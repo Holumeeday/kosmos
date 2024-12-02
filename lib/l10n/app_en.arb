@@ -1,4 +1,12 @@
 {
+  "exploreFunActivitiesNearbyAfar": "Explore fun activities nearby and afar",
+  "iUnderstandTandC": "I understand that by creating an account and using Playkosmos I am saying that I agree and promise to respect its rules and values as stated in the ",
+  "loginWithEmail": "Login with Email",
+  "loginWithGoogle": "Login with Google",
+  "loginWithNumber": "Login with Number",
+  "signUpWithEmail": "Sign up with Email",
+  "signUpWithGoogle": "Sign up with Google",
+  "signUpWithNumber": "Sign up with Number",
   "welcomeToPlaykosmos": "Welcome to Playkosmos",
   "@welcomeToPlaykosmos": {
     "description": "Welcoming the user to the app"

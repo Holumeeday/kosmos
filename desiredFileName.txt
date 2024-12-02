@@ -1,1 +1,67 @@
-{}
+{
+  "fi": [
+    "exploreFunActivitiesNearbyAfar",
+    "iUnderstandTandC",
+    "loginWithEmail",
+    "loginWithGoogle",
+    "loginWithNumber",
+    "signUpWithEmail",
+    "signUpWithGoogle",
+    "signUpWithNumber"
+  ],
+
+  "fr": [
+    "exploreFunActivitiesNearbyAfar",
+    "iUnderstandTandC",
+    "loginWithEmail",
+    "loginWithGoogle",
+    "loginWithNumber",
+    "signUpWithEmail",
+    "signUpWithGoogle",
+    "signUpWithNumber"
+  ],
+
+  "hi": [
+    "exploreFunActivitiesNearbyAfar",
+    "iUnderstandTandC",
+    "loginWithEmail",
+    "loginWithGoogle",
+    "loginWithNumber",
+    "signUpWithEmail",
+    "signUpWithGoogle",
+    "signUpWithNumber"
+  ],
+
+  "si": [
+    "exploreFunActivitiesNearbyAfar",
+    "iUnderstandTandC",
+    "loginWithEmail",
+    "loginWithGoogle",
+    "loginWithNumber",
+    "signUpWithEmail",
+    "signUpWithGoogle",
+    "signUpWithNumber"
+  ],
+
+  "ta": [
+    "exploreFunActivitiesNearbyAfar",
+    "iUnderstandTandC",
+    "loginWithEmail",
+    "loginWithGoogle",
+    "loginWithNumber",
+    "signUpWithEmail",
+    "signUpWithGoogle",
+    "signUpWithNumber"
+  ],
+
+  "zh": [
+    "exploreFunActivitiesNearbyAfar",
+    "iUnderstandTandC",
+    "loginWithEmail",
+    "loginWithGoogle",
+    "loginWithNumber",
+    "signUpWithEmail",
+    "signUpWithGoogle",
+    "signUpWithNumber"
+  ]
+}

@@ -82,7 +82,7 @@ class _AppLogoWithText extends StatelessWidget {
         const PlaykosmosLogoVertical(),
         const VSpace(8),
         Text(
-          'Explore fun activities and nearby and afar',
+          context.loc.exploreFunActivitiesNearbyAfar,
           textAlign: TextAlign.center,
           style: context.textTheme.bodyLarge?.copyWith(
             color: Colors.white,
@@ -108,7 +108,9 @@ class _AuthProviderButtons extends StatelessWidget {
         _AuthButton(
           fOnPressed: () {},
           fAuthIcon: Assets.svgs.auth.google.svg(),
-          fAuthText: fIsSignUp ? 'Sign up with Google' : 'Login with Google',
+          fAuthText: fIsSignUp
+              ? context.loc.signUpWithGoogle
+              : context.loc.loginWithGoogle,
         ),
         const VSpace(20),
 
@@ -116,7 +118,9 @@ class _AuthProviderButtons extends StatelessWidget {
         _AuthButton(
           fOnPressed: () {},
           fAuthIcon: Assets.svgs.auth.emailGradient.svg(),
-          fAuthText: fIsSignUp ? 'Sign up with Email' : 'Login with Email',
+          fAuthText: fIsSignUp
+              ? context.loc.signUpWithEmail
+              : context.loc.loginWithEmail,
         ),
         const VSpace(20),
 
@@ -124,7 +128,9 @@ class _AuthProviderButtons extends StatelessWidget {
         _AuthButton(
           fOnPressed: () {},
           fAuthIcon: Assets.svgs.auth.phoneGradient.svg(),
-          fAuthText: fIsSignUp ? 'Sign up with Number' : 'Login with Number',
+          fAuthText: fIsSignUp
+              ? context.loc.signUpWithNumber
+              : context.loc.loginWithNumber,
         )
       ],
     );
@@ -205,13 +211,13 @@ class _GradientContainerWithText extends StatelessWidget {
       ),
       child: RichText(
         text: TextSpan(
-          text: 'Already have an account? ',
+          text: '${context.loc.alreadyHaveAnAccount} ',
           style: context.textTheme.headlineLarge?.copyWith(
             color: Colors.white,
           ),
           children: [
             TextSpan(
-              text: 'Login',
+              text: context.loc.loginText,
               style: context.textTheme.headlineLarge?.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -234,14 +240,13 @@ class _TermsAndConditions extends StatelessWidget {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        text:
-            'I understand that by creating an account and using Playkosmos I am saying that I agree and promise to respect its rules and values as stated in the ',
+        text: context.loc.iUnderstandTandC,
         style: context.textTheme.bodyLarge?.copyWith(
           color: Colors.white,
         ),
         children: [
           TextSpan(
-            text: 'terms & conditions',
+            text: context.loc.termsAndConditions.toLowerCase(),
             style: context.textTheme.bodyLarge?.copyWith(
               fontWeight: FontWeight.w600,
               color: Colors.white,
@@ -258,7 +263,7 @@ class _TermsAndConditions extends StatelessWidget {
             text: ' and ',
           ),
           TextSpan(
-            text: 'privacy policy',
+            text: context.loc.privacyPolicy.toLowerCase(),
             style: context.textTheme.bodyLarge?.copyWith(
               fontWeight: FontWeight.w600,
               decoration: TextDecoration.underline,
