@@ -1,0 +1,416 @@
+name: playkosmos_v3
+description: "A new Flutter project."
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.0
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  provider: ^6.1.2
+  # Routing and Navigation
+  go_router: ^14.6.1
+  # Dependency injection
+  get_it: ^8.0.2
+  # Local database
+  sembast: ^3.8.0
+  # Database encryption
+  encrypt: ^5.0.3
+  crypto: ^3.0.6
+  # Accessing device file path and utility
+  path_provider: ^2.1.5
+  path: ^1.9.0
+  # Logging
+  logger: ^2.5.0
+  flutter_svg: ^2.0.16
+  device_preview: ^1.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^4.0.0
+
+# Setup for generating assets and font class
+flutter_gen:
+  integrations:
+    flutter_svg: true
+  output: lib/assets_gen/
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/svgs/branding/
+    - assets/svgs/flags/
+    - assets/svgs/auth/
+    - assets/pngs/onboarding/
+
+  fonts:
+    - family: DMSans
+      fonts:
+        - asset: fonts/DMSans-Bold.ttf
+        - asset: fonts/DMSans-ExtraBold.ttf
+        - asset: fonts/DMSans-Medium.ttf
+        - asset: fonts/DMSans-Regular.ttf
+        - asset: fonts/DMSans-SemiBold.ttf
+    - family: Inter
+      fonts:
+        - asset: fonts/Inter-Bold.ttf
+        - asset: fonts/Inter-Medium.ttf
+        - asset: fonts/Inter-Regular.ttf
+        - asset: fonts/Inter-SemiBold.ttf
+        - asset: fonts/Inter-ExtraBold.ttf
+    - family: AbrilFatface
+      fonts:
+        - asset: fonts/AbrilFatface-Regular.ttf
+    - family: Akshar
+      fonts:
+        - asset: fonts/Akshar-Bold.ttf
+        - asset: fonts/Akshar-Medium.ttf
+        - asset: fonts/Akshar-SemiBold.ttf
+    - family: AlumniSans
+      fonts:
+        - asset: fonts/AlumniSans-Bold.ttf
+        - asset: fonts/AlumniSans-Black.ttf
+    - family: AnekKannada
+      fonts:
+        - asset: fonts/AnekKannada-Bold.ttf
+        - asset: fonts/AnekKannada-ExtraBold.ttf
+    - family: Anton
+      fonts:
+        - asset: fonts/Anton-Regular.ttf
+    - family: Archivo
+      fonts:
+        - asset: fonts/Archivo-Bold.ttf
+        - asset: fonts/Archivo-Black.ttf
+        - asset: fonts/Archivo-ExtraBold.ttf
+        - asset: fonts/Archivo-SemiBold.ttf
+        - asset: fonts/Archivo-Medium.ttf
+    - family: ArchivoBlack
+      fonts:
+        - asset: fonts/ArchivoBlack-Regular.ttf
+    - family: Assistant
+      fonts:
+        - asset: fonts/Assistant-ExtraBold.ttf
+    - family: Bangers
+      fonts:
+        - asset: fonts/Bangers-Regular.ttf
+    - family: Barlow
+      fonts:
+        - asset: fonts/Barlow-Black.ttf
+    - family: BarlowCondensed
+      fonts:
+        - asset: fonts/BarlowCondensed-Black.ttf
+    - family: Bayon
+      fonts:
+        - asset: fonts/Bayon-Regular.ttf
+    - family: Bevan
+      fonts:
+        - asset: fonts/Bevan-Regular.ttf
+    - family: BigshotOne
+      fonts:
+        - asset: fonts/BigshotOne-Regular.ttf
+    - family: BigShouldersText
+      fonts:
+        - asset: fonts/BigShouldersText-Black.ttf
+    - family: BlackHanSans
+      fonts:
+        - asset: fonts/BlackHanSans-Regular.ttf
+    - family: BlackOpsOne
+      fonts:
+        - asset: fonts/BlackOpsOne-Regular.ttf
+    - family: BowlbyOne
+      fonts:
+        - asset: fonts/BowlbyOne-Regular.ttf
+    - family: BowlbyOneSC
+      fonts:
+        - asset: fonts/BowlbyOneSC-Regular.ttf
+    - family: BubblegumSans
+      fonts:
+        - asset: fonts/BubblegumSans-Regular.ttf
+    - family: Cabin
+      fonts:
+        - asset: fonts/Cabin-Bold.ttf
+        - asset: fonts/Cabin-SemiBold.ttf
+    - family: Calistoga
+      fonts:
+        - asset: fonts/Calistoga-Regular.ttf
+    - family: Caveat
+      fonts:
+        - asset: fonts/Caveat-Medium.ttf
+    - family: Coda
+      fonts:
+        - asset: fonts/Coda-ExtraBold.ttf
+        - asset: fonts/Coda-Regular.ttf
+    - family: Coiny
+      fonts:
+        - asset: fonts/Coiny-Regular.ttf
+    - family: DoppioOne
+      fonts:
+        - asset: fonts/DoppioOne-Regular.ttf
+    - family: Dosis
+      fonts:
+        - asset: fonts/Dosis-Bold.ttf
+        - asset: fonts/Dosis-ExtraBold.ttf
+    - family: FasterOne
+      fonts:
+        - asset: fonts/FasterOne-Regular.ttf
+    - family: FiraSansExtraCondensed
+      fonts:
+        - asset: fonts/FiraSansExtraCondensed-Black.ttf
+        - asset: fonts/FiraSansExtraCondensed-Bold.ttf
+        - asset: fonts/FiraSansExtraCondensed-SemiBold.ttf
+    - family: FrancoisOne
+      fonts:
+        - asset: fonts/FrancoisOne-Regular.ttf
+    - family: FrederickatheGreat
+      fonts:
+        - asset: fonts/FrederickatheGreat-Regular.ttf
+    - family: FugazOne
+      fonts:
+        - asset: fonts/FugazOne-Regular.ttf
+    - family: GemunuLibre
+      fonts:
+        - asset: fonts/GemunuLibre-Medium.ttf
+        - asset: fonts/GemunuLibre-ExtraBold.ttf
+    - family: Genos
+      fonts:
+        - asset: fonts/Genos-Bold.ttf
+        - asset: fonts/Genos-ExtraBold.ttf
+    - family: GermaniaOne
+      fonts:
+        - asset: fonts/GermaniaOne-Regular.ttf
+    - family: Glory
+      fonts:
+        - asset: fonts/Glory-ExtraBold.ttf
+    - family: Heebo
+      fonts:
+        - asset: fonts/Heebo-Black.ttf
+        - asset: fonts/Heebo-Bold.ttf
+    - family: Hind
+      fonts:
+        - asset: fonts/Hind-Bold.ttf
+    - family: IBMPlexSans
+      fonts:
+        - asset: fonts/IBMPlexSans-SemiBold.ttf
+        - asset: fonts/IBMPlexSans-Bold.ttf
+    - family: IBMPlexSansArabic
+      fonts:
+        - asset: fonts/IBMPlexSansArabic-Bold.ttf
+    - family: IBMPlexSansCondensed
+      fonts:
+        - asset: fonts/IBMPlexSansCondensed-Bold.ttf
+    - family: Jost
+      fonts:
+        - asset: fonts/Jost-Black.ttf
+    - family: Kanit
+      fonts:
+        - asset: fonts/Kanit-Black.ttf
+        - asset: fonts/Kanit-Regular.ttf
+        - asset: fonts/Kanit-Medium.ttf
+        - asset: fonts/Kanit-Bold.ttf
+        - asset: fonts/Kanit-ExtraBold.ttf
+    - family: Karla
+      fonts:
+        - asset: fonts/Karla-ExtraBold.ttf
+    - family: Katibeh
+      fonts:
+        - asset: fonts/Katibeh-Regular.ttf
+    - family: Lalezar
+      fonts:
+        - asset: fonts/Lalezar-Regular.ttf
+    - family: Lato
+      fonts:
+        - asset: fonts/Lato-Bold.ttf
+        - asset: fonts/Lato-Regular.ttf
+        - asset: fonts/Lato-BoldItalic.ttf
+        - asset: fonts/Lato-Black.ttf
+    - family: LilitaOne
+      fonts:
+        - asset: fonts/LilitaOne-Regular.ttf
+    - family: Lexend
+      fonts:
+        - asset: fonts/Lexend-Black.ttf
+        - asset: fonts/Lexend-Bold.ttf
+    - family: Lobster
+      fonts:
+        - asset: fonts/Lobster-Regular.ttf
+    - family: Manrope
+      fonts:
+        - asset: fonts/Manrope-ExtraBold.ttf
+        - asset: fonts/Manrope-SemiBold.ttf
+    - family: Manuale
+      fonts:
+        - asset: fonts/Manuale-ExtraBold.ttf
+    - family: MarkaziText
+      fonts:
+        - asset: fonts/MarkaziText-Bold.ttf
+        - asset: fonts/MarkaziText-Medium.ttf
+    - family: Montserrat
+      fonts:
+        - asset: fonts/Montserrat-Bold.ttf
+        - asset: fonts/Montserrat-ExtraBold.ttf
+        - asset: fonts/Montserrat-SemiBold.ttf
+        - asset: fonts/Montserrat-Black.ttf
+    - family: Mukta
+      fonts:
+        - asset: fonts/Mukta-Bold.ttf
+        - asset: fonts/Mukta-ExtraBold.ttf
+    - family: Neuton
+      fonts:
+        - asset: fonts/Neuton-ExtraBold.ttf
+    - family: NotoSans
+      fonts:
+        - asset: fonts/NotoSans-Black.ttf
+    - family: Nunito
+      fonts:
+        - asset: fonts/Nunito-Black.ttf
+        - asset: fonts/Nunito-Bold.ttf
+        - asset: fonts/Nunito-ExtraBold.ttf
+    - family: OleoScript
+      fonts:
+        - asset: fonts/OleoScript-Bold.ttf
+    - family: Oswald
+      fonts:
+        - asset: fonts/Oswald-Regular.ttf
+        - asset: fonts/Oswald-Medium.ttf
+        - asset: fonts/Oswald-SemiBold.ttf
+        - asset: fonts/Oswald-Bold.ttf
+    - family: Overpass
+      fonts:
+        - asset: fonts/Overpass-Black.ttf
+        - asset: fonts/Overpass-Bold.ttf
+    - family: PassionOne
+      fonts:
+        - asset: fonts/PassionOne-Regular.ttf
+        - asset: fonts/PassionOne-Bold.ttf
+        - asset: fonts/PassionOne-Black.ttf
+    - family: PermanentMarker
+      fonts:
+        - asset: fonts/PermanentMarker-Regular.ttf
+    - family: Play
+      fonts:
+        - asset: fonts/Play-Bold.ttf
+        - asset: fonts/Play-Regular.ttf
+    - family: Poppins
+      fonts:
+        - asset: fonts/Poppins-Bold.ttf
+        - asset: fonts/Poppins-ExtraBold.ttf
+        - asset: fonts/Poppins-Black.ttf
+    - family: PTSansNarrow
+      fonts:
+        - asset: fonts/PTSansNarrow-Bold.ttf
+    - family: Quantico
+      fonts:
+        - asset: fonts/Quantico-Bold.ttf
+    - family: RacingSansOne
+      fonts:
+        - asset: fonts/RacingSansOne-Regular.ttf
+    - family: RadioCanada
+      fonts:
+        - asset: fonts/RadioCanada-Bold.ttf
+    - family: Rajdhani
+      fonts:
+        - asset: fonts/Rajdhani-Bold.ttf
+        - asset: fonts/Rajdhani-SemiBold.ttf
+    - family: Raleway
+      fonts:
+        - asset: fonts/Raleway-Black.ttf
+        - asset: fonts/Raleway-SemiBold.ttf
+        - asset: fonts/Raleway-Bold.ttf
+        - asset: fonts/Raleway-ExtraBold.ttf
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf
+        - asset: fonts/Roboto-Medium.ttf
+        - asset: fonts/Roboto-Bold.ttf
+        - asset: fonts/Roboto-Black.ttf
+    - family: Rowdies
+      fonts:
+        - asset: fonts/Rowdies-Regular.ttf
+        - asset: fonts/Rowdies-Bold.ttf
+    - family: Rubik
+      fonts:
+        - asset: fonts/Rubik-Black.ttf
+        - asset: fonts/Rubik-Bold.ttf
+        - asset: fonts/Rubik-ExtraBold.ttf
+        - asset: fonts/Rubik-Medium.ttf
+        - asset: fonts/Rubik-SemiBold.ttf
+    - family: Rye
+      fonts:
+        - asset: fonts/Rye-Regular.ttf
+    - family: SairaCondensed
+      fonts:
+        - asset: fonts/SairaCondensed-Black.ttf
+        - asset: fonts/SairaCondensed-ExtraBold.ttf
+    - family: SairaStencilOne
+      fonts:
+        - asset: fonts/SairaStencilOne-Regular.ttf
+    - family: SecularOne
+      fonts:
+        - asset: fonts/SecularOne-Regular.ttf
+    - family: Shrikhand
+      fonts:
+        - asset: fonts/Shrikhand-Regular.ttf
+    - family: SofiaSans
+      fonts:
+        - asset: fonts/SofiaSans-Black.ttf
+        - asset: fonts/SofiaSans-Bold.ttf
+        - asset: fonts/SofiaSans-ExtraBold.ttf
+    - family: SourceSansPro
+      fonts:
+        - asset: fonts/SourceSansPro-Bold.ttf
+        - asset: fonts/SourceSansPro-Black.ttf
+        - asset: fonts/SourceSansPro-SemiBold.ttf
+        - asset: fonts/SourceSansPro-Regular.ttf
+    - family: SquadaOne
+      fonts:
+        - asset: fonts/SquadaOne-Regular.ttf
+    - family: SuezOne
+      fonts:
+        - asset: fonts/SuezOne-Regular.ttf
+    - family: Tapestry
+      fonts:
+        - asset: fonts/Tapestry-Regular.ttf
+    - family: Teko
+      fonts:
+        - asset: fonts/Teko-Bold.ttf
+        - asset: fonts/Teko-Medium.ttf
+        - asset: fonts/Teko-SemiBold.ttf
+    - family: TitanOne
+      fonts:
+        - asset: fonts/TitanOne-Regular.ttf
+    - family: TitilliumWeb
+      fonts:
+        - asset: fonts/TitilliumWeb-Bold.ttf
+        - asset: fonts/TitilliumWeb-Black.ttf
+    - family: Tomorrow
+      fonts:
+        - asset: fonts/Tomorrow-Bold.ttf
+        - asset: fonts/Tomorrow-ExtraBold.ttf
+        - asset: fonts/Tomorrow-Medium.ttf
+        - asset: fonts/Tomorrow-Regular.ttf
+        - asset: fonts/Tomorrow-SemiBold.ttf
+    - family: TradeWinds
+      fonts:
+        - asset: fonts/TradeWinds-Regular.ttf
+    - family: Ubuntu
+      fonts:
+        - asset: fonts/Ubuntu-Regular.ttf
+        - asset: fonts/Ubuntu-Medium.ttf
+        - asset: fonts/Ubuntu-Bold.ttf
+    - family: Unbounded
+      fonts:
+        - asset: fonts/Unbounded-Bold.ttf
+        - asset: fonts/Unbounded-ExtraBold.ttf
+    - family: Unna
+      fonts:
+        - asset: fonts/Unna-Bold.ttf
