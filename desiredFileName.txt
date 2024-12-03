@@ -1,65 +1,77 @@
 {
   "fi": [
+    "dontHaveAnAccount",
     "exploreFunActivitiesNearbyAfar",
     "iUnderstandTandC",
     "loginWithEmail",
     "loginWithGoogle",
     "loginWithNumber",
+    "signUp",
     "signUpWithEmail",
     "signUpWithGoogle",
     "signUpWithNumber"
   ],
 
   "fr": [
+    "dontHaveAnAccount",
     "exploreFunActivitiesNearbyAfar",
     "iUnderstandTandC",
     "loginWithEmail",
     "loginWithGoogle",
     "loginWithNumber",
+    "signUp",
     "signUpWithEmail",
     "signUpWithGoogle",
     "signUpWithNumber"
   ],
 
   "hi": [
+    "dontHaveAnAccount",
     "exploreFunActivitiesNearbyAfar",
     "iUnderstandTandC",
     "loginWithEmail",
     "loginWithGoogle",
     "loginWithNumber",
+    "signUp",
     "signUpWithEmail",
     "signUpWithGoogle",
     "signUpWithNumber"
   ],
 
   "si": [
+    "dontHaveAnAccount",
     "exploreFunActivitiesNearbyAfar",
     "iUnderstandTandC",
     "loginWithEmail",
     "loginWithGoogle",
     "loginWithNumber",
+    "signUp",
     "signUpWithEmail",
     "signUpWithGoogle",
     "signUpWithNumber"
   ],
 
   "ta": [
+    "dontHaveAnAccount",
     "exploreFunActivitiesNearbyAfar",
     "iUnderstandTandC",
     "loginWithEmail",
     "loginWithGoogle",
     "loginWithNumber",
+    "signUp",
     "signUpWithEmail",
     "signUpWithGoogle",
     "signUpWithNumber"
   ],
 
   "zh": [
+    "dontHaveAnAccount",
     "exploreFunActivitiesNearbyAfar",
     "iUnderstandTandC",
     "loginWithEmail",
     "loginWithGoogle",
     "loginWithNumber",
+    "signUp",
     "signUpWithEmail",
     "signUpWithGoogle",
     "signUpWithNumber"

@@ -57,11 +57,15 @@ class AuthProviderView extends StatelessWidget {
                 const VSpace(100),
 
                 // Login or Create account button
-                const _GradientContainerWithText(),
-                const VSpace(24),
+                _GradientContainerWithText(
+                  fIsSignUp: fIsSignUp,
+                ),
+                if (fIsSignUp) ...[
+                  const VSpace(24),
 
-                // Terms and condition
-                const _TermsAndConditions(),
+                  // Terms and condition
+                  if (fIsSignUp) const _TermsAndConditions(),
+                ]
               ],
             ),
           ),
@@ -180,7 +184,11 @@ class _AuthButton extends StatelessWidget {
 }
 
 class _GradientContainerWithText extends StatelessWidget {
-  const _GradientContainerWithText();
+  const _GradientContainerWithText({
+    required this.fIsSignUp,
+  });
+
+  final bool fIsSignUp;
 
   @override
   Widget build(BuildContext context) {
@@ -211,13 +219,19 @@ class _GradientContainerWithText extends StatelessWidget {
       ),
       child: RichText(
         text: TextSpan(
-          text: '${context.loc.alreadyHaveAnAccount} ',
+          text: fIsSignUp
+              ? context.loc.alreadyHaveAnAccount
+              : context.loc.dontHaveAnAccount,
           style: context.textTheme.headlineLarge?.copyWith(
             color: Colors.white,
           ),
           children: [
             TextSpan(
-              text: context.loc.loginText,
+              text: fIsSignUp ? context.loc.loginText : context.loc.signUp,
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  context.push(AuthProviderView(fIsSignUp: !fIsSignUp));
+                },
               style: context.textTheme.headlineLarge?.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
@@ -259,8 +273,8 @@ class _TermsAndConditions extends StatelessWidget {
                 debugPrint('Terms & Conditions clicked');
               },
           ),
-          const TextSpan(
-            text: ' and ',
+          TextSpan(
+            text: context.loc.andText,
           ),
           TextSpan(
             text: context.loc.privacyPolicy.toLowerCase(),
