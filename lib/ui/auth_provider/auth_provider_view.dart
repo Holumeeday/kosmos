@@ -48,7 +48,7 @@ class AuthProviderView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: <Widget>[
-                const VSpace(60),
+                const VSpace(100),
                 const _AppLogoWithText(),
                 const VSpace(40),
                 _AuthProviderButtons(
