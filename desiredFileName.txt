@@ -1,6 +1,7 @@
 {
   "fi": [
     "dontHaveAnAccount",
+    "enterYourEmailAddress",
     "exploreFunActivitiesNearbyAfar",
     "iUnderstandTandC",
     "loginWithEmail",
@@ -9,11 +10,13 @@
     "signUp",
     "signUpWithEmail",
     "signUpWithGoogle",
-    "signUpWithNumber"
+    "signUpWithNumber",
+    "weAreSendingYouASecretCodeToVerifyEmail"
   ],
 
   "fr": [
     "dontHaveAnAccount",
+    "enterYourEmailAddress",
     "exploreFunActivitiesNearbyAfar",
     "iUnderstandTandC",
     "loginWithEmail",
@@ -22,11 +25,13 @@
     "signUp",
     "signUpWithEmail",
     "signUpWithGoogle",
-    "signUpWithNumber"
+    "signUpWithNumber",
+    "weAreSendingYouASecretCodeToVerifyEmail"
   ],
 
   "hi": [
     "dontHaveAnAccount",
+    "enterYourEmailAddress",
     "exploreFunActivitiesNearbyAfar",
     "iUnderstandTandC",
     "loginWithEmail",
@@ -35,11 +40,13 @@
     "signUp",
     "signUpWithEmail",
     "signUpWithGoogle",
-    "signUpWithNumber"
+    "signUpWithNumber",
+    "weAreSendingYouASecretCodeToVerifyEmail"
   ],
 
   "si": [
     "dontHaveAnAccount",
+    "enterYourEmailAddress",
     "exploreFunActivitiesNearbyAfar",
     "iUnderstandTandC",
     "loginWithEmail",
@@ -48,11 +55,13 @@
     "signUp",
     "signUpWithEmail",
     "signUpWithGoogle",
-    "signUpWithNumber"
+    "signUpWithNumber",
+    "weAreSendingYouASecretCodeToVerifyEmail"
   ],
 
   "ta": [
     "dontHaveAnAccount",
+    "enterYourEmailAddress",
     "exploreFunActivitiesNearbyAfar",
     "iUnderstandTandC",
     "loginWithEmail",
@@ -61,11 +70,13 @@
     "signUp",
     "signUpWithEmail",
     "signUpWithGoogle",
-    "signUpWithNumber"
+    "signUpWithNumber",
+    "weAreSendingYouASecretCodeToVerifyEmail"
   ],
 
   "zh": [
     "dontHaveAnAccount",
+    "enterYourEmailAddress",
     "exploreFunActivitiesNearbyAfar",
     "iUnderstandTandC",
     "loginWithEmail",
@@ -74,6 +85,7 @@
     "signUp",
     "signUpWithEmail",
     "signUpWithGoogle",
-    "signUpWithNumber"
+    "signUpWithNumber",
+    "weAreSendingYouASecretCodeToVerifyEmail"
   ]
 }

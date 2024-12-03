@@ -29,59 +29,41 @@ Color _kGetScrollbarColor(Set<WidgetState> states) {
 }
 
 /// The text input decoration
-InputDecorationTheme _kFormTextInputDecoration = InputDecorationTheme(
-  hintStyle: const TextStyle(
+InputDecorationTheme _kFormTextInputDecoration = const InputDecorationTheme(
+  hintStyle: TextStyle(
     color: Color(0xFF919191),
   ),
-  labelStyle: const TextStyle(
+  labelStyle: TextStyle(
     color: Color(0xFF919191),
   ),
-  border: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(
-      10,
-    ),
-    borderSide: const BorderSide(
+  border: UnderlineInputBorder(
+    borderSide: BorderSide(
       color: AppColor.fTextBoxColor,
     ),
   ),
-  enabledBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(
-      10,
-    ),
-    borderSide: const BorderSide(
+  enabledBorder: UnderlineInputBorder(
+    borderSide: BorderSide(
       color: AppColor.fTextBoxColor,
     ),
   ),
-  disabledBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(
-      10,
-    ),
-    borderSide: const BorderSide(
+  disabledBorder: UnderlineInputBorder(
+    borderSide: BorderSide(
       color: AppColor.fTextBoxColor,
     ),
   ),
-  focusedBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(
-      10,
-    ),
-    borderSide: const BorderSide(
+  focusedBorder: UnderlineInputBorder(
+    borderSide: BorderSide(
       color: AppColor.fTextBoxColor,
     ),
   ),
-  errorBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(
-      10,
-    ),
-    borderSide: const BorderSide(
+  errorBorder: UnderlineInputBorder(
+    borderSide: BorderSide(
       width: 1,
       color: Colors.red,
     ),
   ),
-  focusedErrorBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(
-      10,
-    ),
-    borderSide: const BorderSide(
+  focusedErrorBorder: UnderlineInputBorder(
+    borderSide: BorderSide(
       width: 1,
       color: Colors.red,
     ),
@@ -176,20 +158,14 @@ class MyThemes {
       onTertiary: Colors.black,
     ),
     inputDecorationTheme: _kFormTextInputDecoration.copyWith(
-      errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(
-          10,
-        ),
-        borderSide: const BorderSide(
+      errorBorder: const UnderlineInputBorder(
+        borderSide: BorderSide(
           width: 1,
           color: Color(0xFFFF0000),
         ),
       ),
-      focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(
-          10,
-        ),
-        borderSide: const BorderSide(
+      focusedErrorBorder: const UnderlineInputBorder(
+        borderSide: BorderSide(
           width: 1,
           color: Color(0xFFFF0000),
         ),

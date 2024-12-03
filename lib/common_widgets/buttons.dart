@@ -513,6 +513,9 @@ class PrimaryGradientButton extends StatelessWidget {
   /// Can be a rectangle, circle, etc. Defaults to `BoxShape.rectangle`.
   final BoxShape? fShape;
 
+  /// Indicate if button is disabled
+  final bool fDisabled;
+
   /// Creates a `PrimaryGradientButton`.
   ///
   /// Requires:
@@ -524,6 +527,7 @@ class PrimaryGradientButton extends StatelessWidget {
     required this.fOnPressed,
     required this.fChild,
     this.fGradientColors = const [],
+    this.fDisabled = false,
     this.fBorderRadius,
     this.fShape,
     this.fHeight = 56,
@@ -536,7 +540,6 @@ class PrimaryGradientButton extends StatelessWidget {
       /// Define the button's base style.
       style: ElevatedButton.styleFrom(
         padding: EdgeInsets.zero,
-        backgroundColor: Colors.transparent, // Ensure gradient shows up.
         shadowColor: context.colors.primary,
       ).copyWith(
 
@@ -551,14 +554,11 @@ class PrimaryGradientButton extends StatelessWidget {
             ),
           ),
 
-          /// Set the foreground color for button content (e.g., text).
-          foregroundColor: WidgetStateProperty.all(Colors.white),
-
           /// Set the shape of the button
           shape: WidgetStateProperty.all(
             fShape == BoxShape.circle ? const CircleBorder() : null,
           )),
-      onPressed: fOnPressed,
+      onPressed: fDisabled ? null : fOnPressed,
 
       child: ConstrainedBox(
         constraints: BoxConstraints(
@@ -573,18 +573,20 @@ class PrimaryGradientButton extends StatelessWidget {
             shape: fShape ?? BoxShape.rectangle,
 
             /// Apply a linear gradient for the background.
-            gradient: LinearGradient(
-              stops: const [
-                0.1,
-                0.3,
-                0.7,
-              ],
-              colors: fGradientColors.isEmpty
-                  ? AppColor.fPrimaryGradient
-                  : fGradientColors,
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            gradient: fDisabled
+                ? null
+                : LinearGradient(
+                    stops: const [
+                      0.1,
+                      0.3,
+                      0.7,
+                    ],
+                    colors: fGradientColors.isEmpty
+                        ? AppColor.fPrimaryGradient
+                        : fGradientColors,
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
 
             /// Define the corner radius.
             borderRadius: fShape != BoxShape.circle
@@ -596,7 +598,13 @@ class PrimaryGradientButton extends StatelessWidget {
             alignment: Alignment.center,
 
             /// Add the child widget (e.g., Text or Icon).
-            child: fChild,
+            child: DefaultTextStyle.merge(
+              style: context.textTheme.headlineLarge?.copyWith(
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
+              child: fChild,
+            ),
           ),
         ),
       ),
