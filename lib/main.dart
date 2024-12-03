@@ -3,8 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:playkosmos_v3/ui/select_language/select_language_view_model.dart';
 import 'package:playkosmos_v3/ui/splash/splash_view.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,6 +31,24 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => SelectLanguageViewModel(),
+        ),
+      ],
+      child: const _AppView(),
+    );
+  }
+}
+
+class _AppView extends StatelessWidget {
+  const _AppView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final dLocale =
+        context.select((SelectLanguageViewModel vm) => vm.dSelectedLocale);
     return MaterialApp(
       title: 'Playkosmos',
       navigatorKey: GetContext.navigatorKey,
@@ -37,6 +57,7 @@ class App extends StatelessWidget {
       builder: DevicePreview.appBuilder,
       theme: MyThemes.lightTheme,
       darkTheme: MyThemes.darkTheme,
+      locale: dLocale,
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
     );

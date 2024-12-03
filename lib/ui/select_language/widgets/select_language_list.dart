@@ -14,10 +14,7 @@ class SelectLanguageSearchList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => SelectLanguageViewModel(),
-      builder: (context, __) => const _SelectLanguageView(),
-    );
+    return const _SelectLanguageView();
   }
 }
 
