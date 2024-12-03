@@ -10,6 +10,12 @@ This view model enables us change the language of the app
 @author: Ugochukwu Umeh
 */
 class SelectLanguageViewModel extends ChangeNotifier {
+  /// The selected locale of the app
+  Locale dSelectedLocale = kLanguageList.first.languageLocale;
+
+  /// The selected locale language name
+  String dSelectedLocaleLangName = kLanguageList.first.languageName;
+
   /// The unchangeable language list
   final List<LanguageLocaleModel> _fLanguageList =
       UnmodifiableListView(kLanguageList);
@@ -38,6 +44,11 @@ class SelectLanguageViewModel extends ChangeNotifier {
 
   /// To set the locale
   void setLocale(Locale locale) {
-    // _fLocaleReactiveService.setLocale(locale);
+    dSelectedLocale = locale;
+    dSelectedLocaleLangName = kLanguageList
+        .where((value) => value.languageLocale == dSelectedLocale)
+        .first
+        .languageName;
+    notifyListeners();
   }
 }

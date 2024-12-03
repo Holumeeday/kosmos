@@ -81,4 +81,9 @@ extension ContextExtension on BuildContext {
   }) {
     return '$first4Bin ${mask * 4} ${mask * 4} $last4Bin';
   }
+
+  /// Navigating to a page using Navigation 2 API
+  Future<dynamic> push(Widget page) async {
+    return Navigator.of(this).push(MaterialPageRoute(builder: (_) => page));
+  }
 }

@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
-import 'package:playkosmos_v3/constants/constants.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/services/services.dart';
+import 'package:playkosmos_v3/ui/select_language/select_language_view_model.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
+import 'package:provider/provider.dart';
 
 /*
 This class defines the row widget placed in either create account or login view
@@ -49,7 +50,8 @@ class AuthHeaderChangeLocale extends StatelessWidget {
               //Language text
               Flexible(
                 child: Text(
-                  kLanguageList.first.languageName,
+                  context.select((SelectLanguageViewModel vm) =>
+                      vm.dSelectedLocaleLangName),
                   style: context.textTheme.bodyMedium?.copyWith(
                     color: Colors.white,
                   ),
