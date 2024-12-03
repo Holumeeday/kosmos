@@ -1,5 +1,6 @@
 {
   "dontHaveAnAccount": "Don''t have an account? ",
+  "enterYourEmailAddress": "Enter your email address",
   "exploreFunActivitiesNearbyAfar": "Explore fun activities nearby and afar",
   "iUnderstandTandC": "I understand that by creating an account and using Playkosmos I am saying that I agree and promise to respect its rules and values as stated in the ",
   "loginWithEmail": "Login with Email",
@@ -9,6 +10,7 @@
   "signUpWithEmail": "Sign up with Email",
   "signUpWithGoogle": "Sign up with Google",
   "signUpWithNumber": "Sign up with Number",
+  "weAreSendingYouASecretCodeToVerifyEmail": "We’re sending you a secret code to prove this email address is really yours, Keep an eye out",
   "welcomeToPlaykosmos": "Welcome to Playkosmos",
   "@welcomeToPlaykosmos": {
     "description": "Welcoming the user to the app"

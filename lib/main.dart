@@ -14,7 +14,7 @@ void main() async {
   // Register all service with [GetIt]
   await setupLocator();
 
-  // Set the app to portrait only mode
+  // Set the app orientation to portrait only mode
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitDown,
     DeviceOrientation.portraitUp,
@@ -26,6 +26,10 @@ void main() async {
   ));
 }
 
+/// This widget is used to setup all the global view models
+/// to be used in the app
+///
+/// @author: Godwin Mathias
 class App extends StatelessWidget {
   const App({super.key});
 

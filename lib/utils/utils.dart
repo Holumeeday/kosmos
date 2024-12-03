@@ -6,3 +6,4 @@ export 'get_context.dart';
 export 'locator.dart';
 export 'logger.dart';
 export 'theme.dart';
+export 'validators.dart';
