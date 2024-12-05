@@ -51,9 +51,7 @@ class OnboardMobileView extends StatelessWidget {
                 fChild: Text(
                   context.loc.setOnboardTitle(fPageModel.title),
                   textAlign: TextAlign.center,
-                  style: context.textTheme.displayLarge?.copyWith(
-                    color: context.colors.secondary,
-                  ),
+                  style: context.appTextTheme.header1,
                 ),
               ),
               const VSpace(8),
@@ -63,7 +61,7 @@ class OnboardMobileView extends StatelessWidget {
                 fChild: Text(
                   context.loc.setOnboardDetails(fPageModel.title),
                   textAlign: TextAlign.center,
-                  style: context.textTheme.headlineMedium,
+                  style: context.appTextTheme.body,
                 ),
               ),
             ],

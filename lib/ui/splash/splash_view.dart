@@ -180,8 +180,7 @@ class _SplashViewState extends State<SplashView> {
           // (using AnimatedSlider) wait for 100ms and move to the language screen
           Timer(const Duration(milliseconds: 1100), () {
             // Mark the initialization phase finish
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const SelectLanguageView()));
+            context.push(const SelectLanguageView());
           });
         }
       },
