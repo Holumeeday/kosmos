@@ -559,7 +559,6 @@ class PrimaryGradientButton extends StatelessWidget {
             fShape == BoxShape.circle ? const CircleBorder() : null,
           )),
       onPressed: fDisabled ? null : fOnPressed,
-
       child: ConstrainedBox(
         constraints: BoxConstraints(
           minHeight: 48,
@@ -599,8 +598,7 @@ class PrimaryGradientButton extends StatelessWidget {
 
             /// Add the child widget (e.g., Text or Icon).
             child: DefaultTextStyle.merge(
-              style: context.textTheme.headlineLarge?.copyWith(
-                fontWeight: FontWeight.w700,
+              style: context.appTextTheme.buttonLarge?.copyWith(
                 color: Colors.white,
               ),
               child: fChild,

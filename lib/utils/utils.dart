@@ -7,3 +7,4 @@ export 'locator.dart';
 export 'logger.dart';
 export 'theme.dart';
 export 'validators.dart';
+export 'app_text_styles.dart';

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/common_widgets/custom_text_form_fields.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
+import 'package:playkosmos_v3/ui/email_otp_verification/email_otp_verification_view.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// This defines the sign up with email page
@@ -61,9 +62,7 @@ class _SignUpWithEmailViewState extends State<SignUpWithEmailView> {
               Text(
                 context.loc.enterYourEmailAddress,
                 textAlign: TextAlign.center,
-                style: context.textTheme.displayLarge?.copyWith(
-                  fontSize: 32,
-                ),
+                style: context.appTextTheme.header1,
               ),
 
               // Email text field
@@ -90,8 +89,12 @@ class _SignUpWithEmailViewState extends State<SignUpWithEmailView> {
               // Next button
               PrimaryGradientButton(
                 fDisabled: !_dCanNext,
-                fOnPressed: () {},
-                fChild: Text(context.loc.nextText),
+                fOnPressed: () {
+                  context.push(const EmailOtpVerificationView());
+                },
+                fChild: Text(
+                  context.loc.nextText,
+                ),
               )
             ],
           ),

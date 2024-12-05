@@ -85,6 +85,8 @@ class AppColors extends ThemeExtension<AppColors> {
   final Color? shimmerColor;
   final Color? unselectedStepperColor;
 
+  final Color? fHyperLinkColor;
+
   AppColors({
     required this.textColor,
     required this.darkGreyColor,
@@ -164,6 +166,7 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.fDividerColor,
     required this.shimmerColor,
     required this.unselectedStepperColor,
+    required this.fHyperLinkColor,
   });
 
   @override
@@ -278,7 +281,10 @@ class AppColors extends ThemeExtension<AppColors> {
       shimmerColor: Color.lerp(shimmerColor, other.shimmerColor, t),
       unselectedStepperColor:
           Color.lerp(unselectedStepperColor, other.unselectedStepperColor, t),
+      fHyperLinkColor:
+      Color.lerp(fHyperLinkColor, other.fHyperLinkColor, t),
     );
+
   }
 
   @override
@@ -361,6 +367,7 @@ class AppColors extends ThemeExtension<AppColors> {
     Color? fDividerColor,
     Color? shimmerColor,
     Color? unselectedStepperColor,
+    Color? fHyperLinkColor,
   }) =>
       AppColors(
         textColor: textColor ?? this.textColor,
@@ -452,6 +459,7 @@ class AppColors extends ThemeExtension<AppColors> {
         shimmerColor: shimmerColor ?? this.shimmerColor,
         unselectedStepperColor:
             unselectedStepperColor ?? this.unselectedStepperColor,
+        fHyperLinkColor: fHyperLinkColor ?? this.fHyperLinkColor,
       );
 }
 
@@ -460,7 +468,7 @@ class AppColor {
   static const fPrimaryGradient = [
     Color(0xFF8A2387),
     Color(0xFFE94057),
-    Color(0xFFF27121),
+    AppColor.fPrimaryColor,
   ];
   static const Color fPrimaryColor = Color(0xFFF27121);
   static const Color fTextColor = Color(0xFF434343);
@@ -539,4 +547,5 @@ class AppColor {
   static const Color fDividerColor = Color(0xFFD5D5D5);
   static const Color fShimmerColor = Color(0xFFC2C2C2);
   static const Color fUnselectedStepperColor = Color(0xFFE7E7E7);
+  static const Color fHyperLinkColor = Color(0xFF5085F7);
 }

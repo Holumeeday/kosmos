@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:playkosmos_v3/assets_gen/fonts.gen.dart';
 import 'package:playkosmos_v3/utils/app_colors.dart';
+import 'package:playkosmos_v3/utils/app_text_styles.dart';
 
 /// The text button theme
 TextButtonThemeData _kTextButtonTheme = TextButtonThemeData(
@@ -175,6 +176,7 @@ class MyThemes {
     radioTheme: _kRadioTheme,
     extensions: <ThemeExtension<dynamic>>[
       AppColors(
+        fHyperLinkColor: AppColor.fHyperLinkColor,
         stopAssemblingTeamColor: AppColor.fStopAssemblingTeamColor,
         textColor: Colors.white,
         darkGreyColor: AppColor.fDarkGrey,
@@ -254,6 +256,8 @@ class MyThemes {
         shimmerColor: const Color(0xFF3A3A3A),
         unselectedStepperColor: AppColor.fUnselectedStepperColor,
       ),
+      AppTextTheme.dark,
+
     ],
     scrollbarTheme: ScrollbarThemeData(
       interactive: true,
@@ -338,6 +342,7 @@ class MyThemes {
         fontWeight: FontWeight.w400,
         color: Colors.white,
       ),
+      labelSmall: TextStyle(),
     ),
     dividerTheme: const DividerThemeData(
       color: Color(0xFF909090),
@@ -416,6 +421,7 @@ class MyThemes {
     radioTheme: _kRadioTheme,
     extensions: <ThemeExtension<dynamic>>[
       AppColors(
+        fHyperLinkColor: AppColor.fHyperLinkColor,
         stopAssemblingTeamColor: AppColor.fStopAssemblingTeamColor,
         textColor: AppColor.fTextColor,
         darkGreyColor: AppColor.fDarkGrey,
@@ -495,6 +501,7 @@ class MyThemes {
         shimmerColor: AppColor.fShimmerColor,
         unselectedStepperColor: AppColor.fUnselectedStepperColor,
       ),
+      AppTextTheme.light,
     ],
     scrollbarTheme: ScrollbarThemeData(
       interactive: true,
