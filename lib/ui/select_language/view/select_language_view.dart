@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/onboarding/onboard_view.dart';
-import 'package:playkosmos_v3/ui/select_language/widgets/select_language_list.dart';
+import 'package:playkosmos_v3/ui/onboarding/view/onboard_view.dart';
+import 'package:playkosmos_v3/ui/select_language/view/widgets/select_language_list.dart';
 
 /*
 This class enables us change the language of the app

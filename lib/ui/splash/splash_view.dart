@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:playkosmos_v3/assets_gen/assets.gen.dart';
 import 'package:playkosmos_v3/constants/constants.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/select_language/select_language_view.dart';
+import 'package:playkosmos_v3/ui/select_language/view/select_language_view.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /*

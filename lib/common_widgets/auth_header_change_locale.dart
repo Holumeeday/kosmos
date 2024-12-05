@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/services/services.dart';
-import 'package:playkosmos_v3/ui/select_language/select_language_view_model.dart';
+import 'package:playkosmos_v3/ui/select_language/cubit/select_language_cubit.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 import 'package:provider/provider.dart';
 
@@ -50,8 +50,8 @@ class AuthHeaderChangeLocale extends StatelessWidget {
               //Language text
               Flexible(
                 child: Text(
-                  context.select((SelectLanguageViewModel vm) =>
-                      vm.dSelectedLocaleLangName),
+                  context.select((SelectLanguageCubit cubit) =>
+                      cubit.state.dSelectedLocaleLangName),
                   style: context.textTheme.bodyMedium?.copyWith(
                     color: Colors.white,
                   ),

@@ -1,19 +1,20 @@
+import 'package:bloc/bloc.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
-/*
-This view model controls the otp verification screen
-@author: Godwin Mathias
-*/
-class EmailOTPVerificationViewModel extends ChangeNotifier {
-  /// Checks if user can resend otp
-  bool dCantResendOtp = true;
+part 'email_otp_verification_state.dart';
+
+class EmailOtpVerificationCubit extends Cubit<EmailOtpVerificationState> {
+  EmailOtpVerificationCubit()
+      : super(
+          const EmailOtpVerificationState(dCanResendOtp: false),
+        );
 
   /// Setting the [dCanResendOtp] value
   void setResendingOtp(bool value) {
-    dCantResendOtp = value;
-    notifyListeners();
+    emit(state.copyWith(dCanResendOtp: value));
   }
 
   /// To resend the otp
