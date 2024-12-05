@@ -93,9 +93,8 @@ class _OnboardViewState extends State<OnboardView> {
                 fChild: Text(
                   context.loc.skipText,
                   semanticsLabel: context.loc.skipToTheLastOnboardingPage,
-                  style: context.textTheme.bodyLarge?.copyWith(
+                  style: context.appTextTheme.buttonMedium?.copyWith(
                     color: context.colors.tertiary,
-                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
@@ -168,10 +167,8 @@ class _OnboardViewState extends State<OnboardView> {
                         fShape: BoxShape.circle,
                         fOnPressed: () {
                           // Save onboard status completed to true
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (_) => const AuthProviderView(
-                              fIsSignUp: true,
-                            ),
+                          context.push(const AuthProviderView(
+                            fIsSignUp: true,
                           ));
                         },
                         fChild: Icon(

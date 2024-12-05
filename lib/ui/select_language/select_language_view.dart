@@ -31,21 +31,12 @@ class SelectLanguageView extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              //Welcome to playkosmos
-              Text(
-                context.loc.welcomeToPlaykosmos,
-                textAlign: TextAlign.center,
-                style: context.textTheme.displayMedium,
-              ),
-              const VSpace(8),
-
               //Choose language
               Text(
                 context.loc.choosePreferredLanguage,
                 textAlign: TextAlign.center,
-                style: context.textTheme.bodyMedium?.copyWith(
-                  color: context.colors.tertiary,
-                  fontWeight: FontWeight.w400,
+                style: context.appTextTheme.caption?.copyWith(
+                  fontSize: 14,
                 ),
               ),
               const VSpace(32),
@@ -64,11 +55,7 @@ class SelectLanguageView extends StatelessWidget {
         child: PrimaryGradientButton(
           fShape: BoxShape.circle,
           fOnPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => const OnboardView(),
-              ),
-            );
+            context.push(const OnboardView());
           },
           fChild: Semantics(
             label: context.loc.continueToNextScreen,

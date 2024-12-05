@@ -79,10 +79,7 @@ class _SignUpWithEmailViewState extends State<SignUpWithEmailView> {
               // OTP sent text label
               Text(
                 context.loc.weAreSendingYouASecretCodeToVerifyEmail,
-                style: context.textTheme.bodySmall?.copyWith(
-                  color: context.appColors.darkGreyColor,
-                  fontSize: 14,
-                ),
+                style: context.appTextTheme.caption,
               ),
               const VSpace(56),
 
@@ -92,9 +89,7 @@ class _SignUpWithEmailViewState extends State<SignUpWithEmailView> {
                 fOnPressed: () {
                   context.push(const EmailOtpVerificationView());
                 },
-                fChild: Text(
-                  context.loc.nextText,
-                ),
+                fChild: Text(context.loc.nextText),
               )
             ],
           ),

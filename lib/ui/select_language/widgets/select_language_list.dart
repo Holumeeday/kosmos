@@ -68,7 +68,7 @@ class _SelectLanguageViewState extends State<_SelectLanguageView> {
             child: ExcludeSemantics(
               child: TextField(
                 controller: _fSearchController,
-                style: context.textTheme.headlineMedium,
+                style: context.appTextTheme.buttonLarge,
                 decoration: InputDecoration(
                   hintText: context.loc.searchLanguageHint,
                   contentPadding: const EdgeInsets.symmetric(
@@ -129,12 +129,12 @@ class _SelectLanguageViewState extends State<_SelectLanguageView> {
                           Text.rich(
                             TextSpan(
                               text: fLanguageModel.languageName,
-                              style: context.textTheme.headlineMedium,
+                              style: context.appTextTheme.buttonLarge,
                               children: [
                                 // Language name
                                 TextSpan(
                                   text: ' (${fLanguageModel.countryName})  ',
-                                  style: context.textTheme.headlineMedium
+                                  style: context.appTextTheme.buttonLarge
                                       ?.copyWith(
                                     color: context.colors.tertiary,
                                   ),

@@ -89,7 +89,7 @@ class _AppLogoWithText extends StatelessWidget {
         Text(
           context.loc.exploreFunActivitiesNearbyAfar,
           textAlign: TextAlign.center,
-          style: context.textTheme.bodyLarge?.copyWith(
+          style: context.appTextTheme.body?.copyWith(
             color: Colors.white,
           ),
         ),
@@ -176,8 +176,7 @@ class _AuthButton extends StatelessWidget {
             child: Text(
               fAuthText,
               overflow: TextOverflow.ellipsis,
-              style: context.textTheme.headlineLarge?.copyWith(
-                fontWeight: FontWeight.w400,
+              style: context.appTextTheme.buttonLarge?.copyWith(
                 color: Colors.black,
               ),
             ),
@@ -227,7 +226,7 @@ class _GradientContainerWithText extends StatelessWidget {
           text: fIsSignUp
               ? context.loc.alreadyHaveAnAccount
               : context.loc.dontHaveAnAccount,
-          style: context.textTheme.headlineLarge?.copyWith(
+          style: context.appTextTheme.buttonLarge?.copyWith(
             color: Colors.white,
           ),
           children: [
@@ -237,7 +236,7 @@ class _GradientContainerWithText extends StatelessWidget {
                 ..onTap = () {
                   context.push(AuthProviderView(fIsSignUp: !fIsSignUp));
                 },
-              style: context.textTheme.headlineLarge?.copyWith(
+              style: context.appTextTheme.buttonLarge?.copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
                 decoration: TextDecoration.underline,
@@ -260,14 +259,13 @@ class _TermsAndConditions extends StatelessWidget {
       textAlign: TextAlign.center,
       text: TextSpan(
         text: context.loc.iUnderstandTandC,
-        style: context.textTheme.bodyLarge?.copyWith(
+        style: context.appTextTheme.body?.copyWith(
           color: Colors.white,
         ),
         children: [
           TextSpan(
             text: context.loc.termsAndConditions.toLowerCase(),
-            style: context.textTheme.bodyLarge?.copyWith(
-              fontWeight: FontWeight.w600,
+            style: context.appTextTheme.body?.copyWith(
               color: Colors.white,
               decoration: TextDecoration.underline,
               decorationColor: Colors.white,
@@ -283,8 +281,7 @@ class _TermsAndConditions extends StatelessWidget {
           ),
           TextSpan(
             text: context.loc.privacyPolicy.toLowerCase(),
-            style: context.textTheme.bodyLarge?.copyWith(
-              fontWeight: FontWeight.w600,
+            style: context.appTextTheme.body?.copyWith(
               decoration: TextDecoration.underline,
               decorationColor: Colors.white,
               color: Colors.white,

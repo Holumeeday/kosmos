@@ -42,7 +42,7 @@ class ResendCountdown extends StatelessWidget {
           fText ?? context.loc.ifYouDidNotReceiveCodeRetry,
           style: context.appTextTheme.caption,
         ),
-        const HSpace(3),
+        const HSpace(8),
         !fCantResendOtp
             ? GestureDetector(
                 onTap: () {

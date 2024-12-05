@@ -53,9 +53,7 @@ class OnboardTabletView extends StatelessWidget {
                   fChild: Text(
                     context.loc.setOnboardTitle(fPageModel.title),
                     textAlign: TextAlign.center,
-                    style: context.textTheme.displayLarge?.copyWith(
-                      color: context.colors.secondary,
-                    ),
+                    style: context.appTextTheme.header1,
                   ),
                 ),
                 const VSpace(5),
@@ -66,7 +64,7 @@ class OnboardTabletView extends StatelessWidget {
                     fChild: Text(
                       context.loc.setOnboardDetails(fPageModel.title),
                       textAlign: TextAlign.center,
-                      style: context.textTheme.titleMedium,
+                      style: context.appTextTheme.body,
                     ),
                   ),
                 ),
