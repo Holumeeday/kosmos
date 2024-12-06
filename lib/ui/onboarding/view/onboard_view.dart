@@ -5,8 +5,8 @@ import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/models/onboarding_model.dart';
 import 'package:playkosmos_v3/ui/auth_provider/auth_provider_view.dart';
-import 'package:playkosmos_v3/ui/onboarding/onboard_view_mobile.dart';
-import 'package:playkosmos_v3/ui/onboarding/onboard_view_tablet.dart';
+import 'package:playkosmos_v3/ui/onboarding/view/widgets/onboard_view_mobile.dart';
+import 'package:playkosmos_v3/ui/onboarding/view/widgets/onboard_view_tablet.dart';
 
 /*
 This class shows the onboarding view

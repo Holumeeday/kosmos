@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:playkosmos_v3/assets_gen/fonts.gen.dart';
-import 'package:playkosmos_v3/utils/app_colors.dart';
-import 'package:playkosmos_v3/utils/app_text_styles.dart';
+import 'package:playkosmos_v3/utils/theme/app_colors.dart';
+import 'package:playkosmos_v3/utils/theme/app_text_styles.dart';
 
 /// The text button theme
 TextButtonThemeData _kTextButtonTheme = TextButtonThemeData(
@@ -257,7 +257,6 @@ class MyThemes {
         unselectedStepperColor: AppColor.fUnselectedStepperColor,
       ),
       AppTextTheme.dark,
-
     ],
     scrollbarTheme: ScrollbarThemeData(
       interactive: true,

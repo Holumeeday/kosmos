@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/ui.dart';
+import 'package:playkosmos_v3/ui/splash/splash_view.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 mixin GoRouterMixin {

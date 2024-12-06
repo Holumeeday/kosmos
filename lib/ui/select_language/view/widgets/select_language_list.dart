@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/select_language/select_language_view_model.dart';
-import 'package:provider/provider.dart';
+import 'package:playkosmos_v3/models/locale_language_model.dart';
+import 'package:playkosmos_v3/ui/select_language/cubit/select_language_cubit.dart';
 
 /*
 This class creates the main select language list
@@ -40,7 +41,7 @@ class _SelectLanguageViewState extends State<_SelectLanguageView> {
     _fSearchController.addListener(
       () {
         context
-            .read<SelectLanguageViewModel>()
+            .read<SelectLanguageCubit>()
             .searchLanguage(_fSearchController.text);
       },
     );
@@ -106,9 +107,10 @@ class _SelectLanguageViewState extends State<_SelectLanguageView> {
           const VSpace(20),
 
           //Language list
-          Selector<SelectLanguageViewModel, List>(
-            selector: (_, viewModel) => viewModel.dLanguageList,
-            builder: (_, languageList, __) => Column(
+          BlocSelector<SelectLanguageCubit, SelectLanguageState,
+              List<LanguageLocaleModel>>(
+            selector: (cubit) => cubit.dLanguageList,
+            builder: (_, languageList) => Column(
               mainAxisSize: MainAxisSize.min,
               children: languageList.map<Widget>(
                 (fLanguageModel) {
@@ -154,7 +156,7 @@ class _SelectLanguageViewState extends State<_SelectLanguageView> {
                       contentPadding: EdgeInsets.zero,
                       onChanged: (value) {
                         context
-                            .read<SelectLanguageViewModel>()
+                            .read<SelectLanguageCubit>()
                             .setLocale(fLanguageModel.languageLocale);
                       },
                     ),

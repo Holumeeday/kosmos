@@ -7,8 +7,8 @@ This widget shows the resend timer
 @author: Ugochukwu Umeh
 */
 class ResendCountdown extends StatelessWidget {
-  ///If resend otp can be sent
-  final bool fCantResendOtp;
+  ///If user can resend top
+  final bool fCanResendOtp;
 
   ///To resend an otp call
   final VoidCallback fResendOtpCall;
@@ -24,7 +24,7 @@ class ResendCountdown extends StatelessWidget {
 
   const ResendCountdown({
     super.key,
-    required this.fCantResendOtp,
+    required this.fCanResendOtp,
     required this.fResendOtpCall,
     required this.fEndCountdown,
     this.fText,
@@ -43,7 +43,7 @@ class ResendCountdown extends StatelessWidget {
           style: context.appTextTheme.caption,
         ),
         const HSpace(8),
-        !fCantResendOtp
+        fCanResendOtp
             ? GestureDetector(
                 onTap: () {
                   fResendOtpCall.call();

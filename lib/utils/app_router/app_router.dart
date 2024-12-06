@@ -1,5 +1,8 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:playkosmos_v3/services/services.dart';
+import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /*
@@ -7,17 +10,19 @@ This class defines the routes and path names for the app navigation
 @author: Godwin Mathias
 */
 class AppRoute with GoRouterMixin {
-  AppRoute();
+  AppRoute({
+    required AuthFlowStorage fAuthStorage,
+  }) : _fAuthFlowStorage = fAuthStorage;
 
   /// The auth service
-  final AuthStorageService _fAuthService = locator<AuthStorageService>();
+  final AuthFlowStorage _fAuthFlowStorage;
 
   /// The router
   GoRouter get router => GoRouter(
         observers: [GoRouterObserver()],
         initialLocation: splashScreenPath,
         navigatorKey: GetContext.navigatorKey,
-        refreshListenable: _fAuthService.listenable,
+        refreshListenable: StreamListenable(_fAuthFlowStorage.listener, null),
         debugLogDiagnostics: true,
         routes: [
           createGoRoute(
@@ -33,21 +38,21 @@ class AppRoute with GoRouterMixin {
           const List<String> step2Pages = [];
 
           /// Check the login state
-          final bool isLoggedIn = _fAuthService.fAuthModel.isLoggedIn;
+          final bool isLoggedIn = _fAuthFlowStorage.fAuthModel.isLoggedIn;
 
           /// Check if the user has gone through the splash
-          final bool isInitialized = _fAuthService.fAuthModel.isInitialized;
+          final bool isInitialized = _fAuthFlowStorage.fAuthModel.isInitialized;
 
           /// Check if user has gone through the onboard screen
-          final bool isOnboarded = _fAuthService.fAuthModel.isOnboarded;
+          final bool isOnboarded = _fAuthFlowStorage.fAuthModel.isOnboarded;
 
           /// Check if user has gone through the otp verification screen
-          final bool isVerified = _fAuthService.fAuthModel.isVerified;
+          final bool isVerified = _fAuthFlowStorage.fAuthModel.isVerified;
 
           /// Checks if the user has completed the step 2 process of creating
           /// an account
           final bool hasCompletedStep2 =
-              _fAuthService.fAuthModel.hasCompletedStep2;
+              _fAuthFlowStorage.fAuthModel.hasCompletedStep2;
 
           /// Check if user going to splash screen
           final bool isGoingToInit = state.matchedLocation == splashScreenPath;
@@ -101,7 +106,7 @@ class AppRoute with GoRouterMixin {
 
             /// if everything is set, send the user where they were going before (or
             /// home if they weren't going anywhere i.e They're in /splash)
-          } else if (_fAuthService.fAuthModel.allTrue()) {
+          } else if (_fAuthFlowStorage.fAuthModel.allTrue()) {
             /// Only redirect the user to home on app launch
             if (isGoingToInit) return '';
 
@@ -121,4 +126,21 @@ class AppRoute with GoRouterMixin {
   /// Route names
   ///
   static const String splashScreen = 'splash';
+}
+
+class StreamListenable extends ValueNotifier<dynamic> {
+  StreamListenable(Stream<dynamic> stream, dynamic initialValue)
+      : super(initialValue) {
+    _subscription = stream.listen((event) {
+      value = event;
+    });
+  }
+
+  late final StreamSubscription _subscription;
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
+  }
 }

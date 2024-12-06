@@ -13,11 +13,8 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.8
-  provider: ^6.1.2
   # Routing and Navigation
   go_router: ^14.6.1
-  # Dependency injection
-  get_it: ^8.0.2
   # Local database
   sembast: ^3.8.0
   # Database encryption
@@ -31,6 +28,10 @@ dependencies:
   flutter_svg: ^2.0.16
   device_preview: ^1.2.0
   pinput: ^5.0.0
+  # State management
+  flutter_bloc: ^8.1.6
+  equatable: ^2.0.7
+  bloc: ^8.1.4
 
 dev_dependencies:
   flutter_test:
