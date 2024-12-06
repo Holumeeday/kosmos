@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/services/services.dart';
 import 'package:playkosmos_v3/ui/select_language/cubit/select_language_cubit.dart';
-import 'package:playkosmos_v3/utils/utils.dart';
-import 'package:provider/provider.dart';
+import 'package:playkosmos_v3/utils/pop_up_util.dart';
 
 /*
 This class defines the row widget placed in either create account or login view
@@ -13,10 +12,7 @@ that contains the locale name and other text
 @author: Ugochukwu Umeh
 */
 class AuthHeaderChangeLocale extends StatelessWidget {
-  final ModalBottomSheetService _fModalBottomService =
-      locator<ModalBottomSheetService>();
-
-  AuthHeaderChangeLocale({
+  const AuthHeaderChangeLocale({
     super.key,
   });
 
@@ -31,7 +27,8 @@ class AuthHeaderChangeLocale extends StatelessWidget {
         child: GestureDetector(
           onTap: () {
             //Shows a modal bottom sheet to change the language of the app
-            _fModalBottomService.showDefaultModal(
+            showDefaultModal(
+              context,
               maxHeight: 65,
               child: const SelectLanguageModal(),
             );

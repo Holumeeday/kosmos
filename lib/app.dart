@@ -2,16 +2,49 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/ui/select_language/cubit/select_language_cubit.dart';
 import 'package:playkosmos_v3/ui/splash/splash_view.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
-/// This widget is used to setup all the global view models
-/// to be used in the app
+/// Root widget of the application responsible for setting up global dependencies,
+/// repository providers, and BLoC providers.
+///
+/// This widget sets up:
+/// - Non-secure storage repository.
+/// - Auth flow storage for managing authentication state.
 ///
 /// @author: Godwin Mathias
 class App extends StatelessWidget {
-  const App({super.key});
+  const App({
+    super.key,
+    required this.fNonSecureStorage,
+  });
+
+  /// The non-secure storage repository for app data storage
+  final NonSecureStorage fNonSecureStorage;
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider.value(
+          value: fNonSecureStorage,
+        ),
+        RepositoryProvider(
+          create: (context) => AuthFlowStorage(
+            fStorage: fNonSecureStorage,
+          ),
+        ),
+      ],
+      child: const _AppBloc(),
+    );
+  }
+}
+
+/// This widget provides all BLoC providers for the application
+class _AppBloc extends StatelessWidget {
+  const _AppBloc({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +59,8 @@ class App extends StatelessWidget {
   }
 }
 
+/// Main app view widget that configures the MaterialApp with themes, locale,
+/// and localization
 class _AppView extends StatelessWidget {
   const _AppView({super.key});
 
@@ -38,10 +73,11 @@ class _AppView extends StatelessWidget {
       navigatorKey: GetContext.navigatorKey,
       debugShowCheckedModeBanner: false,
       home: const SplashView(),
-      builder: DevicePreview.appBuilder,
-      theme: MyThemes.lightTheme,
-      darkTheme: MyThemes.darkTheme,
-      locale: dLocale,
+      builder:
+          DevicePreview.appBuilder, // Enables device preview for development
+      theme: MyThemes.lightTheme, // Light theme of the app
+      darkTheme: MyThemes.darkTheme, // Dark theme of the app
+      locale: dLocale, // Selected language/locale
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
     );

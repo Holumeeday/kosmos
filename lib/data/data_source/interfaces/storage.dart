@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 /// Interface which is used to persist and retrieve data from user device.
 abstract class Storage {
   /// Returns value for key
@@ -14,8 +12,8 @@ abstract class Storage {
   /// Clears all key value pairs from storage
   Future<void> clear();
 
-  /// To react to certain changes in the [keys]
-  ValueListenable<dynamic> listenable(List<String> keys);
+  /// To react to certain changes in the [key]
+  Stream<dynamic> listener(String key);
 
   // Storage initializer
   Future<void> initialize();

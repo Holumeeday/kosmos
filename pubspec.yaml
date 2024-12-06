@@ -15,8 +15,6 @@ dependencies:
   cupertino_icons: ^1.0.8
   # Routing and Navigation
   go_router: ^14.6.1
-  # Dependency injection
-  get_it: ^8.0.2
   # Local database
   sembast: ^3.8.0
   # Database encryption
@@ -33,6 +31,7 @@ dependencies:
   # State management
   flutter_bloc: ^8.1.6
   equatable: ^2.0.7
+  bloc: ^8.1.4
 
 dev_dependencies:
   flutter_test:

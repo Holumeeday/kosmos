@@ -1,5 +1,4 @@
-import 'package:flutter/foundation.dart';
-import 'package:playkosmos_v3/services/services.dart';
+import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/utils/logger.dart';
 
 /// Stores user non-secure essential data. Works like SharedPreference
@@ -8,16 +7,16 @@ import 'package:playkosmos_v3/utils/logger.dart';
 /// ```dart
 /// main() {
 /// ...
-/// final appPreference = AppPreferenceService(storage: SomeStorage());
+/// final nonSecure = NonSecureStorage(storage: SomeStorage());
 /// // Don't forget to initialize
-/// appPreference.initDb();
-/// // Then use the instance to store any data that needs to be secure
-/// appPreference.setValue(key, value);
+/// nonSecure.initDb();
+/// // Then use the instance to store any data that doesn't needs to be secure
+/// nonSecure.setValue(key, value);
 /// }
 ///
 /// ```
-class AppPreferenceService {
-  AppPreferenceService({
+class NonSecureStorage {
+  NonSecureStorage({
     required Storage storage,
   }) : _storage = storage;
 
@@ -58,7 +57,7 @@ class AppPreferenceService {
   }
 
   /// This is used to react to changes to keys
-  ValueListenable<dynamic> reactToKeys(List<String> keys) {
-    return _storage.listenable(keys);
+  Stream<dynamic> listenToChanges(String key) {
+    return _storage.listener(key);
   }
 }

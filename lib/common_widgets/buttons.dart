@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/utils/app_colors.dart';
+import 'package:playkosmos_v3/utils/theme/app_colors.dart';
 
 /*
 This class defines the primary button type

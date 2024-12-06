@@ -32,16 +32,38 @@ class _EmailOtpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AuthOTPForm(
-      fPageTitle: context.loc.enterYourCode,
-      fPageSubTitle: context.loc.letDoubleCheckYourInfoMessage,
-      fOnNextButton:
-          context.read<EmailOtpVerificationCubit>().showSuccessDialog,
-      fOnResendCode: context.read<EmailOtpVerificationCubit>().resendOtp,
-      fCanResendOtp: context.select(
-          (EmailOtpVerificationCubit cubit) => cubit.state.dCanResendOtp),
-      fOnEndCountdown: () =>
-          context.read<EmailOtpVerificationCubit>().setResendingOtp(true),
+    return BlocListener<EmailOtpVerificationCubit, EmailOtpVerificationState>(
+      listener: (context, state) {
+        if (state.dShowSuccessDialog) {
+          // Show success dialog
+          showDialog<void>(
+            context: context,
+            barrierDismissible: false,
+            builder: (BuildContext dialogContext) {
+              return Dialog(
+                child: AuthSuccessInfoDialog(
+                  fTitle: context.loc.emailIsOfficiallyVerified,
+                  fMessage: context.loc.emailVerifiedDialogMessage,
+                  fOnLetGo: () {
+                    dialogContext.pop();
+                  },
+                ),
+              );
+            },
+          );
+        }
+      },
+      child: AuthOTPForm(
+        fPageTitle: context.loc.enterYourCode,
+        fPageSubTitle: context.loc.letDoubleCheckYourInfoMessage,
+        fOnNextButton:
+            context.read<EmailOtpVerificationCubit>().showSuccessDialog,
+        fOnResendCode: context.read<EmailOtpVerificationCubit>().resendOtp,
+        fCanResendOtp: context.select(
+            (EmailOtpVerificationCubit cubit) => cubit.state.dCanResendOtp),
+        fOnEndCountdown: () =>
+            context.read<EmailOtpVerificationCubit>().setResendingOtp(true),
+      ),
     );
   }
 }
