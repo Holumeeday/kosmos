@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
+import 'package:playkosmos_v3/ui/forgot_password_phone/view/forgot_password_phone_page.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// Sign in with phone number and password page
@@ -105,6 +106,9 @@ class _SignInPhoneNumberPageState extends State<SignInPhoneNumberPage> {
               Align(
                 alignment: Alignment.topRight,
                 child: InkWell(
+                  onTap: () {
+                    context.push(const ForgotPasswordPhonePage());
+                  },
                   child: Text(
                     context.loc.forgotPassword,
                     style: context.appTextTheme.buttonMedium?.copyWith(

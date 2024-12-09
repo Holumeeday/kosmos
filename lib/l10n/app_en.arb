@@ -1,6 +1,7 @@
 {
   "alrightTimeToCreateEnterASecretCode": "Alright, it’s time to enter your secret code!  Type it in below and let’s unlock your next move!",
   "checkYourEmail": "Check your email",
+  "checkYourInbox": "Check your inbox",
   "codeAccepted": "Code Accepted",
   "countryCode": "Country code",
   "createPassword": "Create password",
@@ -10,6 +11,7 @@
   "enterYourEmailAddress": "Enter your email address",
   "exploreFunActivitiesNearbyAfar": "Explore fun activities nearby and afar",
   "forgotPassword2": "Forgot Password",
+  "howWouldYouLikeToReceiveCode": "How would you like to receive the code?",
   "iUnderstandTandC": "I understand that by creating an account and using Playkosmos I am saying that I agree and promise to respect its rules and values as stated in the ",
   "ifYouDidNotReceiveCodeRetry": "If you didn’t receive a code, no worries, let’s try again",
   "letDoubleCheckYourInfoMessage": "Let''s double-check your info to keep things legit.",
@@ -28,6 +30,7 @@
   "signUpWithEmail": "Sign up with Email",
   "signUpWithGoogle": "Sign up with Google",
   "signUpWithNumber": "Sign up with Number",
+  "sms": "SMS",
   "timeToLockThingsDownPasswordCreationMessage": "Time to lock things down, Create a password that’s as strong as your coffee and as unique as you are.",
   "weAreSendingYouASecretCodeToVerifyEmail": "We’re sending you a secret code to prove this email address is really yours, Keep an eye out",
   "welcomeBackUser": "Welcome back, {username}",
@@ -352,6 +355,7 @@
   "@enterOtpError": {
     "description": "Error gotten when otp field is blank"
   },
+  "whatsapp": "WhatsApp",
   "wrongOtpError": "*OTP is invalid. Please enter correct password",
   "@wrongOtpError": {
     "description": "Error gotten when otp is wrong"
