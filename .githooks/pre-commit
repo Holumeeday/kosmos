@@ -1,0 +1,75 @@
+#!/usr/bin/env dart
+
+// ignore_for_file: avoid_print
+
+import 'dart:io';
+import 'dart:convert';
+
+/*
+This script will check if the translation files are in sync
+It will print the keys in other translations that is missing in the main translation
+and vice-versa.
+*/
+void main(List<String> arguments) async {
+  const mainLanguageArbPath =
+      'lib/l10n/app_en.arb'; // Update with the path to the main language .arb file
+  const arbFilesDirectory =
+      'lib/l10n/'; // Update with the path to the .arb files directory
+
+  final arbFiles = Directory(arbFilesDirectory).listSync();
+
+  for (var arbFile in arbFiles) {
+    if (arbFile.path.endsWith('.arb') && arbFile.path != mainLanguageArbPath) {
+      final mainLanguageContents =
+          await File(mainLanguageArbPath).readAsString();
+      final currentLanguageContents = await File(arbFile.path).readAsString();
+
+      final diff = diffARBs(mainLanguageContents, currentLanguageContents);
+      final diffMain = diffARBs(currentLanguageContents, mainLanguageContents);
+
+      if (diff.isNotEmpty || diffMain.isNotEmpty) {
+        print(
+            '\x1B[31mError:\x1B[0m Localization mismatch in file: ${arbFile.path}');
+        print('\x1B[31mMissing Key(s):\x1B[0m');
+         // The other arb
+        final splitArbFile = arbFile.path.split('/');
+        print('\t\x1B[33m${splitArbFile[splitArbFile.length - 1]}\x1B[0m');
+        diff.forEach(((element) => print('\t\t$element')));
+
+        // The main arb
+        final splitMainArbFile = mainLanguageArbPath.split('/');
+        print(
+            '\t\x1B[33m${splitMainArbFile[splitMainArbFile.length - 1]}\x1B[0m');
+        diffMain.forEach(((element) => print('\t\t$element')));
+        print('\n');
+
+        // Exit the code
+        exitCode = 1;
+      } else {
+        print(
+            '\x1B[32mInfo:\x1B[0m Localization is in sync for file: ${arbFile.path}');
+        print('\n');
+      }
+    }
+  }
+}
+
+List<String> diffARBs(String arb1Contents, String arb2Contents) {
+  Map<String, dynamic> ret = json.decode(arb1Contents);
+  Map<String, dynamic> json2 = json.decode(arb2Contents);
+  List<String> missingKeys = [];
+
+  for (var key in json2.keys) {
+    if (key.startsWith('@')) continue;
+    if (ret.containsKey(key)) {
+      if (json.encode(ret[key]) == json.encode(json2[key])) {
+        ret.remove(key);
+      }
+    } else {
+      ret[key] = json2[key];
+      missingKeys.add(key);
+    }
+  }
+
+  return missingKeys;
+}

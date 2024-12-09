@@ -104,13 +104,17 @@ class _AuthOTPFormState extends State<AuthOTPForm> {
         Text(
           widget.fPageTitle,
           style: context.appTextTheme.header1,
+          textAlign: TextAlign.center,
         ),
         const VSpace(16),
 
         // Display the page subtitle (additional instruction or message).
         Text(
           widget.fPageSubTitle,
-          style: context.appTextTheme.caption,
+          style: context.appTextTheme.body?.copyWith(
+            color: context.appColors.greyShade85Color,
+          ),
+          textAlign: TextAlign.center,
         ),
         const VSpace(40),
 

@@ -4,7 +4,9 @@ import 'package:playkosmos_v3/assets_gen/assets.gen.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/constants/constants.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/signup_with_email/sign_up_with_email_page.dart';
+import 'package:playkosmos_v3/ui/sign_in_email/view/sign_in_email_page.dart';
+import 'package:playkosmos_v3/ui/sign_in_phone/view/sign_in_phone_page.dart';
+import 'package:playkosmos_v3/ui/signup_with_email/view/sign_up_with_email_page.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// The authentication provider selection page
@@ -124,6 +126,8 @@ class _AuthProviderButtons extends StatelessWidget {
           fOnPressed: () {
             if (fIsSignUp) {
               context.push(const SignUpWithEmailPage());
+            } else {
+              context.push(const SignInEmailPage());
             }
           },
           fAuthIcon: Assets.svgs.auth.emailGradient.svg(),
@@ -135,7 +139,12 @@ class _AuthProviderButtons extends StatelessWidget {
 
         // Sign up with Number
         _AuthButton(
-          fOnPressed: () {},
+          fOnPressed: () {
+            if (fIsSignUp) {
+            } else {
+              context.push(const SignInPhoneNumberPage());
+            }
+          },
           fAuthIcon: Assets.svgs.auth.phoneGradient.svg(),
           fAuthText: fIsSignUp
               ? context.loc.signUpWithNumber
