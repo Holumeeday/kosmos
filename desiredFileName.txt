@@ -21,6 +21,7 @@
     "loginWithGoogle",
     "loginWithNumber",
     "noWorriesForgotPasswordCaption",
+    "passswordResetSuccessfully",
     "resend",
     "searchCountryCode",
     "signIn",
@@ -33,7 +34,8 @@
     "welcomeBackUser",
     "welcomeBackWeMissedYouSignInEmail",
     "youAreAlllSignedInAndReadyToRoll",
-    "youAreOfficiallyBackInActionMessage"
+    "youAreOfficiallyBackInActionMessage",
+    "yourPasswordResetWasSuccessfulMessage"
   ],
 
   "fr": [
@@ -58,6 +60,7 @@
     "loginWithGoogle",
     "loginWithNumber",
     "noWorriesForgotPasswordCaption",
+    "passswordResetSuccessfully",
     "resend",
     "searchCountryCode",
     "signIn",
@@ -70,7 +73,8 @@
     "welcomeBackUser",
     "welcomeBackWeMissedYouSignInEmail",
     "youAreAlllSignedInAndReadyToRoll",
-    "youAreOfficiallyBackInActionMessage"
+    "youAreOfficiallyBackInActionMessage",
+    "yourPasswordResetWasSuccessfulMessage"
   ],
 
   "hi": [
@@ -95,6 +99,7 @@
     "loginWithGoogle",
     "loginWithNumber",
     "noWorriesForgotPasswordCaption",
+    "passswordResetSuccessfully",
     "resend",
     "searchCountryCode",
     "signIn",
@@ -107,7 +112,8 @@
     "welcomeBackUser",
     "welcomeBackWeMissedYouSignInEmail",
     "youAreAlllSignedInAndReadyToRoll",
-    "youAreOfficiallyBackInActionMessage"
+    "youAreOfficiallyBackInActionMessage",
+    "yourPasswordResetWasSuccessfulMessage"
   ],
 
   "si": [
@@ -132,6 +138,7 @@
     "loginWithGoogle",
     "loginWithNumber",
     "noWorriesForgotPasswordCaption",
+    "passswordResetSuccessfully",
     "resend",
     "searchCountryCode",
     "signIn",
@@ -144,7 +151,8 @@
     "welcomeBackUser",
     "welcomeBackWeMissedYouSignInEmail",
     "youAreAlllSignedInAndReadyToRoll",
-    "youAreOfficiallyBackInActionMessage"
+    "youAreOfficiallyBackInActionMessage",
+    "yourPasswordResetWasSuccessfulMessage"
   ],
 
   "ta": [
@@ -169,6 +177,7 @@
     "loginWithGoogle",
     "loginWithNumber",
     "noWorriesForgotPasswordCaption",
+    "passswordResetSuccessfully",
     "resend",
     "searchCountryCode",
     "signIn",
@@ -181,7 +190,8 @@
     "welcomeBackUser",
     "welcomeBackWeMissedYouSignInEmail",
     "youAreAlllSignedInAndReadyToRoll",
-    "youAreOfficiallyBackInActionMessage"
+    "youAreOfficiallyBackInActionMessage",
+    "yourPasswordResetWasSuccessfulMessage"
   ],
 
   "zh": [
@@ -206,6 +216,7 @@
     "loginWithGoogle",
     "loginWithNumber",
     "noWorriesForgotPasswordCaption",
+    "passswordResetSuccessfully",
     "resend",
     "searchCountryCode",
     "signIn",
@@ -218,6 +229,7 @@
     "welcomeBackUser",
     "welcomeBackWeMissedYouSignInEmail",
     "youAreAlllSignedInAndReadyToRoll",
-    "youAreOfficiallyBackInActionMessage"
+    "youAreOfficiallyBackInActionMessage",
+    "yourPasswordResetWasSuccessfulMessage"
   ]
 }

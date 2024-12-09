@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/create_password/view/create_password_page.dart';
 import 'package:playkosmos_v3/ui/forgot_password_otp/cubit/forgot_password_otp_cubit.dart';
+import 'package:playkosmos_v3/ui/reset_password_page/view/reset_password_page.dart';
+import 'package:playkosmos_v3/utils/pop_up_util.dart';
 
 /// Forgot password OTP verification screen
 ///
@@ -38,8 +39,8 @@ class _EmailOtpView extends StatelessWidget {
       listener: (context, state) {
         if (state.dShowSuccessDialog) {
           // Show success dialog
-          showDialog<void>(
-            context: context,
+          showCustomDialog(
+            context,
             barrierDismissible: false,
             builder: (BuildContext dialogContext) {
               return Dialog(
@@ -47,7 +48,7 @@ class _EmailOtpView extends StatelessWidget {
                   fTitle: context.loc.codeAccepted,
                   fMessage: context.loc.youAreOfficiallyBackInActionMessage,
                   fOnLetGo: () {
-                    context.push(const CreatePasswordPage());
+                    context.push(const ResetPasswordPage());
                   },
                 ),
               );
