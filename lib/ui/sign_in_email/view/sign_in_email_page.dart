@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
+import 'package:playkosmos_v3/ui/forgot_password_email/view/forgot_password_email_page.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// Sign in with email and password page
@@ -109,6 +110,9 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
               Align(
                 alignment: Alignment.topRight,
                 child: InkWell(
+                  onTap: () {
+                    context.push(const ForgotPasswordEmailPage());
+                  },
                   child: Text(
                     context.loc.forgotPassword,
                     style: context.appTextTheme.buttonMedium?.copyWith(
