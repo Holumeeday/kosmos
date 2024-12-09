@@ -1,4 +1,5 @@
 {
+  "countryCode": "Country code",
   "createPassword": "Create password",
   "dontHaveAnAccount": "Don''t have an account? ",
   "enterYourCode": "Enter your code",
@@ -14,12 +15,23 @@
   "loginWithGoogle": "Login with Google",
   "loginWithNumber": "Login with Number",
   "resend": "Resend",
+  "searchCountryCode": "Search country code",
+  "signIn": "Sign In",
   "signUp": "Sign up",
   "signUpWithEmail": "Sign up with Email",
   "signUpWithGoogle": "Sign up with Google",
   "signUpWithNumber": "Sign up with Number",
   "timeToLockThingsDownPasswordCreationMessage": "Time to lock things down, Create a password that’s as strong as your coffee and as unique as you are.",
   "weAreSendingYouASecretCodeToVerifyEmail": "We’re sending you a secret code to prove this email address is really yours, Keep an eye out",
+  "welcomeBackUser": "Welcome back, {username}",
+  "@welcomeBackUser": {
+    "placeholders": {
+      "username": {
+        "type": "String"
+      }
+    }
+  },
+  "welcomeBackWeMissedYouSignInEmail": "Welcome back, we missed you. Ready to pick up where you left off and make more magic happen? Let’s do this!",
   "welcomeToPlaykosmos": "Welcome to Playkosmos",
   "@welcomeToPlaykosmos": {
     "description": "Welcoming the user to the app"
@@ -410,6 +422,7 @@
       }
     }
   },
+  "youAreAlllSignedInAndReadyToRoll": "You’re all signed in and ready to roll, Let’s pick up where we left off and make today amazing.",
   "yourLocation": "Your location",
   "@yourLocation": {
     "description": "The location of the user"

@@ -77,3 +77,17 @@ Future showDefaultModal(
     ),
   );
 }
+
+///This shows a custom dialog which holds a [child]
+Future showCustomDialog(
+  BuildContext context, {
+  required Widget Function(BuildContext context) builder,
+  bool barrierDismissible = true,
+}) {
+  return showDialog(
+    useSafeArea: true,
+    barrierDismissible: barrierDismissible,
+    context: context,
+    builder: builder,
+  );
+}

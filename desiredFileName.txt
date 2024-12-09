@@ -1,5 +1,6 @@
 {
   "fi": [
+    "countryCode",
     "createPassword",
     "dontHaveAnAccount",
     "enterYourCode",
@@ -15,15 +16,21 @@
     "loginWithGoogle",
     "loginWithNumber",
     "resend",
+    "searchCountryCode",
+    "signIn",
     "signUp",
     "signUpWithEmail",
     "signUpWithGoogle",
     "signUpWithNumber",
     "timeToLockThingsDownPasswordCreationMessage",
-    "weAreSendingYouASecretCodeToVerifyEmail"
+    "weAreSendingYouASecretCodeToVerifyEmail",
+    "welcomeBackUser",
+    "welcomeBackWeMissedYouSignInEmail",
+    "youAreAlllSignedInAndReadyToRoll"
   ],
 
   "fr": [
+    "countryCode",
     "createPassword",
     "dontHaveAnAccount",
     "enterYourCode",
@@ -39,15 +46,21 @@
     "loginWithGoogle",
     "loginWithNumber",
     "resend",
+    "searchCountryCode",
+    "signIn",
     "signUp",
     "signUpWithEmail",
     "signUpWithGoogle",
     "signUpWithNumber",
     "timeToLockThingsDownPasswordCreationMessage",
-    "weAreSendingYouASecretCodeToVerifyEmail"
+    "weAreSendingYouASecretCodeToVerifyEmail",
+    "welcomeBackUser",
+    "welcomeBackWeMissedYouSignInEmail",
+    "youAreAlllSignedInAndReadyToRoll"
   ],
 
   "hi": [
+    "countryCode",
     "createPassword",
     "dontHaveAnAccount",
     "enterYourCode",
@@ -63,15 +76,21 @@
     "loginWithGoogle",
     "loginWithNumber",
     "resend",
+    "searchCountryCode",
+    "signIn",
     "signUp",
     "signUpWithEmail",
     "signUpWithGoogle",
     "signUpWithNumber",
     "timeToLockThingsDownPasswordCreationMessage",
-    "weAreSendingYouASecretCodeToVerifyEmail"
+    "weAreSendingYouASecretCodeToVerifyEmail",
+    "welcomeBackUser",
+    "welcomeBackWeMissedYouSignInEmail",
+    "youAreAlllSignedInAndReadyToRoll"
   ],
 
   "si": [
+    "countryCode",
     "createPassword",
     "dontHaveAnAccount",
     "enterYourCode",
@@ -87,15 +106,21 @@
     "loginWithGoogle",
     "loginWithNumber",
     "resend",
+    "searchCountryCode",
+    "signIn",
     "signUp",
     "signUpWithEmail",
     "signUpWithGoogle",
     "signUpWithNumber",
     "timeToLockThingsDownPasswordCreationMessage",
-    "weAreSendingYouASecretCodeToVerifyEmail"
+    "weAreSendingYouASecretCodeToVerifyEmail",
+    "welcomeBackUser",
+    "welcomeBackWeMissedYouSignInEmail",
+    "youAreAlllSignedInAndReadyToRoll"
   ],
 
   "ta": [
+    "countryCode",
     "createPassword",
     "dontHaveAnAccount",
     "enterYourCode",
@@ -111,15 +136,21 @@
     "loginWithGoogle",
     "loginWithNumber",
     "resend",
+    "searchCountryCode",
+    "signIn",
     "signUp",
     "signUpWithEmail",
     "signUpWithGoogle",
     "signUpWithNumber",
     "timeToLockThingsDownPasswordCreationMessage",
-    "weAreSendingYouASecretCodeToVerifyEmail"
+    "weAreSendingYouASecretCodeToVerifyEmail",
+    "welcomeBackUser",
+    "welcomeBackWeMissedYouSignInEmail",
+    "youAreAlllSignedInAndReadyToRoll"
   ],
 
   "zh": [
+    "countryCode",
     "createPassword",
     "dontHaveAnAccount",
     "enterYourCode",
@@ -135,11 +166,16 @@
     "loginWithGoogle",
     "loginWithNumber",
     "resend",
+    "searchCountryCode",
+    "signIn",
     "signUp",
     "signUpWithEmail",
     "signUpWithGoogle",
     "signUpWithNumber",
     "timeToLockThingsDownPasswordCreationMessage",
-    "weAreSendingYouASecretCodeToVerifyEmail"
+    "weAreSendingYouASecretCodeToVerifyEmail",
+    "welcomeBackUser",
+    "welcomeBackWeMissedYouSignInEmail",
+    "youAreAlllSignedInAndReadyToRoll"
   ]
 }

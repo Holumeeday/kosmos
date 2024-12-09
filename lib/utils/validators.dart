@@ -38,7 +38,7 @@ class ValidationUtil {
 
   /// To validate user's number
   static String? numberValidator(String? value) {
-    if (value != null && value.isNotEmpty) {
+    if (value != null && value.length > 4) {
       return null;
     }
     return _loc.enterPhoneNumber;
