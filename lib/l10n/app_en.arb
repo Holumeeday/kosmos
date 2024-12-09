@@ -1,5 +1,7 @@
 {
+  "alrightTimeToCreateEnterASecretCode": "Alright, it’s time to enter your secret code!  Type it in below and let’s unlock your next move!",
   "checkYourEmail": "Check your email",
+  "codeAccepted": "Code Accepted",
   "countryCode": "Country code",
   "createPassword": "Create password",
   "dingDingCheckInboxMessage": "Ding-ding! Your reset code has just landed in your inbox! Go check it out, and let’s get you back on track in no time",
@@ -427,6 +429,7 @@
     }
   },
   "youAreAlllSignedInAndReadyToRoll": "You’re all signed in and ready to roll, Let’s pick up where we left off and make today amazing.",
+  "youAreOfficiallyBackInActionMessage": "You’re officially back in action — let’s keep the good vibes rolling!\n\n Time to create a fresh, shiny new password! Make it strong, unique, and ready to keep your account super secure. You’ve got this!",
   "yourLocation": "Your location",
   "@yourLocation": {
     "description": "The location of the user"

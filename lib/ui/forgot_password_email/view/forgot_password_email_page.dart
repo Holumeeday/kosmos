@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
+import 'package:playkosmos_v3/ui/forgot_password_otp/view/forgot_password_otp_page.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// Forgot password using email page
@@ -94,7 +95,10 @@ class _ForgotPasswordEmailPageState extends State<ForgotPasswordEmailPage> {
                       child: AuthSuccessInfoDialog(
                         fTitle: context.loc.checkYourEmail,
                         fMessage: context.loc.dingDingCheckInboxMessage,
-                        fOnLetGo: () {},
+                        fOnLetGo: () {
+                          context
+                              .push(const ForgotPasswordOtpVerificationPage());
+                        },
                       ),
                     ),
                   );

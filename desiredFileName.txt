@@ -1,6 +1,8 @@
 {
   "fi": [
+    "alrightTimeToCreateEnterASecretCode",
     "checkYourEmail",
+    "codeAccepted",
     "countryCode",
     "createPassword",
     "dingDingCheckInboxMessage",
@@ -30,11 +32,14 @@
     "weAreSendingYouASecretCodeToVerifyEmail",
     "welcomeBackUser",
     "welcomeBackWeMissedYouSignInEmail",
-    "youAreAlllSignedInAndReadyToRoll"
+    "youAreAlllSignedInAndReadyToRoll",
+    "youAreOfficiallyBackInActionMessage"
   ],
 
   "fr": [
+    "alrightTimeToCreateEnterASecretCode",
     "checkYourEmail",
+    "codeAccepted",
     "countryCode",
     "createPassword",
     "dingDingCheckInboxMessage",
@@ -64,11 +69,14 @@
     "weAreSendingYouASecretCodeToVerifyEmail",
     "welcomeBackUser",
     "welcomeBackWeMissedYouSignInEmail",
-    "youAreAlllSignedInAndReadyToRoll"
+    "youAreAlllSignedInAndReadyToRoll",
+    "youAreOfficiallyBackInActionMessage"
   ],
 
   "hi": [
+    "alrightTimeToCreateEnterASecretCode",
     "checkYourEmail",
+    "codeAccepted",
     "countryCode",
     "createPassword",
     "dingDingCheckInboxMessage",
@@ -98,11 +106,14 @@
     "weAreSendingYouASecretCodeToVerifyEmail",
     "welcomeBackUser",
     "welcomeBackWeMissedYouSignInEmail",
-    "youAreAlllSignedInAndReadyToRoll"
+    "youAreAlllSignedInAndReadyToRoll",
+    "youAreOfficiallyBackInActionMessage"
   ],
 
   "si": [
+    "alrightTimeToCreateEnterASecretCode",
     "checkYourEmail",
+    "codeAccepted",
     "countryCode",
     "createPassword",
     "dingDingCheckInboxMessage",
@@ -132,11 +143,14 @@
     "weAreSendingYouASecretCodeToVerifyEmail",
     "welcomeBackUser",
     "welcomeBackWeMissedYouSignInEmail",
-    "youAreAlllSignedInAndReadyToRoll"
+    "youAreAlllSignedInAndReadyToRoll",
+    "youAreOfficiallyBackInActionMessage"
   ],
 
   "ta": [
+    "alrightTimeToCreateEnterASecretCode",
     "checkYourEmail",
+    "codeAccepted",
     "countryCode",
     "createPassword",
     "dingDingCheckInboxMessage",
@@ -166,11 +180,14 @@
     "weAreSendingYouASecretCodeToVerifyEmail",
     "welcomeBackUser",
     "welcomeBackWeMissedYouSignInEmail",
-    "youAreAlllSignedInAndReadyToRoll"
+    "youAreAlllSignedInAndReadyToRoll",
+    "youAreOfficiallyBackInActionMessage"
   ],
 
   "zh": [
+    "alrightTimeToCreateEnterASecretCode",
     "checkYourEmail",
+    "codeAccepted",
     "countryCode",
     "createPassword",
     "dingDingCheckInboxMessage",
@@ -200,6 +217,7 @@
     "weAreSendingYouASecretCodeToVerifyEmail",
     "welcomeBackUser",
     "welcomeBackWeMissedYouSignInEmail",
-    "youAreAlllSignedInAndReadyToRoll"
+    "youAreAlllSignedInAndReadyToRoll",
+    "youAreOfficiallyBackInActionMessage"
   ]
 }
