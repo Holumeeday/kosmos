@@ -15,7 +15,7 @@ class SelectLanguageSearchList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const _SelectLanguageView();
+    return const _SelectLanguagePage();
   }
 }
 
@@ -23,14 +23,14 @@ class SelectLanguageSearchList extends StatelessWidget {
 This class shows the select language list
 @author: Ugochukwu Umeh
 */
-class _SelectLanguageView extends StatefulWidget {
-  const _SelectLanguageView();
+class _SelectLanguagePage extends StatefulWidget {
+  const _SelectLanguagePage();
 
   @override
-  State<_SelectLanguageView> createState() => _SelectLanguageViewState();
+  State<_SelectLanguagePage> createState() => _SelectLanguagePageState();
 }
 
-class _SelectLanguageViewState extends State<_SelectLanguageView> {
+class _SelectLanguagePageState extends State<_SelectLanguagePage> {
   ///The search text controller
   late TextEditingController _fSearchController;
 

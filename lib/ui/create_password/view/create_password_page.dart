@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
-import 'package:playkosmos_v3/common_widgets/custom_text_form_fields.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/email_otp_verification/view/email_otp_verification_view.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
-/// This defines the sign up with email page
+/// The create password form page
 ///
-///@author: Godwin Mathias
-class SignUpWithEmailView extends StatefulWidget {
-  const SignUpWithEmailView({super.key});
+/// @author: Godwin Mathias
+class CreatePasswordPage extends StatefulWidget {
+  const CreatePasswordPage({super.key});
 
   @override
-  State<SignUpWithEmailView> createState() => _SignUpWithEmailViewState();
+  State<CreatePasswordPage> createState() => _CreatePasswordPageState();
 }
 
-class _SignUpWithEmailViewState extends State<SignUpWithEmailView> {
-  /// The email controller
-  late TextEditingController _fEmailController;
+class _CreatePasswordPageState extends State<CreatePasswordPage> {
+  /// The password controller
+  late TextEditingController _fPasswordController;
 
   /// The global key for validation of the form
   final _fFormKey = GlobalKey<FormState>();
@@ -28,11 +26,12 @@ class _SignUpWithEmailViewState extends State<SignUpWithEmailView> {
   @override
   void initState() {
     super.initState();
-    _fEmailController = TextEditingController()
+    _fPasswordController = TextEditingController()
       ..addListener(() {
         if (mounted) {
           _dCanNext =
-              ValidationUtil.emailValidator(_fEmailController.text) == null;
+              ValidationUtil.passwordValidator(_fPasswordController.text) ==
+                  null;
           setState(() {});
         }
       });
@@ -40,7 +39,7 @@ class _SignUpWithEmailViewState extends State<SignUpWithEmailView> {
 
   @override
   void dispose() {
-    _fEmailController.dispose();
+    _fPasswordController.dispose();
     super.dispose();
   }
 
@@ -48,6 +47,7 @@ class _SignUpWithEmailViewState extends State<SignUpWithEmailView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomAppBar(
+        fShowBackButton: false,
         fElevation: 0,
       ),
       body: SingleChildScrollView(
@@ -56,29 +56,23 @@ class _SignUpWithEmailViewState extends State<SignUpWithEmailView> {
           key: _fFormKey,
           child: Column(
             children: <Widget>[
-              const VSpace(20),
-
-              // Enter email address text
+              // Enter password text
               Text(
-                context.loc.enterYourEmailAddress,
+                context.loc.createPassword,
                 textAlign: TextAlign.center,
                 style: context.appTextTheme.header1,
               ),
+              const VSpace(40),
 
-              // Email text field
-              CustomTextFormField(
-                fTextController: _fEmailController,
-                fLabelText: context.loc.emailHint,
-                fInputAction: TextInputAction.done,
-                fTextType: TextInputType.emailAddress,
-                fAutoFillHints: const [AutofillHints.email],
-                fValidator: ValidationUtil.emailValidator,
+              // Password text field
+              CustomPasswordField(
+                fPasswordController: _fPasswordController,
               ),
               const VSpace(12),
 
-              // OTP sent text label
+              // text label
               Text(
-                context.loc.weAreSendingYouASecretCodeToVerifyEmail,
+                context.loc.timeToLockThingsDownPasswordCreationMessage,
                 style: context.appTextTheme.caption,
               ),
               const VSpace(56),
@@ -86,9 +80,7 @@ class _SignUpWithEmailViewState extends State<SignUpWithEmailView> {
               // Next button
               PrimaryGradientButton(
                 fDisabled: !_dCanNext,
-                fOnPressed: () {
-                  context.push(const EmailOtpVerificationView());
-                },
+                fOnPressed: () {},
                 fChild: Text(context.loc.nextText),
               )
             ],

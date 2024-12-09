@@ -4,7 +4,7 @@ import 'package:playkosmos_v3/assets_gen/assets.gen.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/models/onboarding_model.dart';
-import 'package:playkosmos_v3/ui/auth_provider/auth_provider_view.dart';
+import 'package:playkosmos_v3/ui/auth_provider/auth_provider_page.dart';
 import 'package:playkosmos_v3/ui/onboarding/view/widgets/onboard_view_mobile.dart';
 import 'package:playkosmos_v3/ui/onboarding/view/widgets/onboard_view_tablet.dart';
 
@@ -12,14 +12,14 @@ import 'package:playkosmos_v3/ui/onboarding/view/widgets/onboard_view_tablet.dar
 This class shows the onboarding view
 @author: Ugochukwu Umeh
 */
-class OnboardView extends StatefulWidget {
-  const OnboardView({super.key});
+class OnboardPage extends StatefulWidget {
+  const OnboardPage({super.key});
 
   @override
-  State<OnboardView> createState() => _OnboardViewState();
+  State<OnboardPage> createState() => _OnboardPageState();
 }
 
-class _OnboardViewState extends State<OnboardView> {
+class _OnboardPageState extends State<OnboardPage> {
   ///The current page for the page view
   int _dCurrentPage = 0;
 
@@ -167,7 +167,7 @@ class _OnboardViewState extends State<OnboardView> {
                         fShape: BoxShape.circle,
                         fOnPressed: () {
                           // Save onboard status completed to true
-                          context.push(const AuthProviderView(
+                          context.push(const AuthProviderPage(
                             fIsSignUp: true,
                           ));
                         },

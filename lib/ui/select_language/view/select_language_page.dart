@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/onboarding/view/onboard_view.dart';
+import 'package:playkosmos_v3/ui/onboarding/view/onboard_page.dart';
 import 'package:playkosmos_v3/ui/select_language/view/widgets/select_language_list.dart';
 
 /*
 This class enables us change the language of the app
 @author: Ugochukwu Umeh
 */
-class SelectLanguageView extends StatelessWidget {
-  const SelectLanguageView({super.key});
+class SelectLanguagePage extends StatelessWidget {
+  const SelectLanguagePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +55,7 @@ class SelectLanguageView extends StatelessWidget {
         child: PrimaryGradientButton(
           fShape: BoxShape.circle,
           fOnPressed: () {
-            context.push(const OnboardView());
+            context.push(const OnboardPage());
           },
           fChild: Semantics(
             label: context.loc.continueToNextScreen,

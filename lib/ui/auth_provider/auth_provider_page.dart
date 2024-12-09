@@ -4,15 +4,15 @@ import 'package:playkosmos_v3/assets_gen/assets.gen.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/constants/constants.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/signup_with_email/sign_up_with_email_view.dart';
+import 'package:playkosmos_v3/ui/signup_with_email/sign_up_with_email_page.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// The authentication provider selection page
 ///
 /// i.e for selecting, Google, Email or Phone sign in method
 /// author: Godwin Mathias
-class AuthProviderView extends StatelessWidget {
-  const AuthProviderView({
+class AuthProviderPage extends StatelessWidget {
+  const AuthProviderPage({
     super.key,
     required this.fIsSignUp,
   });
@@ -24,12 +24,12 @@ class AuthProviderView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: CustomAppBar(
+      appBar: const CustomAppBar(
         fAppBarColor: Colors.transparent,
         fElevation: 0,
         fActions: [
           AuthHeaderChangeLocale(),
-          const HSpace(12),
+          HSpace(12),
         ],
         fShowBackButton: false,
       ),
@@ -123,7 +123,7 @@ class _AuthProviderButtons extends StatelessWidget {
         _AuthButton(
           fOnPressed: () {
             if (fIsSignUp) {
-              context.push(const SignUpWithEmailView());
+              context.push(const SignUpWithEmailPage());
             }
           },
           fAuthIcon: Assets.svgs.auth.emailGradient.svg(),
@@ -234,7 +234,7 @@ class _GradientContainerWithText extends StatelessWidget {
               text: fIsSignUp ? context.loc.loginText : context.loc.signUp,
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
-                  context.push(AuthProviderView(fIsSignUp: !fIsSignUp));
+                  context.push(AuthProviderPage(fIsSignUp: !fIsSignUp));
                 },
               style: context.appTextTheme.buttonLarge?.copyWith(
                 color: Colors.white,

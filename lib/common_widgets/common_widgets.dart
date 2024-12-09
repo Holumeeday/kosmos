@@ -4,6 +4,7 @@ export 'auth_success_info_dialog.dart';
 export 'buttons.dart';
 export 'custom_app_bar.dart';
 export 'custom_otp_field.dart';
+export 'custom_text_form_fields.dart';
 export 'playkosmos_logo_text.dart';
 export 'playkosmos_logo_vertical.dart';
 export 'resend_otp_count_down.dart';

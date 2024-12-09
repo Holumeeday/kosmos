@@ -9,7 +9,7 @@ class AppBlocObserver extends BlocObserver {
   // Method to generate log messages using maps
   Map<String, dynamic> _generateLogMessage(
       String prefix, Map<String, dynamic> details) {
-    ; // Join the map entries into a string
+    // Join the map entries into a string
     return {'Type': prefix, ...details};
   }
 
