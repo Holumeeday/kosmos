@@ -1,5 +1,6 @@
 {
   "fi": [
+    "createPassword",
     "dontHaveAnAccount",
     "enterYourCode",
     "enterYourEmailAddress",
@@ -18,10 +19,12 @@
     "signUpWithEmail",
     "signUpWithGoogle",
     "signUpWithNumber",
+    "timeToLockThingsDownPasswordCreationMessage",
     "weAreSendingYouASecretCodeToVerifyEmail"
   ],
 
   "fr": [
+    "createPassword",
     "dontHaveAnAccount",
     "enterYourCode",
     "enterYourEmailAddress",
@@ -40,10 +43,12 @@
     "signUpWithEmail",
     "signUpWithGoogle",
     "signUpWithNumber",
+    "timeToLockThingsDownPasswordCreationMessage",
     "weAreSendingYouASecretCodeToVerifyEmail"
   ],
 
   "hi": [
+    "createPassword",
     "dontHaveAnAccount",
     "enterYourCode",
     "enterYourEmailAddress",
@@ -62,10 +67,12 @@
     "signUpWithEmail",
     "signUpWithGoogle",
     "signUpWithNumber",
+    "timeToLockThingsDownPasswordCreationMessage",
     "weAreSendingYouASecretCodeToVerifyEmail"
   ],
 
   "si": [
+    "createPassword",
     "dontHaveAnAccount",
     "enterYourCode",
     "enterYourEmailAddress",
@@ -84,10 +91,12 @@
     "signUpWithEmail",
     "signUpWithGoogle",
     "signUpWithNumber",
+    "timeToLockThingsDownPasswordCreationMessage",
     "weAreSendingYouASecretCodeToVerifyEmail"
   ],
 
   "ta": [
+    "createPassword",
     "dontHaveAnAccount",
     "enterYourCode",
     "enterYourEmailAddress",
@@ -106,10 +115,12 @@
     "signUpWithEmail",
     "signUpWithGoogle",
     "signUpWithNumber",
+    "timeToLockThingsDownPasswordCreationMessage",
     "weAreSendingYouASecretCodeToVerifyEmail"
   ],
 
   "zh": [
+    "createPassword",
     "dontHaveAnAccount",
     "enterYourCode",
     "enterYourEmailAddress",
@@ -128,6 +139,7 @@
     "signUpWithEmail",
     "signUpWithGoogle",
     "signUpWithNumber",
+    "timeToLockThingsDownPasswordCreationMessage",
     "weAreSendingYouASecretCodeToVerifyEmail"
   ]
 }

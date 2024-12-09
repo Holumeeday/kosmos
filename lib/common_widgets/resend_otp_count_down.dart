@@ -57,10 +57,10 @@ class ResendCountdown extends StatelessWidget {
               )
             : TweenAnimationBuilder<Duration>(
                 tween: Tween(
-                  begin: const Duration(seconds: 30),
+                  begin: const Duration(minutes: 15),
                   end: const Duration(),
                 ),
-                duration: const Duration(seconds: 30),
+                duration: const Duration(minutes: 15),
                 onEnd: fEndCountdown,
                 builder: (_, value, __) {
                   final String minutes =

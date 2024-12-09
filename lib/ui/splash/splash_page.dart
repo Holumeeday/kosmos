@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:playkosmos_v3/assets_gen/assets.gen.dart';
 import 'package:playkosmos_v3/constants/constants.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/select_language/view/select_language_view.dart';
+import 'package:playkosmos_v3/ui/select_language/view/select_language_page.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /*
@@ -14,14 +14,14 @@ before navigating to the language screen
 @author Adeyemi Adeseye
 */
 
-class SplashView extends StatefulWidget {
-  const SplashView({super.key});
+class SplashPage extends StatefulWidget {
+  const SplashPage({super.key});
 
   @override
-  State<SplashView> createState() => _SplashViewState();
+  State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashViewState extends State<SplashView> {
+class _SplashPageState extends State<SplashPage> {
   ///This is a list of the playkosmos center logo white and blue
   late final List<String> _fOnboardImages;
 
@@ -180,7 +180,7 @@ class _SplashViewState extends State<SplashView> {
           // (using AnimatedSlider) wait for 100ms and move to the language screen
           Timer(const Duration(milliseconds: 1100), () {
             // Mark the initialization phase finish
-            context.push(const SelectLanguageView());
+            context.push(const SelectLanguagePage());
           });
         }
       },

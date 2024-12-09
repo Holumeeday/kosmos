@@ -1,4 +1,5 @@
 {
+  "createPassword": "Create password",
   "dontHaveAnAccount": "Don''t have an account? ",
   "enterYourCode": "Enter your code",
   "enterYourEmailAddress": "Enter your email address",
@@ -17,6 +18,7 @@
   "signUpWithEmail": "Sign up with Email",
   "signUpWithGoogle": "Sign up with Google",
   "signUpWithNumber": "Sign up with Number",
+  "timeToLockThingsDownPasswordCreationMessage": "Time to lock things down, Create a password that’s as strong as your coffee and as unique as you are.",
   "weAreSendingYouASecretCodeToVerifyEmail": "We’re sending you a secret code to prove this email address is really yours, Keep an eye out",
   "welcomeToPlaykosmos": "Welcome to Playkosmos",
   "@welcomeToPlaykosmos": {

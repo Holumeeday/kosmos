@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/ui/select_language/cubit/select_language_cubit.dart';
-import 'package:playkosmos_v3/ui/splash/splash_view.dart';
+import 'package:playkosmos_v3/ui/splash/splash_page.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// Root widget of the application responsible for setting up global dependencies,
@@ -72,7 +72,7 @@ class _AppView extends StatelessWidget {
       title: 'Playkosmos',
       navigatorKey: GetContext.navigatorKey,
       debugShowCheckedModeBanner: false,
-      home: const SplashView(),
+      home: const SplashPage(),
       builder:
           DevicePreview.appBuilder, // Enables device preview for development
       theme: MyThemes.lightTheme, // Light theme of the app

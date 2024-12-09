@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
+import 'package:playkosmos_v3/ui/create_password/view/create_password_page.dart';
 import 'package:playkosmos_v3/ui/email_otp_verification/cubit/email_otp_verification_cubit.dart';
 
 /// Email OTP verification screen
 ///
 ///@author: Godwin Mathias
-class EmailOtpVerificationView extends StatelessWidget {
-  const EmailOtpVerificationView({super.key});
+class EmailOtpVerificationPage extends StatelessWidget {
+  const EmailOtpVerificationPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,7 @@ class _EmailOtpView extends StatelessWidget {
                   fTitle: context.loc.emailIsOfficiallyVerified,
                   fMessage: context.loc.emailVerifiedDialogMessage,
                   fOnLetGo: () {
-                    dialogContext.pop();
+                    context.push(const CreatePasswordPage());
                   },
                 ),
               );

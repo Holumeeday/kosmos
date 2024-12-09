@@ -156,13 +156,8 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
       keyboardType: TextInputType.visiblePassword,
       decoration: InputDecoration(
         labelText: context.loc.passwordHint,
-        prefixIcon: Icon(
-          Icons.lock_outline_rounded,
-          color: context.colors.tertiary,
-          size: 23,
-        ),
         contentPadding: const EdgeInsets.symmetric(
-          horizontal: 20,
+          horizontal: 0,
           vertical: 18,
         ),
         suffixIcon: Semantics(
@@ -180,9 +175,8 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
             },
             child: Icon(
               _dIsPasswordObscured
-                  ? Icons.visibility_outlined
-                  : Icons.visibility_off_outlined,
-              color: context.colors.primary,
+                  ? Icons.visibility_off_outlined
+                  : Icons.visibility_outlined,
               size: 23,
             ),
           ),
