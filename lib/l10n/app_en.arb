@@ -1,5 +1,6 @@
 {
-  "alrightTimeToCreateEnterASecretCode": "Alright, it’s time to enter your secret code! Type it in below and let’s unlock your next move!",
+  "bioTooShort": "Bio is too short. Add more details",
+  "alrightTimeToCreateEnterASecretCode": "Alright, it’s time to enter your secret code!  Type it in below and let’s unlock your next move!",
   "checkYourEmail": "Check your email",
   "checkYourInbox": "Check your inbox",
   "codeAccepted": "Code Accepted",

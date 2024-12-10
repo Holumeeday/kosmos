@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
+import 'package:playkosmos_v3/ui/profile_creation_flow/view/profile_creation_flow_page.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// The create password form page
@@ -80,7 +81,9 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
               // Next button
               PrimaryGradientButton(
                 fDisabled: !_dCanNext,
-                fOnPressed: () {},
+                fOnPressed: () {
+                  context.push(const ProfileCreationFlowPage());
+                },
                 fChild: Text(context.loc.nextText),
               )
             ],
