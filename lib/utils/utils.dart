@@ -4,6 +4,7 @@ export './app_router/go_router_route_observer.dart';
 export 'get_context.dart';
 export 'logger.dart';
 export 'pop_up_util.dart';
+export 'snack_bar_util.dart';
 export 'theme/app_colors.dart';
 export 'theme/app_text_styles.dart';
 export 'theme/theme.dart';

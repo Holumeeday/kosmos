@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
+import 'package:playkosmos_v3/ui/profile_creation_flow/cubit/profile_creation_flow_cubit.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// This is the user name and basic information page
@@ -71,26 +73,26 @@ class _UploadNamePageState extends State<UploadNamePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              "What's your name ?",
+              context.loc.whatsYourName,
               style: context.appTextTheme.header1,
             ),
             const VSpace(12),
             Text(
-              'This is the name everyone will see — make it shine!',
+              context.loc.thisIsTheNameEveryoneWillSee,
               style: context.appTextTheme.caption,
             ),
             const VSpace(40),
 
             // Full name text field
             CustomTextFormField(
-              fHintText: 'Enter full name',
+              fHintText: context.loc.enterFullName,
               fTextController: _fNameController,
               fValidator: ValidationUtil.nameValidator,
             ),
 
             // Bio text field
             CustomTextFormField(
-              fHintText: 'Tell us about yourself (optional)',
+              fHintText: context.loc.tellUsAboutYourselfOptional,
               fTextController: _fBioController,
               fMaxLines: 5,
               fValidator: ValidationUtil.bioValidator,
@@ -110,7 +112,9 @@ class _UploadNamePageState extends State<UploadNamePage> {
             // Next button
             PrimaryGradientButton(
               fDisabled: !((_dNameIsValid ?? false) && (_dBioIsValid ?? true)),
-              fOnPressed: () {},
+              fOnPressed: () {
+                context.read<ProfileCreationFlowCubit>().nextPage();
+              },
               fChild: Text(context.loc.nextText),
             ),
           ],
