@@ -1,11 +1,13 @@
 part of 'sign_up_phone_number_cubit.dart';
+/*
+ Represents the state for signing up with a phone number.
 
-/// Represents the state for signing up with a phone number.
-///
-/// Contains:
-/// - The selected OTP option (e.g., SMS or WhatsApp).
-/// - The selected country code.
-/// - The entered phone number.
+ Contains:
+ - The selected OTP option (e.g., SMS or WhatsApp).
+ - The selected country code.
+ - The entered phone number.
+  @author: Chidera Chijama
+*/
 class SignUpWithPhoneNumberState extends Equatable {
   /// The selected OTP option for receiving the code.
   final String fSelectedOtpOption;

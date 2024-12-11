@@ -3,11 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playkosmos_v3/common_widgets/action_dialog.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/forgot_password_phone/view/forgot_password_phone_page.dart';
 import 'package:playkosmos_v3/ui/sign_up_phone_number/cubit/sign_up_phone_number_cubit.dart';
-import 'package:playkosmos_v3/ui/sign_up_phone_number/view/widgets/custom_radio_tile.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
-
 
 /// This class represents the main page for signing up with a phone number.
 
@@ -69,6 +66,8 @@ class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
         child:
             BlocBuilder<SignUpWithPhoneNumberCubit, SignUpWithPhoneNumberState>(
           builder: (context, state) {
+            final otpOptions =
+                context.read<SignUpWithPhoneNumberCubit>().otpOptions;
             return Form(
               key: _fFormKey,
               child: Column(
@@ -100,43 +99,35 @@ class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
                     fDisabled: !(_dIsValidPhone ?? false),
                     fOnPressed: () {
                       showCustomDialog(
-                         context,
+                        context,
                         barrierDismissible: true,
                         builder: (_) {
                           return Dialog(
                               child: ActionDialog(
                             fTitle: context.loc.howWouldYouLikeToReceiveTheCode,
                             fcontent: Column(
-                              children: [
-                                CustomRadioTile(
-                                  title: context.loc.sms,
-                                  subtitle: context.loc.onlyOnce,
-                                  value: context.loc.sms,
-                                  groupValue: state.fSelectedOtpOption,
-                                  onChanged: (String? value) {
-                                    if (value != null) {
-                                      context
-                                          .read<SignUpWithPhoneNumberCubit>()
-                                          .setOtpOption(value);
-                                    }
+                              children: otpOptions.map((option) {
+                                return BlocSelector<SignUpWithPhoneNumberCubit,
+                                    SignUpWithPhoneNumberState, String>(
+                                  selector: (state) => state.fSelectedOtpOption,
+                                  builder: (context, selectedOption) {
+                                    return RadioListTile<String>(
+                                      title:
+                                          _buildRichTextTitle(context, option),
+                                      value: option,
+                                      groupValue: selectedOption,
+                                      onChanged: (value) {
+                                        if (value != null) {
+                                          context
+                                              .read<
+                                                  SignUpWithPhoneNumberCubit>()
+                                              .setOtpOption(value);
+                                        }
+                                      },
+                                    );
                                   },
-                                  activeColor: context.colors.secondary,
-                                ),
-                                CustomRadioTile(
-                                  title: context.loc.whatsApp,
-                                  subtitle: context.loc.unlimited,
-                                  value: context.loc.whatsApp,
-                                  groupValue: state.fSelectedOtpOption,
-                                  onChanged: (String? value) {
-                                    if (value != null) {
-                                      context
-                                          .read<SignUpWithPhoneNumberCubit>()
-                                          .setOtpOption(value);
-                                    }
-                                  },
-                                  activeColor: context.colors.secondary,
-                                ),
-                              ],
+                                );
+                              }).toList(),
                             ),
                             fOnLetGo: () {
                               //  context
@@ -153,6 +144,33 @@ class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
             );
           },
         ),
+      ),
+    );
+  }
+
+  /// Builds the dynamic RichText title based on the option.
+  Widget _buildRichTextTitle(BuildContext context, String option) {
+    final isSms = option == 'sms';
+    final title = isSms ? context.loc.sms : context.loc.whatsApp;
+    final subtitle = isSms ? context.loc.onlyOnce : context.loc.unlimited;
+
+    return RichText(
+      text: TextSpan(
+        children: [
+          TextSpan(
+            text: title,
+            style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                  fontSize: 18,
+                ),
+          ),
+          TextSpan(
+            text: " ($subtitle)",
+            style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                  fontSize: 18,
+                  color: Colors.grey,
+                ),
+          ),
+        ],
       ),
     );
   }
