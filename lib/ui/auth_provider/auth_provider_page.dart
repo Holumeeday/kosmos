@@ -6,6 +6,7 @@ import 'package:playkosmos_v3/constants/constants.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/sign_in_email/view/sign_in_email_page.dart';
 import 'package:playkosmos_v3/ui/sign_in_phone/view/sign_in_phone_page.dart';
+import 'package:playkosmos_v3/ui/sign_up_phone_number/view/sign_up_phone_number_page.dart';
 import 'package:playkosmos_v3/ui/signup_with_email/view/sign_up_with_email_page.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
@@ -141,6 +142,7 @@ class _AuthProviderButtons extends StatelessWidget {
         _AuthButton(
           fOnPressed: () {
             if (fIsSignUp) {
+              context.push(const SignUpPhoneNumberPage());
             } else {
               context.push(const SignInPhoneNumberPage());
             }

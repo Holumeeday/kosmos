@@ -7,22 +7,21 @@ import 'package:playkosmos_v3/extensions/extensions.dart';
 ///
 /// used in the authentication flow screens
 /// @author: Godwin Mathias
-class AuthSuccessInfoDialog extends StatelessWidget {
-  const AuthSuccessInfoDialog({
+class ActionDialog extends StatelessWidget {
+  const ActionDialog({
     super.key,
     required this.fTitle,
-    required this.fMessage,
     required this.fOnLetGo,
+    required this.fcontent,
   });
 
   /// The title
   final String fTitle;
 
-  /// The message
-  final String fMessage;
-
   /// On click let go button
   final VoidCallback fOnLetGo;
+
+  final Widget fcontent;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +38,8 @@ class AuthSuccessInfoDialog extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const VSpace(16),
+            fcontent,
+            const VSpace(40),
 
             // Let go button
             PrimaryGradientButton(

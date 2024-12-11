@@ -1,4 +1,4 @@
-package com.brilloconnetz.playkosmos_v3
+package com.example.playkosmos_v3
 
 import io.flutter.embedding.android.FlutterActivity
 
