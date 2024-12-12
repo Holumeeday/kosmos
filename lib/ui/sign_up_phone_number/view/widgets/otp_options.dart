@@ -15,8 +15,8 @@ A reusable dialog widget with a title, content, and a primary action button.
 
  @author: Chidera Chijama
 */
-class ActionDialog extends StatelessWidget {
-  const ActionDialog({
+class OtpOptions extends StatelessWidget {
+  const OtpOptions({
     super.key,
     required this.fTitle,
     required this.fOnLetGo,

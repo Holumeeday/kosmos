@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:playkosmos_v3/common_widgets/action_dialog.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
+import 'package:playkosmos_v3/enums/phone_otp_method_enum.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/sign_up_phone_number/cubit/sign_up_phone_number_cubit.dart';
+import 'package:playkosmos_v3/ui/sign_up_phone_number/view/widgets/otp_options.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// This class represents the main page for signing up with a phone number.
@@ -66,8 +67,7 @@ class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
         child:
             BlocBuilder<SignUpWithPhoneNumberCubit, SignUpWithPhoneNumberState>(
           builder: (context, state) {
-            final otpOptions =
-                context.read<SignUpWithPhoneNumberCubit>().otpOptions;
+            const kOtpOptions = PhoneOtpMethodEnum.values;
             return Form(
               key: _fFormKey,
               child: Column(
@@ -103,18 +103,18 @@ class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
                         barrierDismissible: true,
                         builder: (_) {
                           return Dialog(
-                              child: ActionDialog(
+                              child: OtpOptions(
                             fTitle: context.loc.howWouldYouLikeToReceiveTheCode,
                             fcontent: Column(
-                              children: otpOptions.map((option) {
+                              children: kOtpOptions.map((option) {
                                 return BlocSelector<SignUpWithPhoneNumberCubit,
                                     SignUpWithPhoneNumberState, String>(
                                   selector: (state) => state.fSelectedOtpOption,
                                   builder: (context, selectedOption) {
                                     return RadioListTile<String>(
-                                      title:
-                                          _buildRichTextTitle(context, option),
-                                      value: option,
+                                      title: _buildRichTextTitle(
+                                          context, option.name),
+                                      value: option.name,
                                       groupValue: selectedOption,
                                       onChanged: (value) {
                                         if (value != null) {
@@ -150,7 +150,7 @@ class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
 
   /// Builds the dynamic RichText title based on the option.
   Widget _buildRichTextTitle(BuildContext context, String option) {
-    final isSms = option == 'sms';
+    final isSms = option == 'SMS';
     final title = isSms ? context.loc.sms : context.loc.whatsApp;
     final subtitle = isSms ? context.loc.onlyOnce : context.loc.unlimited;
 

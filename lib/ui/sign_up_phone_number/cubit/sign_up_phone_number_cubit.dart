@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:playkosmos_v3/constants/countries_states/countries_states_constant.dart';
+import 'package:playkosmos_v3/enums/phone_otp_method_enum.dart';
 import 'package:playkosmos_v3/models/countries_states_model.dart';
 
 part 'sign_up_phone_number_state.dart';
@@ -16,12 +17,11 @@ part 'sign_up_phone_number_state.dart';
 */
 class SignUpWithPhoneNumberCubit extends Cubit<SignUpWithPhoneNumberState> {
   /// The list of OTP options (SMS and WhatsApp).
-  final List<String> otpOptions = ['sms', 'whatsapp'];
 
   /// Initializes the cubit with default state.
   SignUpWithPhoneNumberCubit()
       : super(SignUpWithPhoneNumberState(
-          fSelectedOtpOption: 'sms',
+          fSelectedOtpOption: PhoneOtpMethodEnum.sms.name,
           fSelectedCountryCode:
               kCountriesStatesList.where((x) => x.name == 'Finland').single,
           fPhoneNumber: '',
@@ -29,9 +29,10 @@ class SignUpWithPhoneNumberCubit extends Cubit<SignUpWithPhoneNumberState> {
 
   /// Updates the selected OTP option.
   void setOtpOption(String option) {
-    if (otpOptions.contains(option)) {
-      emit(state.copyWith(fSelectedOtpOption: option));
-    }
+    final selectedOption = PhoneOtpMethodEnum.values.firstWhere(
+      (element) => element.name.toLowerCase() == option.toLowerCase(),
+    ).name;
+    emit(state.copyWith(fSelectedOtpOption: selectedOption));
   }
 
   /// Updates the selected country code.
