@@ -154,8 +154,8 @@ class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
   /// Builds the dynamic RichText title based on the option.
   Widget _buildRichTextTitle(BuildContext context, String option) {
     final isSms = option == 'SMS';
-    final title = isSms ? context.loc.sms : context.loc.whatsApp;
-    final subtitle = isSms ? context.loc.onlyOnce : context.loc.unlimited;
+    final title = isSms ? context.loc.sms : context.loc.whatsapp;
+    final subtitle = isSms ? context.loc.onlyOnceText : context.loc.unlimited;
 
     return StylingLocalizations(
       fLocalizedText: "$title ($subtitle)",

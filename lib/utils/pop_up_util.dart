@@ -91,3 +91,57 @@ Future showCustomDialog(
     builder: builder,
   );
 }
+
+///For dialogs
+///
+///[title] is the header of the dialog, while [subtitle] is the content.
+///[textAlign] helps to align the title and content text, and defaults to
+///[TextAlign.center] for both [titleTextAlign] and [subTitleTextAlign]
+Future showDialogWithOneAction(
+  BuildContext context, {
+  required String title,
+  required String subtitle,
+  required String trueActionText,
+  Color? trueActionColor,
+  bool barrierDismissible = true,
+  TextAlign titleTextAlign = TextAlign.center,
+  TextAlign subTitleTextAlign = TextAlign.center,
+}) {
+  return showCustomDialog(
+    context,
+    barrierDismissible: barrierDismissible,
+    builder: (context) => AlertDialog.adaptive(
+      title: Text(
+        title,
+        textAlign: titleTextAlign,
+        style: context.textTheme.bodyLarge,
+      ),
+      content: SingleChildScrollView(
+        child: Text(
+          subtitle,
+          textAlign: subTitleTextAlign,
+          style: context.textTheme.bodyMedium?.copyWith(
+            color: context.colors.tertiary,
+          ),
+        ),
+      ),
+      actions: [
+        // Proceed
+        Builder(builder: (_) {
+          final Color color = trueActionColor ?? context.colors.secondary;
+          return TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            style: TextButton.styleFrom(foregroundColor: color),
+            child: Text(
+              trueActionText,
+              textAlign: TextAlign.end,
+              style: context.textTheme.titleSmall?.copyWith(
+                color: color,
+              ),
+            ),
+          );
+        }),
+      ],
+    ),
+  );
+}

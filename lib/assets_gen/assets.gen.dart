@@ -30,6 +30,9 @@ class $AssetsSvgsGen {
 
   /// Directory path: assets/svgs/flags
   $AssetsSvgsFlagsGen get flags => const $AssetsSvgsFlagsGen();
+
+  /// Directory path: assets/svgs/icons
+  $AssetsSvgsIconsGen get icons => const $AssetsSvgsIconsGen();
 }
 
 class $AssetsPngsOnboardingGen {
@@ -126,6 +129,17 @@ class $AssetsSvgsFlagsGen {
   /// List of all assets
   List<SvgGenImage> get values =>
       [cnFlag, fiFlag, frFlag, gbFlag, inFlag, lkFlag];
+}
+
+class $AssetsSvgsIconsGen {
+  const $AssetsSvgsIconsGen();
+
+  /// File path: assets/svgs/icons/location-icon-gradient.svg
+  SvgGenImage get locationIconGradient =>
+      const SvgGenImage('assets/svgs/icons/location-icon-gradient.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [locationIconGradient];
 }
 
 class Assets {

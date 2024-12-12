@@ -1,5 +1,16 @@
 {
-  "alrightTimeToCreateEnterASecretCode": "Alright, it’s time to enter your secret code! Type it in below and let’s unlock your next move!",
+  "dontWorryItsBetweenUs": "Don’t worry, this is just between us",
+  "heyWeWillLoveToKnowWhereYouAre": "Hey, we’d love to know where you’re at, Can we grab your location to make your experience even better?",
+  "onlyOnceText": "Only once",
+  "selectAll": "Select All",
+  "setGenderAuth": "{gender, select, male{Male} female{Female} preferNotToSay{Prefer not to say} other{--}}",
+  "@setGenderAuth": {
+    "placeholder": {
+      "gender": "String"
+    }
+  },
+  "bioTooShort": "Bio is too short. Add more details",
+  "alrightTimeToCreateEnterASecretCode": "Alright, it’s time to enter your secret code!  Type it in below and let’s unlock your next move!",
   "checkYourEmail": "Check your email",
   "checkYourInbox": "Check your inbox",
   "codeAccepted": "Code Accepted",
@@ -7,6 +18,7 @@
   "createPassword": "Create password",
   "dingDingCheckInboxMessage": "Ding-ding! Your reset code has just landed in your inbox! Go check it out, and let’s get you back on track in no time",
   "dontHaveAnAccount": "Don''t have an account? ",
+  "enterFullName": "Enter full name",
   "enterYourCode": "Enter your code",
   "enterYourEmailAddress": "Enter your email address",
   "enterYourNumber": "Enter your number",
@@ -29,18 +41,21 @@
   "passswordResetSuccessfully": "Password Reset Successfully",
   "resend": "Resend",
   "searchCountryCode": "Search country code",
+  "showAll2": "Show All",
+  "showLess": "Show Less",
   "signIn": "Sign In",
   "signUp": "Sign up",
   "signUpWithEmail": "Sign up with Email",
   "signUpWithGoogle": "Sign up with Google",
   "signUpWithNumber": "Sign up with Number",
   "sms": "SMS",
-  "onlyOnce": "Only once",
-  "unlimited": "Unlimited",
-  "timeToLockThingsDownPasswordCreationMessage": "Time to lock things down. Create a password that’s as strong as your coffee and as unique as you are.",
-  "weAreSendingYouASecretCodeToVerifyEmail": "We’re sending you a secret code to prove this email address is really yours. Keep an eye out.",
-  "weAreSendingYouASecretCodeToVerifyNumber": "We’re sending you a secret code to prove this number is really yours. Keep an eye out!",
-  "whatsApp": "WhatsApp",
+  "tellUsAboutYourselfOptional": "Tell us about yourself (optional)",
+  "tellUsYourInterest": "What sparks your excitement? Tell us your interests!",
+  "thisIsTheNameEveryoneWillSee": "This is the name everyone will see — make it shine!",
+  "timeToLockThingsDownPasswordCreationMessage": "Time to lock things down, Create a password that’s as strong as your coffee and as unique as you are.",
+  "timeToShowOffYourProfilePics": "Time to show off your awesome self! Upload your profile pic!",
+  "uploadYourPics": "Upload your pics",
+  "weAreSendingYouASecretCodeToVerifyEmail": "We’re sending you a secret code to prove this email address is really yours, Keep an eye out",
   "welcomeBackUser": "Welcome back, {username}",
   "@welcomeBackUser": {
     "placeholders": {
@@ -363,6 +378,9 @@
   "@enterOtpError": {
     "description": "Error gotten when otp field is blank"
   },
+  "whatsYourBirthday": "When is your birthday?",
+  "whatsYourGender": "What is your gender ?",
+  "whatsYourName": "What''s your name ?",
   "whatsapp": "WhatsApp",
   "wrongOtpError": "*OTP is invalid. Please enter correct password",
   "@wrongOtpError": {

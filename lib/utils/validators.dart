@@ -44,6 +44,14 @@ class ValidationUtil {
     return _loc.enterPhoneNumber;
   }
 
+  /// Bio validator
+  static String? bioValidator(String? value) {
+    if (value == null || value.length >= 150 || value.isEmpty) {
+      return null;
+    }
+    return _loc.bioTooShort;
+  }
+
   /// To validate user's dob,
   static String? dobValidator(String? value) {
     if (value == null || value.isEmpty) {
