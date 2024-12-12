@@ -3,10 +3,18 @@ import 'package:playkosmos_v3/common_widgets/buttons.dart';
 import 'package:playkosmos_v3/common_widgets/sizes.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 
-/// This dialog shows the success message and the let go button
-///
-/// used in the authentication flow screens
-/// @author: Godwin Mathias
+/* 
+A reusable dialog widget with a title, content, and a primary action button.
+
+ Features:
+ - Displays a customizable title at the top.
+ - Allows injecting any widget as content.
+ - Includes a "Let Go" button with a customizable action.
+
+ This widget is useful for showing modal dialogs with a specific action.
+
+ @author: Chidera Chijama
+*/
 class ActionDialog extends StatelessWidget {
   const ActionDialog({
     super.key,
