@@ -1,6 +1,7 @@
 {
   "fi": [
     "dontWorryItsBetweenUs",
+    "heyWeWillLoveToKnowWhereYouAre",
     "selectAll",
     "setGenderAuth",
     "bioTooShort",
@@ -66,6 +67,7 @@
 
   "fr": [
     "dontWorryItsBetweenUs",
+    "heyWeWillLoveToKnowWhereYouAre",
     "selectAll",
     "setGenderAuth",
     "bioTooShort",
@@ -131,6 +133,7 @@
 
   "hi": [
     "dontWorryItsBetweenUs",
+    "heyWeWillLoveToKnowWhereYouAre",
     "selectAll",
     "setGenderAuth",
     "bioTooShort",
@@ -194,6 +197,7 @@
 
   "si": [
     "dontWorryItsBetweenUs",
+    "heyWeWillLoveToKnowWhereYouAre",
     "selectAll",
     "setGenderAuth",
     "bioTooShort",
@@ -259,6 +263,7 @@
 
   "ta": [
     "dontWorryItsBetweenUs",
+    "heyWeWillLoveToKnowWhereYouAre",
     "selectAll",
     "setGenderAuth",
     "bioTooShort",
@@ -322,6 +327,7 @@
 
   "zh": [
     "dontWorryItsBetweenUs",
+    "heyWeWillLoveToKnowWhereYouAre",
     "selectAll",
     "setGenderAuth",
     "bioTooShort",

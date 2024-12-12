@@ -1,5 +1,6 @@
 {
   "dontWorryItsBetweenUs": "Don’t worry, this is just between us",
+  "heyWeWillLoveToKnowWhereYouAre": "Hey, we’d love to know where you’re at, Can we grab your location to make your experience even better?",
   "selectAll": "Select All",
   "setGenderAuth": "{gender, select, male{Male} female{Female} preferNotToSay{Prefer not to say} other{--}}",
   "@setGenderAuth": {

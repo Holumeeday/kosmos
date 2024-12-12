@@ -9,6 +9,7 @@ import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_gende
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_interest_page.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_name_page.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_pics_page.dart';
+import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_your_location_page.dart';
 
 /// The profile creation flow a successful sign up
 ///
@@ -79,7 +80,7 @@ class __ProfileCreationFlowPageState extends State<_ProfileCreationFlowPage>
                     UploadInterestPage(),
 
                     // Location selection
-                    SizedBox(),
+                    UploadYourLocationPage(),
 
                     // Search radius
                     SizedBox(),
@@ -193,7 +194,7 @@ class _BackButtonAndSkip extends StatelessWidget {
               cubit.state.fFlowModel.radius == null),
       ProfileCreationFlowEnum.uploadLocation => context.select(
           (ProfileCreationFlowCubit cubit) =>
-              cubit.state.fFlowModel.location == null),
+              cubit.state.fFlowModel.location != null),
     };
   }
 }

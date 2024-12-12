@@ -37,6 +37,9 @@ class App extends StatelessWidget {
             fStorage: fNonSecureStorage,
           ),
         ),
+        RepositoryProvider(
+          create: (context) => PermissionsRepository(),
+        ),
       ],
       child: const _AppBloc(),
     );

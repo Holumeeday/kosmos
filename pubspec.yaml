@@ -59,6 +59,7 @@ flutter:
     - assets/svgs/branding/
     - assets/svgs/flags/
     - assets/svgs/auth/
+    - assets/svgs/icons/
     - assets/pngs/onboarding/
 
   fonts:

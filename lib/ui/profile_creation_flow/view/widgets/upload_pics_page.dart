@@ -23,70 +23,68 @@ class UploadPicsPage extends StatelessWidget {
       builder: (context, state) {
         final dSelectedImages = [...?state];
         return SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Title
-                Text(
-                  context.loc.uploadYourPics,
-                  style: context.appTextTheme.header1,
-                ),
-                const VSpace(12),
-                Text(
-                  context.loc.timeToShowOffYourProfilePics,
-                  style: context.appTextTheme.caption,
-                ),
-                const VSpace(40),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Title
+              Text(
+                context.loc.uploadYourPics,
+                style: context.appTextTheme.header1,
+              ),
+              const VSpace(12),
+              Text(
+                context.loc.timeToShowOffYourProfilePics,
+                style: context.appTextTheme.caption,
+              ),
+              const VSpace(40),
 
-                // Image selection grid
-                LayoutBuilder(builder: (context, constraint) {
-                  final fMaxWidth = constraint.maxWidth;
-                  const fItemsWidth = 122;
-                  final fCrossAxisCount = fMaxWidth ~/ fItemsWidth;
-                  return GridView.builder(
-                    shrinkWrap: true,
-                    itemCount: dSelectedImages.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: fCrossAxisCount,
-                      crossAxisSpacing: 8,
-                      mainAxisSpacing: 8,
-                    ),
-                    itemBuilder: (context, index) {
-                      return ImageSlot(
-                        image: dSelectedImages[index],
-                        onAdd: () async {
-                          final picker = ImagePicker();
-                          final pickedFile = await picker.pickImage(
-                              source: ImageSource.gallery);
+              // Image selection grid
+              LayoutBuilder(builder: (context, constraint) {
+                final fMaxWidth = constraint.maxWidth;
+                const fItemsWidth = 122;
+                final fCrossAxisCount = fMaxWidth ~/ fItemsWidth;
+                return GridView.builder(
+                  shrinkWrap: true,
+                  itemCount: dSelectedImages.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: fCrossAxisCount,
+                    crossAxisSpacing: 8,
+                    mainAxisSpacing: 8,
+                  ),
+                  itemBuilder: (context, index) {
+                    return ImageSlot(
+                      image: dSelectedImages[index],
+                      onAdd: () async {
+                        final picker = ImagePicker();
+                        final pickedFile =
+                            await picker.pickImage(source: ImageSource.gallery);
 
-                          if (pickedFile != null) {
-                            dSelectedImages[index] = File(pickedFile.path);
-                            context
-                                .read<ProfileCreationFlowCubit>()
-                                .changeSelectedImageFiles(dSelectedImages);
-                          }
-                        },
-                        onRemove: () {
-                          dSelectedImages[index] = null;
+                        if (pickedFile != null) {
+                          dSelectedImages[index] = File(pickedFile.path);
                           context
                               .read<ProfileCreationFlowCubit>()
                               .changeSelectedImageFiles(dSelectedImages);
-                        },
-                      );
-                    },
-                  );
-                }),
+                        }
+                      },
+                      onRemove: () {
+                        dSelectedImages[index] = null;
+                        context
+                            .read<ProfileCreationFlowCubit>()
+                            .changeSelectedImageFiles(dSelectedImages);
+                      },
+                    );
+                  },
+                );
+              }),
 
-                const VSpace(40),
+              const VSpace(40),
 
-                // The next button
-                NextButton(fOnPressed: () {
-                  context.read<ProfileCreationFlowCubit>().nextPage();
-                }),
-              ],
-            ),
+              // The next button
+              NextButton(fOnPressed: () {
+                context.read<ProfileCreationFlowCubit>().nextPage();
+              }),
+            ],
           ),
         );
       },

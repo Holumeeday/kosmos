@@ -12,10 +12,14 @@ class NextButton extends StatelessWidget {
   const NextButton({
     super.key,
     required this.fOnPressed,
+    this.fText,
   });
 
   /// On click of the button
   final VoidCallback fOnPressed;
+
+  /// The button label
+  final String? fText;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +29,7 @@ class NextButton extends StatelessWidget {
     return fCanShowNext
         ? PrimaryGradientButton(
             fOnPressed: fOnPressed,
-            fChild: Text(context.loc.nextText),
+            fChild: Text(fText ?? context.loc.nextText),
           )
         : const SizedBox.shrink();
   }
@@ -50,7 +54,7 @@ class NextButton extends StatelessWidget {
               cubit.state.fFlowModel.radius == null),
       ProfileCreationFlowEnum.uploadLocation => context.select(
           (ProfileCreationFlowCubit cubit) =>
-              cubit.state.fFlowModel.location == null),
+              cubit.state.fFlowModel.location != null),
     };
   }
 }
