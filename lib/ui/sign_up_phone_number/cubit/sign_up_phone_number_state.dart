@@ -1,4 +1,5 @@
 part of 'sign_up_phone_number_cubit.dart';
+
 /*
  Represents the state for signing up with a phone number.
 
@@ -13,7 +14,7 @@ class SignUpWithPhoneNumberState extends Equatable {
   final String fSelectedOtpOption;
 
   /// The selected country code model.
-  final CountriesStatesModel fSelectedCountryCode;
+  final CountryModel fSelectedCountryCode;
 
   /// The entered phone number.
   final String fPhoneNumber;
@@ -32,7 +33,7 @@ class SignUpWithPhoneNumberState extends Equatable {
   /// Creates a new state with updated values while keeping others unchanged.
   SignUpWithPhoneNumberState copyWith({
     String? fSelectedOtpOption,
-    CountriesStatesModel? fSelectedCountryCode,
+    CountryModel? fSelectedCountryCode,
     String? fPhoneNumber,
   }) {
     return SignUpWithPhoneNumberState(

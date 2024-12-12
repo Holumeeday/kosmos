@@ -139,12 +139,64 @@ class $AssetsSvgsFlagsGen {
 class $AssetsSvgsIconsGen {
   const $AssetsSvgsIconsGen();
 
+  /// File path: assets/svgs/icons/buddies-filled.svg
+  SvgGenImage get buddiesFilled =>
+      const SvgGenImage('assets/svgs/icons/buddies-filled.svg');
+
+  /// File path: assets/svgs/icons/buddies-outlined.svg
+  SvgGenImage get buddiesOutlined =>
+      const SvgGenImage('assets/svgs/icons/buddies-outlined.svg');
+
+  /// File path: assets/svgs/icons/home-filled.svg
+  SvgGenImage get homeFilled =>
+      const SvgGenImage('assets/svgs/icons/home-filled.svg');
+
+  /// File path: assets/svgs/icons/home-outlined.svg
+  SvgGenImage get homeOutlined =>
+      const SvgGenImage('assets/svgs/icons/home-outlined.svg');
+
+  /// File path: assets/svgs/icons/inbox-filled.svg
+  SvgGenImage get inboxFilled =>
+      const SvgGenImage('assets/svgs/icons/inbox-filled.svg');
+
+  /// File path: assets/svgs/icons/inbox-outlined.svg
+  SvgGenImage get inboxOutlined =>
+      const SvgGenImage('assets/svgs/icons/inbox-outlined.svg');
+
   /// File path: assets/svgs/icons/location-icon-gradient.svg
   SvgGenImage get locationIconGradient =>
       const SvgGenImage('assets/svgs/icons/location-icon-gradient.svg');
 
+  /// File path: assets/svgs/icons/notification-icon.svg
+  SvgGenImage get notificationIcon =>
+      const SvgGenImage('assets/svgs/icons/notification-icon.svg');
+
+  /// File path: assets/svgs/icons/profile-filled.svg
+  SvgGenImage get profileFilled =>
+      const SvgGenImage('assets/svgs/icons/profile-filled.svg');
+
+  /// File path: assets/svgs/icons/profile-outlined.svg
+  SvgGenImage get profileOutlined =>
+      const SvgGenImage('assets/svgs/icons/profile-outlined.svg');
+
+  /// File path: assets/svgs/icons/settings-icon.svg
+  SvgGenImage get settingsIcon =>
+      const SvgGenImage('assets/svgs/icons/settings-icon.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [locationIconGradient];
+  List<SvgGenImage> get values => [
+        buddiesFilled,
+        buddiesOutlined,
+        homeFilled,
+        homeOutlined,
+        inboxFilled,
+        inboxOutlined,
+        locationIconGradient,
+        notificationIcon,
+        profileFilled,
+        profileOutlined,
+        settingsIcon
+      ];
 }
 
 class Assets {

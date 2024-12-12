@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
-import 'package:playkosmos_v3/constants/countries_states/countries_states_constant.dart';
+import 'package:playkosmos_v3/constants/countries_list.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/models/countries_states_model.dart';
+import 'package:playkosmos_v3/models/country_model.dart';
 
 /*
 To pick a country from the list of countries
@@ -13,10 +13,10 @@ class CountryPickerSheet extends StatefulWidget {
   final String? fSelectedCountryName;
 
   /// When the country is tapped
-  final ValueChanged<CountriesStatesModel> fOnCountryTap;
+  final ValueChanged<CountryModel> fOnCountryTap;
 
   /// To customize the trailing widget
-  final Widget Function(CountriesStatesModel)? fTrailing;
+  final Widget Function(CountryModel)? fTrailing;
 
   const CountryPickerSheet({
     super.key,
@@ -34,13 +34,13 @@ class _CountryPickerSheetState extends State<CountryPickerSheet> {
   late TextEditingController _fCountrySearchController;
 
   /// The list of countries
-  List<CountriesStatesModel> _fCountries = [];
+  List<CountryModel> _fCountries = [];
 
   /// The country
   String get _fSelectedCountry => widget.fSelectedCountryName ?? '';
 
   /// The list of countries to use for searching
-  List<CountriesStatesModel> _dCountries = [];
+  List<CountryModel> _dCountries = [];
 
   @override
   void initState() {
@@ -63,10 +63,9 @@ class _CountryPickerSheetState extends State<CountryPickerSheet> {
   }
 
   /// To rearrange the country list
-  List<CountriesStatesModel> rearrangeCountryList() {
-    List<CountriesStatesModel> reorderedCountries =
-        List.of(kCountriesStatesList);
-    for (CountriesStatesModel country in kCountriesStatesList) {
+  List<CountryModel> rearrangeCountryList() {
+    List<CountryModel> reorderedCountries = List.of(kCountriesList);
+    for (CountryModel country in kCountriesList) {
       if (country.localizedName(context.loc.localeName).trim().toLowerCase() ==
           _fSelectedCountry.trim().toLowerCase()) {
         reorderedCountries.remove(country);
@@ -106,7 +105,7 @@ class _CountryPickerSheetState extends State<CountryPickerSheet> {
         child: ListView.separated(
           itemCount: _dCountries.length,
           itemBuilder: (_, index) {
-            final CountriesStatesModel country = _dCountries[index];
+            final CountryModel country = _dCountries[index];
             return Material(
               child: RadioListTile(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 5),

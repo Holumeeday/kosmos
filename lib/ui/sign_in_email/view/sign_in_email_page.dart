@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/forgot_password_email/view/forgot_password_email_page.dart';
+import 'package:playkosmos_v3/ui/main/view/main_page.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// Sign in with email and password page
@@ -137,7 +138,9 @@ class _SignInEmailPageState extends State<SignInEmailPage> {
                           fTitle: context.loc.welcomeBackUser(fUsername),
                           fMessage:
                               context.loc.youAreAlllSignedInAndReadyToRoll,
-                          fOnLetGo: () {},
+                          fOnLetGo: () {
+                            context.push(const MainPage());
+                          },
                         ),
                       );
                     },

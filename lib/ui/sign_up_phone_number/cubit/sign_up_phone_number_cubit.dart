@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:playkosmos_v3/constants/countries_states/countries_states_constant.dart';
+import 'package:playkosmos_v3/constants/countries_list.dart';
 import 'package:playkosmos_v3/enums/phone_otp_method_enum.dart';
-import 'package:playkosmos_v3/models/countries_states_model.dart';
+import 'package:playkosmos_v3/models/country_model.dart';
 
 part 'sign_up_phone_number_state.dart';
 
@@ -23,20 +23,22 @@ class SignUpWithPhoneNumberCubit extends Cubit<SignUpWithPhoneNumberState> {
       : super(SignUpWithPhoneNumberState(
           fSelectedOtpOption: PhoneOtpMethodEnum.sms.name,
           fSelectedCountryCode:
-              kCountriesStatesList.where((x) => x.name == 'Finland').single,
+              kCountriesList.where((x) => x.name == 'Finland').single,
           fPhoneNumber: '',
         ));
 
   /// Updates the selected OTP option.
   void setOtpOption(String option) {
-    final selectedOption = PhoneOtpMethodEnum.values.firstWhere(
-      (element) => element.name.toLowerCase() == option.toLowerCase(),
-    ).name;
+    final selectedOption = PhoneOtpMethodEnum.values
+        .firstWhere(
+          (element) => element.name.toLowerCase() == option.toLowerCase(),
+        )
+        .name;
     emit(state.copyWith(fSelectedOtpOption: selectedOption));
   }
 
   /// Updates the selected country code.
-  void setCountryCode(CountriesStatesModel code) {
+  void setCountryCode(CountryModel code) {
     emit(state.copyWith(fSelectedCountryCode: code));
   }
 

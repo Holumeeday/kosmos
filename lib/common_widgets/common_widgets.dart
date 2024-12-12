@@ -5,6 +5,7 @@ export 'buttons.dart';
 export 'country_picker_sheet.dart';
 export 'csc_picker_sheet.dart';
 export 'custom_app_bar.dart';
+export 'custom_badge.dart';
 export 'custom_otp_field.dart';
 export 'custom_phone_form_field.dart';
 export 'custom_text_form_fields.dart';
