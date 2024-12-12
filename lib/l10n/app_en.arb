@@ -21,6 +21,7 @@
   "letsGo": "Let’s Go",
   "emailVerifiedDialogMessage": "Let’s secure your account with a top-secret password! Make it strong, unique, and totally unforgettable — just like you.",
   "emailIsOfficiallyVerified": "You email is officially verified!",
+  "phoneNumberIsOfficiallyVerified": "Your phone number is officially verified!",
   "loginWithEmail": "Login with Email",
   "loginWithGoogle": "Login with Google",
   "loginWithNumber": "Login with Number",

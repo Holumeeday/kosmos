@@ -39,7 +39,13 @@ class AuthSuccessInfoDialog extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const VSpace(16),
-
+            // The message
+            Text(
+              fMessage,
+              style: context.appTextTheme.body,
+              textAlign: TextAlign.center,
+            ),
+            const VSpace(40),
             // Let go button
             PrimaryGradientButton(
               fOnPressed: fOnLetGo,
