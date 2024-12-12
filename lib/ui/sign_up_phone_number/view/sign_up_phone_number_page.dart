@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
+import 'package:playkosmos_v3/common_widgets/styled_localization.dart';
 import 'package:playkosmos_v3/enums/phone_otp_method_enum.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/sign_up_phone_number/cubit/sign_up_phone_number_cubit.dart';
@@ -154,24 +155,16 @@ class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
     final title = isSms ? context.loc.sms : context.loc.whatsApp;
     final subtitle = isSms ? context.loc.onlyOnce : context.loc.unlimited;
 
-    return RichText(
-      text: TextSpan(
-        children: [
-          TextSpan(
-            text: title,
-            style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                  fontSize: 18,
-                ),
+    return StylingLocalizations(
+      fLocalizedText: "$title ($subtitle)",
+      fTextToStyle: [title, "($subtitle)"],
+      fGeneralStyle: Theme.of(context).textTheme.displayLarge?.copyWith(
+            fontSize: 18,
           ),
-          TextSpan(
-            text: " ($subtitle)",
-            style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                  fontSize: 18,
-                  color: Colors.grey,
-                ),
+      fStyleText: Theme.of(context).textTheme.displayLarge?.copyWith(
+            fontSize: 18,
+            color: Colors.grey,
           ),
-        ],
-      ),
     );
   }
 }
