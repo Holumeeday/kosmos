@@ -16,38 +16,40 @@ class UploadGenderPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final fSelectedGender = context.select(
         (ProfileCreationFlowCubit cubit) => cubit.state.fFlowModel.gender);
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            "What is your gender ?",
-            style: context.appTextTheme.header1,
-          ),
-          const VSpace(40),
-
-          // Genders
-          for (final gender in GenderEnum.values) ...[
-            InkWell(
-              borderRadius: BorderRadius.circular(56),
-              onTap: () {
-                context.read<ProfileCreationFlowCubit>().changeGender(gender);
-              },
-              child: _GenderContainer(
-                fIsSelected: gender == fSelectedGender,
-                fText: context.loc.setGenderAuth(gender.name),
-              ),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              context.loc.whatsYourGender,
+              style: context.appTextTheme.header1,
             ),
-            const VSpace(20),
-          ],
-          const VSpace(40),
+            const VSpace(40),
 
-          // Next button
-          NextButton(fOnPressed: () {
-            context.read<ProfileCreationFlowCubit>().nextPage();
-          }),
-        ],
+            // Genders
+            for (final gender in GenderEnum.values) ...[
+              InkWell(
+                borderRadius: BorderRadius.circular(56),
+                onTap: () {
+                  context.read<ProfileCreationFlowCubit>().changeGender(gender);
+                },
+                child: _GenderContainer(
+                  fIsSelected: gender == fSelectedGender,
+                  fText: context.loc.setGenderAuth(gender.name),
+                ),
+              ),
+              const VSpace(20),
+            ],
+            const VSpace(40),
+
+            // Next button
+            NextButton(fOnPressed: () {
+              context.read<ProfileCreationFlowCubit>().nextPage();
+            }),
+          ],
+        ),
       ),
     );
   }

@@ -66,59 +66,57 @@ class _UploadNamePageState extends State<UploadNamePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return SingleChildScrollView(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              context.loc.whatsYourName,
-              style: context.appTextTheme.header1,
-            ),
-            const VSpace(12),
-            Text(
-              context.loc.thisIsTheNameEveryoneWillSee,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            context.loc.whatsYourName,
+            style: context.appTextTheme.header1,
+          ),
+          const VSpace(12),
+          Text(
+            context.loc.thisIsTheNameEveryoneWillSee,
+            style: context.appTextTheme.caption,
+          ),
+          const VSpace(40),
+
+          // Full name text field
+          CustomTextFormField(
+            fHintText: context.loc.enterFullName,
+            fTextController: _fNameController,
+            fValidator: ValidationUtil.nameValidator,
+          ),
+
+          // Bio text field
+          CustomTextFormField(
+            fHintText: context.loc.tellUsAboutYourselfOptional,
+            fTextController: _fBioController,
+            fMaxLines: 5,
+            fValidator: ValidationUtil.bioValidator,
+          ),
+          const VSpace(12),
+
+          // Bio text counter
+          Align(
+            alignment: Alignment.topRight,
+            child: Text(
+              '$_dBioTextCount/150',
               style: context.appTextTheme.caption,
             ),
-            const VSpace(40),
+          ),
+          const VSpace(40),
 
-            // Full name text field
-            CustomTextFormField(
-              fHintText: context.loc.enterFullName,
-              fTextController: _fNameController,
-              fValidator: ValidationUtil.nameValidator,
-            ),
-
-            // Bio text field
-            CustomTextFormField(
-              fHintText: context.loc.tellUsAboutYourselfOptional,
-              fTextController: _fBioController,
-              fMaxLines: 5,
-              fValidator: ValidationUtil.bioValidator,
-            ),
-            const VSpace(12),
-
-            // Bio text counter
-            Align(
-              alignment: Alignment.topRight,
-              child: Text(
-                '$_dBioTextCount/150',
-                style: context.appTextTheme.caption,
-              ),
-            ),
-            const VSpace(40),
-
-            // Next button
-            PrimaryGradientButton(
-              fDisabled: !((_dNameIsValid ?? false) && (_dBioIsValid ?? true)),
-              fOnPressed: () {
-                context.read<ProfileCreationFlowCubit>().nextPage();
-              },
-              fChild: Text(context.loc.nextText),
-            ),
-          ],
-        ),
+          // Next button
+          PrimaryGradientButton(
+            fDisabled: !((_dNameIsValid ?? false) && (_dBioIsValid ?? true)),
+            fOnPressed: () {
+              context.read<ProfileCreationFlowCubit>().nextPage();
+            },
+            fChild: Text(context.loc.nextText),
+          ),
+        ],
       ),
     );
   }

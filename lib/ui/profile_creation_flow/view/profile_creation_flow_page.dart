@@ -6,6 +6,7 @@ import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/cubit/profile_creation_flow_cubit.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_birthday_page.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_gender_page.dart';
+import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_interest_page.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_name_page.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_pics_page.dart';
 
@@ -25,7 +26,7 @@ class ProfileCreationFlowPage extends StatelessWidget {
 }
 
 class _ProfileCreationFlowPage extends StatefulWidget {
-  const _ProfileCreationFlowPage({super.key});
+  const _ProfileCreationFlowPage();
 
   @override
   State<_ProfileCreationFlowPage> createState() =>
@@ -75,7 +76,7 @@ class __ProfileCreationFlowPageState extends State<_ProfileCreationFlowPage>
                     UploadGenderPage(),
 
                     // Interest
-                    SizedBox(),
+                    UploadInterestPage(),
 
                     // Location selection
                     SizedBox(),
@@ -97,7 +98,7 @@ class __ProfileCreationFlowPageState extends State<_ProfileCreationFlowPage>
 }
 
 class _ProgressBar extends StatelessWidget {
-  const _ProgressBar({super.key});
+  const _ProgressBar();
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +116,7 @@ class _ProgressBar extends StatelessWidget {
 }
 
 class _BackButtonAndSkip extends StatelessWidget {
-  const _BackButtonAndSkip({super.key});
+  const _BackButtonAndSkip();
 
   @override
   Widget build(BuildContext context) {

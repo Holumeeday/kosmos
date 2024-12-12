@@ -1,4 +1,6 @@
 {
+  "dontWorryItsBetweenUs": "Don’t worry, this is just between us",
+  "selectAll": "Select All",
   "setGenderAuth": "{gender, select, male{Male} female{Female} preferNotToSay{Prefer not to say} other{--}}",
   "@setGenderAuth": {
     "placeholder": {
@@ -37,13 +39,20 @@
   "passswordResetSuccessfully": "Password Reset Successfully",
   "resend": "Resend",
   "searchCountryCode": "Search country code",
+  "showAll2": "Show All",
+  "showLess": "Show Less",
   "signIn": "Sign In",
   "signUp": "Sign up",
   "signUpWithEmail": "Sign up with Email",
   "signUpWithGoogle": "Sign up with Google",
   "signUpWithNumber": "Sign up with Number",
   "sms": "SMS",
+  "tellUsAboutYourselfOptional": "Tell us about yourself (optional)",
+  "tellUsYourInterest": "What sparks your excitement? Tell us your interests!",
+  "thisIsTheNameEveryoneWillSee": "This is the name everyone will see — make it shine!",
   "timeToLockThingsDownPasswordCreationMessage": "Time to lock things down, Create a password that’s as strong as your coffee and as unique as you are.",
+  "timeToShowOffYourProfilePics": "Time to show off your awesome self! Upload your profile pic!",
+  "uploadYourPics": "Upload your pics",
   "weAreSendingYouASecretCodeToVerifyEmail": "We’re sending you a secret code to prove this email address is really yours, Keep an eye out",
   "welcomeBackUser": "Welcome back, {username}",
   "@welcomeBackUser": {
@@ -367,6 +376,8 @@
   "@enterOtpError": {
     "description": "Error gotten when otp field is blank"
   },
+  "whatsYourBirthday": "When is your birthday?",
+  "whatsYourGender": "What is your gender ?",
   "whatsYourName": "What''s your name ?",
   "whatsapp": "WhatsApp",
   "wrongOtpError": "*OTP is invalid. Please enter correct password",

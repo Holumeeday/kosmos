@@ -4,6 +4,7 @@ import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/create_password/view/create_password_page.dart';
 import 'package:playkosmos_v3/ui/email_otp_verification/cubit/email_otp_verification_cubit.dart';
+import 'package:playkosmos_v3/utils/pop_up_util.dart';
 
 /// Email OTP verification screen
 ///
@@ -37,8 +38,8 @@ class _EmailOtpView extends StatelessWidget {
       listener: (context, state) {
         if (state.dShowSuccessDialog) {
           // Show success dialog
-          showDialog<void>(
-            context: context,
+          showCustomDialog(
+            context,
             barrierDismissible: false,
             builder: (BuildContext dialogContext) {
               return Dialog(

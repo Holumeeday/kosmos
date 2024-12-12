@@ -30,12 +30,12 @@ class UploadPicsPage extends StatelessWidget {
               children: [
                 // Title
                 Text(
-                  "Upload your pics",
+                  context.loc.uploadYourPics,
                   style: context.appTextTheme.header1,
                 ),
                 const VSpace(12),
                 Text(
-                  'Time to show off your awesome self! Upload your profile pic!',
+                  context.loc.timeToShowOffYourProfilePics,
                   style: context.appTextTheme.caption,
                 ),
                 const VSpace(40),

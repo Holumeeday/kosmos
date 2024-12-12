@@ -14,39 +14,41 @@ class UploadBirthdayPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            "When is your birthday?",
-            style: context.appTextTheme.header1,
-          ),
-          const VSpace(12),
-          Text(
-            "Don’t worry, this is just between us",
-            style: context.appTextTheme.caption,
-          ),
-          const VSpace(40),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              context.loc.whatsYourBirthday,
+              style: context.appTextTheme.header1,
+            ),
+            const VSpace(12),
+            Text(
+              context.loc.dontWorryItsBetweenUs,
+              style: context.appTextTheme.caption,
+            ),
+            const VSpace(40),
 
-          // Birthday text field
-          Center(
-              child: SegmentedDatePicker(
-            fInitialDate: context.select((ProfileCreationFlowCubit cubit) =>
-                cubit.state.fFlowModel.dateOfBirth),
-            fOnDateSelected: (d) {
-              if (d == null) return;
-              context.read<ProfileCreationFlowCubit>().changeBirthday(d);
-            },
-          )),
-          const VSpace(22),
+            // Birthday text field
+            Center(
+                child: SegmentedDatePicker(
+              fInitialDate: context.select((ProfileCreationFlowCubit cubit) =>
+                  cubit.state.fFlowModel.dateOfBirth),
+              fOnDateSelected: (d) {
+                if (d == null) return;
+                context.read<ProfileCreationFlowCubit>().changeBirthday(d);
+              },
+            )),
+            const VSpace(22),
 
-          // The next button
-          NextButton(fOnPressed: () {
-            context.read<ProfileCreationFlowCubit>().nextPage();
-          }),
-        ],
+            // The next button
+            NextButton(fOnPressed: () {
+              context.read<ProfileCreationFlowCubit>().nextPage();
+            }),
+          ],
+        ),
       ),
     );
   }
