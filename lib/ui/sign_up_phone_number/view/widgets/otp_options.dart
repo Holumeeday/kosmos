@@ -3,26 +3,33 @@ import 'package:playkosmos_v3/common_widgets/buttons.dart';
 import 'package:playkosmos_v3/common_widgets/sizes.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 
-/// This dialog shows the success message and the let go button
-///
-/// used in the authentication flow screens
-/// @author: Godwin Mathias
-class AuthSuccessInfoDialog extends StatelessWidget {
-  const AuthSuccessInfoDialog({
+/* 
+A reusable dialog widget with a title, content, and a primary action button.
+
+ Features:
+ - Displays a customizable title at the top.
+ - Allows injecting any widget as content.
+ - Includes a "Let Go" button with a customizable action.
+
+ This widget is useful for showing modal dialogs with a specific action.
+
+ @author: Chidera Chijama
+*/
+class OtpOptions extends StatelessWidget {
+  const OtpOptions({
     super.key,
     required this.fTitle,
-    required this.fMessage,
     required this.fOnLetGo,
+    required this.fcontent,
   });
 
   /// The title
   final String fTitle;
 
-  /// The message
-  final String fMessage;
-
   /// On click let go button
   final VoidCallback fOnLetGo;
+
+  final Widget fcontent;
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +46,9 @@ class AuthSuccessInfoDialog extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const VSpace(16),
-            // The message
-            Text(
-              fMessage,
-              style: context.appTextTheme.body,
-              textAlign: TextAlign.center,
-            ),
+            fcontent,
             const VSpace(40),
+
             // Let go button
             PrimaryGradientButton(
               fOnPressed: fOnLetGo,

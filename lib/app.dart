@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/ui/select_language/cubit/select_language_cubit.dart';
+import 'package:playkosmos_v3/ui/sign_up_phone_number/cubit/sign_up_phone_number_cubit.dart';
 import 'package:playkosmos_v3/ui/splash/splash_page.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
@@ -44,7 +45,7 @@ class App extends StatelessWidget {
 
 /// This widget provides all BLoC providers for the application
 class _AppBloc extends StatelessWidget {
-  const _AppBloc({super.key});
+  const _AppBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +54,9 @@ class _AppBloc extends StatelessWidget {
         BlocProvider(
           create: (_) => SelectLanguageCubit(),
         ),
+        BlocProvider(
+      create: (_) => SignUpWithPhoneNumberCubit(),
+    )
       ],
       child: const _AppView(),
     );
@@ -62,7 +66,7 @@ class _AppBloc extends StatelessWidget {
 /// Main app view widget that configures the MaterialApp with themes, locale,
 /// and localization
 class _AppView extends StatelessWidget {
-  const _AppView({super.key});
+  const _AppView();
 
   @override
   Widget build(BuildContext context) {
