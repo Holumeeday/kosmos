@@ -46,6 +46,6 @@ class SignUpWithPhoneNumberCubit extends Cubit<SignUpWithPhoneNumberState> {
 
   /// Combines the selected country code and phone number into a full phone number.
   String getFullPhoneNumber() {
-    return '${state.fSelectedCountryCode?.phoneCode ?? ''}${state.fPhoneNumber}';
+    return '${state.fSelectedCountryCode.phoneCode}${state.fPhoneNumber}';
   }
 }

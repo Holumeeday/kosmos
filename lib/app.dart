@@ -45,7 +45,7 @@ class App extends StatelessWidget {
 
 /// This widget provides all BLoC providers for the application
 class _AppBloc extends StatelessWidget {
-  const _AppBloc({super.key});
+  const _AppBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,7 @@ class _AppBloc extends StatelessWidget {
 /// Main app view widget that configures the MaterialApp with themes, locale,
 /// and localization
 class _AppView extends StatelessWidget {
-  const _AppView({super.key});
+  const _AppView();
 
   @override
   Widget build(BuildContext context) {
