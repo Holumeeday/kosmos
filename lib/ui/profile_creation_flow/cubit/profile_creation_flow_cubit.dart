@@ -174,14 +174,11 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
 
   /// Updates the selected location measure option.
   void setLocationMeasure(String option) {
-    final selectedOption = UnitOfLocationMeasurementEnum.values
-        .firstWhere(
-          (element) => element.name.toLowerCase() == option.toLowerCase(),
-        )
-        .name;
-    state.copyWith(
-      fFlowModel: state.fFlowModel.copyWith(radiusUnits: selectedOption),
-    );
+
+// Debugging print
+    emit(state.copyWith(
+      fFlowModel: state.fFlowModel.copyWith(radiusUnits: option),
+    ));
   }
 
   /// Updates the selected search radius.
