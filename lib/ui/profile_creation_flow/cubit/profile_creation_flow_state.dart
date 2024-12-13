@@ -13,11 +13,18 @@ class ProfileCreationFlowState extends Equatable {
   /// Selected interest group
   final Map<String, List<String>> fSelectedInterestMap;
 
-  const ProfileCreationFlowState({
+    /// Selected dist group
+  final double fSearchRadius;
+
+    /// Selected interest group
+  final String fLocationMeasure;
+
+  const ProfileCreationFlowState( {
     required this.fProfileCreationStage,
     required this.fFlowModel,
     required this.fSelectedInterestMap,
     required this.fInterestGroupList,
+    required this.fSearchRadius, required this.fLocationMeasure,
   });
 
   @override
@@ -26,6 +33,8 @@ class ProfileCreationFlowState extends Equatable {
         fInterestGroupList,
         fSelectedInterestMap,
         fFlowModel,
+        fSearchRadius,
+        fLocationMeasure
       ];
 
   ProfileCreationFlowState copyWith({
@@ -33,6 +42,8 @@ class ProfileCreationFlowState extends Equatable {
     ProfileCreationFlowModel? fFlowModel,
     List<ActivityInterestGroups>? fInterestGroupList,
     Map<String, List<String>>? fSelectedInterestMap,
+    double? fSearchRadius,
+    String? fLocationMeasure
   }) {
     return ProfileCreationFlowState(
       fSelectedInterestMap: fSelectedInterestMap ?? this.fSelectedInterestMap,
@@ -40,6 +51,9 @@ class ProfileCreationFlowState extends Equatable {
       fFlowModel: fFlowModel ?? this.fFlowModel,
       fProfileCreationStage:
           fProfileCreationStage ?? this.fProfileCreationStage,
+      fSearchRadius: fSearchRadius ?? this.fSearchRadius,
+      fLocationMeasure:fLocationMeasure ?? this.fLocationMeasure
+      
     );
   }
 }

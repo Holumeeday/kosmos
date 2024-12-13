@@ -24,6 +24,8 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
             fFlowModel: ProfileCreationFlowModel(
               profilePicsList: List.filled(5, null),
             ),
+            fSearchRadius: 7,
+            fLocationMeasure: UnitOfLocationMeasurementEnum.miles.name
           ),
         );
 
@@ -165,4 +167,19 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
       );
     }
   }
+
+    /// Updates the selected location measure option.
+  void setLocationMeasure(String option) {
+    final selectedOption = UnitOfLocationMeasurementEnum.values.firstWhere(
+      (element) => element.name.toLowerCase() == option.toLowerCase(),
+    ).name;
+    emit(state.copyWith(fLocationMeasure: selectedOption));
+  }
+
+      /// Updates the selected search radius.
+  void setSearchRadius(double searchRadius ) {
+   
+    emit(state.copyWith(fSearchRadius: searchRadius));
+  }
 }
+
