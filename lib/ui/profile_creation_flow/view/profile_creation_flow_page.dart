@@ -65,6 +65,7 @@ class __ProfileCreationFlowPageState extends State<_ProfileCreationFlowPage>
                 child: PageView(
                   controller: fPageController,
                   allowImplicitScrolling: false,
+                  physics: const NeverScrollableScrollPhysics(),
                   children: const [
                     // Name and Bio
                     UploadNamePage(),
