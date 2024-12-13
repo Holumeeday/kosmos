@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:playkosmos_v3/assets_gen/assets.gen.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/enums/enums.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,11 +62,9 @@ class UploadSearchRadiusPage extends StatelessWidget {
                 return BlocSelector<ProfileCreationFlowCubit,
                     ProfileCreationFlowState, String>(
                   selector: (state) {
-            
                     return state.fFlowModel.radiusUnits ?? 'miles';
                   },
                   builder: (context, selectedOption) {
-                  
                     return RadioListTile<String>(
                       title: Text(context.loc.setUnitOfMeasure(measure.name)),
                       value: measure.name,
@@ -138,7 +137,8 @@ class UploadSearchRadiusPage extends StatelessWidget {
                                 fTitle: '',
                                 fMessage:
                                     context.loc.profileCreationDialogMessage,
-                                fWidget: Image.asset("name"),
+                                fWidget: Image.asset(Assets
+                                    .pngs.onboarding.welcomeOnboarding.path),
                                 fOnLetGo: () {
                                   context.pop();
                                 }),
