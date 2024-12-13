@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:equatable/equatable.dart';
+import 'package:playkosmos_v3/data_transfer_objects/activity_interest_groups.dart';
 
 /// Gender types
 enum GenderEnum {
@@ -20,7 +21,7 @@ class ProfileCreationFlowModel extends Equatable {
   final GenderEnum? gender;
 
   /// The interests of the user
-  final List<String>? interests;
+  final List<ActivityInterestGroups>? interests;
 
   /// The latitude
   final double? latitude;
@@ -53,7 +54,7 @@ class ProfileCreationFlowModel extends Equatable {
   ProfileCreationFlowModel copyWith({
     GenderEnum? gender,
     List<File?>? profilePicsList,
-    List<String>? interests,
+    List<ActivityInterestGroups>? interests,
     double? latitude,
     double? longitude,
     double? radius,

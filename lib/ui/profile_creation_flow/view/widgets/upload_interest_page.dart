@@ -4,6 +4,7 @@ import 'package:playkosmos_v3/common_widgets/sizes.dart';
 import 'package:playkosmos_v3/data_transfer_objects/activity_interest_groups.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/cubit/profile_creation_flow_cubit.dart';
+import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/next_button.dart';
 
 /// Define the selection of interests page
 ///
@@ -14,7 +15,7 @@ class UploadInterestPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fInterestGroupList = context.select(
-        (ProfileCreationFlowCubit cubit) => cubit.state.fInterestGroupList);
+        (ProfileCreationFlowCubit cubit) => cubit.state.fFlowModel.interests);
     final fSelectedInterestsList = context.select(
         (ProfileCreationFlowCubit cubit) => cubit.state.fSelectedInterestMap);
 
@@ -34,7 +35,7 @@ class UploadInterestPage extends StatelessWidget {
 
         SliverList.separated(
           separatorBuilder: (_, __) => const VSpace(20),
-          itemCount: fInterestGroupList.length,
+          itemCount: fInterestGroupList!.length,
           itemBuilder: (context, index) {
             return _InterestGroupList(
               fInterestGroup: fInterestGroupList[index],
@@ -43,6 +44,23 @@ class UploadInterestPage extends StatelessWidget {
                   [],
             );
           },
+        ),
+
+        const SliverToBoxAdapter(child: VSpace(30)),
+        // Allow button
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: NextButton(
+              fOnPressed: () async {
+                if (context.mounted) {
+                  // Navigate to the next stage
+                  context.read<ProfileCreationFlowCubit>().nextPage();
+                }
+              },
+              fText: context.loc.nextText,
+            ),
+          ),
         ),
       ],
     );

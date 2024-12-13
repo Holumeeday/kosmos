@@ -12,11 +12,15 @@ class AuthSuccessInfoDialog extends StatelessWidget {
     super.key,
     required this.fTitle,
     required this.fMessage,
-    required this.fOnLetGo,
+    required this.fOnLetGo, this.fWidget,
   });
 
   /// The title
   final String fTitle;
+
+  /// Optional widget to replace the default title text.
+  /// If `fWidget` is provided, it will be rendered instead of the default `Text` widget for the title.
+  final Widget? fWidget;
 
   /// The message
   final String fMessage;
@@ -33,10 +37,12 @@ class AuthSuccessInfoDialog extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             // The title
-            Text(
-              fTitle,
-              style: context.appTextTheme.header1,
-              textAlign: TextAlign.center,
+            Container(
+              child:fWidget ?? Text(
+                fTitle,
+                style: context.appTextTheme.header1,
+                textAlign: TextAlign.center,
+              ),
             ),
             const VSpace(16),
             // The message
