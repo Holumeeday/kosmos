@@ -5,6 +5,7 @@ import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/main/cubit/main_page_cubit.dart';
 import 'package:playkosmos_v3/ui/main/view/widgets/bottom_nav_bar.dart';
+import 'package:playkosmos_v3/ui/main/view/widgets/home_page.dart';
 
 /// The main page that defines the Home, Buddies, Inbox and Profile
 /// tabs. It manages the navigation between them
@@ -118,7 +119,7 @@ class _MainPageState extends State<MainPage> {
           physics: const NeverScrollableScrollPhysics(),
           children: const [
             // Home
-            SizedBox(),
+            HomePage(),
 
             // Buddies
             SizedBox(),

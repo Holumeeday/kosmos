@@ -32,16 +32,11 @@ class CreateActivityPostStatusModal extends StatelessWidget {
               },
               title: Text(
                 context.loc.activity,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
+                style: context.appTextTheme.buttonLarge,
               ),
               subtitle: Text(
-                'Bring people together! Create activities that everyone can join and enjoy.',
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.tertiary,
-                    ),
+                context.loc.bringPeopleTogetherCreateActivities,
+                style: context.appTextTheme.caption,
               ),
             ),
             const Divider(),
@@ -59,16 +54,11 @@ class CreateActivityPostStatusModal extends StatelessWidget {
               },
               title: Text(
                 context.loc.post,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
+                style: context.appTextTheme.buttonLarge,
               ),
               subtitle: Text(
-                'Let your creativity shine, Express yourself and share your vibe in your post.',
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.tertiary,
-                    ),
+                context.loc.letYourCreativityShineExpressYourself,
+                style: context.appTextTheme.caption,
               ),
             ),
             const Divider(),
@@ -86,16 +76,11 @@ class CreateActivityPostStatusModal extends StatelessWidget {
               },
               title: Text(
                 context.loc.status,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
+                style: context.appTextTheme.buttonLarge,
               ),
               subtitle: Text(
-                'Share anything you like, it’ll stay live for 24 hours.',
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      color: Theme.of(context).colorScheme.tertiary,
-                    ),
+                context.loc.shareAnythingYouLike,
+                style: context.appTextTheme.caption,
               ),
             ),
             const Divider(),

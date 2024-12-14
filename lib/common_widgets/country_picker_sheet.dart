@@ -117,9 +117,12 @@ class _CountryPickerSheetState extends State<CountryPickerSheet> {
                       country.flag,
                     ),
                     const HSpace(8),
-                    Text(
-                      country.localizedName(context.loc.localeName),
-                      style: context.appTextTheme.buttonLarge,
+                    Flexible(
+                      child: Text(
+                        country.localizedName(context.loc.localeName),
+                        style: context.appTextTheme.buttonLarge,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                     const HSpace(4),
                     widget.fTrailing?.call(country) ?? const SizedBox.shrink(),

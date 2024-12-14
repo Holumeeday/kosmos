@@ -1,6 +1,17 @@
 {
+  "setActivitySource": "{activitySource, select, following {Following} buddies {Buddies} arena {Arena} other {Unknown}}",
+  "@setActivitySource": {
+    "description": "Select dropdown label for Following, Buddies, and Arena.",
+    "placeholders": {
+      "activitySource": {
+        "example": "following"
+      }
+    }
+  },
+  "bringPeopleTogetherCreateActivities": "Bring people together! Create activities that everyone can join and enjoy.",
   "dontWorryItsBetweenUs": "Don’t worry, this is just between us",
   "heyWeWillLoveToKnowWhereYouAre": "Hey, we’d love to know where you’re at, Can we grab your location to make your experience even better?",
+  "letYourCreativityShineExpressYourself": "Let your creativity shine, Express yourself and share your vibe in your post.",
   "onlyOnceText": "Only once",
   "selectAll": "Select All",
   "setGenderAuth": "{gender, select, male{Male} female{Female} preferNotToSay{Prefer not to say} other{--}}",
@@ -43,6 +54,7 @@
   "profileCreationDialogMessage":"Woohoo, you did it! Your profile is ready, and you’re officially part of the Playkosmos family, Now the real fun begins — dive in, explore, and make the most of your new adventure. Let’s go! ",
   "resend": "Resend",
   "searchCountryCode": "Search country code",
+  "shareAnythingYouLike": "Share anything you like, it’ll stay live for 24 hours.",
   "showAll2": "Show All",
   "showLess": "Show Less",
   "signIn": "Sign In",
