@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
-import 'package:playkosmos_v3/constants/countries_states/countries_states_constant.dart';
+import 'package:playkosmos_v3/constants/countries_list.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/models/countries_states_model.dart';
+import 'package:playkosmos_v3/models/country_model.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /*
@@ -15,7 +15,7 @@ class CustomPhoneField extends StatefulWidget {
   final TextEditingController fTextController;
 
   /// When the country is changed
-  final ValueChanged<CountriesStatesModel>? fOnCountryChanged;
+  final ValueChanged<CountryModel>? fOnCountryChanged;
 
   /// The validator
   final String? Function(String?) fValidator;
@@ -45,17 +45,17 @@ class CustomPhoneField extends StatefulWidget {
 
 class _CustomPhoneFieldState extends State<CustomPhoneField> {
   /// The country list
-  late List<CountriesStatesModel> _dCountryList;
+  late List<CountryModel> _dCountryList;
 
   /// The selected country
-  late CountriesStatesModel _dSelectedCountry;
+  late CountryModel _dSelectedCountry;
 
   @override
   void initState() {
     super.initState();
 
     /// To select the countries list
-    _dCountryList = List.from(kCountriesStatesList);
+    _dCountryList = List.from(kCountriesList);
 
     /// To select the country
     _dSelectedCountry = _dCountryList.firstWhere(
@@ -121,7 +121,7 @@ The prefix icon with the selected country for the text field
  */
 class _SelectedCountryIcon extends StatelessWidget {
   /// The selected country
-  final CountriesStatesModel fSelectedCountry;
+  final CountryModel fSelectedCountry;
 
   /// The border radius
   final double fBorderRadius;

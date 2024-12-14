@@ -1,7 +1,10 @@
 {
   "fi": [
+    "setActivitySource",
+    "bringPeopleTogetherCreateActivities",
     "dontWorryItsBetweenUs",
     "heyWeWillLoveToKnowWhereYouAre",
+    "letYourCreativityShineExpressYourself",
     "onlyOnceText",
     "selectAll",
     "setGenderAuth",
@@ -39,6 +42,7 @@
     "profileCreationDialogMessage",
     "resend",
     "searchCountryCode",
+    "shareAnythingYouLike",
     "showAll2",
     "showLess",
     "signIn",
@@ -66,8 +70,11 @@
   ],
 
   "fr": [
+    "setActivitySource",
+    "bringPeopleTogetherCreateActivities",
     "dontWorryItsBetweenUs",
     "heyWeWillLoveToKnowWhereYouAre",
+    "letYourCreativityShineExpressYourself",
     "onlyOnceText",
     "selectAll",
     "setGenderAuth",
@@ -105,6 +112,7 @@
     "profileCreationDialogMessage",
     "resend",
     "searchCountryCode",
+    "shareAnythingYouLike",
     "showAll2",
     "showLess",
     "signIn",
@@ -132,8 +140,11 @@
   ],
 
   "hi": [
+    "setActivitySource",
+    "bringPeopleTogetherCreateActivities",
     "dontWorryItsBetweenUs",
     "heyWeWillLoveToKnowWhereYouAre",
+    "letYourCreativityShineExpressYourself",
     "onlyOnceText",
     "selectAll",
     "setGenderAuth",
@@ -171,6 +182,7 @@
     "profileCreationDialogMessage",
     "resend",
     "searchCountryCode",
+    "shareAnythingYouLike",
     "showAll2",
     "showLess",
     "signIn",
@@ -198,8 +210,11 @@
   ],
 
   "si": [
+    "setActivitySource",
+    "bringPeopleTogetherCreateActivities",
     "dontWorryItsBetweenUs",
     "heyWeWillLoveToKnowWhereYouAre",
+    "letYourCreativityShineExpressYourself",
     "onlyOnceText",
     "selectAll",
     "setGenderAuth",
@@ -237,6 +252,7 @@
     "profileCreationDialogMessage",
     "resend",
     "searchCountryCode",
+    "shareAnythingYouLike",
     "showAll2",
     "showLess",
     "signIn",
@@ -264,8 +280,11 @@
   ],
 
   "ta": [
+    "setActivitySource",
+    "bringPeopleTogetherCreateActivities",
     "dontWorryItsBetweenUs",
     "heyWeWillLoveToKnowWhereYouAre",
+    "letYourCreativityShineExpressYourself",
     "onlyOnceText",
     "selectAll",
     "setGenderAuth",
@@ -303,6 +322,7 @@
     "profileCreationDialogMessage",
     "resend",
     "searchCountryCode",
+    "shareAnythingYouLike",
     "showAll2",
     "showLess",
     "signIn",
@@ -330,8 +350,11 @@
   ],
 
   "zh": [
+    "setActivitySource",
+    "bringPeopleTogetherCreateActivities",
     "dontWorryItsBetweenUs",
     "heyWeWillLoveToKnowWhereYouAre",
+    "letYourCreativityShineExpressYourself",
     "onlyOnceText",
     "selectAll",
     "setGenderAuth",
@@ -369,6 +392,7 @@
     "profileCreationDialogMessage",
     "resend",
     "searchCountryCode",
+    "shareAnythingYouLike",
     "showAll2",
     "showLess",
     "signIn",

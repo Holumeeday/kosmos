@@ -1,4 +1,10 @@
 export 'context_extension.dart';
 export 'double_extension.dart';
+export 'flutter_internals_extension.dart';
 export 'int_extension.dart';
+export 'list_extension.dart';
+export 'null_date_time_extension.dart';
+export 'null_string_extension.dart';
+export 'num_extension.dart';
+export 'reaction_icon_type_enum_extension.dart';
 export 'string_extension.dart';

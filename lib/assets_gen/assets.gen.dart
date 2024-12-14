@@ -33,6 +33,10 @@ class $AssetsSvgsGen {
 
   /// Directory path: assets/svgs/icons
   $AssetsSvgsIconsGen get icons => const $AssetsSvgsIconsGen();
+
+  /// Directory path: assets/svgs/post_reaction_icons
+  $AssetsSvgsPostReactionIconsGen get postReactionIcons =>
+      const $AssetsSvgsPostReactionIconsGen();
 }
 
 class $AssetsPngsOnboardingGen {
@@ -139,12 +143,147 @@ class $AssetsSvgsFlagsGen {
 class $AssetsSvgsIconsGen {
   const $AssetsSvgsIconsGen();
 
+  /// File path: assets/svgs/icons/bronze_subscription_plan.svg
+  SvgGenImage get bronzeSubscriptionPlan =>
+      const SvgGenImage('assets/svgs/icons/bronze_subscription_plan.svg');
+
+  /// File path: assets/svgs/icons/buddies-filled.svg
+  SvgGenImage get buddiesFilled =>
+      const SvgGenImage('assets/svgs/icons/buddies-filled.svg');
+
+  /// File path: assets/svgs/icons/buddies-outlined.svg
+  SvgGenImage get buddiesOutlined =>
+      const SvgGenImage('assets/svgs/icons/buddies-outlined.svg');
+
+  /// File path: assets/svgs/icons/diamond_subscription_plan.svg
+  SvgGenImage get diamondSubscriptionPlan =>
+      const SvgGenImage('assets/svgs/icons/diamond_subscription_plan.svg');
+
+  /// File path: assets/svgs/icons/gold_subscription_plan.svg
+  SvgGenImage get goldSubscriptionPlan =>
+      const SvgGenImage('assets/svgs/icons/gold_subscription_plan.svg');
+
+  /// File path: assets/svgs/icons/home-filled.svg
+  SvgGenImage get homeFilled =>
+      const SvgGenImage('assets/svgs/icons/home-filled.svg');
+
+  /// File path: assets/svgs/icons/home-outlined.svg
+  SvgGenImage get homeOutlined =>
+      const SvgGenImage('assets/svgs/icons/home-outlined.svg');
+
+  /// File path: assets/svgs/icons/inbox-filled.svg
+  SvgGenImage get inboxFilled =>
+      const SvgGenImage('assets/svgs/icons/inbox-filled.svg');
+
+  /// File path: assets/svgs/icons/inbox-outlined.svg
+  SvgGenImage get inboxOutlined =>
+      const SvgGenImage('assets/svgs/icons/inbox-outlined.svg');
+
   /// File path: assets/svgs/icons/location-icon-gradient.svg
   SvgGenImage get locationIconGradient =>
       const SvgGenImage('assets/svgs/icons/location-icon-gradient.svg');
 
+  /// File path: assets/svgs/icons/notification-icon.svg
+  SvgGenImage get notificationIcon =>
+      const SvgGenImage('assets/svgs/icons/notification-icon.svg');
+
+  /// File path: assets/svgs/icons/profile-filled.svg
+  SvgGenImage get profileFilled =>
+      const SvgGenImage('assets/svgs/icons/profile-filled.svg');
+
+  /// File path: assets/svgs/icons/profile-outlined.svg
+  SvgGenImage get profileOutlined =>
+      const SvgGenImage('assets/svgs/icons/profile-outlined.svg');
+
+  /// File path: assets/svgs/icons/settings-icon.svg
+  SvgGenImage get settingsIcon =>
+      const SvgGenImage('assets/svgs/icons/settings-icon.svg');
+
+  /// File path: assets/svgs/icons/silver_subscription_plan.svg
+  SvgGenImage get silverSubscriptionPlan =>
+      const SvgGenImage('assets/svgs/icons/silver_subscription_plan.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [locationIconGradient];
+  List<SvgGenImage> get values => [
+        bronzeSubscriptionPlan,
+        buddiesFilled,
+        buddiesOutlined,
+        diamondSubscriptionPlan,
+        goldSubscriptionPlan,
+        homeFilled,
+        homeOutlined,
+        inboxFilled,
+        inboxOutlined,
+        locationIconGradient,
+        notificationIcon,
+        profileFilled,
+        profileOutlined,
+        settingsIcon,
+        silverSubscriptionPlan
+      ];
+}
+
+class $AssetsSvgsPostReactionIconsGen {
+  const $AssetsSvgsPostReactionIconsGen();
+
+  /// File path: assets/svgs/post_reaction_icons/angry_reaction.svg
+  SvgGenImage get angryReaction =>
+      const SvgGenImage('assets/svgs/post_reaction_icons/angry_reaction.svg');
+
+  /// File path: assets/svgs/post_reaction_icons/clap_reaction.svg
+  SvgGenImage get clapReaction =>
+      const SvgGenImage('assets/svgs/post_reaction_icons/clap_reaction.svg');
+
+  /// File path: assets/svgs/post_reaction_icons/cry_reaction.svg
+  SvgGenImage get cryReaction =>
+      const SvgGenImage('assets/svgs/post_reaction_icons/cry_reaction.svg');
+
+  /// File path: assets/svgs/post_reaction_icons/default_reaction.svg
+  SvgGenImage get defaultReaction =>
+      const SvgGenImage('assets/svgs/post_reaction_icons/default_reaction.svg');
+
+  /// File path: assets/svgs/post_reaction_icons/dislike_reaction.svg
+  SvgGenImage get dislikeReaction =>
+      const SvgGenImage('assets/svgs/post_reaction_icons/dislike_reaction.svg');
+
+  /// File path: assets/svgs/post_reaction_icons/heart_reaction.svg
+  SvgGenImage get heartReaction =>
+      const SvgGenImage('assets/svgs/post_reaction_icons/heart_reaction.svg');
+
+  /// File path: assets/svgs/post_reaction_icons/laugh_reaction.svg
+  SvgGenImage get laughReaction =>
+      const SvgGenImage('assets/svgs/post_reaction_icons/laugh_reaction.svg');
+
+  /// File path: assets/svgs/post_reaction_icons/like_reaction.svg
+  SvgGenImage get likeReaction =>
+      const SvgGenImage('assets/svgs/post_reaction_icons/like_reaction.svg');
+
+  /// File path: assets/svgs/post_reaction_icons/party_reaction.svg
+  SvgGenImage get partyReaction =>
+      const SvgGenImage('assets/svgs/post_reaction_icons/party_reaction.svg');
+
+  /// File path: assets/svgs/post_reaction_icons/sad_reaction.svg
+  SvgGenImage get sadReaction =>
+      const SvgGenImage('assets/svgs/post_reaction_icons/sad_reaction.svg');
+
+  /// File path: assets/svgs/post_reaction_icons/shock_reaction.svg
+  SvgGenImage get shockReaction =>
+      const SvgGenImage('assets/svgs/post_reaction_icons/shock_reaction.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [
+        angryReaction,
+        clapReaction,
+        cryReaction,
+        defaultReaction,
+        dislikeReaction,
+        heartReaction,
+        laughReaction,
+        likeReaction,
+        partyReaction,
+        sadReaction,
+        shockReaction
+      ];
 }
 
 class Assets {

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:playkosmos_v3/data/data.dart';
+import 'package:playkosmos_v3/ui/main/cubit/main_page_cubit.dart';
 import 'package:playkosmos_v3/ui/select_language/cubit/select_language_cubit.dart';
 import 'package:playkosmos_v3/ui/sign_up_phone_number/cubit/sign_up_phone_number_cubit.dart';
 import 'package:playkosmos_v3/ui/splash/splash_page.dart';
@@ -58,8 +59,11 @@ class _AppBloc extends StatelessWidget {
           create: (_) => SelectLanguageCubit(),
         ),
         BlocProvider(
-      create: (_) => SignUpWithPhoneNumberCubit(),
-    )
+          create: (_) => SignUpWithPhoneNumberCubit(),
+        ),
+        BlocProvider(
+          create: (_) => MainPageCubit(),
+        ),
       ],
       child: const _AppView(),
     );
@@ -80,11 +84,14 @@ class _AppView extends StatelessWidget {
       navigatorKey: GetContext.navigatorKey,
       debugShowCheckedModeBanner: false,
       home: const SplashPage(),
-      builder:
-          DevicePreview.appBuilder, // Enables device preview for development
-      theme: MyThemes.lightTheme, // Light theme of the app
-      darkTheme: MyThemes.darkTheme, // Dark theme of the app
-      locale: dLocale, // Selected language/locale
+      builder: DevicePreview.appBuilder,
+      // Enables device preview for development
+      theme: MyThemes.lightTheme,
+      // Light theme of the app
+      darkTheme: MyThemes.darkTheme,
+      // Dark theme of the app
+      locale: dLocale,
+      // Selected language/locale
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
     );
