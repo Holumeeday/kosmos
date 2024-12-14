@@ -4,6 +4,7 @@ import 'package:playkosmos_v3/common_widgets/sizes.dart';
 import 'package:playkosmos_v3/enums/enums.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/cubit/profile_creation_flow_cubit.dart';
+import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_search_radius_page.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_birthday_page.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_gender_page.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_interest_page.dart';
@@ -63,6 +64,8 @@ class __ProfileCreationFlowPageState extends State<_ProfileCreationFlowPage>
               Expanded(
                 child: PageView(
                   controller: fPageController,
+                  allowImplicitScrolling: false,
+                  physics: const NeverScrollableScrollPhysics(),
                   children: const [
                     // Name and Bio
                     UploadNamePage(),
@@ -83,7 +86,7 @@ class __ProfileCreationFlowPageState extends State<_ProfileCreationFlowPage>
                     UploadYourLocationPage(),
 
                     // Search radius
-                    SizedBox(),
+                    UploadSearchRadiusPage(),
                   ],
                 ),
               )
@@ -186,9 +189,13 @@ class _BackButtonAndSkip extends StatelessWidget {
       ProfileCreationFlowEnum.uploadGender => context.select(
           (ProfileCreationFlowCubit cubit) =>
               cubit.state.fFlowModel.gender == null),
-      ProfileCreationFlowEnum.uploadInterest => context.select(
-          (ProfileCreationFlowCubit cubit) =>
-              cubit.state.fFlowModel.interests == null),
+      ProfileCreationFlowEnum.uploadInterest =>
+        context.select((ProfileCreationFlowCubit cubit) {
+          final interests =
+              cubit.state.fSelectedInterestMap.values.expand((e) => e);
+          return interests
+              .isEmpty; // If no interests are selected, show the button
+        }),
       ProfileCreationFlowEnum.uploadSearchRadius => context.select(
           (ProfileCreationFlowCubit cubit) =>
               cubit.state.fFlowModel.radius == null),

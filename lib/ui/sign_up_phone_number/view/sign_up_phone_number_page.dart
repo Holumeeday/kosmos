@@ -100,8 +100,8 @@ class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
                   PrimaryGradientButton(
                     fDisabled: !(_dIsValidPhone ?? false),
                     fOnPressed: () {
-                      showCustomDialog(
-                        context,
+                      showDialog(
+                        context: context,
                         barrierDismissible: true,
                         builder: (_) {
                           return Dialog(

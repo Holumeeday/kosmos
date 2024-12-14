@@ -57,7 +57,6 @@ class UploadGenderPage extends StatelessWidget {
 
 class _GenderContainer extends StatelessWidget {
   const _GenderContainer({
-    super.key,
     required this.fIsSelected,
     required this.fText,
   });

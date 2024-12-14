@@ -46,9 +46,13 @@ class NextButton extends StatelessWidget {
       ProfileCreationFlowEnum.uploadGender => context.select(
           (ProfileCreationFlowCubit cubit) =>
               cubit.state.fFlowModel.gender == null),
-      ProfileCreationFlowEnum.uploadInterest => context.select(
-          (ProfileCreationFlowCubit cubit) =>
-              cubit.state.fFlowModel.interests == null),
+      ProfileCreationFlowEnum.uploadInterest =>
+        context.select((ProfileCreationFlowCubit cubit) {
+          final interests =
+              cubit.state.fSelectedInterestMap.values.expand((e) => e);
+          return interests
+              .isEmpty; // If no interests are selected, show the button
+        }),
       ProfileCreationFlowEnum.uploadSearchRadius => context.select(
           (ProfileCreationFlowCubit cubit) =>
               cubit.state.fFlowModel.radius == null),

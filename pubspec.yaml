@@ -40,12 +40,15 @@ dependencies:
   image_picker: ^1.1.2
 
 dev_dependencies:
+  build_runner: ^2.4.0
+  flutter_gen_runner: ^5.8.0
   flutter_test:
     sdk: flutter
-
+  
   flutter_lints: ^4.0.0
 
 # Setup for generating assets and font class
+
 flutter_gen:
   integrations:
     flutter_svg: true

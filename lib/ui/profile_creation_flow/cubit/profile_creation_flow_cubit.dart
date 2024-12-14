@@ -20,10 +20,10 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
           ProfileCreationFlowState(
             fProfileCreationStage: ProfileCreationFlowEnum.uploadName,
             fSelectedInterestMap: const {},
-            fInterestGroupList: const [...kActivityInterestGroup],
             fFlowModel: ProfileCreationFlowModel(
-              profilePicsList: List.filled(5, null),
-            ),
+                interests: const [...kActivityInterestGroup],
+                profilePicsList: List.filled(5, null),
+                radiusUnits: UnitOfLocationMeasurementEnum.miles.name),
           ),
         );
 
@@ -49,18 +49,19 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
     final updatedInterestMap =
         Map<String, List<String>>.from(state.fSelectedInterestMap)
           ..[fActivityGroup.categoryName] = currentInterests;
+    final fInterestGroupList = state.fFlowModel.interests!;
 
-    final updatedInterestGroupList = [...state.fInterestGroupList];
-    final groupIndex = state.fInterestGroupList.indexWhere(
+    final updatedInterestGroupList = [...fInterestGroupList];
+    final groupIndex = fInterestGroupList.indexWhere(
       (group) => group.categoryName == fActivityGroup.categoryName,
     );
     updatedInterestGroupList[groupIndex] = updatedInterestGroup;
 
     emit(
       state.copyWith(
-        fSelectedInterestMap: updatedInterestMap,
-        fInterestGroupList: updatedInterestGroupList,
-      ),
+          fSelectedInterestMap: updatedInterestMap,
+          fFlowModel:
+              state.fFlowModel.copyWith(interests: updatedInterestGroupList)),
     );
   }
 
@@ -80,10 +81,11 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
     final updatedInterestMap =
         Map<String, List<String>>.from(state.fSelectedInterestMap)
           ..[fActivityGroup.categoryName] = updatedInterests;
+    final fInterestGroupList = state.fFlowModel.interests!;
 
     final updatedInterestGroup = fActivityGroup.copyWith(selectAll: selectAll);
-    final updatedInterestGroupList = [...state.fInterestGroupList];
-    final groupIndex = state.fInterestGroupList.indexWhere(
+    final updatedInterestGroupList = [...fInterestGroupList];
+    final groupIndex = fInterestGroupList.indexWhere(
       (group) => group.categoryName == fActivityGroup.categoryName,
     );
     updatedInterestGroupList[groupIndex] = updatedInterestGroup;
@@ -91,7 +93,8 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
     emit(
       state.copyWith(
         fSelectedInterestMap: updatedInterestMap,
-        fInterestGroupList: updatedInterestGroupList,
+        fFlowModel:
+            state.fFlowModel.copyWith(interests: updatedInterestGroupList),
       ),
     );
   }
@@ -120,15 +123,18 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
   void setShowAll(ActivityInterestGroups fInterestGroup) {
     final updatedInterestGroup =
         fInterestGroup.copyWith(showAll: !fInterestGroup.showAll);
+    final fInterestGroupList = state.fFlowModel.interests!;
 
-    final updatedInterestGroupList = [...state.fInterestGroupList];
-    final groupIndex = state.fInterestGroupList.indexWhere(
+    final updatedInterestGroupList = [...fInterestGroupList];
+    final groupIndex = fInterestGroupList.indexWhere(
       (group) => group.categoryName == fInterestGroup.categoryName,
     );
     updatedInterestGroupList[groupIndex] = updatedInterestGroup;
 
     emit(
-      state.copyWith(fInterestGroupList: updatedInterestGroupList),
+      state.copyWith(
+          fFlowModel:
+              state.fFlowModel.copyWith(interests: updatedInterestGroupList)),
     );
   }
 
@@ -164,5 +170,23 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
         ),
       );
     }
+  }
+
+  /// Updates the selected location measure option.
+  void setLocationMeasure(String option) {
+
+// Debugging print
+    emit(state.copyWith(
+      fFlowModel: state.fFlowModel.copyWith(radiusUnits: option),
+    ));
+  }
+
+  /// Updates the selected search radius.
+  void setSearchRadius(double searchRadius) {
+    emit(
+      state.copyWith(
+        fFlowModel: state.fFlowModel.copyWith(radius: searchRadius),
+      ),
+    );
   }
 }
