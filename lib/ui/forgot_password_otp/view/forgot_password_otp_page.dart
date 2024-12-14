@@ -70,6 +70,7 @@ class _EmailOtpView extends StatelessWidget {
         fOnEndCountdown: () => context
             .read<ForgotPasswordOtpVerificationCubit>()
             .setResendingOtp(true),
+        fOnChanged: (String value) {},
       ),
     );
   }

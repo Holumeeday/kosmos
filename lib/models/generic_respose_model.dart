@@ -13,7 +13,7 @@ class GenericResponse {
     return GenericResponse(
       status: json['status'] == 'success',
       message: json['status'] != 'success'
-          ? (json['data']['error'] ?? json['error']) as String
+          ? (json['error'] ?? json['data']['error']) as String
           : '',
       data: json['data'] as Map?,
     );

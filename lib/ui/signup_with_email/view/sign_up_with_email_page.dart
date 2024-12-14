@@ -73,7 +73,9 @@ class _SignUpWithEmailPageViewState extends State<_SignUpWithEmailPageView> {
           if (state.status == SignUpWithEmailStatus.success) {
             // If sign up was successful
             if (state.data?.status == true) {
-              context.push(const EmailOtpVerificationPage());
+              context.push(EmailOtpVerificationPage(
+                fEmail: _fEmailController.text,
+              ));
             }
           } else if (state.status == SignUpWithEmailStatus.failure) {
             SnackBarUtil.showError(message: state.errorMessage!);

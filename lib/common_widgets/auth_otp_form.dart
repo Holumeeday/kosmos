@@ -32,6 +32,7 @@ class AuthOTPForm extends StatefulWidget {
     required this.fOnNextButton,
     required this.fCanResendOtp,
     required this.fOnEndCountdown,
+    required this.fOnChanged,
   });
 
   /// The OTP page title that will be displayed at the top of the form.
@@ -56,6 +57,9 @@ class AuthOTPForm extends StatefulWidget {
   /// A boolean value that determines whether the user is allowed to resend the OTP.
   final bool fCanResendOtp;
 
+  /// On text field change
+  final ValueChanged<String> fOnChanged;
+
   @override
   State<AuthOTPForm> createState() => _AuthOTPFormState();
 }
@@ -77,11 +81,15 @@ class _AuthOTPFormState extends State<AuthOTPForm> {
     _fOtpController = TextEditingController()
       ..addListener(() {
         if (mounted) {
+          final _fCurrentText = _fOtpController.text;
           // Regex pattern to check if the input is a number and exactly 6 digits long.
-          final isValidOtp = RegExp(r'^\d{6}$').hasMatch(_fOtpController.text);
+          final isValidOtp = RegExp(r'^\d{6}$').hasMatch(_fCurrentText);
 
           // Enable the "Next" button if the OTP is 6 digits long and valid.
           _dCanNext = isValidOtp;
+          if (isValidOtp) {
+            widget.fOnChanged.call(_fCurrentText);
+          }
           setState(() {});
         }
       });
@@ -130,6 +138,7 @@ class _AuthOTPFormState extends State<AuthOTPForm> {
 
         // The resend OTP section with countdown and callback functionality.
         ResendCountdown(
+          fCountdownDuration: const Duration(minutes: 15),
           fText: widget.fTextFieldLabel,
           fCanResendOtp: widget.fCanResendOtp,
           fResendOtpCall: () {

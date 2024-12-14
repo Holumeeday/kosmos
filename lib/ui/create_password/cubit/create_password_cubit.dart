@@ -4,27 +4,40 @@ import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/data_transfer_objects/playkosmos_exception.dart';
 import 'package:playkosmos_v3/models/generic_respose_model.dart';
 
-part 'sign_up_with_email_state.dart';
+part 'create_password_state.dart';
 
-class SignUpWithEmailCubit extends Cubit<SignUpWithEmailState> {
+class CreatePasswordCubit extends Cubit<CreatePasswordState> {
   /// The authentication api repository
   final AuthRemoteApiRepository fAuthRepository;
 
-  SignUpWithEmailCubit({
+  CreatePasswordCubit({
     required this.fAuthRepository,
-  }) : super(const SignUpWithEmailState());
+  }) : super(const CreatePasswordState());
 
-  /// Sign up with email
-  void signUpEmail({required String email}) async {
-    emit(state.copyWith(status: SignUpWithEmailStatus.loading));
+  /// Create new password email or phone
+  void createPassword({
+    String? email,
+    String? phone,
+    required String password,
+  }) async {
+    emit(state.copyWith(status: CreatePasswordStatus.loading));
     try {
-      final fResponse = await fAuthRepository.signUpEmail(email: email);
+      late GenericResponse fResponse;
+      if (email != null) {
+        fResponse = await fAuthRepository.createPassword(
+          email: email,
+          password: password,
+        );
+      } else {
+        // create password for phone
+      }
+
       // Emit the state if response status is failed or success with the error message
       // if available
       if (fResponse.status == true) {
         emit(
           state.copyWith(
-            status: SignUpWithEmailStatus.success,
+            status: CreatePasswordStatus.success,
             data: fResponse,
           ),
         );
@@ -32,7 +45,7 @@ class SignUpWithEmailCubit extends Cubit<SignUpWithEmailState> {
         addError(fResponse.status);
         emit(
           state.copyWith(
-            status: SignUpWithEmailStatus.failure,
+            status: CreatePasswordStatus.failure,
             data: fResponse,
             errorMessage: fResponse.message,
           ),
@@ -43,7 +56,7 @@ class SignUpWithEmailCubit extends Cubit<SignUpWithEmailState> {
       emit(
         state.copyWith(
           errorMessage: e.message,
-          status: SignUpWithEmailStatus.failure,
+          status: CreatePasswordStatus.failure,
         ),
       );
     }
