@@ -1,20 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
+import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/email_otp_verification/view/email_otp_verification_page.dart';
+import 'package:playkosmos_v3/ui/signup_with_email/cubit/sign_up_with_email_cubit.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// This defines the sign up with email page
 ///
 ///@author: Godwin Mathias
-class SignUpWithEmailPage extends StatefulWidget {
+class SignUpWithEmailPage extends StatelessWidget {
   const SignUpWithEmailPage({super.key});
 
   @override
-  State<SignUpWithEmailPage> createState() => _SignUpWithEmailPageState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => SignUpWithEmailCubit(
+        fAuthRepository: context.read<AuthRemoteApiRepository>(),
+      ),
+      child: const _SignUpWithEmailPageView(),
+    );
+  }
 }
 
-class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
+class _SignUpWithEmailPageView extends StatefulWidget {
+  const _SignUpWithEmailPageView({super.key});
+
+  @override
+  State<_SignUpWithEmailPageView> createState() =>
+      _SignUpWithEmailPageViewState();
+}
+
+class _SignUpWithEmailPageViewState extends State<_SignUpWithEmailPageView> {
   /// The email controller
   late TextEditingController _fEmailController;
 
@@ -45,51 +63,71 @@ class _SignUpWithEmailPageState extends State<SignUpWithEmailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CustomAppBar(
-        fElevation: 0,
+    return ShowAsyncBusyIndicator(
+      fInAsync: context.select(
+        (SignUpWithEmailCubit cubit) =>
+            cubit.state.status == SignUpWithEmailStatus.loading,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Form(
-          key: _fFormKey,
-          child: Column(
-            children: <Widget>[
-              // Enter email address text
-              Text(
-                context.loc.enterYourEmailAddress,
-                textAlign: TextAlign.center,
-                style: context.appTextTheme.header1,
-              ),
-              const VSpace(40),
+      fChild: BlocListener<SignUpWithEmailCubit, SignUpWithEmailState>(
+        listener: (context, state) {
+          if (state.status == SignUpWithEmailStatus.success) {
+            // If sign up was successful
+            if (state.data?.status == true) {
+              context.push(const EmailOtpVerificationPage());
+            }
+          } else if (state.status == SignUpWithEmailStatus.failure) {
+            SnackBarUtil.showError(message: state.errorMessage!);
+          }
+        },
+        child: Scaffold(
+          appBar: const CustomAppBar(
+            fElevation: 0,
+          ),
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Form(
+              key: _fFormKey,
+              child: Column(
+                children: <Widget>[
+                  // Enter email address text
+                  Text(
+                    context.loc.enterYourEmailAddress,
+                    textAlign: TextAlign.center,
+                    style: context.appTextTheme.header1,
+                  ),
+                  const VSpace(40),
 
-              // Email text field
-              CustomTextFormField(
-                fTextController: _fEmailController,
-                fLabelText: context.loc.emailHint,
-                fInputAction: TextInputAction.done,
-                fTextType: TextInputType.emailAddress,
-                fAutoFillHints: const [AutofillHints.email],
-                fValidator: ValidationUtil.emailValidator,
-              ),
-              const VSpace(12),
+                  // Email text field
+                  CustomTextFormField(
+                    fTextController: _fEmailController,
+                    fLabelText: context.loc.emailHint,
+                    fInputAction: TextInputAction.done,
+                    fTextType: TextInputType.emailAddress,
+                    fAutoFillHints: const [AutofillHints.email],
+                    fValidator: ValidationUtil.emailValidator,
+                  ),
+                  const VSpace(12),
 
-              // OTP sent text label
-              Text(
-                context.loc.weAreSendingYouASecretCodeToVerifyEmail,
-                style: context.appTextTheme.caption,
-              ),
-              const VSpace(56),
+                  // OTP sent text label
+                  Text(
+                    context.loc.weAreSendingYouASecretCodeToVerifyEmail,
+                    style: context.appTextTheme.caption,
+                  ),
+                  const VSpace(56),
 
-              // Next button
-              PrimaryGradientButton(
-                fDisabled: !_dCanNext,
-                fOnPressed: () {
-                  context.push(const EmailOtpVerificationPage());
-                },
-                fChild: Text(context.loc.nextText),
-              )
-            ],
+                  // Next button
+                  PrimaryGradientButton(
+                    fDisabled: !_dCanNext,
+                    fOnPressed: () {
+                      context
+                          .read<SignUpWithEmailCubit>()
+                          .signUpEmail(email: _fEmailController.text);
+                    },
+                    fChild: Text(context.loc.nextText),
+                  )
+                ],
+              ),
+            ),
           ),
         ),
       ),

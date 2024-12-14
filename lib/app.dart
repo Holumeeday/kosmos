@@ -45,6 +45,11 @@ class App extends StatelessWidget {
         RepositoryProvider(
           create: (context) => PermissionsRepository(),
         ),
+        RepositoryProvider(
+          create: (context) => AuthRemoteApiRepository(
+            remoteApi: AuthRemoteApiNodeJs(),
+          ),
+        )
       ],
       child: const _AppBloc(),
     );
