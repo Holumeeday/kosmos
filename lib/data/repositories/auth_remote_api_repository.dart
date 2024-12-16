@@ -101,6 +101,42 @@ class AuthRemoteApiRepository {
     }
   }
 
+  /// Resend OTP for forgot password email
+  Future<GenericResponse> resendOtpForgotPasswordEmail({
+    required String email,
+  }) async {
+    try {
+      final res = await _remoteApi.post(
+        'auth/forgot-password/resend-otp',
+        body: {
+          'email': email,
+        },
+      );
+      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  /// Verify otp for forgot password email
+  Future<GenericResponse> verifyOtpForgotPasswordEmail({
+    required String otp,
+    required String email,
+  }) async {
+    try {
+      final res = await _remoteApi.post(
+        'auth/forgot-password/email/verify',
+        body: {
+          'email': email,
+          'otp': otp,
+        },
+      );
+      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
+    } catch (_) {
+      rethrow;
+    }
+  }
+
   /// Reset password email
   Future<GenericResponse> resetPasswordEmail({
     required String email,

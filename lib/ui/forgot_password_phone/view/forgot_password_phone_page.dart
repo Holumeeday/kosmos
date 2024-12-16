@@ -106,8 +106,9 @@ class _ForgotPasswordPhoneState extends State<_ForgotPasswordPhone> {
                         fTitle: context.loc.checkYourInbox,
                         fMessage: context.loc.dingDingCheckInboxMessage,
                         fOnLetGo: () {
-                          context
-                              .push(const ForgotPasswordOtpVerificationPage());
+                          context.push(const ForgotPasswordOtpVerificationPage(
+                            fEmail: '',
+                          ));
                         },
                       ),
                     ),
