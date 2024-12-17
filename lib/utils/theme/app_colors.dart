@@ -475,6 +475,8 @@ class AppColor {
   static const Color fTextBoxColor = Color(0xFFD6D6D6);
   static const Color fDarkGrey = Color(0xFF919191);
   static const Color fGreyShade85Color = Color(0xFF858585);
+  static const Color fBlack = Colors.black;
+  static const Color fWhite = Colors.white;
   static const Color fDurationModalTextColor = Color(0xFF333333);
   static const Color fStarColor = Color(0xFFDFB300);
   static const Color fModalDividerColor = Color(0xFFE5E5E5);
