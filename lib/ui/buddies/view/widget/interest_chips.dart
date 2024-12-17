@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 
+/* InterestChips
+ Displays a list of user interests as chips.
+ @author: Chidera Chijama 
+ */
 class InterestChips extends StatelessWidget {
   const InterestChips({
     super.key,

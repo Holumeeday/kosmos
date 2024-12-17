@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:playkosmos_v3/data/data.dart';
+import 'package:playkosmos_v3/ui/buddies/cubit/buddies_cubit.dart';
 import 'package:playkosmos_v3/ui/main/cubit/main_page_cubit.dart';
 import 'package:playkosmos_v3/ui/select_language/cubit/select_language_cubit.dart';
 import 'package:playkosmos_v3/ui/sign_up_phone_number/cubit/sign_up_phone_number_cubit.dart';
@@ -63,6 +64,9 @@ class _AppBloc extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => MainPageCubit(),
+        ),
+        BlocProvider(
+          create: (_) => BuddiesCubit(),
         ),
       ],
       child: const _AppView(),
