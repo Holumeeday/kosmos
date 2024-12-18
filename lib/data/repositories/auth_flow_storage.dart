@@ -1,6 +1,7 @@
 import 'package:playkosmos_v3/constants/constants.dart';
 import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/models/auth_model.dart';
+import 'package:playkosmos_v3/utils/cookies/cookie_storage.dart';
 
 /// A service that manages authentication flow,
 /// including initialization, onboarding, login, and verification states.
@@ -15,10 +16,15 @@ class AuthFlowStorage {
   /// Requires a [NonSecureStorage] instance for local storage operations.
   AuthFlowStorage({
     required NonSecureStorage fStorage,
-  }) : _fLocalStorage = fStorage;
+    required CookiesStorage fCookiesStorage,
+  })  : _fLocalStorage = fStorage,
+        _fCookiesStorage = fCookiesStorage;
 
   /// Reference to the non-secure local storage service.
   final NonSecureStorage _fLocalStorage;
+
+  /// The app cookies storage (for getting the user session infos)
+  final CookiesStorage _fCookiesStorage;
 
   /// Stream to listen for changes to the authentication storage key.
   ///

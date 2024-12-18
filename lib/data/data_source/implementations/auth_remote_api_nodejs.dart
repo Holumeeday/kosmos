@@ -1,3 +1,5 @@
+import 'package:cookie_jar/cookie_jar.dart';
+import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:playkosmos_v3/data/data_source/interfaces/remote_api.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
@@ -5,12 +7,21 @@ import 'package:playkosmos_v3/utils/utils.dart';
 ///
 /// @author: Godwin Mathias
 class AuthRemoteApiNodeJs extends RemoteApi {
-  AuthRemoteApiNodeJs()
-      : super(
+  /// Cookies storage
+  final CookiesStorage fCookStorage;
+
+  AuthRemoteApiNodeJs({
+    required this.fCookStorage,
+  }) : super(
           client: Dio(options)
             ..interceptors.addAll(
               [
                 LoggingInterceptor(),
+                CookieManager(
+                  PersistCookieJar(
+                    storage: fCookStorage,
+                  ),
+                ),
               ],
             ),
         );

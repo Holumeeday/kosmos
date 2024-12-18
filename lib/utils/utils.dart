@@ -2,6 +2,7 @@ export './app_router/app_router.dart';
 export './app_router/go_router_mixin.dart';
 export './app_router/go_router_route_observer.dart';
 export './dio_interceptors/logging_interceptor.dart';
+export 'cookies/cookie_storage.dart';
 export 'env_keys.dart';
 export 'flyer_util.dart';
 export 'get_context.dart';

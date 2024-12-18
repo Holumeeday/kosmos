@@ -25,10 +25,14 @@ class App extends StatelessWidget {
   const App({
     super.key,
     required this.fNonSecureStorage,
+    required this.fCookiesStorage,
   });
 
   /// The non-secure storage repository for app data storage
   final NonSecureStorage fNonSecureStorage;
+
+  /// The app cookies storage
+  final CookiesStorage fCookiesStorage;
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +44,7 @@ class App extends StatelessWidget {
         RepositoryProvider(
           create: (context) => AuthFlowStorage(
             fStorage: fNonSecureStorage,
+            fCookiesStorage: fCookiesStorage,
           ),
         ),
         RepositoryProvider(
@@ -47,7 +52,9 @@ class App extends StatelessWidget {
         ),
         RepositoryProvider(
           create: (context) => AuthRemoteApiRepository(
-            remoteApi: AuthRemoteApiNodeJs(),
+            remoteApi: AuthRemoteApiNodeJs(
+              fCookStorage: fCookiesStorage,
+            ),
           ),
         )
       ],
