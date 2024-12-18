@@ -73,7 +73,7 @@ class AuthRemoteApiRepository {
   }) async {
     try {
       final res = await _remoteApi.post(
-        'auth/forgot-password',
+        'auth/forgot-password/email',
         body: {'email': email},
       );
       return GenericResponse.fromJson(res.data as Map<String, dynamic>);
@@ -107,7 +107,7 @@ class AuthRemoteApiRepository {
   }) async {
     try {
       final res = await _remoteApi.post(
-        'auth/forgot-password/resend-otp',
+        'auth/forgot-password/email/resend-otp',
         body: {
           'email': email,
         },
