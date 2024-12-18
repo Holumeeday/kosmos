@@ -70,7 +70,7 @@ class _Item extends StatelessWidget {
   final String? fId;
   final ParticipantTypeEnum? fParticipantType;
 
-  _Item({
+  const _Item({
     required this.fRadius,
     required this.fProfilePicture,
     required this.fUserName,

@@ -60,7 +60,7 @@ class UploadPicsPage extends StatelessWidget {
                         final pickedFile =
                             await picker.pickImage(source: ImageSource.gallery);
 
-                        if (pickedFile != null) {
+                        if (pickedFile != null && context.mounted) {
                           dSelectedImages[index] = File(pickedFile.path);
                           context
                               .read<ProfileCreationFlowCubit>()

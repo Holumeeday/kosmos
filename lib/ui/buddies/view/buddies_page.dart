@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:path/path.dart';
-import 'package:playkosmos_v3/common_widgets/activity_added_media.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
-import 'package:playkosmos_v3/common_widgets/error_media.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/buddies/cubit/buddies_cubit.dart';
 import 'package:playkosmos_v3/ui/buddies/view/widget/interest_chips.dart';
 import 'package:playkosmos_v3/ui/buddies/view/widget/next_arrow_button.dart';
 import 'package:playkosmos_v3/ui/buddies/view/widget/overlapping_profiles.dart';
+import 'package:playkosmos_v3/ui/buddy_profile/buddy_profile_page.dart';
 
 /// Buddies Page
 /// A page that displays a user profile with details like distance, interests, and mutual buddies.
@@ -78,9 +76,8 @@ class BuddiesPage extends StatelessWidget {
                               context),
                           _buildBadge(
                               Text(
-                                "${state.fBuddiesModel.similarInterests.toString()} ${context.loc.similarInterests} ",
-                                style: context.textTheme.titleMedium!
-                                    .copyWith(fontSize: 14)
+                                "${state.fBuddiesModel.similarInterestsCount.toString()} ${context.loc.similarInterests} ",
+                                style: context.textTheme.headlineSmall!
                                     .copyWith(
                                         color: context.appColors.textColor),
                               ),
@@ -90,9 +87,8 @@ class BuddiesPage extends StatelessWidget {
                                 children: [
                                   const OverlappingProfiles(),
                                   Text(
-                                    " ${state.fBuddiesModel.mutualBuddies.toString()} ${context.loc.mutualBuddies}",
-                                    style: context.textTheme.titleMedium!
-                                        .copyWith(fontSize: 14)
+                                    " ${state.fBuddiesModel.mutualBuddiesCount.toString()} ${context.loc.mutualBuddies}",
+                                    style: context.textTheme.headlineSmall!
                                         .copyWith(
                                             color: context.appColors.textColor),
                                   )
@@ -131,7 +127,11 @@ class BuddiesPage extends StatelessWidget {
                                               fontSize: 16),
                                     )),
                                 const HSpace(5),
-                                NextArrowButton(),
+                                NextArrowButton(
+                                  fOnTap: () {
+                                    context.push(const BuddyProfilePage());
+                                  },
+                                ),
                               ],
                             )
                           ],
@@ -141,7 +141,7 @@ class BuddiesPage extends StatelessWidget {
 
                       // Interests Chips
                       InterestChips(
-                        kInterests: state.fBuddiesModel.interests,
+                        kInterests: state.fBuddiesModel.interests!,
                       )
                     ],
                   ),

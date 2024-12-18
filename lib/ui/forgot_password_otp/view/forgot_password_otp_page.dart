@@ -30,7 +30,7 @@ class ForgotPasswordOtpVerificationPage extends StatelessWidget {
 }
 
 class _EmailOtpView extends StatelessWidget {
-  const _EmailOtpView({super.key});
+  const _EmailOtpView();
 
   @override
   Widget build(BuildContext context) {

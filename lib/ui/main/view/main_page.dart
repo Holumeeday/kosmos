@@ -59,7 +59,7 @@ class _MainPageState extends State<MainPage> {
               Assets.svgs.branding.logoText.svg(
                 height: 17,
                 width: 119,
-              ), 
+              ),
             ],
           ),
         ),

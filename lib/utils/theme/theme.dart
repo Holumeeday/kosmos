@@ -306,6 +306,11 @@ class MyThemes {
         fontWeight: FontWeight.w400,
         color: Colors.white,
       ),
+      headlineSmall: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
+        color: Colors.white,
+      ),
       titleMedium: TextStyle(
         fontSize: 15,
         fontWeight: FontWeight.w400,
@@ -533,6 +538,11 @@ class MyThemes {
       ),
       headlineMedium: TextStyle(
         fontSize: 17,
+        fontWeight: FontWeight.w400,
+        color: AppColor.fTextColor,
+      ),
+      headlineSmall: TextStyle(
+        fontSize: 14,
         fontWeight: FontWeight.w400,
         color: AppColor.fTextColor,
       ),

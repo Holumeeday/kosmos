@@ -209,7 +209,7 @@ class _PostOwner<T extends FeedActivityHelperMixin> extends StatelessWidget {
   final double fDistance;
   final GlobalKey fRepaintKey;
 
-  _PostOwner({
+  const _PostOwner({
     required this.fActivityOwner,
     required this.fIsSharedPost,
     required this.fActivityId,

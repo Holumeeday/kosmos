@@ -22,9 +22,6 @@ class _UploadNamePageState extends State<UploadNamePage> {
   /// The user info controller
   late TextEditingController _fBioController;
 
-  /// The global key for validation of the form
-  final _fFormKey = GlobalKey<FormState>();
-
   /// If user name is valid
   bool? _dNameIsValid;
 

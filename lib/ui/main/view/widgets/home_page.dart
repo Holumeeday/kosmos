@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
 }
 
 class _ActivityTab extends StatelessWidget {
-  const _ActivityTab({super.key});
+  const _ActivityTab();
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class _ActivityTab extends StatelessWidget {
 }
 
 class _ActivityPostTabBarView extends StatelessWidget {
-  const _ActivityPostTabBarView({super.key});
+  const _ActivityPostTabBarView();
 
   @override
   Widget build(BuildContext context) {

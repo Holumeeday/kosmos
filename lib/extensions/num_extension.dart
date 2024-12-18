@@ -35,9 +35,20 @@ extension NumExtension on num {
   }
 
   ///To format an int to compact form i.e from 200000 to 200k
-  String formatNumToCompact() => NumberFormat.compact(
+  String formatNumToCompact() => _removeTrailingZeros(NumberFormat.compact(
         locale: _loc.localeName,
-      ).format(this);
+      ).format(this));
+
+  /// Removes trailing ".0" if present in the string.
+  /// Examples:
+  /// - "12.0" -> "12"
+  /// - "4.2" -> "4.2"
+  String _removeTrailingZeros(String value) {
+    if (value.endsWith(".0")) {
+      return value.substring(0, value.length - 2);
+    }
+    return value;
+  }
 
   /// To format a num to currency form i.e from 200000 to $200,000.00
   String formatNumToCurrency(

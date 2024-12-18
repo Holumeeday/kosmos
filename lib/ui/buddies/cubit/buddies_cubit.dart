@@ -7,15 +7,15 @@ part 'buddies_state.dart';
 /*
  Buddies Cubit
  Supplies dynamic data for the Buddies Page.
- @author: Chidera Chijama\
+ @author: Chidera Chijama
  */
 class BuddiesCubit extends Cubit<BuddiesState> {
   BuddiesCubit()
-      : super(BuddiesState(
+      : super(const BuddiesState(
           fBuddiesModel: BuddiesModel(
             distance: 3,
-            similarInterests: 15,
-            mutualBuddies: 12,
+            similarInterestsCount: 15,
+            mutualBuddiesCount: 12,
             userName: "Jordyn Vaccaro",
             interests: [
               "Art",
@@ -33,30 +33,33 @@ class BuddiesCubit extends Cubit<BuddiesState> {
 
   /// get the user's name
   void getUserName(String userName) {
-    emit(state.copyWith(fBuddiesModel: state.fBuddiesModel.copyWith(userName: userName)));
+    emit(state.copyWith(
+        fBuddiesModel: state.fBuddiesModel.copyWith(userName: userName)));
   }
 
   /// get the distance text
   void getDistance(int distance) {
-        emit(state.copyWith(fBuddiesModel: state.fBuddiesModel.copyWith(distance: distance)));
-
+    emit(state.copyWith(
+        fBuddiesModel: state.fBuddiesModel.copyWith(distance: distance)));
   }
 
   /// get the number of mutual buddies
   void getMutualBuddyCount(int count) {
-        emit(state.copyWith(fBuddiesModel: state.fBuddiesModel.copyWith(mutualBuddies: count)));
-
+    emit(state.copyWith(
+        fBuddiesModel:
+            state.fBuddiesModel.copyWith(mutualBuddiesCount: count)));
   }
 
   /// get the number of similar interests
   void getSimilarInterestCount(int count) {
-        emit(state.copyWith(fBuddiesModel: state.fBuddiesModel.copyWith(similarInterests: count)));
-
+    emit(state.copyWith(
+        fBuddiesModel:
+            state.fBuddiesModel.copyWith(similarInterestsCount: count)));
   }
 
   /// get the interest list
   void getInterestList(List<String> interests) {
-    emit(state.copyWith(fBuddiesModel: state.fBuddiesModel.copyWith(interest: interests)));
-    
+    emit(state.copyWith(
+        fBuddiesModel: state.fBuddiesModel.copyWith(interests: interests)));
   }
 }

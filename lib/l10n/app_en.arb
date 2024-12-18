@@ -20,7 +20,9 @@
       "gender": "String"
     }
   },
+
   "bioTooShort": "Bio is too short. Add more details",
+  "buddies":"Buddies",
   "alrightTimeToCreateEnterASecretCode": "Alright, it’s time to enter your secret code!  Type it in below and let’s unlock your next move!",
   "checkYourEmail": "Check your email",
   "checkYourInbox": "Check your inbox",
@@ -199,6 +201,71 @@
   "@badges": {
     "description": "Markers used to signify achievements"
   },
+"setActivitiesCreated": "{count, plural, =1 {Activity Created} other {Activities Created}}",
+"@setActivitiesCreated": {
+  "description": "Displays the correct activity count string.",
+  "placeholders": {
+    "count": {
+      "type": "int",
+      "description": "The count of activities created."
+    }
+  }
+},
+
+"setFollowers": "{count, plural, =1 {Follower} other {Followers}}",
+"@setFollowers": {
+  "description": "Displays the count of followers dynamically.",
+  "placeholders": {
+    "count": {
+      "type": "int",
+      "description": "The count of followers."
+    }
+  }
+},
+
+"setBuddies": "{count, plural, =1 {Buddy} other {Buddies}}",
+"@setBuddies": {
+  "description": "Displays the count of buddies dynamically.",
+  "placeholders": {
+    "count": {
+      "type": "int",
+      "description": "The count of buddies."
+    }
+  }
+},
+
+"setActivitiesCreated": "{count, plural, =1 {Activity Created} other {Activities Created}}",
+"@setActivitiesCreated": {
+  "description": "Displays the count of activities created dynamically.",
+  "placeholders": {
+    "count": {
+      "type": "int",
+      "description": "The count of activities created."
+    }
+  }
+},
+
+"setActivityJoined": "{count, plural, =1 {Activity Joined} other {Activities Joined}}",
+"@setActivityJoined": {
+  "description": "Displays the count of activities joined dynamically.",
+  "placeholders": {
+    "count": {
+      "type": "int",
+      "description": "The count of activities joined."
+    }
+  }
+},
+
+"setReviews": "{count, plural, =1 {Review} other {Reviews}}",
+"@setReviews": {
+  "description": "Displays the count of reviews dynamically.",
+  "placeholders": {
+    "count": {
+      "type": "int",
+      "description": "The count of reviews."
+    }
+  }
+},
   "activitiesCreated": "Activities Created",
   "@activitiesCreated": {
     "description": "Events initiated and organized by the user"
