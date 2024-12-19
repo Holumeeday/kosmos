@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/common_widgets/styled_localization.dart';
 import 'package:playkosmos_v3/enums/phone_otp_method_enum.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/phone_number_otp_verification%20copy/view/phone_number_otp_verification_page.dart';
 import 'package:playkosmos_v3/ui/sign_up_phone_number/cubit/sign_up_phone_number_cubit.dart';
 import 'package:playkosmos_v3/ui/sign_up_phone_number/view/widgets/otp_options.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
@@ -132,9 +132,8 @@ class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
                               }).toList(),
                             ),
                             fOnLetGo: () {
-                              context.pop();
-                              context
-                                  .push(const PhoneNumberOtpVerificationPage());
+                              context.go(AppRoute
+                                  .phoneNumberOtpVerificationScreenPath);
                             },
                           ));
                         },

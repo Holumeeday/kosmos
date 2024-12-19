@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playkosmos_v3/assets_gen/assets.gen.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
+import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/models/onboarding_model.dart';
-import 'package:playkosmos_v3/ui/auth_provider/auth_provider_page.dart';
 import 'package:playkosmos_v3/ui/onboarding/view/widgets/onboard_view_mobile.dart';
 import 'package:playkosmos_v3/ui/onboarding/view/widgets/onboard_view_tablet.dart';
 
@@ -167,9 +168,7 @@ class _OnboardPageState extends State<OnboardPage> {
                         fShape: BoxShape.circle,
                         fOnPressed: () {
                           // Save onboard status completed to true
-                          context.push(const AuthProviderPage(
-                            fIsSignUp: true,
-                          ));
+                          context.read<AuthFlowStorage>().setOnboarding();
                         },
                         fChild: Icon(
                           Icons.arrow_forward_rounded,

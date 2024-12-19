@@ -1,65 +1,86 @@
-import 'dart:io';
-
 import 'package:cookie_jar/cookie_jar.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:sembast/sembast_io.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:playkosmos_v3/utils/utils.dart';
 
+/// A storage system for managing cookies using FlutterSecureStorage.
+///
+/// This class implements the `Storage` interface for the `cookie_jar` package
+/// to allow persistence of cookies in a secure format.
+///
+/// Author: Godwin Mathias
 class CookiesStorage implements Storage {
-  late Database _db;
-  final _store = StoreRef<String, String>("cookie_store");
+  final FlutterSecureStorage _secureStorage;
 
-  CookiesStorage();
+  CookiesStorage({FlutterSecureStorage? secureStorage})
+      : _secureStorage = secureStorage ?? const FlutterSecureStorage();
 
+  /// Initializes the secure storage.
+  ///
+  /// [persistSession]: Indicates whether session cookies should be persisted.
+  /// [ignoreExpires]: If true, expired cookies are not removed.
   @override
   Future<void> init([
     bool persistSession = true,
     bool ignoreExpires = false,
   ]) async {
-    final dbFactory = databaseFactoryIo;
-    final dbPath = await getDbPath('cookie_database.db');
-    _db = await dbFactory.openDatabase(dbPath);
+    printI('Secure storage initialized');
   }
 
+  /// Writes a key-value pair to the secure storage.
+  ///
+  /// [key]: The key to store the value under.
+  /// [value]: The value to store (converted to a string).
   @override
   Future<void> write(String key, Object value) async {
     final stringValue = value.toString();
-    await _store.record(key).put(_db, stringValue);
+    await _secureStorage.write(key: key, value: stringValue);
+    printI('Cookie written: Key="$key", Value="$stringValue"');
   }
 
+  /// Reads the value associated with a key from the secure storage.
+  ///
+  /// [key]: The key whose value is to be read.
+  /// Returns: The stored value as a string, or `null` if the key does not exist.
   @override
   Future<String?> read(String key) async {
-    return await _store.record(key).get(_db);
+    final value = await _secureStorage.read(key: key);
+    printI('Cookie read: Key="$key", Value="$value"');
+    return value;
   }
 
+  /// Deletes a key-value pair from the secure storage.
+  ///
+  /// [key]: The key to delete.
   @override
   Future<void> delete(String key) async {
-    await _store.record(key).delete(_db);
+    await _secureStorage.delete(key: key);
+    printI('Cookie deleted: Key="$key"');
   }
 
-  /// Clear all entries in the store
+  /// Clears all cookies from the secure storage.
   Future<void> clear() async {
-    await _store.delete(_db);
+    await _secureStorage.deleteAll();
+    printI('All cookies cleared');
   }
 
+  /// Deletes multiple keys from the secure storage.
+  ///
+  /// [keys]: A list of keys to delete.
   @override
   Future<void> deleteAll(List<String> keys) async {
     for (var key in keys) {
-      await _store.record(key).delete(_db);
+      await _secureStorage.delete(key: key);
+      printI('Cookie deleted in bulk: Key="$key"');
     }
   }
 
-  /// Close the database connection
-  Future<void> close() async {
-    await _db.close();
-  }
-
-  Future<String> getDbPath(String dbName) async {
-    final directory = await getApplicationDocumentsDirectory();
-    return File('${directory.path}/$dbName').path;
-  }
-
-  bool isUserLoggedIn() {
-    final cookie = _store.countSync(_db);
-    return cookie > 0;
+  /// Checks if the user is logged in by verifying the presence of cookies.
+  ///
+  /// Returns: `true` if there are cookies stored, `false` otherwise.
+  Future<bool> isUserLoggedIn() async {
+    final allKeys = await _secureStorage.readAll();
+    final isLoggedIn = allKeys.isNotEmpty;
+    printI('User logged in status: $isLoggedIn');
+    return isLoggedIn;
   }
 }

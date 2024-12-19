@@ -8,20 +8,20 @@ import 'package:playkosmos_v3/enums/enums.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
-class GalleryProfilePicView extends StatefulWidget {
+class GalleryProfilePicPage extends StatefulWidget {
   ///The current selected entity
   final AssetEntity? fSelectedAssetEntity;
 
-  const GalleryProfilePicView({
+  const GalleryProfilePicPage({
     super.key,
     required this.fSelectedAssetEntity,
   });
 
   @override
-  State<GalleryProfilePicView> createState() => _GalleryProfilePicViewState();
+  State<GalleryProfilePicPage> createState() => _GalleryProfilePicPageState();
 }
 
-class _GalleryProfilePicViewState extends State<GalleryProfilePicView> {
+class _GalleryProfilePicPageState extends State<GalleryProfilePicPage> {
   ///Current page
   int _dCurrentPage = 0;
 

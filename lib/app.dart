@@ -6,11 +6,9 @@ import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/ui/buddies/cubit/buddies_cubit.dart';
 import 'package:playkosmos_v3/ui/buddy_connections/cubit/buddy_connections_cubit.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/cubit/buddy_profile_cubit.dart';
-import 'package:playkosmos_v3/ui/buddy_profile/view/buddy_profile_page.dart';
 import 'package:playkosmos_v3/ui/main/cubit/main_page_cubit.dart';
 import 'package:playkosmos_v3/ui/select_language/cubit/select_language_cubit.dart';
 import 'package:playkosmos_v3/ui/sign_up_phone_number/cubit/sign_up_phone_number_cubit.dart';
-import 'package:playkosmos_v3/ui/splash/splash_page.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// Root widget of the application responsible for setting up global dependencies,
@@ -56,7 +54,12 @@ class App extends StatelessWidget {
               fCookStorage: fCookiesStorage,
             ),
           ),
-        )
+        ),
+        RepositoryProvider(
+          create: (context) => AppRoute(
+            fAuthStorage: context.read<AuthFlowStorage>(),
+          ),
+        ),
       ],
       child: const _AppBloc(),
     );
@@ -87,7 +90,8 @@ class _AppBloc extends StatelessWidget {
           create: (_) => BuddyProfileCubit(),
         ),
         BlocProvider(
-      create: (_) => BuddyConnectionsCubit(),)
+          create: (_) => BuddyConnectionsCubit(),
+        )
       ],
       child: const _AppView(),
     );
@@ -103,11 +107,10 @@ class _AppView extends StatelessWidget {
   Widget build(BuildContext context) {
     final dLocale = context
         .select((SelectLanguageCubit cubit) => cubit.state.dSelectedLocale);
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: context.read<AppRoute>().router,
       title: 'Playkosmos',
-      navigatorKey: GetContext.navigatorKey,
       debugShowCheckedModeBanner: false,
-      home: const BuddyProfilePage(),
       builder: DevicePreview.appBuilder,
       // Enables device preview for development
       theme: MyThemes.lightTheme,

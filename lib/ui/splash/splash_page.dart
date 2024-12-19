@@ -1,11 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:playkosmos_v3/assets_gen/assets.gen.dart';
 import 'package:playkosmos_v3/constants/constants.dart';
+import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/select_language/view/select_language_page.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /*
@@ -180,7 +181,7 @@ class _SplashPageState extends State<SplashPage> {
           // (using AnimatedSlider) wait for 100ms and move to the language screen
           Timer(const Duration(milliseconds: 1100), () {
             // Mark the initialization phase finish
-            context.push(const SelectLanguagePage());
+            context.read<AuthFlowStorage>().setInitialized();
           });
         }
       },

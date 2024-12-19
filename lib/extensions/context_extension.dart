@@ -92,45 +92,4 @@ extension ContextExtension on BuildContext {
   }) {
     return '$first4Bin ${mask * 4} ${mask * 4} $last4Bin';
   }
-
-  //-------------------------- NAVIGATION ------------------------------------//
-
-  /// Navigates to a new page using the Navigation 2 API.
-  ///
-  /// [page] is the widget to navigate to.
-  Future<dynamic> push(Widget page) async {
-    return Navigator.of(this).push(MaterialPageRoute(builder: (_) => page));
-  }
-
-  /// Pops the current route off the navigation stack.
-  ///
-  /// Optionally, returns [result] to the previous route.
-  void pop([dynamic result]) {
-    Navigator.of(this).pop(result);
-  }
-
-  /// Navigates to a new page and removes all previous routes from the navigation stack.
-  ///
-  /// [page] is the widget to navigate to.
-  /// This ensures the navigation stack is cleared, leaving only the new page.
-  Future<dynamic> pushAndRemoveAll(Widget page) async {
-    return Navigator.of(this).pushAndRemoveUntil(
-      MaterialPageRoute(builder: (_) => page),
-          (Route<dynamic> route) => false, // Clears all routes from the stack.
-    );
-  }
-
-  /// Replaces the current route with a new route.
-  ///
-  /// [page] is the widget to navigate to.
-  Future<dynamic> replaceWith(Widget page) async {
-    return Navigator.of(this).pushReplacement(
-      MaterialPageRoute(builder: (_) => page),
-    );
-  }
-
-  /// Pops all routes until the root route is reached.
-  void popToRoot() {
-    Navigator.of(this).popUntil((route) => route.isFirst);
-  }
 }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/email_otp_verification/view/email_otp_verification_page.dart';
 import 'package:playkosmos_v3/ui/signup_with_email/cubit/sign_up_with_email_cubit.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
@@ -73,9 +73,12 @@ class _SignUpWithEmailPageViewState extends State<_SignUpWithEmailPageView> {
           if (state.status == SignUpWithEmailStatus.success) {
             // If sign up was successful
             if (state.data?.status == true) {
-              context.push(EmailOtpVerificationPage(
-                fEmail: _fEmailController.text,
-              ));
+              context.pushNamed(
+                AppRoute.emailOtpVerificationScreen,
+                pathParameters: {
+                  'email': _fEmailController.text,
+                },
+              );
             }
           } else if (state.status == SignUpWithEmailStatus.failure) {
             SnackBarUtil.showError(message: state.errorMessage!);

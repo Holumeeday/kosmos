@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/enums/enums.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/forgot_password_otp/view/forgot_password_otp_page.dart';
 import 'package:playkosmos_v3/ui/forgot_password_phone/cubit/forgot_password_phone_cubit.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
@@ -106,9 +106,13 @@ class _ForgotPasswordPhoneState extends State<_ForgotPasswordPhone> {
                         fTitle: context.loc.checkYourInbox,
                         fMessage: context.loc.dingDingCheckInboxMessage,
                         fOnLetGo: () {
-                          context.push(const ForgotPasswordOtpVerificationPage(
-                            fEmail: '',
-                          ));
+                          context.goNamed(
+                            AppRoute.forgotPasswordOtpScreen,
+                            queryParameters: {
+                              'phone': _fPhoneController.text,
+                              'is-email': false.toString()
+                            },
+                          );
                         },
                       ),
                     ),

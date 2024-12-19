@@ -43,8 +43,8 @@ class AuthFlowStorage {
   ///
   /// This method serializes the provided [json] and updates the
   /// value associated with the authentication storage key.
-  void _updateAuthStorage(Map<String, dynamic> json) {
-    _fLocalStorage.setValue(kAuthStorageKey, json);
+  Future<void> _updateAuthStorage(Map<String, dynamic> json) async {
+    await _fLocalStorage.setValue(kAuthStorageKey, json);
   }
 
   /// Sets the initialization state of the app.
@@ -77,7 +77,8 @@ class AuthFlowStorage {
   /// - `isLoggedIn` to `true`
   /// - `hasCompletedStep2` to `true`
   /// - `isVerified` to `true`
-  void setLogIn() {
+  Future<void> setLogIn() async {
+    if (!(await _fCookiesStorage.isUserLoggedIn())) return;
     final jsonModel = fAuthModel
         .copyWith(
           isLoggedIn: true,
@@ -85,7 +86,7 @@ class AuthFlowStorage {
           isVerified: true,
         )
         .toJson();
-    _updateAuthStorage(jsonModel);
+    await _updateAuthStorage(jsonModel);
   }
 
   /// Sets the verification state for the user.

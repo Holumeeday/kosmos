@@ -19,7 +19,6 @@ class AppRoute with GoRouterMixin {
 
   /// The router
   GoRouter get router => GoRouter(
-        observers: [GoRouterObserver()],
         initialLocation: splashScreenPath,
         navigatorKey: GetContext.navigatorKey,
         refreshListenable: StreamListenable(_fAuthFlowStorage.listener, null),
@@ -29,13 +28,87 @@ class AppRoute with GoRouterMixin {
             path: splashScreenPath,
             name: splashScreen,
           ),
+          createGoRoute(
+            path: homeScreenPath,
+            name: homeScreen,
+          ),
+          createGoRoute(
+            path: authProviderScreenPath,
+            name: authProviderScreen,
+          ),
+          createGoRoute(
+            path: signInEmailScreenPath,
+            name: signInEmailScreen,
+          ),
+          createGoRoute(
+            path: signInPhoneScreenPath,
+            name: signInPhoneScreen,
+          ),
+          createGoRoute(
+            path: signUpEmailScreenPath,
+            name: signUpEmailScreen,
+          ),
+          createGoRoute(
+            path: signUpPhoneScreenPath,
+            name: signUpPhoneScreen,
+          ),
+          createGoRoute(
+            path: forgotPasswordEmailScreenPath,
+            name: forgotPasswordEmailScreen,
+          ),
+          createGoRoute(
+            path: forgotPasswordPhoneScreenPath,
+            name: forgotPasswordPhoneScreen,
+          ),
+          createGoRoute(
+            path: forgotPasswordOtpScreenPath,
+            name: forgotPasswordOtpScreen,
+          ),
+          createGoRoute(
+            path: emailOtpVerificationScreenPath,
+            name: emailOtpVerificationScreen,
+          ),
+          createGoRoute(
+            path: phoneNumberOtpVerificationScreenPath,
+            name: phoneNumberOtpVerificationScreen,
+          ),
+          createGoRoute(
+            path: galleryOrProfilePicturesScreenPath,
+            name: galleryOrProfilePicturesScreen,
+          ),
+          createGoRoute(
+            path: profileCreationFlowScreenPath,
+            name: profileCreationFlowScreen,
+          ),
+          createGoRoute(
+            path: selectLanguageScreenPath,
+            name: selectLanguageScreen,
+          ),
+          createGoRoute(
+            path: onboardingScreenPath,
+            name: onboardingScreen,
+          ),
         ],
         redirect: (context, state) {
           /// Pages used for authentication
-          const List<String> authPages = [];
+          const List<String> authPages = [
+            signInEmailScreenPath,
+            signInPhoneScreenPath,
+            signUpEmailScreenPath,
+            signUpPhoneScreenPath,
+            forgotPasswordEmailScreenPath,
+            forgotPasswordPhoneScreenPath,
+            forgotPasswordOtpScreenPath,
+            emailOtpVerificationScreenPath,
+            authProviderScreenPath,
+            phoneNumberOtpVerificationScreenPath,
+          ];
 
           /// Pages used in step 2
-          const List<String> step2Pages = [];
+          const List<String> step2Pages = [
+            galleryOrProfilePicturesScreenPath,
+            profileCreationFlowScreenPath,
+          ];
 
           /// Check the login state
           final bool isLoggedIn = _fAuthFlowStorage.fAuthModel.isLoggedIn;
@@ -45,9 +118,6 @@ class AppRoute with GoRouterMixin {
 
           /// Check if user has gone through the onboard screen
           final bool isOnboarded = _fAuthFlowStorage.fAuthModel.isOnboarded;
-
-          /// Check if user has gone through the otp verification screen
-          final bool isVerified = _fAuthFlowStorage.fAuthModel.isVerified;
 
           /// Checks if the user has completed the step 2 process of creating
           /// an account
@@ -66,10 +136,8 @@ class AppRoute with GoRouterMixin {
               step2Pages.contains(state.matchedLocation);
 
           /// Checks if the user is going to the onboarding page
-          final bool isGoingToOnboard = state.matchedLocation == '';
-
-          /// Checks if the user is going to the otp verification page
-          final bool isGoingToVerify = state.matchedLocation == '';
+          final bool isGoingToOnboard =
+              state.matchedLocation == onboardingScreenPath;
 
           /// If not initialized, redirect to Splash
           if (!isInitialized) {
@@ -77,38 +145,29 @@ class AppRoute with GoRouterMixin {
 
             /// If initialized but not onboarded, redirect to Select Language
           } else if (isInitialized && !isOnboarded && !isGoingToOnboard) {
-            return '';
+            return selectLanguageScreenPath;
 
             /// If initialized and onboarded only, redirect to create Account if
             /// user is not going to the auth pages else redirect to login
           } else if (isInitialized && isOnboarded && !isLoggedIn) {
-            if (isVerified && hasCompletedStep2) {
-              return isGoingToAuthPages ? null : '';
+            if (hasCompletedStep2) {
+              return isGoingToAuthPages ? null : authProviderScreenPath;
             }
-            return isGoingToAuthPages ? null : '';
-
-            /// If its not verified redirect to verify otp screen
-          } else if (isInitialized &&
-              isOnboarded &&
-              isLoggedIn &&
-              !isVerified &&
-              !hasCompletedStep2) {
-            return isGoingToVerify ? null : '';
+            return isGoingToAuthPages ? null : authProviderScreenPath;
 
             /// If all true but has not completed step 2 and is not going to
             /// profile and pic page, redirect to Profile Pic and Bio
           } else if (isInitialized &&
               isOnboarded &&
               isLoggedIn &&
-              isVerified &&
               !hasCompletedStep2) {
-            return isGoingToStep2Pages ? null : '';
+            return isGoingToStep2Pages ? null : profileCreationFlowScreenPath;
 
             /// if everything is set, send the user where they were going before (or
             /// home if they weren't going anywhere i.e They're in /splash)
           } else if (_fAuthFlowStorage.fAuthModel.allTrue()) {
             /// Only redirect the user to home on app launch
-            if (isGoingToInit) return '';
+            if (isGoingToInit) return homeScreenPath;
 
             /// No redirection needed this time
             return null;
@@ -122,10 +181,48 @@ class AppRoute with GoRouterMixin {
   /// Route paths
   ///
   static const String splashScreenPath = '/';
+  static const String homeScreenPath = '/home';
+  static const String authProviderScreenPath = '/auth-provider';
+  static const String signUpEmailScreenPath = '/sign-up-email';
+  static const String signUpPhoneScreenPath = '/sign-up-phone';
+  static const String signInEmailScreenPath = '/sign-in-email';
+  static const String signInPhoneScreenPath = '/sign-in-phone';
+  static const String createPasswordScreenPath = '/create-password/:email';
+  static const String emailOtpVerificationScreenPath =
+      '/email-otp-verification/:email';
+  static const String forgotPasswordEmailScreenPath = '/forgot-password-email';
+  static const String forgotPasswordOtpScreenPath =
+      '/forgot-password-otp/:email';
+  static const String forgotPasswordPhoneScreenPath = '/forgot-password-phone';
+  static const String galleryOrProfilePicturesScreenPath = '/gallery-pictures';
+  static const String onboardingScreenPath = '/onboarding';
+  static const String phoneNumberOtpVerificationScreenPath =
+      '/phone-otp-verification/:phone';
+  static const String profileCreationFlowScreenPath = '/profile-creation-flow';
+  static const String resetPasswordScreenPath = '/reset-password';
+  static const String selectLanguageScreenPath = '/select-language';
 
   /// Route names
   ///
   static const String splashScreen = 'splash';
+  static const String homeScreen = 'home';
+  static const String authProviderScreen = 'auth-provider';
+  static const String signUpEmailScreen = 'sign-up-email';
+  static const String signUpPhoneScreen = 'sign-up-phone';
+  static const String signInEmailScreen = 'sign-in-email';
+  static const String signInPhoneScreen = 'sign-in-phone';
+  static const String createPasswordScreen = 'create-password';
+  static const String emailOtpVerificationScreen = 'email-otp-verification';
+  static const String forgotPasswordEmailScreen = 'forgot-password-email';
+  static const String forgotPasswordOtpScreen = 'forgot-password-otp';
+  static const String forgotPasswordPhoneScreen = 'forgot-password-phone';
+  static const String galleryOrProfilePicturesScreen = 'gallery-pictures';
+  static const String onboardingScreen = 'onboarding';
+  static const String phoneNumberOtpVerificationScreen =
+      'phone-otp-verification';
+  static const String profileCreationFlowScreen = 'profile-creation-flow';
+  static const String resetPasswordScreen = 'reset-password';
+  static const String selectLanguageScreen = 'select-language';
 }
 
 class StreamListenable extends ValueNotifier<dynamic> {

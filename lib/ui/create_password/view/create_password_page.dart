@@ -12,10 +12,14 @@ import 'package:playkosmos_v3/utils/utils.dart';
 class CreatePasswordPage extends StatelessWidget {
   /// The user email address of the uer
   final String fEmail;
+  final String fPhone;
+  final bool fIsEmail;
 
   const CreatePasswordPage({
     super.key,
     required this.fEmail,
+    required this.fIsEmail,
+    required this.fPhone,
   });
 
   @override

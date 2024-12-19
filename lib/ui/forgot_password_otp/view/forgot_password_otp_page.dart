@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/data/repositories/auth_remote_api_repository.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/forgot_password_otp/cubit/forgot_password_otp_cubit.dart';
-import 'package:playkosmos_v3/ui/reset_password_page/view/reset_password_page.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// Forgot password OTP verification screen
@@ -14,10 +14,18 @@ class ForgotPasswordOtpVerificationPage extends StatelessWidget {
   const ForgotPasswordOtpVerificationPage({
     super.key,
     required this.fEmail,
+    required this.fPhone,
+    required this.fIsEmail,
   });
 
   /// The user email
   final String fEmail;
+
+  /// The user phone number
+  final String fPhone;
+
+  /// If the user is using phone or email
+  final bool fIsEmail;
 
   @override
   Widget build(BuildContext context) {
@@ -61,9 +69,10 @@ class _EmailOtpView extends StatelessWidget {
                       fTitle: context.loc.codeAccepted,
                       fMessage: context.loc.youAreOfficiallyBackInActionMessage,
                       fOnLetGo: () {
-                        context.push(ResetPasswordPage(
-                          fEmail: fEmail,
-                        ));
+                        context.goNamed(
+                          AppRoute.resetPasswordScreen,
+                          pathParameters: {'email': fEmail},
+                        );
                       },
                     ),
                   );

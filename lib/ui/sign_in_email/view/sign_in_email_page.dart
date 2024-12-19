@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/forgot_password_email/view/forgot_password_email_page.dart';
-import 'package:playkosmos_v3/ui/main/view/main_page.dart';
 import 'package:playkosmos_v3/ui/sign_in_email/cubit/sign_in_cubit.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
@@ -96,7 +95,13 @@ class __SignInEmailPageForm extends State<_SignInEmailForm> {
                     fTitle: context.loc.welcomeBackUser(fUsername),
                     fMessage: context.loc.youAreAlllSignedInAndReadyToRoll,
                     fOnLetGo: () {
-                      context.push(const MainPage());
+                      // Set login status to true which will re-direct the user
+                      // to home page
+                      context.read<AuthFlowStorage>().setLogIn().then((_) {
+                        if (context.mounted) {
+                          context.go(AppRoute.homeScreenPath);
+                        }
+                      });
                     },
                   ),
                 );
@@ -159,7 +164,9 @@ class __SignInEmailPageForm extends State<_SignInEmailForm> {
                     alignment: Alignment.topRight,
                     child: InkWell(
                       onTap: () {
-                        context.push(const ForgotPasswordEmailPage());
+                        context.push(
+                          AppRoute.forgotPasswordEmailScreenPath,
+                        );
                       },
                       child: Text(
                         context.loc.forgotPassword,

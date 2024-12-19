@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/create_password/view/create_password_page.dart';
 import 'package:playkosmos_v3/ui/email_otp_verification/cubit/email_otp_verification_cubit.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
@@ -95,9 +95,13 @@ class _EmailOtpView extends StatelessWidget {
                       fTitle: context.loc.emailIsOfficiallyVerified,
                       fMessage: context.loc.emailVerifiedDialogMessage,
                       fOnLetGo: () {
-                        context.push(CreatePasswordPage(
-                          fEmail: fEmail,
-                        ));
+                        context.goNamed(
+                          AppRoute.createPasswordScreen,
+                          queryParameters: {
+                            'email': fEmail,
+                            'is-email': true.toString()
+                          },
+                        );
                       },
                     ),
                   );

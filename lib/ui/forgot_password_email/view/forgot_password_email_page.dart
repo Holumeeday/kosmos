@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/forgot_password_email/cubit/forgot_password_email_cubit.dart';
-import 'package:playkosmos_v3/ui/forgot_password_otp/view/forgot_password_otp_page.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// Forgot password using email page
@@ -77,9 +77,13 @@ class __ForgotPasswordEmailFormState extends State<_ForgotPasswordEmailForm> {
                     fTitle: context.loc.checkYourEmail,
                     fMessage: context.loc.dingDingCheckInboxMessage,
                     fOnLetGo: () {
-                      context.push(ForgotPasswordOtpVerificationPage(
-                        fEmail: _fEmailController.text,
-                      ));
+                      context.goNamed(
+                        AppRoute.forgotPasswordOtpScreen,
+                        queryParameters: {
+                          'email': _fEmailController.text,
+                          'is-email': true.toString()
+                        },
+                      );
                     },
                   ),
                 ),
