@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
-import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/forgot_password_email/cubit/forgot_password_email_cubit.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
@@ -15,11 +14,7 @@ class ForgotPasswordEmailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ForgotPasswordEmailCubit(
-          fAuthRepository: context.read<AuthRemoteApiRepository>()),
-      child: const _ForgotPasswordEmailForm(),
-    );
+    return const _ForgotPasswordEmailForm();
   }
 }
 

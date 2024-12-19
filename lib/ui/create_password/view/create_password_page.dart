@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
-import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/create_password/cubit/create_password_cubit.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
@@ -24,12 +23,8 @@ class CreatePasswordPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CreatePasswordCubit(
-          fAuthRepository: context.read<AuthRemoteApiRepository>()),
-      child: _CreatePasswordForm(
-        fEmail: fEmail,
-      ),
+    return _CreatePasswordForm(
+      fEmail: fEmail,
     );
   }
 }

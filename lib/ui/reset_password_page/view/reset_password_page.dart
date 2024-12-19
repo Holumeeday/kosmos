@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
-import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/reset_password_page/cubit/reset_password_cubit.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
@@ -20,12 +19,8 @@ class ResetPasswordPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ResetPasswordCubit(
-          fAuthRepository: context.read<AuthRemoteApiRepository>()),
-      child: _ResetPasswordForm(
-        fEmail: fEmail,
-      ),
+    return _ResetPasswordForm(
+      fEmail: fEmail,
     );
   }
 }

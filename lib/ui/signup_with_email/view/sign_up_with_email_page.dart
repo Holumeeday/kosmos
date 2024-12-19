@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
-import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/signup_with_email/cubit/sign_up_with_email_cubit.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
@@ -15,12 +14,7 @@ class SignUpWithEmailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SignUpWithEmailCubit(
-        fAuthRepository: context.read<AuthRemoteApiRepository>(),
-      ),
-      child: const _SignUpWithEmailPageView(),
-    );
+    return const _SignUpWithEmailPageView();
   }
 }
 

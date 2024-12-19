@@ -15,12 +15,7 @@ class SignInEmailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SignInWithEmailCubit(
-        fAuthRepository: context.read<AuthRemoteApiRepository>(),
-      ),
-      child: const _SignInEmailForm(),
-    );
+    return const _SignInEmailForm();
   }
 }
 

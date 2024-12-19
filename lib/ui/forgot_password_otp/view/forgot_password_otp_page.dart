@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
-import 'package:playkosmos_v3/data/repositories/auth_remote_api_repository.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/forgot_password_otp/cubit/forgot_password_otp_cubit.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
@@ -29,13 +28,8 @@ class ForgotPasswordOtpVerificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ForgotPasswordOtpVerificationCubit(
-          fEmail: fEmail,
-          fAuthRepository: context.read<AuthRemoteApiRepository>()),
-      child: _EmailOtpView(
-        fEmail: fEmail,
-      ),
+    return _EmailOtpView(
+      fEmail: fEmail,
     );
   }
 }

@@ -15,10 +15,7 @@ class ForgotPasswordPhonePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ForgotPasswordPhoneCubit(),
-      child: const _ForgotPasswordPhone(),
-    );
+    return const _ForgotPasswordPhone();
   }
 }
 

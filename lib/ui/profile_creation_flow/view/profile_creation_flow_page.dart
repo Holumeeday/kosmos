@@ -4,12 +4,12 @@ import 'package:playkosmos_v3/common_widgets/sizes.dart';
 import 'package:playkosmos_v3/enums/enums.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/cubit/profile_creation_flow_cubit.dart';
-import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_search_radius_page.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_birthday_page.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_gender_page.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_interest_page.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_name_page.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_pics_page.dart';
+import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_search_radius_page.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_your_location_page.dart';
 
 /// The profile creation flow a successful sign up
@@ -20,10 +20,7 @@ class ProfileCreationFlowPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ProfileCreationFlowCubit(),
-      child: const _ProfileCreationFlowPage(),
-    );
+    return const _ProfileCreationFlowPage();
   }
 }
 

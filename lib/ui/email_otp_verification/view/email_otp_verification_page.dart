@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
-import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/email_otp_verification/cubit/email_otp_verification_cubit.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
@@ -21,14 +20,8 @@ class EmailOtpVerificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => EmailOtpVerificationCubit(
-        fEmail: fEmail,
-        fAuthRepository: context.read<AuthRemoteApiRepository>(),
-      ),
-      child: _EmailOtpVerificationForm(
-        fEmail: fEmail,
-      ),
+    return _EmailOtpVerificationForm(
+      fEmail: fEmail,
     );
   }
 }
