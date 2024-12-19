@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/buddies/cubit/buddies_cubit.dart';
-import 'package:playkosmos_v3/ui/buddies/view/widget/interest_chips.dart';
-import 'package:playkosmos_v3/ui/buddies/view/widget/next_arrow_button.dart';
-import 'package:playkosmos_v3/ui/buddies/view/widget/overlapping_profiles.dart';
-import 'package:playkosmos_v3/ui/buddy_profile/buddy_profile_page.dart';
+import 'package:playkosmos_v3/ui/buddies/view/widgets/interest_chips.dart';
+import 'package:playkosmos_v3/ui/buddies/view/widgets/next_arrow_button.dart';
+import 'package:playkosmos_v3/ui/buddies/view/widgets/overlapping_profiles.dart';
+import 'package:playkosmos_v3/ui/buddy_profile/view/buddy_profile_page.dart';
 
 /// Buddies Page
 /// A page that displays a user profile with details like distance, interests, and mutual buddies.
@@ -118,6 +118,10 @@ class BuddiesPage extends StatelessWidget {
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 PrimaryGradientButton(
+                                    fHeight:
+                                        getRelativeScreenHeight(50, context),
+                                    fWidth:
+                                        getRelativeScreenWidth(100, context),
                                     fOnPressed: () {},
                                     fChild: Text(
                                       context.loc.followUser,
@@ -126,7 +130,7 @@ class BuddiesPage extends StatelessWidget {
                                               color: Colors.white,
                                               fontSize: 16),
                                     )),
-                                const HSpace(5),
+                                const HRelativeSpace(5),
                                 NextArrowButton(
                                   fOnTap: () {
                                     context.push(const BuddyProfilePage());
