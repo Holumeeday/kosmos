@@ -23,24 +23,6 @@ class _BuddyProfilePageState extends State<BuddyProfilePage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
-  /// Sample data for activities and posts
-  final List<String> kActivities = [
-    "https://elections.civichive.org/wp-content/uploads/2022/12/Abiola-Latifu-Kolawole-PRP.jpg",
-    "https://pbs.twimg.com/profile_images/1510691230555987973/agTnpSpG_400x400.jpg",
-    "https://dailytrust.com/wp-content/uploads/2022/11/Prince-Adewole-Adebayo-1.jpg",
-    "https://elections.civichive.org/wp-content/uploads/2022/12/Adenuga-Sunday-Oluwafemi-BP.jpg",
-    "https://elections.civichive.org/wp-content/uploads/2022/12/Ado-Ibrahim-Abdulmalik-YPP.jpg",
-    "https://upload.wikimedia.org/wikipedia/commons/7/7c/Hamza_al-Mustapha_2023.jpg",
-    "https://cdn.businessday.ng/2022/04/Abiru-1.png",
-    "https://pbs.twimg.com/profile_images/1495721772523692034/GnC5MJjS_400x400.jpg",
-    "https://pbs.twimg.com/profile_images/1530445927739162625/xtGDZZIm_400x400.jpg",
-    "https://stears-elections.s3.eu-west-1.amazonaws.com/static/candidate-photos/president/APP-Charles-Nnadi.png"
-  ];
-
-  final List<String> kPosts = [
-    'assets/images/post1.jpg',
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -102,18 +84,20 @@ class _BuddyProfilePageState extends State<BuddyProfilePage>
             body: NestedScrollView(
               headerSliverBuilder: (context, innerBoxIsScrolled) {
                 return [
-                  const SliverToBoxAdapter(
+                  SliverToBoxAdapter(
                     child: Column(
                       children: [
                         VSpace(12),
                         // Image Page View
-                        CarouselWidget(),
+                        CarouselWidget(
+                          images: state.fBuddiesModel.profileImages!,
+                        ),
 
                         // User Content Section
                         // _buildUserContent(),
 
                         // Stats Section
-                        SizedBox(height: 8),
+                        VSpace(8),
                         UserStatsSection(),
 
                         // Activity Section
@@ -150,8 +134,12 @@ class _BuddyProfilePageState extends State<BuddyProfilePage>
                         top: 46,
                       ),
                       tabs: [
-                        Tab(text: 'Activities (${kActivities.length})'),
-                        Tab(text: 'Post (${kPosts.length})'),
+                        Tab(
+                            text:
+                                'Activities (${state.fBuddiesModel.posts!.length})'),
+                        Tab(
+                            text:
+                                'Post (${state.fBuddiesModel.activities!.length})'),
                       ],
                     ),
                   ),
@@ -159,8 +147,8 @@ class _BuddyProfilePageState extends State<BuddyProfilePage>
               },
               body: // Tabbar view
                   TabBarView(controller: _tabController, children: [
-                BuildImageGrid(images: List.empty()),
-                BuildImageGrid(images: kPosts)
+                BuildImageGrid(images: state.fBuddiesModel.activities!),
+                BuildImageGrid(images: state.fBuddiesModel.posts!)
               ]),
             ),
           ),

@@ -18,8 +18,8 @@ class BuddiesModel {
   final int? activityJoinedCount; // Count of activities joined
   final int? reviewCount; // Count of reviews
   final double? reviewStars; // Review rating in stars
-  final List<dynamic>? activities; // List of user activities
-  final List<dynamic>? posts; // List of user posts
+  final List<String>? activities; // List of user activities
+  final List<String>? posts; // List of user posts
 
   const BuddiesModel({
     this.distance,
@@ -57,8 +57,8 @@ class BuddiesModel {
       activityJoinedCount: json['activityJoinedCount'] ?? 0,
       reviewCount: json['reviewCount'] ?? 0,
       reviewStars: json['reviewStars'] ?? 0,
-      activities: List<dynamic>.from(json['activities'] ?? []),
-      posts: List<dynamic>.from(json['posts'] ?? []),
+      activities: List<String>.from(json['activities'] ?? []),
+      posts: List<String>.from(json['posts'] ?? []),
     );
   }
 
@@ -78,8 +78,8 @@ class BuddiesModel {
     int? activityJoinedCount,
     int? reviewCount,
     double? reviewStars,
-    List<dynamic>? activities,
-    List<dynamic>? posts,
+    List<String>? activities,
+    List<String>? posts,
   }) {
     return BuddiesModel(
       distance: distance ?? this.distance,

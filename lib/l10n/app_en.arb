@@ -266,6 +266,26 @@
     }
   }
 },
+"setActivities": "{count, plural, =1 {Activity} other {Activities}}",
+"@setActivities": {
+  "description": "Displays the count of Activities dynamically.",
+  "placeholders": {
+    "count": {
+      "type": "int",
+      "description": "The count of Activities."
+    }
+  }
+},
+"setPosts": "{count, plural, =1 {Post} other {Posts}}",
+"@setPosts": {
+  "description": "Displays the count of Posts dynamically.",
+  "placeholders": {
+    "count": {
+      "type": "int",
+      "description": "The count of Posts."
+    }
+  }
+},
   "activitiesCreated": "Activities Created",
   "@activitiesCreated": {
     "description": "Events initiated and organized by the user"
