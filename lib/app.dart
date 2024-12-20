@@ -9,7 +9,6 @@ import 'package:playkosmos_v3/ui/buddy_connections/cubit/buddy_connections_cubit
 import 'package:playkosmos_v3/ui/buddy_profile/cubit/buddy_profile_cubit.dart';
 import 'package:playkosmos_v3/ui/main/cubit/main_page_cubit.dart';
 import 'package:playkosmos_v3/ui/select_language/cubit/select_language_cubit.dart';
-import 'package:playkosmos_v3/ui/sign_up_phone_number/cubit/sign_up_phone_number_cubit.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// Root widget of the application responsible for setting up global dependencies,
@@ -82,9 +81,6 @@ class _AppBloc extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (_) => SelectLanguageCubit(),
-        ),
-        BlocProvider(
-          create: (_) => SignUpWithPhoneNumberCubit(),
         ),
         BlocProvider(
           create: (_) => MainPageCubit(),

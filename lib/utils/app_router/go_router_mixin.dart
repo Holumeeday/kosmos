@@ -101,7 +101,9 @@ mixin GoRouterMixin {
         return _createRoute(
           routeScreen: BlocProvider(
             child: const SignUpPhoneNumberPage(),
-            create: (_) => SignUpWithPhoneNumberCubit(),
+            create: (context) => SignUpWithPhoneNumberCubit(
+              fAuthRepository: context.read<AuthRemoteApiRepository>(),
+            ),
           ),
         );
       case AppRoute.signInEmailScreenPath:
@@ -210,7 +212,10 @@ mixin GoRouterMixin {
             child: PhoneNumberOtpVerificationPage(
               fPhone: fPhone,
             ),
-            create: (context) => PhoneNumberOtpVerificationCubit(),
+            create: (context) => PhoneNumberOtpVerificationCubit(
+              fAuthRepository: context.read<AuthRemoteApiRepository>(),
+              fPhone: fPhone,
+            ),
           ),
         );
       case AppRoute.profileCreationFlowScreenPath:

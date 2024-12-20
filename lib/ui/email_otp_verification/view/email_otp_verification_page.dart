@@ -116,7 +116,8 @@ class _EmailOtpView extends StatelessWidget {
               SnackBarUtil.showInfo(
                   message: context.loc.otpSentEnterCodeToProceed);
             } else if (state.resendOtpStatus ==
-                EmailResendOtpVerificationStatus.failure) {
+                    EmailResendOtpVerificationStatus.failure &&
+                state.errorMessage != null) {
               SnackBarUtil.showError(message: state.errorMessage!);
             }
           },
