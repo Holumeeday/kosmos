@@ -183,6 +183,10 @@ class $AssetsSvgsIconsGen {
   SvgGenImage get locationIconGradient =>
       const SvgGenImage('assets/svgs/icons/location-icon-gradient.svg');
 
+  /// File path: assets/svgs/icons/message_icon.svg
+  SvgGenImage get messageIcon =>
+      const SvgGenImage('assets/svgs/icons/message_icon.svg');
+
   /// File path: assets/svgs/icons/notification-icon.svg
   SvgGenImage get notificationIcon =>
       const SvgGenImage('assets/svgs/icons/notification-icon.svg');
@@ -215,6 +219,7 @@ class $AssetsSvgsIconsGen {
         inboxFilled,
         inboxOutlined,
         locationIconGradient,
+        messageIcon,
         notificationIcon,
         profileFilled,
         profileOutlined,

@@ -51,7 +51,6 @@ mixin FeedActivityHelperMixin on SharingLinkMixin {
 
   /// To manage an activity
   void manageActivity(String id) {
-    ;
   }
 
   /// To edit an activity
@@ -105,7 +104,9 @@ mixin FeedActivityHelperMixin on SharingLinkMixin {
       _bookmarkActivity(id);
 
       _setOriginalActivities(fFeedActivities);
-    } catch (e) {}
+    } catch (e) {
+      //
+    }
   }
 
   /// The core function to bookmark or unbookmark an activity
@@ -189,7 +190,9 @@ mixin FeedActivityHelperMixin on SharingLinkMixin {
       _reactToActivity(id, reaction);
 
       _setOriginalActivities(fFeedActivities);
-    } catch (e) {}
+    } catch (e) {
+      //
+    }
   }
 
   /// The core function to react to an activity

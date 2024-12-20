@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playkosmos_v3/assets_gen/assets.gen.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
+import 'package:playkosmos_v3/ui/buddies/view/buddies_page.dart';
 import 'package:playkosmos_v3/ui/main/cubit/main_page_cubit.dart';
 import 'package:playkosmos_v3/ui/main/view/widgets/bottom_nav_bar.dart';
 import 'package:playkosmos_v3/ui/main/view/widgets/home_page.dart';
@@ -122,7 +123,7 @@ class _MainPageState extends State<MainPage> {
             HomePage(),
 
             // Buddies
-            SizedBox(),
+            BuddiesPage(),
 
             // Inbox
             SizedBox(),

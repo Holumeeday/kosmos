@@ -29,7 +29,7 @@ class PhoneNumberOtpVerificationPage extends StatelessWidget {
 }
 
 class _PhoneNumberOtpView extends StatelessWidget {
-  const _PhoneNumberOtpView({super.key});
+  const _PhoneNumberOtpView();
 
   @override
   Widget build(BuildContext context) {

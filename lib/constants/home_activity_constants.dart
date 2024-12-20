@@ -194,7 +194,7 @@ final List<ActivityListModel> fHomeActivityList = [
         ),
       ),
     ),
-    activityAddedImages: [
+    activityAddedImages: const [
       'https://fastly.picsum.photos/id/0/5000/3333.jpg?hmac=_j6ghY5fCfSD6tvtcV74zXivkJSPIfR9B8w34XeQmvU',
       'https://fastly.picsum.photos/id/705/200/200.jpg?hmac=2HZlwayMAMOyCllDpM-Mx3u2Xyk40VRHAzlpNLKyTC8',
       'https://fastly.picsum.photos/id/221/200/200.jpg?hmac=zy33VSww4_QQk0Hf2MngBaudI_ahiadnRwuREDTbWnA',
@@ -234,7 +234,7 @@ final List<ActivityListModel> fHomeActivityList = [
     isActivityShared: true,
     sharedActivityPost: null,
     sharedActivityPostTime: DateTime(2023, 6, 1, 13, 2, 20),
-    sharedActivityTag: [
+    sharedActivityTag: const [
       'Ice Queen',
       'Okorie Ndubuisi',
     ],
@@ -407,7 +407,7 @@ final List<ActivityListModel> fHomeActivityList = [
         ),
       ),
     ),
-    activityAddedImages: [
+    activityAddedImages: const [
       'https://fastly.picsum.photos/id/0/5000/3333.jpg?hmac=_j6ghY5fCfSD6tvtcV74zXivkJSPIfR9B8w34XeQmvU',
       'https://fastly.picsum.photos/id/705/200/200.jpg?hmac=2HZlwayMAMOyCllDpM-Mx3u2Xyk40VRHAzlpNLKyTC8',
     ],
@@ -617,7 +617,7 @@ final List<ActivityListModel> fHomeActivityList = [
         ),
       ),
     ),
-    activityAddedImages: [
+    activityAddedImages: const [
       'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
       'https://fastly.picsum.photos/id/0/5000/3333.jpg?hmac=_j6ghY5fCfSD6tvtcV74zXivkJSPIfR9B8w34XeQmvU',
       'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
@@ -626,7 +626,7 @@ final List<ActivityListModel> fHomeActivityList = [
       'https://fastly.picsum.photos/id/1027/200/200.jpg?hmac=fiXlkLLwYm7JmmU80uRIj9g21XD4q9v_lM_2Z57UhuA',
       'https://fastly.picsum.photos/id/421/200/200.jpg?hmac=Kix073-H73pkRedH4XJ8fenHLI9Sd9akWlOFjKog0EA',
     ],
-    playmatesAttending: [],
+    playmatesAttending: const [],
     activityTag: const [
       'Rayna Rosser',
       'Kianna Vaccaro',
@@ -825,7 +825,7 @@ final List<ActivityListModel> fHomeActivityList = [
         ),
       ),
     ),
-    activityAddedImages: [
+    activityAddedImages: const [
       'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4',
       'https://fastly.picsum.photos/id/0/5000/3333.jpg?hmac=_j6ghY5fCfSD6tvtcV74zXivkJSPIfR9B8w34XeQmvU',
       'https://fastly.picsum.photos/id/705/200/200.jpg?hmac=2HZlwayMAMOyCllDpM-Mx3u2Xyk40VRHAzlpNLKyTC8',
@@ -852,7 +852,7 @@ final List<ActivityListModel> fHomeActivityList = [
     activityParticipantsCount: 20,
     activityQAndACount: 5000,
     activityReviewsCount: 300,
-    playmatesAttending: [],
+    playmatesAttending: const [],
     userReaction: null,
   ),
   ActivityListModel(
@@ -1021,7 +1021,7 @@ final List<ActivityListModel> fHomeActivityList = [
         ),
       ),
     ),
-    activityAddedImages: [],
+    activityAddedImages: const [],
     activityTag: const [
       'Rayna Rosser',
       'Kianna Vaccaro',
@@ -1212,8 +1212,8 @@ final List<ActivityListModel> fHomeActivityList = [
         ),
       ),
     ),
-    activityAddedImages: [],
-    activityTag: [],
+    activityAddedImages: const [],
+    activityTag: const [],
     activityReactionList: List.generate(
       0,
       (index) => _reactionList[_random.nextInt(_reactionList.length)],

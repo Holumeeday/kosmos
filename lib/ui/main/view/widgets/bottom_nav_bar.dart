@@ -78,7 +78,7 @@ class BottomNavBar extends StatelessWidget {
                 label: context.loc.createPost,
                 excludeSemantics: true,
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 10),
+                  padding: const EdgeInsets.only(top: 0),
                   child: PrimaryGradientButton(
                     fHeight: 50,
                     fWidth: 50,
@@ -164,7 +164,7 @@ class _BottomNavBarIcon extends StatelessWidget {
   ///The color to be used
   final Color? fColor;
 
-  ///Makes the svg icon have a height and width of 23
+  ///Makes the svg icon have a height and width of 19
   const _BottomNavBarIcon({
     required this.fIcon,
     this.fColor,
@@ -180,8 +180,8 @@ class _BottomNavBarIcon extends StatelessWidget {
               fColor!,
               BlendMode.srcIn,
             ),
-      height: 23,
-      width: 23,
+      height: 19,
+      width: 19,
     );
   }
 }

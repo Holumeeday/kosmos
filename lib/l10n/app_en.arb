@@ -20,7 +20,9 @@
       "gender": "String"
     }
   },
+
   "bioTooShort": "Bio is too short. Add more details",
+  "buddies":"Buddies",
   "alrightTimeToCreateEnterASecretCode": "Alright, it’s time to enter your secret code!  Type it in below and let’s unlock your next move!",
   "checkYourEmail": "Check your email",
   "checkYourInbox": "Check your inbox",
@@ -49,6 +51,7 @@
   "loginWithEmail": "Login with Email",
   "loginWithGoogle": "Login with Google",
   "loginWithNumber": "Login with Number",
+  "mutualBuddies": "Mutual buddies",
   "noWorriesForgotPasswordCaption": "No worries, forgetting happens to the best of us! We’ve got your back — a reset code is on its way to save the day. Hang tight, and you’ll be back in no time!",
   "passswordResetSuccessfully": "Password Reset Successfully",
   "profileCreationDialogMessage":"Woohoo, you did it! Your profile is ready, and you’re officially part of the Playkosmos family, Now the real fun begins — dive in, explore, and make the most of your new adventure. Let’s go! ",
@@ -62,6 +65,7 @@
   "signUpWithEmail": "Sign up with Email",
   "signUpWithGoogle": "Sign up with Google",
   "signUpWithNumber": "Sign up with Number",
+  "similarInterests": "Similar interests",
   "sms": "SMS",
   "tellUsAboutYourselfOptional": "Tell us about yourself (optional)",
   "tellUsYourInterest": "What sparks your excitement? Tell us your interests!",
@@ -197,6 +201,91 @@
   "@badges": {
     "description": "Markers used to signify achievements"
   },
+"setActivitiesCreated": "{count, plural, =1 {Activity Created} other {Activities Created}}",
+"@setActivitiesCreated": {
+  "description": "Displays the correct activity count string.",
+  "placeholders": {
+    "count": {
+      "type": "int",
+      "description": "The count of activities created."
+    }
+  }
+},
+
+"setFollowers": "{count, plural, =1 {Follower} other {Followers}}",
+"@setFollowers": {
+  "description": "Displays the count of followers dynamically.",
+  "placeholders": {
+    "count": {
+      "type": "int",
+      "description": "The count of followers."
+    }
+  }
+},
+
+"setBuddies": "{count, plural, =1 {Buddy} other {Buddies}}",
+"@setBuddies": {
+  "description": "Displays the count of buddies dynamically.",
+  "placeholders": {
+    "count": {
+      "type": "int",
+      "description": "The count of buddies."
+    }
+  }
+},
+
+"setActivitiesCreated": "{count, plural, =1 {Activity Created} other {Activities Created}}",
+"@setActivitiesCreated": {
+  "description": "Displays the count of activities created dynamically.",
+  "placeholders": {
+    "count": {
+      "type": "int",
+      "description": "The count of activities created."
+    }
+  }
+},
+
+"setActivityJoined": "{count, plural, =1 {Activity Joined} other {Activities Joined}}",
+"@setActivityJoined": {
+  "description": "Displays the count of activities joined dynamically.",
+  "placeholders": {
+    "count": {
+      "type": "int",
+      "description": "The count of activities joined."
+    }
+  }
+},
+
+"setReviews": "{count, plural, =1 {Review} other {Reviews}}",
+"@setReviews": {
+  "description": "Displays the count of reviews dynamically.",
+  "placeholders": {
+    "count": {
+      "type": "int",
+      "description": "The count of reviews."
+    }
+  }
+},
+"setActivities": "{count, plural, =1 {Activity} other {Activities}}",
+"@setActivities": {
+  "description": "Displays the count of Activities dynamically.",
+  "placeholders": {
+    "count": {
+      "type": "int",
+      "description": "The count of Activities."
+    }
+  }
+},
+"setPosts": "{count, plural, =1 {Post} other {Posts}}",
+"@setPosts": {
+  "description": "Displays the count of Posts dynamically.",
+  "placeholders": {
+    "count": {
+      "type": "int",
+      "description": "The count of Posts."
+    }
+  }
+},
   "activitiesCreated": "Activities Created",
   "@activitiesCreated": {
     "description": "Events initiated and organized by the user"
@@ -1012,6 +1101,10 @@
   "followUser": "Follow",
   "@followUser": {
     "description": "To follow a store or venue"
+  },
+   "followBack": "Follow Back",
+  "@followBack": {
+    "description": "To follow back"
   },
   "followingUser": "Following",
   "@followingUser": {

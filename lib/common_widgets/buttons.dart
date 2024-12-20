@@ -542,6 +542,7 @@ class PrimaryGradientButton extends StatelessWidget {
         padding: EdgeInsets.zero,
         shadowColor: context.colors.primary,
       ).copyWith(
+          backgroundColor: const WidgetStatePropertyAll(Colors.transparent),
 
           /// Override button's elevation to remove default shadow.
           elevation: WidgetStateProperty.all(0),
@@ -561,7 +562,7 @@ class PrimaryGradientButton extends StatelessWidget {
       onPressed: fDisabled ? null : fOnPressed,
       child: ConstrainedBox(
         constraints: BoxConstraints(
-          minHeight: 48,
+          minHeight: 30,
           maxHeight: fHeight,
           maxWidth: fWidth,
         ),
@@ -593,6 +594,7 @@ class PrimaryGradientButton extends StatelessWidget {
                 : null,
           ),
           child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 8),
             /// Center-align the content inside the button.
             alignment: Alignment.center,
 

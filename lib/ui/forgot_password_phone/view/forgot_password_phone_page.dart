@@ -23,7 +23,7 @@ class ForgotPasswordPhonePage extends StatelessWidget {
 }
 
 class _ForgotPasswordPhone extends StatefulWidget {
-  const _ForgotPasswordPhone({super.key});
+  const _ForgotPasswordPhone();
 
   @override
   State<_ForgotPasswordPhone> createState() => _ForgotPasswordPhoneState();
@@ -128,7 +128,7 @@ class _ForgotPasswordPhoneState extends State<_ForgotPasswordPhone> {
 }
 
 class _OtpMethodSelection extends StatelessWidget {
-  const _OtpMethodSelection({super.key});
+  const _OtpMethodSelection();
 
   @override
   Widget build(BuildContext context) {

@@ -107,7 +107,7 @@ class ActivityMoreOptionsUserModal extends StatelessWidget {
       isTrueActionRed: true,
       barrierDismissible: false,
     );
-    if (result == true) {
+    if (result == true && context.mounted) {
       context.pop();
       cancelActivity();
     }
