@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
+import 'package:playkosmos_v3/extensions/connection_type_enum.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/buddies/cubit/buddies_cubit.dart';
 import 'package:playkosmos_v3/ui/buddies/view/widgets/interest_chips.dart';
@@ -24,7 +25,11 @@ class BuddiesPage extends StatelessWidget {
               // Background Image
               Positioned.fill(
                   child: Container(
-                color: Colors.purple,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: NetworkImage(
+                            state.fBuddiesModel.profileImages[0]))),
               )),
 
               // Gradient Overlay at the bottom
@@ -117,19 +122,8 @@ class BuddiesPage extends StatelessWidget {
                             Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                PrimaryGradientButton(
-                                    fHeight:
-                                        getRelativeScreenHeight(50, context),
-                                    fWidth:
-                                        getRelativeScreenWidth(100, context),
-                                    fOnPressed: () {},
-                                    fChild: Text(
-                                      context.loc.followUser,
-                                      style: context.textTheme.displayLarge!
-                                          .copyWith(
-                                              color: Colors.white,
-                                              fontSize: 16),
-                                    )),
+                                state.fBuddiesModel.connectionType
+                                    .toConnectionButton(context),
                                 const HRelativeSpace(5),
                                 NextArrowButton(
                                   fOnTap: () {
@@ -145,7 +139,7 @@ class BuddiesPage extends StatelessWidget {
 
                       // Interests Chips
                       InterestChips(
-                        kInterests: state.fBuddiesModel.interests!,
+                        kInterests: state.fBuddiesModel.interests,
                       )
                     ],
                   ),

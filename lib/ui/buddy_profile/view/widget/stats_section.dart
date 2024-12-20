@@ -22,26 +22,26 @@ class UserStatsSection extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     BuildStatItem(
-                        value: state.fBuddiesModel.followingCount!
+                        value: state.fBuddiesModel.followingCount
                             .formatNumToCompact(),
                         label: context.loc.followingUser),
                     VerticalDivider(
                       color: context.appColors.fDividerColor,
                     ),
                     BuildStatItem(
-                      value: state.fBuddiesModel.followersCount!
+                      value: state.fBuddiesModel.followersCount
                           .formatNumToCompact(),
                       label: context.loc
-                          .setFollowers(state.fBuddiesModel.followersCount!),
+                          .setFollowers(state.fBuddiesModel.followersCount),
                     ),
                     VerticalDivider(
                       color: context.appColors.fDividerColor,
                     ),
                     BuildStatItem(
-                      value: state.fBuddiesModel.buddiesCount!
+                      value: state.fBuddiesModel.buddiesCount
                           .formatNumToCompact(),
                       label: context.loc
-                          .setBuddies(state.fBuddiesModel.followersCount!),
+                          .setBuddies(state.fBuddiesModel.followersCount),
                     ),
                     VerticalDivider(
                       color: context.appColors.fDividerColor,
@@ -80,18 +80,18 @@ class UserStatsSection extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     BuildStatItem(
-                        value: state.fBuddiesModel.activityCreatedCount!
+                        value: state.fBuddiesModel.activityCreatedCount
                             .formatNumToCompact(),
                         label: context.loc.setActivitiesCreated(
-                            state.fBuddiesModel.activityCreatedCount!)),
+                            state.fBuddiesModel.activityCreatedCount)),
                     VerticalDivider(
                       color: context.appColors.fDividerColor,
                     ),
                     BuildStatItem(
-                      value: state.fBuddiesModel.activityJoinedCount!
+                      value: state.fBuddiesModel.activityJoinedCount
                           .formatNumToCompact(),
                       label: context.loc.setActivityJoined(
-                          state.fBuddiesModel.activityJoinedCount!),
+                          state.fBuddiesModel.activityJoinedCount),
                     ),
                     VerticalDivider(
                       color: context.appColors.fDividerColor,
@@ -100,7 +100,7 @@ class UserStatsSection extends StatelessWidget {
                         rating: true,
                         value: state.fBuddiesModel.reviewStars.toString(),
                         label:
-                            "${state.fBuddiesModel.reviewCount!.formatNumToCompact()} ${context.loc.setReviews(state.fBuddiesModel.reviewCount!)}"),
+                            "${state.fBuddiesModel.reviewCount.formatNumToCompact()} ${context.loc.setReviews(state.fBuddiesModel.reviewCount)}"),
                   ],
                 ),
               ),

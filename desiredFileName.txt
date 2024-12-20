@@ -76,6 +76,7 @@
     "whatsapp",
     "youAreAlllSignedInAndReadyToRoll",
     "youAreOfficiallyBackInActionMessage",
+    "followBack",
     "yourPasswordResetWasSuccessfulMessage"
   ],
 
@@ -156,6 +157,7 @@
     "whatsapp",
     "youAreAlllSignedInAndReadyToRoll",
     "youAreOfficiallyBackInActionMessage",
+    "followBack",
     "yourPasswordResetWasSuccessfulMessage"
   ],
 
@@ -236,6 +238,7 @@
     "whatsapp",
     "youAreAlllSignedInAndReadyToRoll",
     "youAreOfficiallyBackInActionMessage",
+    "followBack",
     "yourPasswordResetWasSuccessfulMessage"
   ],
 
@@ -316,6 +319,7 @@
     "whatsapp",
     "youAreAlllSignedInAndReadyToRoll",
     "youAreOfficiallyBackInActionMessage",
+    "followBack",
     "yourPasswordResetWasSuccessfulMessage"
   ],
 
@@ -396,6 +400,7 @@
     "whatsapp",
     "youAreAlllSignedInAndReadyToRoll",
     "youAreOfficiallyBackInActionMessage",
+    "followBack",
     "yourPasswordResetWasSuccessfulMessage"
   ],
 
@@ -476,6 +481,7 @@
     "whatsapp",
     "youAreAlllSignedInAndReadyToRoll",
     "youAreOfficiallyBackInActionMessage",
+    "followBack",
     "yourPasswordResetWasSuccessfulMessage"
   ]
 }

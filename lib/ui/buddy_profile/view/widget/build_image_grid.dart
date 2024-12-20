@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
 
 /* 
-
+A responsive grid layout for displaying posts/activities.
+ [fImages]: List of image URLs to display
+ [fLabel]: Unique identifier for maintaining scroll state
   @author: Chidera Chijama
 */
 
 class BuildImageGrid extends StatelessWidget {
   const BuildImageGrid({
     super.key,
-    required this.images,
+    required this.fImages,
+    required this.fLabel,
   });
-  final List<String> images;
-
+  final List<String> fImages;
+  final String fLabel;
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      key: PageStorageKey(fLabel),
       slivers: [
+        // Handle the overlap from the nested scroll view
+        SliverOverlapInjector(
+          handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+        ),
         SliverPadding(
           padding: const EdgeInsets.all(8.0),
           sliver: SliverGrid(
@@ -30,16 +38,9 @@ class BuildImageGrid extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8.0),
                     image: DecorationImage(
-                      image: NetworkImage(images[index]),
+                      image: NetworkImage(fImages[index]),
                       fit: BoxFit.cover,
                     ),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 4,
-                        offset: Offset(0, 2),
-                      )
-                    ],
                   ),
                   child: Align(
                     alignment: Alignment.topRight,
@@ -56,7 +57,7 @@ class BuildImageGrid extends StatelessWidget {
                   ),
                 );
               },
-              childCount: images.length,
+              childCount: fImages.length,
             ),
           ),
         ),

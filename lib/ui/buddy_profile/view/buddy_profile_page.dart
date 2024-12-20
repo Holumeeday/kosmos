@@ -3,37 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:playkosmos_v3/assets_gen/assets.gen.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
+import 'package:playkosmos_v3/extensions/connection_type_enum.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/cubit/buddy_profile_cubit.dart';
-import 'package:playkosmos_v3/ui/buddy_profile/view/widget/activity_post_tab.dart';
+import 'package:playkosmos_v3/ui/buddy_profile/view/widget/build_image_grid.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/view/widget/carousel.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/view/widget/stats_section.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
-/// Profile Page - Represents the user profile screen.
+/// A profile page that displays buddy information
 /// @author: Chidera
-class BuddyProfilePage extends StatefulWidget {
+class BuddyProfilePage extends StatelessWidget {
   const BuddyProfilePage({super.key});
-
-  @override
-  State<BuddyProfilePage> createState() => _BuddyProfilePageState();
-}
-
-class _BuddyProfilePageState extends State<BuddyProfilePage>
-    with SingleTickerProviderStateMixin {
-  late TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController = TabController(length: 2, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,15 +33,8 @@ class _BuddyProfilePageState extends State<BuddyProfilePage>
                       .copyWith(color: context.colors.onSurface, fontSize: 28)),
               fActions: [
                 // follow, following, unfollow button
-                PrimaryGradientButton(
-                    fHeight: getRelativeScreenHeight(50, context),
-                    fWidth: getRelativeScreenWidth(100, context),
-                    fOnPressed: () {},
-                    fChild: Text(
-                      context.loc.followUser,
-                      style: context.textTheme.displayLarge!
-                          .copyWith(color: Colors.white, fontSize: 16),
-                    )),
+                state.fBuddiesModel.connectionType.toConnectionButton(context),
+
                 const HRelativeSpace(10),
                 // Message Button
                 SvgPicture.asset(Assets.svgs.icons.messageIcon.path,
@@ -82,73 +56,84 @@ class _BuddyProfilePageState extends State<BuddyProfilePage>
               ],
             ),
             body: NestedScrollView(
+              floatHeaderSlivers: true,
               headerSliverBuilder: (context, innerBoxIsScrolled) {
                 return [
                   SliverToBoxAdapter(
                     child: Column(
                       children: [
-                        VSpace(12),
+                        const VSpace(12),
                         // Image Page View
                         CarouselWidget(
-                          images: state.fBuddiesModel.profileImages!,
+                          images: state.fBuddiesModel.profileImages,
                         ),
 
                         // User Content Section
                         // _buildUserContent(),
 
                         // Stats Section
-                        VSpace(8),
-                        UserStatsSection(),
+                        const VSpace(8),
+                        const UserStatsSection(),
 
                         // Activity Section
-                        Divider(),
+                        const Divider(),
                       ],
                     ),
                   ),
-                  SliverAppBar(
-                    pinned: true,
-                    stretch: false,
-                    toolbarHeight: 0,
-                    floating: true,
-                    forceElevated: innerBoxIsScrolled,
-                    automaticallyImplyLeading: false,
-                    bottom: TabBar(
-                      dividerColor: context.appColors.fDividerColor,
-                      dividerHeight: 1,
-                      controller: _tabController,
-                      labelStyle: context.textTheme.displayLarge!.copyWith(
-                          fontSize: getRelativeScreenWidth(18, context)),
-                      labelColor: AppColor.fPrimaryColor,
-                      tabAlignment: TabAlignment.fill,
-                      unselectedLabelColor: context.colors.onSurface,
-                      indicator: BoxDecoration(
-                        gradient: const LinearGradient(
-                            // center: Alignment.topCenter,
-                            stops: [.5, .8, 1],
-                            colors: AppColor.fPrimaryGradient),
-                        borderRadius: BorderRadius.circular(5),
+                  SliverOverlapAbsorber(
+                    handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                        context),
+                    sliver: SliverAppBar(
+                      pinned: true,
+                      stretch: false,
+                      toolbarHeight: 0,
+                      floating: true,
+                      snap: true,
+                      forceElevated: innerBoxIsScrolled,
+                      automaticallyImplyLeading: false,
+                      bottom: TabBar(
+                        dividerColor: context.appColors.fDividerColor,
+                        dividerHeight: 1,
+                        labelStyle: context.textTheme.displayLarge!.copyWith(
+                            fontSize: getRelativeScreenWidth(18, context)),
+                        labelColor: AppColor.fPrimaryColor,
+                        tabAlignment: TabAlignment.fill,
+                        unselectedLabelColor: context.colors.onSurface,
+                        indicator: BoxDecoration(
+                          gradient: const LinearGradient(
+                              // center: Alignment.topCenter,
+                              stops: [.5, .8, 1],
+                              colors: AppColor.fPrimaryGradient),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                        indicatorWeight: 3,
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        indicatorPadding: const EdgeInsets.only(
+                          top: 46,
+                        ),
+                        tabs: [
+                          Tab(
+                              text:
+                                  '${context.loc.setActivities(state.fBuddiesModel.activities.length)} (${state.fBuddiesModel.activities.length})'),
+                          Tab(
+                              text:
+                                  '${context.loc.setPosts(state.fBuddiesModel.posts.length)}  (${state.fBuddiesModel.posts.length})'),
+                        ],
                       ),
-                      indicatorWeight: 3,
-                      indicatorSize: TabBarIndicatorSize.tab,
-                      indicatorPadding: const EdgeInsets.only(
-                        top: 46,
-                      ),
-                      tabs: [
-                        Tab(
-                            text:
-                                'Activities (${state.fBuddiesModel.posts!.length})'),
-                        Tab(
-                            text:
-                                'Post (${state.fBuddiesModel.activities!.length})'),
-                      ],
                     ),
                   ),
                 ];
               },
               body: // Tabbar view
-                  TabBarView(controller: _tabController, children: [
-                BuildImageGrid(images: state.fBuddiesModel.activities!),
-                BuildImageGrid(images: state.fBuddiesModel.posts!)
+                  TabBarView(children: [
+                BuildImageGrid(
+                  fImages: state.fBuddiesModel.activities,
+                  fLabel: context.loc.activity,
+                ),
+                BuildImageGrid(
+                  fImages: state.fBuddiesModel.posts,
+                  fLabel: context.loc.post,
+                )
               ]),
             ),
           ),

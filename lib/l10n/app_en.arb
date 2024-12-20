@@ -1102,6 +1102,10 @@
   "@followUser": {
     "description": "To follow a store or venue"
   },
+   "followBack": "Follow Back",
+  "@followBack": {
+    "description": "To follow back"
+  },
   "followingUser": "Following",
   "@followingUser": {
     "description": "Already following(listening for updates of) a store, venue"

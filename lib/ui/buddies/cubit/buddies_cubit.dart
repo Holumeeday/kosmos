@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+// ignore: unused_import
+import 'package:playkosmos_v3/enums/connection_type.dart';
 import 'package:playkosmos_v3/models/buddies_model.dart';
 
 part 'buddies_state.dart';
@@ -13,21 +15,7 @@ class BuddiesCubit extends Cubit<BuddiesState> {
   BuddiesCubit()
       : super(const BuddiesState(
           fBuddiesModel: BuddiesModel(
-            distance: 3,
-            similarInterestsCount: 15,
-            mutualBuddiesCount: 12,
-            userName: "Jordyn Vaccaro",
-            interests: [
-              "Art",
-              "Hockey",
-              "Sport",
-              "Baseball",
-              "Rugby",
-              "Visual Arts",
-              "Ice Hockey",
-              "Softball",
-              "Softball"
-            ],
+          
           ),
         ));
 
