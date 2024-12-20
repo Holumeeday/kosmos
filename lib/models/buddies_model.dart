@@ -107,7 +107,7 @@ class BuddiesModel {
       "https://pbs.twimg.com/profile_images/1530445927739162625/xtGDZZIm_400x400.jpg",
       "https://stears-elections.s3.eu-west-1.amazonaws.com/static/candidate-photos/president/APP-Charles-Nnadi.png"
     ],
-    this.connectionType = "buddy",
+    this.connectionType = "followingYou",
   });
 
   /// Creates a copy of this BuddiesModel with the given fields replaced with new values

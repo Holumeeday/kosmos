@@ -23,7 +23,7 @@ extension ConnectionTypeUI on String {
       return const Text('Unknown');
     }
 
-    final buttonWidth = width ?? getRelativeScreenWidth(100, context);
+    final buttonWidth = width ?? double.infinity;
     final buttonHeight = height ?? getRelativeScreenWidth(50, context);
 
     // Return button based on matched type
@@ -34,15 +34,15 @@ extension ConnectionTypeUI on String {
           fWidth: buttonWidth,
           fOnPressed: onPressed ?? () {},
           fGradientColors: const [
-            Color(0xFFF0F0F0),
-            Color(0xFFF0F0F0),
-            Color(0xFFF0F0F0)
+            Color(0xFFEDEDED),
+            Color(0xFFEDEDED),
+            Color(0xFFEDEDED)
           ],
           fChild: Text(
             context.loc.followingUser,
             style: context.textTheme.displayLarge!.copyWith(
               color: Colors.black,
-              fontSize: 16,
+              fontSize: 14,
             ),
           ),
         );
@@ -50,7 +50,7 @@ extension ConnectionTypeUI on String {
       case ConnectionTypeEnum.followingYou:
         return PrimaryGradientButton(
           fHeight: buttonHeight,
-          fWidth: double.infinity,
+          fWidth: buttonWidth,
           fOnPressed: onPressed ?? () {},
           fChild: Text(
             context.loc.followBack,
