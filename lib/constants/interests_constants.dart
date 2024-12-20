@@ -1,4 +1,4 @@
-import 'package:playkosmos_v3/data_transfer_objects/data_transfer_objects.dart';
+import 'package:playkosmos_v3/models/activity_interest_groups.dart';
 
 /// The activity interest groups
 const List<ActivityInterestGroups> kActivityInterestGroup = [

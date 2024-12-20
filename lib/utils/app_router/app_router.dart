@@ -5,6 +5,12 @@ import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
+/// Used to remove every suffix of a path i.e path parameters or query parameters
+/// for example /email-page/:email is cleaned to /email-page
+extension _StringX on String {
+  String get cleanPath => '/${split('/')[1]}';
+}
+
 /*
 This class defines the routes and path names for the app navigation
 @author: Godwin Mathias
@@ -88,26 +94,31 @@ class AppRoute with GoRouterMixin {
             path: onboardingScreenPath,
             name: onboardingScreen,
           ),
+          createGoRoute(
+            path: createPasswordScreenPath,
+            name: createPasswordScreen,
+          ),
         ],
         redirect: (context, state) {
           /// Pages used for authentication
-          const List<String> authPages = [
-            signInEmailScreenPath,
-            signInPhoneScreenPath,
-            signUpEmailScreenPath,
-            signUpPhoneScreenPath,
-            forgotPasswordEmailScreenPath,
-            forgotPasswordPhoneScreenPath,
-            forgotPasswordOtpScreenPath,
-            emailOtpVerificationScreenPath,
-            authProviderScreenPath,
-            phoneNumberOtpVerificationScreenPath,
+          final List<String> authPages = [
+            signInEmailScreenPath.cleanPath,
+            signInPhoneScreenPath.cleanPath,
+            signUpEmailScreenPath.cleanPath,
+            signUpPhoneScreenPath.cleanPath,
+            forgotPasswordEmailScreenPath.cleanPath,
+            forgotPasswordPhoneScreenPath.cleanPath,
+            forgotPasswordOtpScreenPath.cleanPath,
+            emailOtpVerificationScreenPath.cleanPath,
+            authProviderScreenPath.cleanPath,
+            createPasswordScreenPath.cleanPath,
+            phoneNumberOtpVerificationScreenPath.cleanPath,
           ];
 
           /// Pages used in step 2
-          const List<String> step2Pages = [
-            galleryOrProfilePicturesScreenPath,
-            profileCreationFlowScreenPath,
+          final List<String> step2Pages = [
+            galleryOrProfilePicturesScreenPath.cleanPath,
+            profileCreationFlowScreenPath.cleanPath,
           ];
 
           /// Check the login state
@@ -129,15 +140,15 @@ class AppRoute with GoRouterMixin {
 
           /// If the user is going to any of the auth pages
           final bool isGoingToAuthPages =
-              authPages.contains(state.matchedLocation);
+              authPages.contains(state.matchedLocation.cleanPath);
 
           /// If the user is going to any of the step 2 pages
           final bool isGoingToStep2Pages =
-              step2Pages.contains(state.matchedLocation);
+              step2Pages.contains(state.matchedLocation.cleanPath);
 
           /// Checks if the user is going to the onboarding page
           final bool isGoingToOnboard =
-              state.matchedLocation == onboardingScreenPath;
+              state.matchedLocation.cleanPath == onboardingScreenPath;
 
           /// If not initialized, redirect to Splash
           if (!isInitialized) {
@@ -187,12 +198,11 @@ class AppRoute with GoRouterMixin {
   static const String signUpPhoneScreenPath = '/sign-up-phone';
   static const String signInEmailScreenPath = '/sign-in-email';
   static const String signInPhoneScreenPath = '/sign-in-phone';
-  static const String createPasswordScreenPath = '/create-password/:email';
+  static const String createPasswordScreenPath = '/create-password';
   static const String emailOtpVerificationScreenPath =
       '/email-otp-verification/:email';
   static const String forgotPasswordEmailScreenPath = '/forgot-password-email';
-  static const String forgotPasswordOtpScreenPath =
-      '/forgot-password-otp/:email';
+  static const String forgotPasswordOtpScreenPath = '/forgot-password-otp';
   static const String forgotPasswordPhoneScreenPath = '/forgot-password-phone';
   static const String galleryOrProfilePicturesScreenPath = '/gallery-pictures';
   static const String onboardingScreenPath = '/onboarding';

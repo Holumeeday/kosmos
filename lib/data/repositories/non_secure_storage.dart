@@ -49,9 +49,9 @@ class NonSecureStorage {
   }
 
   /// Deletes the value in key
-  void delKey(String key) {
+  Future<void> delKey(String key) async {
     try {
-      _storage.delete(key);
+      await _storage.delete(key);
     } catch (e, s) {
       printE(e, s);
     }

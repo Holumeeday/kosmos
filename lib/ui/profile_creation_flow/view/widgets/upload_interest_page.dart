@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playkosmos_v3/common_widgets/show_all_button.dart';
 import 'package:playkosmos_v3/common_widgets/sizes.dart';
-import 'package:playkosmos_v3/data_transfer_objects/activity_interest_groups.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
+import 'package:playkosmos_v3/models/activity_interest_groups.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/cubit/profile_creation_flow_cubit.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/next_button.dart';
 

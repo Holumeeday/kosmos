@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/data_transfer_objects/playkosmos_exception.dart';
 import 'package:playkosmos_v3/models/generic_respose_model.dart';
+import 'package:playkosmos_v3/models/user_model.dart';
 
 part 'sign_in_state.dart';
 
@@ -10,8 +11,11 @@ class SignInWithEmailCubit extends Cubit<SignInWithEmailState> {
   /// The authentication api repository
   final AuthRemoteApiRepository fAuthRepository;
 
+  /// The user profile storage
+  final UserProfileStorage fUserStorage;
   SignInWithEmailCubit({
     required this.fAuthRepository,
+    required this.fUserStorage,
   }) : super(const SignInWithEmailState());
 
   /// Sign in with email
@@ -28,6 +32,10 @@ class SignInWithEmailCubit extends Cubit<SignInWithEmailState> {
       // Emit the state if response status is failed or success with the error message
       // if available
       if (fResponse.status == true) {
+        final user = UserModel.fromMap(fResponse.data);
+        // Save the user data
+        fUserStorage.setUser(user);
+
         emit(
           state.copyWith(
             status: SignInWithEmailStatus.success,

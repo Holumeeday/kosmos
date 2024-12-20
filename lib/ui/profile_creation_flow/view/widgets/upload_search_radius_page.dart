@@ -8,7 +8,7 @@ import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/cubit/profile_creation_flow_cubit.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/gradient_slider_tracker.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/next_button.dart';
-import 'package:playkosmos_v3/utils/theme/app_colors.dart';
+import 'package:playkosmos_v3/utils/utils.dart';
 
 /// Select search radius page
 ///
@@ -140,7 +140,7 @@ class UploadSearchRadiusPage extends StatelessWidget {
                                 fWidget: Image.asset(Assets
                                     .pngs.onboarding.welcomeOnboarding.path),
                                 fOnLetGo: () {
-                                  context.pop();
+                                  context.go(AppRoute.homeScreenPath);
                                 }),
                           );
                         });

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/create_password/cubit/create_password_cubit.dart';
@@ -8,7 +9,7 @@ import 'package:playkosmos_v3/utils/utils.dart';
 /// The create password form page
 ///
 /// @author: Godwin Mathias
-class CreatePasswordPage extends StatelessWidget {
+class CreatePasswordPage extends StatefulWidget {
   /// The user email address of the uer
   final String fEmail;
   final String fPhone;
@@ -22,27 +23,10 @@ class CreatePasswordPage extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    return _CreatePasswordForm(
-      fEmail: fEmail,
-    );
-  }
+  State<CreatePasswordPage> createState() => _CreatePasswordPageState();
 }
 
-class _CreatePasswordForm extends StatefulWidget {
-  /// The user email address of the uer
-  final String fEmail;
-
-  const _CreatePasswordForm({
-    super.key,
-    required this.fEmail,
-  });
-
-  @override
-  State<_CreatePasswordForm> createState() => _CreatePasswordFormState();
-}
-
-class _CreatePasswordFormState extends State<_CreatePasswordForm> {
+class _CreatePasswordPageState extends State<CreatePasswordPage> {
   /// The password controller
   late TextEditingController _fPasswordController;
 
@@ -79,9 +63,15 @@ class _CreatePasswordFormState extends State<_CreatePasswordForm> {
         if (state.status == CreatePasswordStatus.success) {
           // If sign up was successful
           if (state.data?.status == true) {
-            // Navigate to create profile or login
+            // Navigate to login
+            if (widget.fIsEmail) {
+              context.go(AppRoute.signInEmailScreenPath);
+            } else {
+              context.go(AppRoute.signInPhoneScreenPath);
+            }
           }
-        } else if (state.status == CreatePasswordStatus.failure) {
+        } else if (state.status == CreatePasswordStatus.failure &&
+            state.errorMessage != null) {
           SnackBarUtil.showError(message: state.errorMessage!);
         }
       },

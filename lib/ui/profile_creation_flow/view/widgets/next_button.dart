@@ -56,9 +56,8 @@ class NextButton extends StatelessWidget {
       ProfileCreationFlowEnum.uploadSearchRadius => context.select(
           (ProfileCreationFlowCubit cubit) =>
               cubit.state.fFlowModel.radius == null),
-      ProfileCreationFlowEnum.uploadLocation => context.select(
-          (ProfileCreationFlowCubit cubit) =>
-              cubit.state.fFlowModel.location != null),
+      ProfileCreationFlowEnum.uploadLocation =>
+        context.select((ProfileCreationFlowCubit cubit) => false),
     };
   }
 }

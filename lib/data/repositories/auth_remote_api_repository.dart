@@ -1,7 +1,8 @@
 import 'package:playkosmos_v3/data/data_source/interfaces/remote_api.dart';
-import 'package:playkosmos_v3/data_transfer_objects/activity_interest_groups.dart';
+import 'package:playkosmos_v3/enums/enums.dart';
+import 'package:playkosmos_v3/models/activity_interest_groups.dart';
 import 'package:playkosmos_v3/models/generic_respose_model.dart';
-import 'package:playkosmos_v3/ui/profile_creation_flow/models/profile_creation_flow_model.dart';
+import 'package:playkosmos_v3/models/location_model.dart';
 
 /// The authentication flow repository for nodejs/Java backend
 ///
@@ -197,24 +198,25 @@ class AuthRemoteApiRepository {
   }
 
   /// Update profile second step
-  Future<GenericResponse> updateProfileSecondStep({
+  Future<GenericResponse> setOnboarding({
+    required String fullName,
     int? searchRadius,
     String? birthday,
     List<String>? pictures,
     GenderEnum? gender,
-    List<ActivityInterestGroups>? interests,
-    Map<String, String>? location,
+    ActivityInterestGroupsList? interests,
+    Locations? location,
   }) async {
     try {
       final res = await _remoteApi.post(
-        'user/profile/update',
+        'user',
         body: {
+          'fullName': fullName,
           if (searchRadius != null) 'searchRadius': searchRadius,
           if (birthday != null) 'birthday': birthday,
           if (pictures != null) 'pictures': pictures,
-          if (interests != null)
-            'interests': interests.map((e) => {e.categoryName: e.interests}),
-          if (location != null) 'location': location,
+          if (interests != null) 'interests': interests.toJson(),
+          if (location != null) 'location': location.toMap(),
         },
       );
       return GenericResponse.fromJson(res.data as Map<String, dynamic>);
@@ -292,11 +294,11 @@ class AuthRemoteApiRepository {
   }
 
   /// Update location
-  Future<GenericResponse> updateLocation(Map<String, String> location) async {
+  Future<GenericResponse> updateLocation(Locations location) async {
     try {
       final res = await _remoteApi.post(
         'user/profile/update/location',
-        body: {'location': location},
+        body: {'location': location.toMap()},
       );
       return GenericResponse.fromJson(res.data as Map<String, dynamic>);
     } catch (_) {

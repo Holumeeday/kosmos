@@ -109,7 +109,12 @@ class _UploadNamePageState extends State<UploadNamePage> {
           PrimaryGradientButton(
             fDisabled: !((_dNameIsValid ?? false) && (_dBioIsValid ?? true)),
             fOnPressed: () {
-              context.read<ProfileCreationFlowCubit>().nextPage();
+              context.read<ProfileCreationFlowCubit>().uploadNameBio(
+                    name: _fNameController.text,
+                    bio: _fBioController.text.isEmpty
+                        ? null
+                        : _fBioController.text,
+                  );
             },
             fChild: Text(context.loc.nextText),
           ),

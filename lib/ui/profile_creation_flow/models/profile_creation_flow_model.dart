@@ -1,14 +1,8 @@
 import 'dart:io';
 
 import 'package:equatable/equatable.dart';
-import 'package:playkosmos_v3/data_transfer_objects/activity_interest_groups.dart';
-
-/// Gender types
-enum GenderEnum {
-  male,
-  female,
-  preferNotToSay,
-}
+import 'package:playkosmos_v3/enums/enums.dart';
+import 'package:playkosmos_v3/models/activity_interest_groups.dart';
 
 class ProfileCreationFlowModel extends Equatable {
   /// Image upload list
@@ -35,9 +29,6 @@ class ProfileCreationFlowModel extends Equatable {
   /// The unit of radius: miles or kilometers
   final String? radiusUnits;
 
-  /// The location of the user
-  final String? location;
-
   const ProfileCreationFlowModel({
     this.dateOfBirth,
     this.gender,
@@ -47,7 +38,6 @@ class ProfileCreationFlowModel extends Equatable {
     this.longitude,
     this.radius,
     this.radiusUnits,
-    this.location,
   });
 
   /// To update the info
@@ -59,7 +49,6 @@ class ProfileCreationFlowModel extends Equatable {
     double? longitude,
     double? radius,
     String? radiusUnits,
-    String? location,
     DateTime? dateOfBirth,
   }) {
     return ProfileCreationFlowModel(
@@ -71,7 +60,6 @@ class ProfileCreationFlowModel extends Equatable {
       longitude: longitude ?? this.longitude,
       radius: radius ?? this.radius,
       radiusUnits: radiusUnits ?? this.radiusUnits,
-      location: location ?? this.location,
     );
   }
 
@@ -85,7 +73,6 @@ class ProfileCreationFlowModel extends Equatable {
         '   longitude: $longitude, \n'
         '   radius: $radius, \n'
         '   radiusUnits: $radiusUnits, \n'
-        '   location: $location\n'
         '}';
   }
 
@@ -98,7 +85,6 @@ class ProfileCreationFlowModel extends Equatable {
       'longitude': longitude,
       'radius': radius,
       'radius_units': radiusUnits,
-      'location': location,
     };
   }
 
@@ -112,6 +98,5 @@ class ProfileCreationFlowModel extends Equatable {
         longitude,
         radius,
         radiusUnits,
-        location,
       ];
 }

@@ -22,6 +22,8 @@ import 'package:playkosmos_v3/ui/main/view/main_page.dart';
 import 'package:playkosmos_v3/ui/onboarding/view/onboard_page.dart';
 import 'package:playkosmos_v3/ui/phone_number_otp_verification%20copy/cubit/phone_number_otp_verification_cubit.dart';
 import 'package:playkosmos_v3/ui/phone_number_otp_verification%20copy/view/phone_number_otp_verification_page.dart';
+import 'package:playkosmos_v3/ui/profile_creation_flow/cubit/profile_creation_flow_cubit.dart';
+import 'package:playkosmos_v3/ui/profile_creation_flow/view/profile_creation_flow_page.dart';
 import 'package:playkosmos_v3/ui/reset_password_page/cubit/reset_password_cubit.dart';
 import 'package:playkosmos_v3/ui/reset_password_page/view/reset_password_page.dart';
 import 'package:playkosmos_v3/ui/select_language/cubit/select_language_cubit.dart';
@@ -107,6 +109,7 @@ mixin GoRouterMixin {
           routeScreen: BlocProvider(
             child: const SignInEmailPage(),
             create: (context) => SignInWithEmailCubit(
+              fUserStorage: context.read<UserProfileStorage>(),
               fAuthRepository: context.read<AuthRemoteApiRepository>(),
             ),
           ),
@@ -208,6 +211,15 @@ mixin GoRouterMixin {
               fPhone: fPhone,
             ),
             create: (context) => PhoneNumberOtpVerificationCubit(),
+          ),
+        );
+      case AppRoute.profileCreationFlowScreenPath:
+        return _createRoute(
+          routeScreen: BlocProvider(
+            child: const ProfileCreationFlowPage(),
+            create: (context) => ProfileCreationFlowCubit(
+              fAuthRepository: context.read<AuthRemoteApiRepository>(),
+            ),
           ),
         );
       default:

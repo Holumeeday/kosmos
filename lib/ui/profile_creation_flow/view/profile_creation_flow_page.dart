@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:playkosmos_v3/common_widgets/sizes.dart';
+import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
+import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/enums/enums.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/cubit/profile_creation_flow_cubit.dart';
@@ -11,6 +12,7 @@ import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_name_
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_pics_page.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_search_radius_page.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_your_location_page.dart';
+import 'package:playkosmos_v3/utils/utils.dart';
 
 /// The profile creation flow a successful sign up
 ///
@@ -38,56 +40,100 @@ class __ProfileCreationFlowPageState extends State<_ProfileCreationFlowPage>
   final fPageController = PageController();
 
   @override
+  void initState() {
+    super.initState();
+    final fCurrentUser = context.read<UserProfileStorage>().fUserModel;
+    // Navigate to the next profile flow if the user name is already set
+    if (fCurrentUser.data?.fullName != null) {
+      context.read<ProfileCreationFlowCubit>().nextPage();
+    }
+  }
+
+  @override
+  void dispose() {
+    fPageController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     super.build(context);
-    return BlocListener<ProfileCreationFlowCubit, ProfileCreationFlowState>(
-      listener: (context, state) {
-        fPageController.jumpToPage(
-          state.fProfileCreationStage.index,
-        );
-      },
-      child: Scaffold(
-        body: SafeArea(
-          child: Column(
-            children: <Widget>[
-              // Progress bar
-              const _ProgressBar(),
-              const VSpace(20),
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<ProfileCreationFlowCubit, ProfileCreationFlowState>(
+          listener: (context, state) {
+            fPageController.jumpToPage(
+              state.fProfileCreationStage.index,
+            );
+          },
+        ),
 
-              // Back button
-              const _BackButtonAndSkip(),
+        // Uploading Name and Bio listener
+        BlocListener<ProfileCreationFlowCubit, ProfileCreationFlowState>(
+          listenWhen: (prev, next) =>
+              prev.uploadNameStatus != next.uploadNameStatus,
+          listener: (context, state) {
+            if (state.uploadNameStatus ==
+                ProfileCreationUploadNameStatus.success) {
+              if (state.data?.status != true) return;
+              context.read<ProfileCreationFlowCubit>().nextPage();
+            } else if (state.uploadNameStatus ==
+                    ProfileCreationUploadNameStatus.failure &&
+                state.errorMessage != null) {
+              SnackBarUtil.showError(message: state.errorMessage!);
+            }
+          },
+        ),
+      ],
+      child: ShowAsyncBusyIndicator(
+        fInAsync: context.select((ProfileCreationFlowCubit cubit) =>
+            cubit.state.uploadNameStatus ==
+                ProfileCreationUploadNameStatus.loading ||
+            cubit.state.uploadOthersStatus ==
+                ProfileCreationUploadOthersStatus.loading),
+        fChild: Scaffold(
+          body: SafeArea(
+            child: Column(
+              children: <Widget>[
+                // Progress bar
+                const _ProgressBar(),
+                const VSpace(20),
 
-              // Pages
-              Expanded(
-                child: PageView(
-                  controller: fPageController,
-                  allowImplicitScrolling: false,
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: const [
-                    // Name and Bio
-                    UploadNamePage(),
+                // Back button
+                const _BackButtonAndSkip(),
 
-                    // Profile pics
-                    UploadPicsPage(),
+                // Pages
+                Expanded(
+                  child: PageView(
+                    controller: fPageController,
+                    allowImplicitScrolling: false,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: const [
+                      // Name and Bio
+                      UploadNamePage(),
 
-                    // Birthday
-                    UploadBirthdayPage(),
+                      // Profile pics
+                      UploadPicsPage(),
 
-                    // Gender
-                    UploadGenderPage(),
+                      // Birthday
+                      UploadBirthdayPage(),
 
-                    // Interest
-                    UploadInterestPage(),
+                      // Gender
+                      UploadGenderPage(),
 
-                    // Location selection
-                    UploadYourLocationPage(),
+                      // Interest
+                      UploadInterestPage(),
 
-                    // Search radius
-                    UploadSearchRadiusPage(),
-                  ],
-                ),
-              )
-            ],
+                      // Location selection
+                      UploadYourLocationPage(),
+
+                      // Search radius
+                      UploadSearchRadiusPage(),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -196,9 +242,8 @@ class _BackButtonAndSkip extends StatelessWidget {
       ProfileCreationFlowEnum.uploadSearchRadius => context.select(
           (ProfileCreationFlowCubit cubit) =>
               cubit.state.fFlowModel.radius == null),
-      ProfileCreationFlowEnum.uploadLocation => context.select(
-          (ProfileCreationFlowCubit cubit) =>
-              cubit.state.fFlowModel.location != null),
+      ProfileCreationFlowEnum.uploadLocation =>
+        context.select((ProfileCreationFlowCubit cubit) => false),
     };
   }
 }

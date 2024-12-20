@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 
 /*
@@ -131,7 +132,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         centerTitle: fCenterTitle,
         elevation: fElevation,
         leading: fLeading ??
-            (fShowBackButton
+            (fShowBackButton && context.canPop()
                 ? Semantics(
                     button: true,
                     label: fBackButtonSemanticLabel ??

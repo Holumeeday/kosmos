@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
+import 'package:playkosmos_v3/enums/enums.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/cubit/profile_creation_flow_cubit.dart';
-import 'package:playkosmos_v3/ui/profile_creation_flow/models/profile_creation_flow_model.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/next_button.dart';
 
 /// Upload gender page

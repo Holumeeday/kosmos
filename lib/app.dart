@@ -2,6 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/ui/buddies/cubit/buddies_cubit.dart';
 import 'package:playkosmos_v3/ui/buddy_connections/cubit/buddy_connections_cubit.dart';
@@ -43,6 +44,11 @@ class App extends StatelessWidget {
           create: (context) => AuthFlowStorage(
             fStorage: fNonSecureStorage,
             fCookiesStorage: fCookiesStorage,
+          ),
+        ),
+        RepositoryProvider(
+          create: (context) => UserProfileStorage(
+            fStorage: fNonSecureStorage,
           ),
         ),
         RepositoryProvider(
@@ -100,15 +106,28 @@ class _AppBloc extends StatelessWidget {
 
 /// Main app view widget that configures the MaterialApp with themes, locale,
 /// and localization
-class _AppView extends StatelessWidget {
+class _AppView extends StatefulWidget {
   const _AppView();
+
+  @override
+  State<_AppView> createState() => _AppViewState();
+}
+
+class _AppViewState extends State<_AppView> {
+  late GoRouter _fRouter;
+
+  @override
+  void initState() {
+    super.initState();
+    _fRouter = context.read<AppRoute>().router;
+  }
 
   @override
   Widget build(BuildContext context) {
     final dLocale = context
         .select((SelectLanguageCubit cubit) => cubit.state.dSelectedLocale);
     return MaterialApp.router(
-      routerConfig: context.read<AppRoute>().router,
+      routerConfig: _fRouter,
       title: 'Playkosmos',
       debugShowCheckedModeBanner: false,
       builder: DevicePreview.appBuilder,

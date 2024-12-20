@@ -42,9 +42,6 @@ class __SignInEmailPageForm extends State<_SignInEmailForm> {
   /// If password is valid
   bool? _dIsValidPassword;
 
-  // User name
-  final fUsername = 'John Doe';
-
   @override
   void initState() {
     super.initState();
@@ -81,27 +78,36 @@ class __SignInEmailPageForm extends State<_SignInEmailForm> {
       listener: (context, state) {
         if (state.status == SignInWithEmailStatus.success) {
           if (state.data?.status == true) {
-            showDialog<void>(
-              context: context,
-              barrierDismissible: false,
-              builder: (BuildContext dialogContext) {
-                return Dialog(
-                  child: AuthSuccessInfoDialog(
-                    fTitle: context.loc.welcomeBackUser(fUsername),
-                    fMessage: context.loc.youAreAlllSignedInAndReadyToRoll,
-                    fOnLetGo: () {
-                      // Set login status to true which will re-direct the user
-                      // to home page
-                      context.read<AuthFlowStorage>().setLogIn().then((_) {
-                        if (context.mounted) {
-                          context.go(AppRoute.homeScreenPath);
-                        }
-                      });
-                    },
-                  ),
-                );
-              },
-            );
+            if (state.user?.data?.fullName != null) {
+              showDialog<void>(
+                context: context,
+                barrierDismissible: false,
+                builder: (BuildContext dialogContext) {
+                  return Dialog(
+                    child: AuthSuccessInfoDialog(
+                      fTitle: context.loc.welcomeBackUser(
+                          state.user?.data?.fullName ?? 'User'),
+                      fMessage: context.loc.youAreAlllSignedInAndReadyToRoll,
+                      fOnLetGo: () {
+                        // Set login status to true which will re-direct the user
+                        // to home page
+                        context.read<AuthFlowStorage>().setLogIn().then((_) {
+                          if (context.mounted) {
+                            context.go(AppRoute.homeScreenPath);
+                          }
+                        });
+                      },
+                    ),
+                  );
+                },
+              );
+            } else {
+              context.read<AuthFlowStorage>().setLogIn().then((_) {
+                if (context.mounted) {
+                  context.go(AppRoute.profileCreationFlowScreenPath);
+                }
+              });
+            }
           }
         } else if (state.status == SignInWithEmailStatus.failure &&
             state.errorMessage != null) {
