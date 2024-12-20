@@ -30,6 +30,21 @@ class AuthRemoteApiRepository {
     }
   }
 
+  /// Register with phone
+  Future<GenericResponse> signUpPhone({
+    required String phone,
+  }) async {
+    try {
+      final res = await _remoteApi.post(
+        'auth/register/phone',
+        body: {'phone': phone},
+      );
+      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
+    } catch (_) {
+      rethrow;
+    }
+  }
+
   /// Verify email using OTP
   Future<GenericResponse> verifyEmailOtp({
     required String email,
@@ -49,16 +64,37 @@ class AuthRemoteApiRepository {
     }
   }
 
+  /// Verify phone using OTP
+  Future<GenericResponse> verifyPhoneOtp({
+    required String phone,
+    required int otp,
+  }) async {
+    try {
+      final res = await _remoteApi.post(
+        'auth/register/phone/verify',
+        body: {
+          'phone': phone,
+          'otp': otp,
+        },
+      );
+      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
+    } catch (_) {
+      rethrow;
+    }
+  }
+
   /// Create password for both email/phone sign up
   Future<GenericResponse> createPassword({
-    required String email,
+    String? phone,
+    String? email,
     required String password,
   }) async {
     try {
       final res = await _remoteApi.post(
         'auth/register/set-password',
         body: {
-          'email': email,
+          if (phone != null) 'phone': phone,
+          if (email != null) 'email': email,
           'password': password,
         },
       );
@@ -83,6 +119,21 @@ class AuthRemoteApiRepository {
     }
   }
 
+  /// Request forgot password otp for phone
+  Future<GenericResponse> forgotPasswordPhone({
+    required String phone,
+  }) async {
+    try {
+      final res = await _remoteApi.post(
+        'auth/forgot-password/phone',
+        body: {'phone': phone},
+      );
+      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
+    } catch (_) {
+      rethrow;
+    }
+  }
+
   /// Forgot password email verification
   Future<GenericResponse> verifyForgotPasswordEmail({
     required String otp,
@@ -90,9 +141,28 @@ class AuthRemoteApiRepository {
   }) async {
     try {
       final res = await _remoteApi.post(
-        'auth/forgot-password/verify',
+        'auth/forgot-password/email/verify',
         body: {
           'email': email,
+          'otp': otp,
+        },
+      );
+      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  /// Forgot password phone verification
+  Future<GenericResponse> verifyForgotPasswordPhone({
+    required String otp,
+    required String phone,
+  }) async {
+    try {
+      final res = await _remoteApi.post(
+        'auth/forgot-password/phone/verify',
+        body: {
+          'phone': phone,
           'otp': otp,
         },
       );
@@ -119,6 +189,23 @@ class AuthRemoteApiRepository {
     }
   }
 
+  /// Resend OTP for forgot password phone
+  Future<GenericResponse> resendOtpForgotPasswordPhone({
+    required String phone,
+  }) async {
+    try {
+      final res = await _remoteApi.post(
+        'auth/forgot-password/phone/resend-otp',
+        body: {
+          'phone': phone,
+        },
+      );
+      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
+    } catch (_) {
+      rethrow;
+    }
+  }
+
   /// Verify otp for forgot password email
   Future<GenericResponse> verifyOtpForgotPasswordEmail({
     required String otp,
@@ -129,6 +216,25 @@ class AuthRemoteApiRepository {
         'auth/forgot-password/email/verify',
         body: {
           'email': email,
+          'otp': otp,
+        },
+      );
+      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  /// Verify otp for forgot password phone
+  Future<GenericResponse> verifyOtpForgotPasswordPhone({
+    required String otp,
+    required String phone,
+  }) async {
+    try {
+      final res = await _remoteApi.post(
+        'auth/forgot-password/phone/verify',
+        body: {
+          'phone': phone,
           'otp': otp,
         },
       );
@@ -157,6 +263,25 @@ class AuthRemoteApiRepository {
     }
   }
 
+  /// Reset password phone
+  Future<GenericResponse> resetPasswordPhone({
+    required String phone,
+    required String password,
+  }) async {
+    try {
+      final res = await _remoteApi.post(
+        'auth/forgot-password/change-password',
+        body: {
+          'phone': phone,
+          'password': password,
+        },
+      );
+      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
+    } catch (_) {
+      rethrow;
+    }
+  }
+
   /// Login with email
   Future<GenericResponse> loginWithEmail({
     required String email,
@@ -167,6 +292,25 @@ class AuthRemoteApiRepository {
         'auth/login',
         body: {
           'email': email,
+          'password': password,
+        },
+      );
+      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  /// Login with phone
+  Future<GenericResponse> loginWithPhone({
+    required String phone,
+    required String password,
+  }) async {
+    try {
+      final res = await _remoteApi.post(
+        'auth/login',
+        body: {
+          'phone': phone,
           'password': password,
         },
       );

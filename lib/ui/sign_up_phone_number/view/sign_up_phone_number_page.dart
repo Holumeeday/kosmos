@@ -27,7 +27,7 @@ class SignUpPhoneNumberPage extends StatefulWidget {
 }
 
 class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
-  // Email controller
+  // Phone controller
   late TextEditingController _fPhoneController;
 
   /// The global key for validation of the form
@@ -60,91 +60,123 @@ class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CustomAppBar(
-        fElevation: 0,
+    return ShowAsyncBusyIndicator(
+      fInAsync: context.select(
+        (SignUpWithPhoneNumberCubit cubit) =>
+            cubit.state.status == SignUpWithPhoneStatus.loading,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child:
-            BlocBuilder<SignUpWithPhoneNumberCubit, SignUpWithPhoneNumberState>(
-          builder: (context, state) {
-            const kOtpOptions = PhoneOtpMethodEnum.values;
-            return Form(
-              key: _fFormKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      context.loc.enterYourNumber,
-                      style: context.appTextTheme.header1,
-                    ),
-                  ),
-                  const VSpace(56),
+      fChild:
+          BlocListener<SignUpWithPhoneNumberCubit, SignUpWithPhoneNumberState>(
+        listener: (context, state) {
+          if (state.status == SignUpWithPhoneStatus.success) {
+            // If sign up was successful
+            if (state.data?.status == true) {
+              context.pushNamed(
+                AppRoute.phoneNumberOtpVerificationScreen,
+                pathParameters: {
+                  'phone': context
+                      .read<SignUpWithPhoneNumberCubit>()
+                      .getFullPhoneNumber(),
+                },
+              );
+            }
+          } else if (state.status == SignUpWithPhoneStatus.failure &&
+              state.errorMessage != null) {
+            SnackBarUtil.showError(message: state.errorMessage!);
+          }
+        },
+        child: Scaffold(
+          appBar: const CustomAppBar(
+            fElevation: 0,
+          ),
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: BlocBuilder<SignUpWithPhoneNumberCubit,
+                SignUpWithPhoneNumberState>(
+              builder: (context, state) {
+                const kOtpOptions = PhoneOtpMethodEnum.values;
+                return Form(
+                  key: _fFormKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          context.loc.enterYourNumber,
+                          style: context.appTextTheme.header1,
+                        ),
+                      ),
+                      const VSpace(56),
 
-                  // Phone number text field
-                  CustomPhoneField(
-                    fTextController: _fPhoneController,
-                    fValidator: ValidationUtil.numberValidator,
-                    fOnCountryChanged: (value) {
-                      context
-                          .read<SignUpWithPhoneNumberCubit>()
-                          .setCountryCode(value);
-                    },
-                  ),
-                  const VSpace(56),
+                      // Phone number text field
+                      CustomPhoneField(
+                        fTextController: _fPhoneController,
+                        fValidator: ValidationUtil.numberValidator,
+                        fOnCountryChanged: (value) {
+                          context
+                              .read<SignUpWithPhoneNumberCubit>()
+                              .setCountryCode(value);
+                        },
+                      ),
+                      const VSpace(56),
 
-                  // Login button
-                  PrimaryGradientButton(
-                    fDisabled: !(_dIsValidPhone ?? false),
-                    fOnPressed: () {
-                      showDialog(
-                        context: context,
-                        barrierDismissible: true,
-                        builder: (_) {
-                          return Dialog(
-                              child: OtpOptions(
-                            fTitle: context.loc.howWouldYouLikeToReceiveTheCode,
-                            fcontent: Column(
-                              children: kOtpOptions.map((option) {
-                                return BlocSelector<SignUpWithPhoneNumberCubit,
-                                    SignUpWithPhoneNumberState, String>(
-                                  selector: (state) => state.fSelectedOtpOption,
-                                  builder: (context, selectedOption) {
-                                    return RadioListTile<String>(
-                                      title: _buildRichTextTitle(
-                                          context, option.name),
-                                      value: option.name,
-                                      groupValue: selectedOption,
-                                      onChanged: (value) {
-                                        if (value != null) {
-                                          context
-                                              .read<
-                                                  SignUpWithPhoneNumberCubit>()
-                                              .setOtpOption(value);
-                                        }
+                      // Login button
+                      PrimaryGradientButton(
+                        fDisabled: !(_dIsValidPhone ?? false),
+                        fOnPressed: () {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: true,
+                            builder: (_) {
+                              return Dialog(
+                                  child: OtpOptions(
+                                fTitle:
+                                    context.loc.howWouldYouLikeToReceiveTheCode,
+                                fcontent: Column(
+                                  children: kOtpOptions.map((option) {
+                                    return BlocSelector<
+                                        SignUpWithPhoneNumberCubit,
+                                        SignUpWithPhoneNumberState,
+                                        String>(
+                                      selector: (state) =>
+                                          state.fSelectedOtpOption,
+                                      builder: (context, selectedOption) {
+                                        return RadioListTile<String>(
+                                          title: _buildRichTextTitle(
+                                              context, option.name),
+                                          value: option.name,
+                                          groupValue: selectedOption,
+                                          onChanged: (value) {
+                                            if (value != null) {
+                                              context
+                                                  .read<
+                                                      SignUpWithPhoneNumberCubit>()
+                                                  .setOtpOption(value);
+                                            }
+                                          },
+                                        );
                                       },
                                     );
-                                  },
-                                );
-                              }).toList(),
-                            ),
-                            fOnLetGo: () {
-                              context.go(AppRoute
-                                  .phoneNumberOtpVerificationScreenPath);
+                                  }).toList(),
+                                ),
+                                fOnLetGo: () {
+                                  context
+                                      .read<SignUpWithPhoneNumberCubit>()
+                                      .signUpPhone();
+                                },
+                              ));
                             },
-                          ));
+                          );
                         },
-                      );
-                    },
-                    fChild: Text(context.loc.loginText),
-                  )
-                ],
-              ),
-            );
-          },
+                        fChild: Text(context.loc.loginText),
+                      )
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
         ),
       ),
     );

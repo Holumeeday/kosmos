@@ -74,7 +74,8 @@ class _SignUpWithEmailPageViewState extends State<_SignUpWithEmailPageView> {
                 },
               );
             }
-          } else if (state.status == SignUpWithEmailStatus.failure) {
+          } else if (state.status == SignUpWithEmailStatus.failure &&
+              state.errorMessage != null) {
             SnackBarUtil.showError(message: state.errorMessage!);
           }
         },
