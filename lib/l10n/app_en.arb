@@ -2490,6 +2490,10 @@
   "@close": {
     "description": "To close something"
   },
+   "expand": "Expand",
+  "@Expand": {
+    "description": "To Expand something"
+  },
   "helsinkiFinland": "Helsinki, Finland",
   "@helsinkiFinland": {
     "description": "To display user location"

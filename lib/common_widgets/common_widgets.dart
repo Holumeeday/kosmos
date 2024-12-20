@@ -34,3 +34,4 @@ export 'sizes.dart';
 export 'text_scale_clamp.dart';
 export 'text_with_background.dart';
 export 'username_and_plan.dart';
+export 'carousel_indicator.dart';

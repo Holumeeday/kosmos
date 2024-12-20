@@ -39,7 +39,7 @@ class _CarouselWidgetState extends State<CarouselWidget> {
             children: [
               GestureDetector(
                 onTapDown: (details) => _onTapDown(details, fImageLength),
-                child: PageView.builder(
+                child: PageView .builder(
                   controller: _pageController,
                   itemCount: fImageLength,
                   onPageChanged: (page) {
@@ -47,7 +47,7 @@ class _CarouselWidgetState extends State<CarouselWidget> {
                       fActivePage = page;
                     });
                   },
-                  itemBuilder: (context, pagePosition) {
+                 itemBuilder: (context, pagePosition) {
                     return AnimatedContainer(
                       duration: const Duration(milliseconds: 500),
                       curve: Curves.easeInOut,
@@ -66,7 +66,7 @@ class _CarouselWidgetState extends State<CarouselWidget> {
               ),
               Positioned(
                 top: 20,
-                child: Indicator(
+                child: CarouselIndicator(
                   fImagesLength: fImageLength,
                   fCurrentIndex: fActivePage,
                 ),
@@ -111,51 +111,3 @@ class _CarouselWidgetState extends State<CarouselWidget> {
   }
 }
 
-class Indicator extends StatelessWidget {
-  const Indicator({
-    super.key,
-    required this.fImagesLength,
-    required this.fCurrentIndex,
-  });
-
-  final int fImagesLength;
-  final int fCurrentIndex;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      // margin: const EdgeInsets.symmetric(horizontal: 20),
-      width: getScreenWidth(context),
-      height: 5,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: List<Widget>.generate(
-          fImagesLength,
-          (index) {
-            final bool active = index == fCurrentIndex;
-            return Container(
-              // margin: const EdgeInsets.symmetric(horizontal: 4),
-              width: getScreenWidth(context) / (fImagesLength + .5),
-              decoration: BoxDecoration(
-                boxShadow: active
-                    ? const [
-                        BoxShadow(
-                          color: Color(0xFF2A2A2A),
-                          blurRadius: 10,
-                          spreadRadius: 0,
-                          offset: Offset(0, 4),
-                        ),
-                      ]
-                    : null,
-                color: active
-                    ? Colors.white
-                    : const Color(0xFF000000).withOpacity(0.3),
-                borderRadius: const BorderRadius.all(Radius.circular(4.89)),
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
-}
