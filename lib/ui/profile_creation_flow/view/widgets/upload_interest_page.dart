@@ -134,35 +134,34 @@ class _InterestHeader extends StatelessWidget {
           ),
 
           // "Select All" switch
-          Switch(
-            value: fIsSelectAll,
-            onChanged: (v) => fOnSelectAll.call(v),
-          ),
-          const HSpace(12),
-          Text(
-            context.loc.selectAll,
-            style: context.appTextTheme.buttonMedium,
-          ),
+          if (fIsClosed)
+            Row(
+              children: [
+                Switch(
+                  value: fIsSelectAll,
+                  onChanged: (v) => fOnSelectAll.call(v),
+                ),
+                const HSpace(12),
+                Text(
+                  context.loc.selectAll,
+                  style: context.appTextTheme.buttonMedium,
+                ),
+              ],
+            ),
 
           // Close/Expand toggle button
           const HRelativeSpace(32),
-          Row(
-            children: [
-              if (getScreenWidth(context) >= 480)
-                Text(
-                  fIsClosed ? context.loc.close : context.loc.expand,
-                  style: context.appTextTheme.header3!.copyWith(fontSize: 14),
-                ),
-              IconButton(
-                onPressed: fOnClosed,
-                icon: Icon(
-                  fIsClosed
-                      ? Icons.keyboard_arrow_up
-                      : Icons.keyboard_arrow_down,
-                  size: 24,
-                ),
-              )
-            ],
+          if (getScreenWidth(context) >= 480)
+            Text(
+              fIsClosed ? context.loc.close : context.loc.open,
+              style: context.appTextTheme.header3!.copyWith(fontSize: 14),
+            ),
+          IconButton(
+            onPressed: fOnClosed,
+            icon: Icon(
+              fIsClosed ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+              size: 24,
+            ),
           ),
         ],
       ),
