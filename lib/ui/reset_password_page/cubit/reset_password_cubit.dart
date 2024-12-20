@@ -22,16 +22,11 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
   }) async {
     emit(state.copyWith(status: ResetPasswordStatus.loading));
     try {
-      late GenericResponse fResponse;
-      if (email != null) {
-        fResponse = await fAuthRepository.resetPasswordEmail(
-          email: email,
-          password: password,
-        );
-      } else {
-        // create password for phone
-      }
-
+      final fResponse = await fAuthRepository.resetPassword(
+        email: email,
+        phone: phone,
+        password: password,
+      );
       // Emit the state if response status is failed or success with the error message
       // if available
       if (fResponse.status == true) {

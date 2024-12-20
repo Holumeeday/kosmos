@@ -133,7 +133,9 @@ mixin GoRouterMixin {
         return _createRoute(
           routeScreen: BlocProvider(
             child: const ForgotPasswordPhonePage(),
-            create: (context) => ForgotPasswordPhoneCubit(),
+            create: (context) => ForgotPasswordPhoneCubit(
+              fAuthRepository: context.read<AuthRemoteApiRepository>(),
+            ),
           ),
         );
       case AppRoute.forgotPasswordOtpScreenPath:
@@ -141,8 +143,8 @@ mixin GoRouterMixin {
         return _createRoute(
           routeScreen: BlocProvider(
             child: ForgotPasswordOtpVerificationPage(
-              fEmail: fQueryParams['email'] ?? '',
-              fPhone: fQueryParams['phone'] ?? '',
+              fEmail: fQueryParams['email'],
+              fPhone: fQueryParams['phone'],
               fIsEmail: bool.parse(fQueryParams['is-email'] as String),
             ),
             create: (context) => ForgotPasswordEmailCubit(
@@ -196,10 +198,14 @@ mixin GoRouterMixin {
           ),
         );
       case AppRoute.resetPasswordScreenPath:
-        final fEmail = state.pathParameters['email'] as String;
+        final fQueryParams = state.uri.queryParameters;
         return _createRoute(
           routeScreen: BlocProvider(
-            child: ResetPasswordPage(fEmail: fEmail),
+            child: ResetPasswordPage(
+              fEmail: fQueryParams['email'],
+              fPhone: fQueryParams['phone'],
+              fIsEmail: bool.parse(fQueryParams['is-email']!),
+            ),
             create: (context) => ResetPasswordCubit(
               fAuthRepository: context.read<AuthRemoteApiRepository>(),
             ),

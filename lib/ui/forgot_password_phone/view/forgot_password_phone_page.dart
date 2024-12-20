@@ -44,6 +44,11 @@ class _ForgotPasswordPhoneState extends State<_ForgotPasswordPhone> {
         if (mounted) {
           _dCanNext =
               ValidationUtil.numberValidator(_fPhoneController.text) == null;
+          if (_dCanNext) {
+            context
+                .read<ForgotPasswordPhoneCubit>()
+                .setPhoneNumber(_fPhoneController.text);
+          }
           setState(() {});
         }
       });
@@ -57,71 +62,112 @@ class _ForgotPasswordPhoneState extends State<_ForgotPasswordPhone> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CustomAppBar(
-        fElevation: 0,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Form(
-          key: _fFormKey,
-          child: Column(
-            children: <Widget>[
-              // Forgot password text
-              Text(
-                context.loc.forgotPassword2,
-                textAlign: TextAlign.center,
-                style: context.appTextTheme.header1,
-              ),
-              const VSpace(10),
-              Text(
-                context.loc.noWorriesForgotPasswordCaption,
-                textAlign: TextAlign.center,
-                style: context.appTextTheme.body?.copyWith(
-                  color: context.appColors.greyShade85Color,
-                ),
-              ),
-              const VSpace(40),
-
-              // Phone text field
-              CustomPhoneField(
-                fTextController: _fPhoneController,
-                fValidator: ValidationUtil.numberValidator,
-              ),
-
-              const VSpace(56),
-
-              // Next button
-              PrimaryGradientButton(
-                fDisabled: !_dCanNext,
-                fOnPressed: () {
-                  showCustomDialog(
-                    barrierDismissible: false,
-                    context,
-                    builder: (_) => Dialog(
-                      child: AuthSuccessInfoDialog(
-                        fTitle: context.loc.checkYourInbox,
-                        fMessage: context.loc.dingDingCheckInboxMessage,
-                        fOnLetGo: () {
-                          context.goNamed(
-                            AppRoute.forgotPasswordOtpScreen,
-                            queryParameters: {
-                              'phone': _fPhoneController.text,
-                              'is-email': false.toString()
-                            },
-                          );
+    return ShowAsyncBusyIndicator(
+      fInAsync: context.select((ForgotPasswordPhoneCubit cubit) =>
+          cubit.state.status == ForgotPasswordPhoneStatus.loading),
+      fChild: BlocListener<ForgotPasswordPhoneCubit, ForgotPasswordPhoneState>(
+        listener: (context, state) {
+          if (state.status == ForgotPasswordPhoneStatus.success) {
+            if (state.data?.status == true) {
+              showCustomDialog(
+                barrierDismissible: false,
+                context,
+                builder: (_) => Dialog(
+                  child: AuthSuccessInfoDialog(
+                    fTitle: context.loc.checkYourInbox,
+                    fMessage: context.loc.dingDingCheckInboxMessage,
+                    fOnLetGo: () {
+                      context.goNamed(
+                        AppRoute.forgotPasswordOtpScreen,
+                        queryParameters: {
+                          'phone': context
+                              .read<ForgotPasswordPhoneCubit>()
+                              .getFullPhoneNumber(),
+                          'is-email': false.toString()
                         },
-                      ),
+                      );
+                    },
+                  ),
+                ),
+              );
+            }
+          } else if (state.status == ForgotPasswordPhoneStatus.failure &&
+              state.errorMessage != null) {
+            SnackBarUtil.showError(message: state.errorMessage!);
+          }
+        },
+        child: Scaffold(
+          appBar: const CustomAppBar(
+            fElevation: 0,
+          ),
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Form(
+              key: _fFormKey,
+              child: Column(
+                children: <Widget>[
+                  // Forgot password text
+                  Text(
+                    context.loc.forgotPassword2,
+                    textAlign: TextAlign.center,
+                    style: context.appTextTheme.header1,
+                  ),
+                  const VSpace(10),
+                  Text(
+                    context.loc.noWorriesForgotPasswordCaption,
+                    textAlign: TextAlign.center,
+                    style: context.appTextTheme.body?.copyWith(
+                      color: context.appColors.greyShade85Color,
                     ),
-                  );
-                },
-                fChild: Text(context.loc.nextText),
-              ),
-              const VSpace(24),
+                  ),
+                  const VSpace(40),
 
-              // Otp selection method
-              const _OtpMethodSelection(),
-            ],
+                  // Phone text field
+                  CustomPhoneField(
+                    fOnCountryChanged: (v) {
+                      context
+                          .read<ForgotPasswordPhoneCubit>()
+                          .setCountryCode(v);
+                    },
+                    fTextController: _fPhoneController,
+                    fValidator: ValidationUtil.numberValidator,
+                  ),
+
+                  const VSpace(56),
+
+                  // Next button
+                  PrimaryGradientButton(
+                    fDisabled: !_dCanNext,
+                    fOnPressed: () {
+                      showCustomDialog(
+                        barrierDismissible: false,
+                        context,
+                        builder: (_) => Dialog(
+                          child: AuthSuccessInfoDialog(
+                            fTitle: context.loc.checkYourInbox,
+                            fMessage: context.loc.dingDingCheckInboxMessage,
+                            fOnLetGo: () {
+                              context.goNamed(
+                                AppRoute.forgotPasswordOtpScreen,
+                                queryParameters: {
+                                  'phone': _fPhoneController.text,
+                                  'is-email': false.toString()
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                    fChild: Text(context.loc.nextText),
+                  ),
+                  const VSpace(24),
+
+                  // Otp selection method
+                  const _OtpMethodSelection(),
+                ],
+              ),
+            ),
           ),
         ),
       ),
@@ -134,8 +180,8 @@ class _OtpMethodSelection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fSelectedOtpMethod = context
-        .select((ForgotPasswordPhoneCubit cubit) => cubit.state.fOtpMethod);
+    final fSelectedOtpMethod = context.select(
+        (ForgotPasswordPhoneCubit cubit) => cubit.state.fSelectedOtpOption);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[

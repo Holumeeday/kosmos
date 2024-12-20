@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/reset_password_page/cubit/reset_password_cubit.dart';
@@ -8,37 +9,28 @@ import 'package:playkosmos_v3/utils/utils.dart';
 /// The reset password form page
 ///
 /// @author: Godwin Mathias
-class ResetPasswordPage extends StatelessWidget {
+class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({
     super.key,
-    required this.fEmail,
+    this.fEmail,
+    this.fPhone,
+    required this.fIsEmail,
   });
 
   /// The user email address
-  final String fEmail;
+  final String? fEmail;
+
+  /// The user phone number
+  final String? fPhone;
+
+  /// If the user is using email
+  final bool fIsEmail;
 
   @override
-  Widget build(BuildContext context) {
-    return _ResetPasswordForm(
-      fEmail: fEmail,
-    );
-  }
+  State<ResetPasswordPage> createState() => __ResetPasswordPageState();
 }
 
-class _ResetPasswordForm extends StatefulWidget {
-  const _ResetPasswordForm({
-    super.key,
-    required this.fEmail,
-  });
-
-  /// The user email
-  final String fEmail;
-
-  @override
-  State<_ResetPasswordForm> createState() => __ResetPasswordFormState();
-}
-
-class __ResetPasswordFormState extends State<_ResetPasswordForm> {
+class __ResetPasswordPageState extends State<ResetPasswordPage> {
   /// The password controller
   late TextEditingController _fPasswordController;
 
@@ -80,7 +72,13 @@ class __ResetPasswordFormState extends State<_ResetPasswordForm> {
                 child: AuthSuccessInfoDialog(
                   fTitle: context.loc.passswordResetSuccessfully,
                   fMessage: context.loc.yourPasswordResetWasSuccessfulMessage,
-                  fOnLetGo: () {},
+                  fOnLetGo: () {
+                    context.go(
+                      widget.fIsEmail
+                          ? AppRoute.signInEmailScreenPath
+                          : AppRoute.signInPhoneScreenPath,
+                    );
+                  },
                 ),
               );
             });
@@ -133,6 +131,7 @@ class __ResetPasswordFormState extends State<_ResetPasswordForm> {
                     fOnPressed: () {
                       context.read<ResetPasswordCubit>().resetPassword(
                             email: widget.fEmail,
+                            phone: widget.fPhone,
                             password: _fPasswordController.text,
                           );
                     },

@@ -89,6 +89,8 @@ class AuthRemoteApiRepository {
     String? email,
     required String password,
   }) async {
+    assert(email != null && phone != null,
+        'Email and Phone number can\'t be null');
     try {
       final res = await _remoteApi.post(
         'auth/register/set-password',
@@ -244,16 +246,20 @@ class AuthRemoteApiRepository {
     }
   }
 
-  /// Reset password email
-  Future<GenericResponse> resetPasswordEmail({
-    required String email,
+  /// Reset password email/phone
+  Future<GenericResponse> resetPassword({
+    String? email,
+    String? phone,
     required String password,
   }) async {
+    assert(email != null && phone != null,
+        'Email and Phone number can\'t be null');
     try {
       final res = await _remoteApi.post(
         'auth/forgot-password/change-password',
         body: {
-          'email': email,
+          if (email != null) 'email': email,
+          if (phone != null) 'phone': phone,
           'password': password,
         },
       );

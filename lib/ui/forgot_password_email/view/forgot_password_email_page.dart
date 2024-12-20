@@ -84,7 +84,8 @@ class __ForgotPasswordEmailFormState extends State<_ForgotPasswordEmailForm> {
                 ),
               );
             }
-          } else if (state.status == ForgotPasswordEmailStatus.failure) {
+          } else if (state.status == ForgotPasswordEmailStatus.failure &&
+              state.errorMessage != null) {
             SnackBarUtil.showError(message: state.errorMessage!);
           }
         },

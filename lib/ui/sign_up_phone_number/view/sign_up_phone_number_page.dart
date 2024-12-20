@@ -47,6 +47,11 @@ class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
         if (mounted) {
           _dIsValidPhone =
               ValidationUtil.numberValidator(_fPhoneController.text) == null;
+          if (_dIsValidPhone ?? false) {
+            context
+                .read<SignUpWithPhoneNumberCubit>()
+                .setPhoneNumber(_fPhoneController.text);
+          }
           setState(() {});
         }
       });

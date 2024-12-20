@@ -18,10 +18,10 @@ class ForgotPasswordOtpVerificationPage extends StatelessWidget {
   });
 
   /// The user email
-  final String fEmail;
+  final String? fEmail;
 
   /// The user phone number
-  final String fPhone;
+  final String? fPhone;
 
   /// If the user is using phone or email
   final bool fIsEmail;
@@ -30,6 +30,8 @@ class ForgotPasswordOtpVerificationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return _EmailOtpView(
       fEmail: fEmail,
+      fIsEmail: fIsEmail,
+      fPhone: fPhone,
     );
   }
 }
@@ -37,11 +39,19 @@ class ForgotPasswordOtpVerificationPage extends StatelessWidget {
 class _EmailOtpView extends StatelessWidget {
   const _EmailOtpView({
     super.key,
-    required this.fEmail,
+    this.fEmail,
+    this.fPhone,
+    required this.fIsEmail,
   });
 
   /// The user email
-  final String fEmail;
+  final String? fEmail;
+
+  /// The user phone number
+  final String? fPhone;
+
+  /// If the user is using phone or email
+  final bool fIsEmail;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +75,11 @@ class _EmailOtpView extends StatelessWidget {
                       fOnLetGo: () {
                         context.goNamed(
                           AppRoute.resetPasswordScreen,
-                          pathParameters: {'email': fEmail},
+                          queryParameters: {
+                            if (fEmail != null) 'email': fEmail!,
+                            if (fPhone != null) 'phone': fPhone!,
+                            'is-email': fIsEmail.toString(),
+                          },
                         );
                       },
                     ),
@@ -73,7 +87,8 @@ class _EmailOtpView extends StatelessWidget {
                 },
               );
             } else if (state.status ==
-                ForgotPasswordOtpVerificationStatus.failure) {
+                    ForgotPasswordOtpVerificationStatus.failure &&
+                state.errorMessage != null) {
               SnackBarUtil.showError(message: state.errorMessage!);
             }
           },
