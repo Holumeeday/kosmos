@@ -119,6 +119,7 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
                       context.read<CreatePasswordCubit>().createPassword(
                             password: _fPasswordController.text,
                             email: widget.fEmail,
+                            phone: widget.fPhone,
                           );
                     },
                     fChild: Text(context.loc.nextText),

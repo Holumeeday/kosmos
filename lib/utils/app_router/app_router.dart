@@ -39,6 +39,10 @@ class AppRoute with GoRouterMixin {
             name: homeScreen,
           ),
           createGoRoute(
+            path: resetPasswordScreenPath,
+            name: resetPasswordScreen,
+          ),
+          createGoRoute(
             path: authProviderScreenPath,
             name: authProviderScreen,
           ),
@@ -113,6 +117,7 @@ class AppRoute with GoRouterMixin {
             authProviderScreenPath.cleanPath,
             createPasswordScreenPath.cleanPath,
             phoneNumberOtpVerificationScreenPath.cleanPath,
+            resetPasswordScreenPath.cleanPath,
           ];
 
           /// Pages used in step 2

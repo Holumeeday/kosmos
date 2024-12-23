@@ -2,5 +2,5 @@
 class EnvKeys {
   /// The base url
   static const nodeJsBaseUrl =
-      'https://qcsxljk27g.execute-api.eu-west-2.amazonaws.com/prod/';
+      'https://h5x3qg2ff0.execute-api.eu-west-2.amazonaws.com/prod/';
 }

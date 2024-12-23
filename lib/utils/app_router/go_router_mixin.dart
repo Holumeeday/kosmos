@@ -13,6 +13,7 @@ import 'package:playkosmos_v3/ui/email_otp_verification/cubit/email_otp_verifica
 import 'package:playkosmos_v3/ui/email_otp_verification/view/email_otp_verification_page.dart';
 import 'package:playkosmos_v3/ui/forgot_password_email/cubit/forgot_password_email_cubit.dart';
 import 'package:playkosmos_v3/ui/forgot_password_email/view/forgot_password_email_page.dart';
+import 'package:playkosmos_v3/ui/forgot_password_otp/cubit/forgot_password_otp_cubit.dart';
 import 'package:playkosmos_v3/ui/forgot_password_otp/view/forgot_password_otp_page.dart';
 import 'package:playkosmos_v3/ui/forgot_password_phone/cubit/forgot_password_phone_cubit.dart';
 import 'package:playkosmos_v3/ui/forgot_password_phone/view/forgot_password_phone_page.dart';
@@ -30,6 +31,7 @@ import 'package:playkosmos_v3/ui/select_language/cubit/select_language_cubit.dar
 import 'package:playkosmos_v3/ui/select_language/view/select_language_page.dart';
 import 'package:playkosmos_v3/ui/sign_in_email/cubit/sign_in_cubit.dart';
 import 'package:playkosmos_v3/ui/sign_in_email/view/sign_in_email_page.dart';
+import 'package:playkosmos_v3/ui/sign_in_phone/cubit/sign_in_phone_cubit.dart';
 import 'package:playkosmos_v3/ui/sign_in_phone/view/sign_in_phone_page.dart';
 import 'package:playkosmos_v3/ui/sign_up_phone_number/cubit/sign_up_phone_number_cubit.dart';
 import 'package:playkosmos_v3/ui/sign_up_phone_number/view/sign_up_phone_number_page.dart';
@@ -118,7 +120,13 @@ mixin GoRouterMixin {
         );
       case AppRoute.signInPhoneScreenPath:
         return _createRoute(
-          routeScreen: const SignInPhoneNumberPage(),
+          routeScreen: BlocProvider(
+            create: (context) => SignInPhoneCubit(
+              fUserStorage: context.read<UserProfileStorage>(),
+              fAuthRepository: context.read<AuthRemoteApiRepository>(),
+            ),
+            child: const SignInPhoneNumberPage(),
+          ),
         );
       case AppRoute.forgotPasswordEmailScreenPath:
         return _createRoute(
@@ -147,7 +155,10 @@ mixin GoRouterMixin {
               fPhone: fQueryParams['phone'],
               fIsEmail: bool.parse(fQueryParams['is-email'] as String),
             ),
-            create: (context) => ForgotPasswordEmailCubit(
+            create: (context) => ForgotPasswordOtpVerificationCubit(
+              fEmail: fQueryParams['email'],
+              fPhone: fQueryParams['phone'],
+              fIsEmail: bool.parse(fQueryParams['is-email'] as String),
               fAuthRepository: context.read<AuthRemoteApiRepository>(),
             ),
           ),

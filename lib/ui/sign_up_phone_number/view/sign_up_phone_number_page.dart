@@ -36,9 +36,6 @@ class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
   /// If email is valid
   bool? _dIsValidPhone;
 
-  // User name
-  final fUsername = 'John Doe';
-
   @override
   void initState() {
     super.initState();
@@ -134,47 +131,52 @@ class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
                             context: context,
                             barrierDismissible: true,
                             builder: (_) {
-                              return Dialog(
-                                  child: OtpOptions(
-                                fTitle:
-                                    context.loc.howWouldYouLikeToReceiveTheCode,
-                                fcontent: Column(
-                                  children: kOtpOptions.map((option) {
-                                    return BlocSelector<
-                                        SignUpWithPhoneNumberCubit,
-                                        SignUpWithPhoneNumberState,
-                                        String>(
-                                      selector: (state) =>
-                                          state.fSelectedOtpOption,
-                                      builder: (context, selectedOption) {
-                                        return RadioListTile<String>(
-                                          title: _buildRichTextTitle(
-                                              context, option.name),
-                                          value: option.name,
-                                          groupValue: selectedOption,
-                                          onChanged: (value) {
-                                            if (value != null) {
-                                              context
-                                                  .read<
-                                                      SignUpWithPhoneNumberCubit>()
-                                                  .setOtpOption(value);
-                                            }
-                                          },
-                                        );
-                                      },
-                                    );
-                                  }).toList(),
-                                ),
-                                fOnLetGo: () {
-                                  context
-                                      .read<SignUpWithPhoneNumberCubit>()
-                                      .signUpPhone();
-                                },
-                              ));
+                              return BlocProvider.value(
+                                value:
+                                    context.read<SignUpWithPhoneNumberCubit>(),
+                                child: Dialog(
+                                    child: OtpOptions(
+                                  fTitle: context
+                                      .loc.howWouldYouLikeToReceiveTheCode,
+                                  fcontent: Column(
+                                    children: kOtpOptions.map((option) {
+                                      return BlocSelector<
+                                          SignUpWithPhoneNumberCubit,
+                                          SignUpWithPhoneNumberState,
+                                          String>(
+                                        selector: (state) =>
+                                            state.fSelectedOtpOption,
+                                        builder: (context, selectedOption) {
+                                          return RadioListTile<String>(
+                                            title: _buildRichTextTitle(
+                                                context, option.name),
+                                            value: option.name,
+                                            groupValue: selectedOption,
+                                            onChanged: (value) {
+                                              if (value != null) {
+                                                context
+                                                    .read<
+                                                        SignUpWithPhoneNumberCubit>()
+                                                    .setOtpOption(value);
+                                              }
+                                            },
+                                          );
+                                        },
+                                      );
+                                    }).toList(),
+                                  ),
+                                  fOnLetGo: () {
+                                    context.pop();
+                                    context
+                                        .read<SignUpWithPhoneNumberCubit>()
+                                        .signUpPhone();
+                                  },
+                                )),
+                              );
                             },
                           );
                         },
-                        fChild: Text(context.loc.loginText),
+                        fChild: Text(context.loc.nextText),
                       )
                     ],
                   ),

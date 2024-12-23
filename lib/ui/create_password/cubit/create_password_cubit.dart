@@ -22,15 +22,11 @@ class CreatePasswordCubit extends Cubit<CreatePasswordState> {
   }) async {
     emit(state.copyWith(status: CreatePasswordStatus.loading));
     try {
-      late GenericResponse fResponse;
-      if (email != null) {
-        fResponse = await fAuthRepository.createPassword(
-          email: email,
-          password: password,
-        );
-      } else {
-        // create password for phone
-      }
+      final fResponse = await fAuthRepository.createPassword(
+        email: email,
+        password: password,
+        phone: phone,
+      );
 
       // Emit the state if response status is failed or success with the error message
       // if available
