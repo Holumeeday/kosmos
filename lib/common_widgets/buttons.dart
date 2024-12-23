@@ -594,7 +594,7 @@ class PrimaryGradientButton extends StatelessWidget {
                 : null,
           ),
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             /// Center-align the content inside the button.
             alignment: Alignment.center,
 
