@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:playkosmos_v3/assets_gen/assets.gen.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/enums/enums.dart';
@@ -79,6 +81,39 @@ class __ProfileCreationFlowPageState extends State<_ProfileCreationFlowPage>
               context.read<ProfileCreationFlowCubit>().nextPage();
             } else if (state.uploadNameStatus ==
                     ProfileCreationUploadNameStatus.failure &&
+                state.errorMessage != null) {
+              SnackBarUtil.showError(message: state.errorMessage!);
+            }
+          },
+        ),
+
+        // Uploading other details
+        BlocListener<ProfileCreationFlowCubit, ProfileCreationFlowState>(
+          listenWhen: (prev, next) =>
+              prev.uploadOthersStatus != next.uploadOthersStatus,
+          listener: (context, state) {
+            if (state.uploadOthersStatus ==
+                ProfileCreationUploadOthersStatus.success) {
+              if (state.data?.status != true) return;
+              // If other details were successfully uploaded
+              // go to home
+              showDialog(
+                context: context,
+                builder: (_) {
+                  return Dialog(
+                    child: AuthSuccessInfoDialog(
+                        fTitle: '',
+                        fMessage: context.loc.profileCreationDialogMessage,
+                        fWidget: Image.asset(
+                            Assets.pngs.onboarding.welcomeOnboarding.path),
+                        fOnLetGo: () {
+                          context.go(AppRoute.homeScreenPath);
+                        }),
+                  );
+                },
+              );
+            } else if (state.uploadOthersStatus ==
+                    ProfileCreationUploadOthersStatus.failure &&
                 state.errorMessage != null) {
               SnackBarUtil.showError(message: state.errorMessage!);
             }

@@ -2,14 +2,17 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:intl/intl.dart';
 import 'package:playkosmos_v3/constants/interests_constants.dart';
 import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/data_transfer_objects/playkosmos_exception.dart';
 import 'package:playkosmos_v3/enums/enums.dart';
 import 'package:playkosmos_v3/models/activity_interest_groups.dart';
+import 'package:playkosmos_v3/models/file_upload_url_path_model.dart';
 import 'package:playkosmos_v3/models/generic_respose_model.dart';
 import 'package:playkosmos_v3/models/location_model.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/models/profile_creation_flow_model.dart';
+import 'package:playkosmos_v3/utils/utils.dart';
 
 part 'profile_creation_flow_state.dart';
 
@@ -21,16 +24,20 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
   ///  Authentication repository
   final AuthRemoteApiRepository fAuthRepository;
 
+  /// The user storage repository
+  final UserProfileStorage fUserRepository;
+
   /// Initializes the cubit with the default profile creation state.
   ProfileCreationFlowCubit({
     required this.fAuthRepository,
+    required this.fUserRepository,
   }) : super(
           ProfileCreationFlowState(
             fProfileCreationStage: ProfileCreationFlowEnum.uploadName,
             fSelectedInterestMap: const {},
             fFlowModel: ProfileCreationFlowModel(
                 interests: const [...kActivityInterestGroup],
-                profilePicsList: List.filled(5, null),
+                profilePicsList: List.filled(9, null),
                 radiusUnits: UnitOfLocationMeasurementEnum.miles.name),
           ),
         );
@@ -157,6 +164,25 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
     );
   }
 
+  /// Sets the user current location data
+  Future<void> setLocation() async {
+    final position = await LocationUtil.getLocation();
+    if (position == null) return;
+    // The getting of location property takes time sometimes
+    if (!isClosed) {
+      emit(state.copyWith(
+          fFlowModel: state.fFlowModel.copyWith(
+              location: Locations(
+                  latitude: position.latitude,
+                  longitude: position.longitude))));
+    } else {
+      // In case it was closed we can just add the values directly to the API
+      uploadOtherDetails(
+          location: Locations(
+              latitude: position.latitude, longitude: position.longitude));
+    }
+  }
+
   /// Sets the user's gender.
   ///
   /// [fGender] - The selected gender.
@@ -215,6 +241,8 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
       // Emit the state if response status is failed or success with the error message
       // if available
       if (fResponse.status == true) {
+        fUserRepository.setUser(fUserRepository.fUserModel.copyWith(
+            data: fUserRepository.fUserModel.data?.copyWith(fullName: name)));
         emit(
           state.copyWith(
             uploadNameStatus: ProfileCreationUploadNameStatus.success,
@@ -244,26 +272,40 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
 
   /// Upload name and Bio
   void uploadOtherDetails({
-    required String name,
+    String? name,
     int? searchRadius,
     String? birthday,
-    List<String>? pictures,
     GenderEnum? gender,
     ActivityInterestGroupsList? interests,
     Locations? location,
   }) async {
-    emit(state.copyWith(
-        uploadOthersStatus: ProfileCreationUploadOthersStatus.loading));
+    // Since we can call this when the bloc is closed we need to check
+    if (!isClosed) {
+      emit(state.copyWith(
+          uploadOthersStatus: ProfileCreationUploadOthersStatus.loading));
+    }
     try {
       final fResponse = await fAuthRepository.setOnboarding(
         fullName: name,
-        searchRadius: searchRadius,
-        birthday: birthday,
-        pictures: pictures,
-        gender: gender,
-        interests: interests,
-        location: location,
+        searchRadius: state.fFlowModel.radius,
+        birthday: state.fFlowModel.dateOfBirth != null
+            ? DateFormat('yyyy-MM-dd').format(state.fFlowModel.dateOfBirth!)
+            : null,
+        gender: state.fFlowModel.gender,
+        interests: state.fSelectedInterestMap.isNotEmpty
+            ? ActivityInterestGroupsList(groups: [
+                for (final item in state.fSelectedInterestMap.entries)
+                  ActivityInterestGroups(
+                    categoryName: item.key,
+                    interests: item.value,
+                  )
+              ])
+            : null,
+        location: state.fFlowModel.location,
       );
+
+      // Since we can call this when the bloc is closed we need to check
+      if (isClosed) return;
 
       // Emit the state if response status is failed or success with the error message
       // if available
@@ -293,5 +335,42 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
         ),
       );
     }
+  }
+
+  /// Upload image to aws bucket
+  Future<void> uploadImages({
+    required List<File?> images,
+  }) async {
+    final newImages = <File>[
+      for (final item in images)
+        if (item != null) item
+    ];
+    try {
+      final fResponse = await fAuthRepository.getOnboardingImageUrls(
+        totalImages: newImages.length,
+      );
+
+      if (!fResponse.status) return;
+      final fFileUploadUrls = FileUploadPartModel.fromMap(fResponse.data);
+      final dUploadedImages = <String>[];
+      printI(fFileUploadUrls.toMap());
+      for (final (index, image)
+          in (fFileUploadUrls.url ?? <FileUploadUrl>[]).indexed) {
+        // Upload file
+        await fAuthRepository.uploadImagesWithFile(
+          image: newImages[index],
+          uploadPath: image.uploadUrl!,
+        );
+        dUploadedImages.add(image.fileUrl!);
+      }
+      // if upload was successful set the profile pic urls
+      if (dUploadedImages.isNotEmpty) {
+        await fAuthRepository.setOnboarding(pictures: dUploadedImages);
+        fUserRepository.setUser(fUserRepository.fUserModel.copyWith(
+            data: fUserRepository.fUserModel.data?.copyWith(
+          pictures: dUploadedImages,
+        )));
+      }
+    } catch (_) {}
   }
 }

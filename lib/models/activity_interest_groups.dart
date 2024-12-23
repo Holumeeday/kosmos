@@ -18,7 +18,8 @@ class ActivityInterestGroupsList extends Equatable {
   /// Serializes the list of activity interest groups to JSON
   Map<String, dynamic> toJson() {
     return {
-      for (final item in groups) item.categoryName: item.interests,
+      for (final item in groups)
+        if (item.interests.isNotEmpty) item.categoryName: item.interests,
     };
   }
 

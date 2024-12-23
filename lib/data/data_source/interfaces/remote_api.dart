@@ -79,6 +79,35 @@ abstract class RemoteApi with ErrorHandlingMixin {
     return response;
   }
 
+  /// A put request
+  Future<Response> put(
+    String path, {
+    Map<String, String>? headers,
+    Map<String, dynamic>? queryParameters,
+    Object? body,
+    ResponseType? responseType,
+    NetworkProgress? onReceiveProgress,
+    CancelToken? cancelToken,
+  }) async {
+    late Response response;
+    try {
+      response = await _client.put(
+        path,
+        data: body,
+        options: Options(
+          headers: headers,
+          responseType: responseType,
+        ),
+        queryParameters: queryParameters,
+        cancelToken: cancelToken,
+        onReceiveProgress: onReceiveProgress,
+      );
+    } catch (e) {
+      handleError(e);
+    }
+    return response;
+  }
+
   /// A download request
   Future<void> download(
     String path,

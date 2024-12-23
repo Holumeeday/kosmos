@@ -240,6 +240,7 @@ mixin GoRouterMixin {
           routeScreen: BlocProvider(
             child: const ProfileCreationFlowPage(),
             create: (context) => ProfileCreationFlowCubit(
+              fUserRepository: context.read<UserProfileStorage>(),
               fAuthRepository: context.read<AuthRemoteApiRepository>(),
             ),
           ),

@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:playkosmos_v3/data/data_source/interfaces/remote_api.dart';
+import 'package:playkosmos_v3/data_transfer_objects/playkosmos_exception.dart';
 import 'package:playkosmos_v3/enums/enums.dart';
 import 'package:playkosmos_v3/models/activity_interest_groups.dart';
 import 'package:playkosmos_v3/models/generic_respose_model.dart';
 import 'package:playkosmos_v3/models/location_model.dart';
+import 'package:playkosmos_v3/utils/logger.dart';
 
 /// The authentication flow repository for nodejs/Java backend
 ///
@@ -345,8 +349,8 @@ class AuthRemoteApiRepository {
 
   /// Update profile second step
   Future<GenericResponse> setOnboarding({
-    required String fullName,
-    int? searchRadius,
+    String? fullName,
+    double? searchRadius,
     String? birthday,
     List<String>? pictures,
     GenderEnum? gender,
@@ -354,15 +358,19 @@ class AuthRemoteApiRepository {
     Locations? location,
   }) async {
     try {
+      final interestMap = interests?.toJson();
+      printI(pictures);
       final res = await _remoteApi.post(
-        'user',
+        'user/onboarding',
         body: {
-          'fullName': fullName,
+          if (fullName != null) 'fullName': fullName,
           if (searchRadius != null) 'searchRadius': searchRadius,
           if (birthday != null) 'birthday': birthday,
           if (pictures != null) 'pictures': pictures,
-          if (interests != null) 'interests': interests.toJson(),
-          if (location != null) 'location': location.toMap(),
+          if (gender != null) 'gender': gender.name,
+          if (interestMap != null && interestMap.isNotEmpty)
+            'interests': interestMap,
+          if (location != null) 'locations': location.toMap(),
         },
       );
       return GenericResponse.fromJson(res.data as Map<String, dynamic>);
@@ -446,6 +454,76 @@ class AuthRemoteApiRepository {
         'user/profile/update/location',
         body: {'location': location.toMap()},
       );
+      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  /// Upload multiple image files
+  Future<GenericResponse> uploadImagesWithFiles({
+    required List<File> images,
+  }) async {
+    try {
+      // Get file upload url
+      final fUrlRes = await getOnboardingImageUrls(totalImages: images.length);
+      if (fUrlRes.status) {
+        final fPayload = fUrlRes.data['url']['fields'];
+
+        // Prepare the multipart form data
+        final formData = FormData.fromMap({
+          ...fPayload,
+          "file": images
+              .map(((image) => MultipartFile.fromFileSync(image.path,
+                  filename: image.path.split('/').last)))
+              .toList(),
+        });
+        final res = await _remoteApi.put(
+          'file/upload-url',
+          body: formData,
+        );
+
+        return GenericResponse.fromJson(res.data as Map<String, dynamic>);
+      } else {
+        throw PlaykosmosException(error: ErrorEnum.responseError);
+      }
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  /// Upload a single image
+  Future<void> uploadImagesWithFile({
+    required File image,
+    required String uploadPath,
+  }) async {
+    // Prepare the multipart form data
+    final formData = FormData.fromMap({
+      "file": MultipartFile.fromFile(image.path,
+          filename: image.path.split('/').last),
+    });
+
+    try {
+      final res = await _remoteApi.put(
+        uploadPath,
+        body: formData,
+      );
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  /// Get image upload urls
+  Future<GenericResponse> getOnboardingImageUrls(
+      {required int totalImages}) async {
+    try {
+      final res = await _remoteApi.put(
+        'file/onboarding',
+        body: {
+          'numberOfFiles': totalImages,
+        },
+      );
+
       return GenericResponse.fromJson(res.data as Map<String, dynamic>);
     } catch (_) {
       rethrow;

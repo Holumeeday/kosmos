@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 class Locations {
-  final String? latitude;
-  final String? longitude;
+  final double? latitude;
+  final double? longitude;
 
   Locations({
     this.latitude,
@@ -10,8 +10,8 @@ class Locations {
   });
 
   Locations copyWith({
-    String? latitude,
-    String? longitude,
+    double? latitude,
+    double? longitude,
   }) =>
       Locations(
         latitude: latitude ?? this.latitude,
@@ -23,12 +23,12 @@ class Locations {
   String toJson() => json.encode(toMap());
 
   factory Locations.fromMap(Map<String, dynamic> json) => Locations(
-        latitude: json["latitude"],
-        longitude: json["longitude"],
+        latitude: double.parse(json["latitude"]),
+        longitude: double.parse(json["longitude"]),
       );
 
   Map<String, dynamic> toMap() => {
-        "latitude": latitude,
-        "longitude": longitude,
+        "latitude": latitude.toString(),
+        "longitude": longitude.toString(),
       };
 }

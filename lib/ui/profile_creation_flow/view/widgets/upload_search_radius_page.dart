@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:playkosmos_v3/assets_gen/assets.gen.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
+import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/enums/enums.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/cubit/profile_creation_flow_cubit.dart';
@@ -128,25 +127,9 @@ class UploadSearchRadiusPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: NextButton(
                 fOnPressed: () async {
-                  if (context.mounted) {
-                    showDialog(
-                        context: context,
-                        builder: (_) {
-                          return Dialog(
-                            child: AuthSuccessInfoDialog(
-                                fTitle: '',
-                                fMessage:
-                                    context.loc.profileCreationDialogMessage,
-                                fWidget: Image.asset(Assets
-                                    .pngs.onboarding.welcomeOnboarding.path),
-                                fOnLetGo: () {
-                                  context.go(AppRoute.homeScreenPath);
-                                }),
-                          );
-                        });
-
-                    context.read<ProfileCreationFlowCubit>().nextPage();
-                  }
+                  final user = context.read<UserProfileStorage>().fUserModel;
+                  printI(user.data?.toMap());
+                  context.read<ProfileCreationFlowCubit>().uploadOtherDetails();
                 },
                 fText: context.loc.done,
               ),

@@ -22,30 +22,33 @@ class UploadPicsPage extends StatelessWidget {
       selector: (state) => state.fFlowModel.profilePicsList,
       builder: (context, state) {
         final dSelectedImages = [...?state];
-        return SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Title
-              Text(
-                context.loc.uploadYourPics,
-                style: context.appTextTheme.header1,
-              ),
-              const VSpace(12),
-              Text(
-                context.loc.timeToShowOffYourProfilePics,
-                style: context.appTextTheme.caption,
-              ),
-              const VSpace(40),
+        return LayoutBuilder(builder: (context, constraint) {
+          final fMaxWidth = constraint.maxWidth;
+          const fItemsWidth = 122;
+          final fCrossAxisCount = fMaxWidth ~/ fItemsWidth;
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: CustomScrollView(
+              slivers: [
+                // Title
+                SliverToBoxAdapter(
+                  child: Text(
+                    context.loc.uploadYourPics,
+                    style: context.appTextTheme.header1,
+                  ),
+                ),
+                const SliverToBoxAdapter(child: VSpace(12)),
 
-              // Image selection grid
-              LayoutBuilder(builder: (context, constraint) {
-                final fMaxWidth = constraint.maxWidth;
-                const fItemsWidth = 122;
-                final fCrossAxisCount = fMaxWidth ~/ fItemsWidth;
-                return GridView.builder(
-                  shrinkWrap: true,
+                SliverToBoxAdapter(
+                  child: Text(
+                    context.loc.timeToShowOffYourProfilePics,
+                    style: context.appTextTheme.caption,
+                  ),
+                ),
+                const SliverToBoxAdapter(child: VSpace(40)),
+
+                // Image selection grid
+                SliverGrid.builder(
                   itemCount: dSelectedImages.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: fCrossAxisCount,
@@ -62,9 +65,11 @@ class UploadPicsPage extends StatelessWidget {
 
                         if (pickedFile != null && context.mounted) {
                           dSelectedImages[index] = File(pickedFile.path);
-                          context
-                              .read<ProfileCreationFlowCubit>()
-                              .changeSelectedImageFiles(dSelectedImages);
+                          if (context.mounted) {
+                            context
+                                .read<ProfileCreationFlowCubit>()
+                                .changeSelectedImageFiles(dSelectedImages);
+                          }
                         }
                       },
                       onRemove: () {
@@ -75,18 +80,23 @@ class UploadPicsPage extends StatelessWidget {
                       },
                     );
                   },
-                );
-              }),
+                ),
 
-              const VSpace(40),
+                const SliverToBoxAdapter(child: VSpace(40)),
 
-              // The next button
-              NextButton(fOnPressed: () {
-                context.read<ProfileCreationFlowCubit>().nextPage();
-              }),
-            ],
-          ),
-        );
+                // The next button
+                SliverToBoxAdapter(
+                  child: NextButton(fOnPressed: () {
+                    context
+                        .read<ProfileCreationFlowCubit>()
+                        .uploadImages(images: dSelectedImages);
+                    context.read<ProfileCreationFlowCubit>().nextPage();
+                  }),
+                ),
+              ],
+            ),
+          );
+        });
       },
     );
   }
@@ -132,7 +142,7 @@ class ImageSlot extends StatelessWidget {
                 ),
               ),
             ))
-          : SizedBox(
+          : Container(
               height: 122,
               width: 122,
               child: Stack(
