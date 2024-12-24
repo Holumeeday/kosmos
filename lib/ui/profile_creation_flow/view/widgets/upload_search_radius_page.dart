@@ -49,9 +49,8 @@ class UploadSearchRadiusPage extends StatelessWidget {
 
             TextWithBackground(
               fText: context.loc.searchRadius,
-              fContainerColor:
-                  context.appColors.darkGreyColor?.withOpacity(.07),
-              fBackgroundColor: Colors.grey,
+
+              fTextColor: Colors.grey,
               fTextSize: 14,
               fFontWeight: FontWeight.w500,
             ),

@@ -7,9 +7,8 @@ import 'package:playkosmos_v3/extensions/connection_type_enum.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/cubit/buddy_profile_cubit.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/view/widget/build_image_grid.dart';
-import 'package:playkosmos_v3/ui/buddy_profile/view/widget/carousel.dart';
+
 import 'package:playkosmos_v3/ui/buddy_profile/view/widget/stats_section.dart';
-import 'package:playkosmos_v3/utils/utils.dart';
 
 /// A profile page that displays buddy information
 /// @author: Chidera
@@ -37,9 +36,11 @@ class BuddyProfilePage extends StatelessWidget {
 
                 const HRelativeSpace(10),
                 // Message Button
-                SvgPicture.asset(Assets.svgs.icons.messageIcon.path,
-                    colorFilter: ColorFilter.mode(
-                        context.colors.onSurface, BlendMode.srcIn)),
+                InkWell(
+                  child: SvgPicture.asset(Assets.svgs.icons.messageIcon.path,
+                      colorFilter: ColorFilter.mode(
+                          context.colors.onSurface, BlendMode.srcIn)),
+                ),
                 const HRelativeSpace(10),
                 //  Menu Button
                 PopupMenuButton<String>(
@@ -64,8 +65,12 @@ class BuddyProfilePage extends StatelessWidget {
                       children: [
                         const VSpace(12),
                         // Image Page View
-                        CarouselWidget(
-                          images: state.fBuddiesModel.profileImages,
+                        SizedBox(
+                          width: double.infinity,
+                          height: getScreenHeight(context) * 0.6,
+                          child: CarouselWidget(
+                            images: state.fBuddiesModel.profileImages,
+                          ),
                         ),
 
                         // User Content Section
@@ -91,27 +96,8 @@ class BuddyProfilePage extends StatelessWidget {
                       snap: true,
                       forceElevated: innerBoxIsScrolled,
                       automaticallyImplyLeading: false,
-                      bottom: TabBar(
-                        dividerColor: context.appColors.fDividerColor,
-                        dividerHeight: 1,
-                        labelStyle: context.textTheme.displayLarge!.copyWith(
-                            fontSize: getRelativeScreenWidth(18, context)),
-                        labelColor: AppColor.fPrimaryColor,
-                        tabAlignment: TabAlignment.fill,
-                        unselectedLabelColor: context.colors.onSurface,
-                        indicator: BoxDecoration(
-                          gradient: const LinearGradient(
-                              // center: Alignment.topCenter,
-                              stops: [.5, .8, 1],
-                              colors: AppColor.fPrimaryGradient),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        indicatorWeight: 3,
-                        indicatorSize: TabBarIndicatorSize.tab,
-                        indicatorPadding: const EdgeInsets.only(
-                          top: 46,
-                        ),
-                        tabs: [
+                      bottom: CustomTabbar(
+                        fTabs: [
                           Tab(
                               text:
                                   '${context.loc.setActivities(state.fBuddiesModel.activities.length)} (${state.fBuddiesModel.activities.length})'),

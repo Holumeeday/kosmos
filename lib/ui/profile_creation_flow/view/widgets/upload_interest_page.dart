@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:playkosmos_v3/common_widgets/sizes.dart';
+import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/data_transfer_objects/activity_interest_groups.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/cubit/profile_creation_flow_cubit.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/next_button.dart';
+
 
 /// Define the selection of interests page
 ///
@@ -207,7 +208,7 @@ class _InterestGroupList extends StatelessWidget {
                     .read<ProfileCreationFlowCubit>()
                     .setShowAll(fInterestGroup);
               },
-              child: _ShowAllButton(fShowAll: fInterestGroup.showAll),
+              child: ShowAllButton(fShowAll: fInterestGroup.showAll,fText1: context.loc.showAll2,fText2: context.loc.showLess,),
             ),
           ),
       ],
@@ -215,54 +216,6 @@ class _InterestGroupList extends StatelessWidget {
   }
 }
 
-class _ShowAllButton extends StatelessWidget {
-  const _ShowAllButton({
-    required this.fShowAll,
-  });
-
-  /// Show all
-  final bool fShowAll;
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedSwitcher(
-      duration: Durations.extralong4,
-      transitionBuilder: (Widget child, Animation<double> animation) {
-        return FadeTransition(
-          opacity: animation,
-          child: child,
-        );
-      },
-      child: !fShowAll
-          ? Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  context.loc.showAll2,
-                  style: context.appTextTheme.buttonSmall,
-                ),
-                Icon(
-                  Icons.keyboard_arrow_down_rounded,
-                  color: context.appTextTheme.buttonSmall?.color,
-                ),
-              ],
-            )
-          : Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  context.loc.showLess,
-                  style: context.appTextTheme.buttonSmall,
-                ),
-                Icon(
-                  Icons.keyboard_arrow_up_rounded,
-                  color: context.appTextTheme.buttonSmall?.color,
-                ),
-              ],
-            ),
-    );
-  }
-}
 
 class _InterestChip extends StatelessWidget {
   const _InterestChip({

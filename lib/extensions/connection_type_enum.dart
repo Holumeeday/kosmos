@@ -28,26 +28,24 @@ extension ConnectionTypeUI on String {
 
     // Return button based on matched type
     switch (type) {
-      case ConnectionTypeEnum.buddy:
+      case ConnectionTypeEnum.userFollowing:
         return PrimaryGradientButton(
           fHeight: buttonHeight,
           fWidth: buttonWidth,
           fOnPressed: onPressed ?? () {},
-          fGradientColors: const [
-            Color(0xFFEDEDED),
-            Color(0xFFEDEDED),
-            Color(0xFFEDEDED)
-          ],
+          fGradientColors: List.generate(3, (index) {
+            return const Color(0xFFEDEDED);
+          }),
           fChild: Text(
             context.loc.followingUser,
             style: context.textTheme.displayLarge!.copyWith(
               color: Colors.black,
-              fontSize: 14,
+              fontSize:getRelativeScreenWidth(14, context) ,
             ),
           ),
         );
 
-      case ConnectionTypeEnum.followingYou:
+      case ConnectionTypeEnum.followingUser:
         return PrimaryGradientButton(
           fHeight: buttonHeight,
           fWidth: buttonWidth,
@@ -70,6 +68,22 @@ extension ConnectionTypeUI on String {
             context.loc.followUser,
             style: context.textTheme.displayLarge!.copyWith(
               color: Colors.white,
+              fontSize: 16,
+            ),
+          ),
+        );
+      case ConnectionTypeEnum.buddy:
+        return PrimaryGradientButton(
+          fHeight: buttonHeight,
+          fWidth: buttonWidth,
+          fGradientColors: List.generate(3, (index) {
+            return const Color(0xFFD3D3D3);
+          }),
+          fOnPressed: onPressed ?? () {},
+          fChild: Text(
+            context.loc.buddies,
+            style: context.textTheme.displayLarge!.copyWith(
+              color: Colors.black,
               fontSize: 16,
             ),
           ),

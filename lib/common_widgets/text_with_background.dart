@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 
 /*
 This class shows a text with a colored background
@@ -7,7 +8,7 @@ This class shows a text with a colored background
 class TextWithBackground extends StatelessWidget {
   ///The color of the text. This is also used to generate the color of the
   ///container when [fContainerColor] is empty
-  final Color? fBackgroundColor;
+  final Color? fTextColor;
 
   ///The color of the container
   final Color? fContainerColor;
@@ -19,7 +20,7 @@ class TextWithBackground extends StatelessWidget {
   final bool? fIsCentered;
 
   ///The font size.
-  final double fTextSize;
+  final double? fTextSize;
 
   ///The font weight. Defaults to regular
   final FontWeight? fFontWeight;
@@ -52,14 +53,16 @@ class TextWithBackground extends StatelessWidget {
   /// The semantics label
   final String? fSemanticLabel;
 
-  ///Uses a default font weight of 400 and a size of 22. [fBackgroundColor] is
+  final double? fVerticalPadding;
+
+  ///Uses a default font weight of 400 and a size of 22. [fTextColor] is
   ///the color of the text and is also used to generate the color of the
   ///container when [fContainerColor] is empty
   const TextWithBackground({
     super.key,
     required this.fText,
-    required this.fBackgroundColor,
-    this.fTextSize = 22,
+    this.fTextColor,
+    this.fTextSize,
     this.fFontWeight,
     this.fIsCentered = false,
     this.fPadding,
@@ -72,6 +75,7 @@ class TextWithBackground extends StatelessWidget {
     this.fBorderGeometry,
     this.fWidth,
     this.fSemanticLabel,
+    this.fVerticalPadding,
   });
 
   @override
@@ -81,9 +85,9 @@ class TextWithBackground extends StatelessWidget {
       excludeSemantics: true,
       child: Container(
         margin: fMargin,
-        width: fWidth,
+        width: fWidth ?? double.infinity,
         decoration: BoxDecoration(
-          color: fContainerColor ?? fBackgroundColor?.withOpacity(0.1),
+          color: fContainerColor ?? Colors.grey.withOpacity(0.15),
           borderRadius: (fBorderGeometry != null)
               ? fBorderGeometry
               : (fBorderRadius != null)
@@ -92,18 +96,19 @@ class TextWithBackground extends StatelessWidget {
           border: fContainerBorder,
         ),
         padding: fPadding ??
-            const EdgeInsets.symmetric(
+            EdgeInsets.symmetric(
               horizontal: 20,
-              vertical: 9,
+              vertical:
+                  fVerticalPadding ?? getRelativeScreenHeight(11, context),
             ),
         child: Text(
           fText,
           maxLines: fMaxLines,
           overflow: fTextOverflow,
           style: TextStyle(
-            fontSize: fTextSize,
-            fontWeight: fFontWeight,
-            color: fBackgroundColor,
+            fontSize: fTextSize ?? getRelativeScreenWidth(16, context),
+            fontWeight: FontWeight.w600,
+            color: fTextColor,
           ),
           textAlign: fIsCentered == false ? null : TextAlign.center,
         ),

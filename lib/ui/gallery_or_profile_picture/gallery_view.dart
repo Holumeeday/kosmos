@@ -322,8 +322,7 @@ class _GalleryViewState extends State<GalleryView> {
                                             entity.duration.getVideoDuration(),
                                         fTextSize: 11,
                                         fPadding: const EdgeInsets.all(2),
-                                        fBackgroundColor:
-                                            context.colors.tertiary,
+                                        fTextColor: context.colors.tertiary,
                                         fFontWeight: FontWeight.w600,
                                       ),
                                     ),
