@@ -1,6 +1,7 @@
 {
   "fi": [
     "setInterestCategories",
+    "setInterestCategoryPageTitle",
     "setInterests",
     "setActivitySource",
     "bringPeopleTogetherCreateActivities",
@@ -86,6 +87,7 @@
 
   "fr": [
     "setInterestCategories",
+    "setInterestCategoryPageTitle",
     "setInterests",
     "setActivitySource",
     "bringPeopleTogetherCreateActivities",
@@ -171,6 +173,7 @@
 
   "hi": [
     "setInterestCategories",
+    "setInterestCategoryPageTitle",
     "setInterests",
     "setActivitySource",
     "bringPeopleTogetherCreateActivities",
@@ -256,6 +259,7 @@
 
   "si": [
     "setInterestCategories",
+    "setInterestCategoryPageTitle",
     "setInterests",
     "setActivitySource",
     "bringPeopleTogetherCreateActivities",
@@ -341,6 +345,7 @@
 
   "ta": [
     "setInterestCategories",
+    "setInterestCategoryPageTitle",
     "setInterests",
     "setActivitySource",
     "bringPeopleTogetherCreateActivities",
@@ -426,6 +431,7 @@
 
   "zh": [
     "setInterestCategories",
+    "setInterestCategoryPageTitle",
     "setInterests",
     "setActivitySource",
     "bringPeopleTogetherCreateActivities",

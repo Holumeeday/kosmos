@@ -38,7 +38,7 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
             fFlowModel: ProfileCreationFlowModel(
                 interests: const [...kActivityInterestGroups],
                 profilePicsList: List.filled(9, null),
-                radiusUnits: UnitOfLocationMeasurementEnum.miles.name),
+                radiusUnits: UnitOfLocationMeasurementEnum.kilometres.name),
           ),
         );
 

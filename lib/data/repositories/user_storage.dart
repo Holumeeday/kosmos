@@ -30,7 +30,7 @@ class UserProfileStorage {
   /// Parses the JSON stored in the local storage to construct
   /// the [UserModel] object.
   UserModel get fUserModel =>
-      UserModel.fromMap(_fLocalStorage.getValue(kUserStorageKey));
+      UserModel.fromMapLocal(_fLocalStorage.getValue(kUserStorageKey));
 
   Future<void> setUser(UserModel fUser) async {
     _fLocalStorage.setValue(kUserStorageKey, fUser.toMap());

@@ -49,33 +49,32 @@ class ProfileCreationFlowState extends Equatable {
   @override
   List<Object?> get props => [
         fProfileCreationStage,
-        fSelectedInterestMap,
         fFlowModel,
+        fSelectedInterestMap,
         uploadNameStatus,
+        uploadOthersStatus,
         errorMessage,
         data,
-        uploadOthersStatus,
       ];
 
-  ProfileCreationFlowState copyWith(
-      {ProfileCreationFlowEnum? fProfileCreationStage,
-      ProfileCreationUploadNameStatus? uploadNameStatus,
-      ProfileCreationUploadOthersStatus? uploadOthersStatus,
-      ProfileCreationFlowModel? fFlowModel,
-      Map<String, List<String>>? fSelectedInterestMap,
-      String? errorMessage,
-      GenericResponse? data,
-      double? fSearchRadius,
-      String? fLocationMeasure}) {
+  ProfileCreationFlowState copyWith({
+    ProfileCreationFlowEnum? fProfileCreationStage,
+    ProfileCreationFlowModel? fFlowModel,
+    Map<String, List<String>>? fSelectedInterestMap,
+    ProfileCreationUploadNameStatus? uploadNameStatus,
+    ProfileCreationUploadOthersStatus? uploadOthersStatus,
+    String? errorMessage,
+    GenericResponse? data,
+  }) {
     return ProfileCreationFlowState(
-      data: data ?? this.data,
-      errorMessage: errorMessage ?? this.errorMessage,
-      uploadNameStatus: uploadNameStatus ?? this.uploadNameStatus,
-      uploadOthersStatus: uploadOthersStatus ?? this.uploadOthersStatus,
-      fSelectedInterestMap: fSelectedInterestMap ?? this.fSelectedInterestMap,
-      fFlowModel: fFlowModel ?? this.fFlowModel,
       fProfileCreationStage:
           fProfileCreationStage ?? this.fProfileCreationStage,
+      fFlowModel: fFlowModel ?? this.fFlowModel,
+      fSelectedInterestMap: fSelectedInterestMap ?? this.fSelectedInterestMap,
+      uploadNameStatus: uploadNameStatus ?? this.uploadNameStatus,
+      uploadOthersStatus: uploadOthersStatus ?? this.uploadOthersStatus,
+      errorMessage: errorMessage ?? this.errorMessage,
+      data: data ?? this.data,
     );
   }
 }

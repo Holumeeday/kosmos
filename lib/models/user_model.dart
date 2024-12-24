@@ -66,11 +66,9 @@ class UserModel {
         searchRadius: searchRadius ?? this.searchRadius,
       );
 
-  factory UserModel.fromJson(String str) => UserModel.fromMap(json.decode(str));
-
   String toJson() => json.encode(toMap());
 
-  factory UserModel.fromMap(Map<String, dynamic> json) => UserModel(
+  factory UserModel.fromMapLocal(Map<String, dynamic> json) => UserModel(
         id: json["id"],
         fullName: json["fullName"],
         email: json["email"],
@@ -93,6 +91,32 @@ class UserModel {
             ? null
             : Locations.fromMap(json["locations"]),
         searchRadius: json["searchRadius"],
+      );
+
+  factory UserModel.fromMapRemote(Map<String, dynamic> json) => UserModel(
+        id: json['data']["id"],
+        fullName: json['data']["fullName"],
+        email: json['data']["email"],
+        phone: json['data']["phone"],
+        emailVerified: json['data']["emailVerified"],
+        phoneVerified: json['data']["phoneVerified"],
+        bio: json['data']["bio"],
+        pictures: json['data']["pictures"] == null
+            ? []
+            : List<String>.from(json['data']["pictures"]!.map((x) => x)),
+        birthday: json['data']["birthday"] == null
+            ? null
+            : DateTime.parse(json['data']["birthday"]),
+        gender: json['data']["gender"] != null
+            ? GenderEnum.fromString(json['data']['gender'])
+            : null,
+        interests: json['data']["interests"] == null
+            ? null
+            : ActivityInterestGroupsList.fromJson(json['data']["interests"]),
+        locations: json['data']["locations"] == null
+            ? null
+            : Locations.fromMap(json['data']["locations"]),
+        searchRadius: json['data']["searchRadius"],
       );
 
   Map<String, dynamic> toMap() => {

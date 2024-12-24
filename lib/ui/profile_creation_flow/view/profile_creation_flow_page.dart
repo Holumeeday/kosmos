@@ -9,7 +9,7 @@ import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/cubit/profile_creation_flow_cubit.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_birthday_page.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_gender_page.dart';
-import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_interest_page.dart';
+import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_interest_per_category_page.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_name_page.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_pics_page.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_search_radius_page.dart';
@@ -156,8 +156,31 @@ class __ProfileCreationFlowPageState extends State<_ProfileCreationFlowPage>
                       // Gender
                       UploadGenderPage(),
 
-                      // Interest
-                      UploadInterestPage(),
+                      // Sports Interest
+                      UploadInterestPerCategoryPage(fCategoryTitle: 'sports'),
+
+                      // Arts Interest
+                      UploadInterestPerCategoryPage(fCategoryTitle: 'arts'),
+
+                      // Technology Interest
+                      UploadInterestPerCategoryPage(
+                          fCategoryTitle: 'technology'),
+
+                      // Food Interest
+                      UploadInterestPerCategoryPage(fCategoryTitle: 'food'),
+
+                      // Education Interest
+                      UploadInterestPerCategoryPage(
+                          fCategoryTitle: 'education'),
+
+                      // Social Interest
+                      UploadInterestPerCategoryPage(fCategoryTitle: 'social'),
+
+                      // Wellness Interest
+                      UploadInterestPerCategoryPage(fCategoryTitle: 'wellness'),
+
+                      // Animals Interest
+                      UploadInterestPerCategoryPage(fCategoryTitle: 'animals'),
 
                       // Location selection
                       UploadYourLocationPage(),
@@ -206,7 +229,12 @@ class _BackButtonAndSkip extends StatelessWidget {
     final fLastPage = ProfileCreationFlowEnum.values.last;
     final dSelectedPage = context.select(
         (ProfileCreationFlowCubit cubit) => cubit.state.fProfileCreationStage);
-    final fCanShowSkip = canShowSkip(context, dSelectedPage);
+    final fSelectedInterests = context.select(
+        (ProfileCreationFlowCubit cubit) => cubit.state.fSelectedInterestMap);
+    final fCanShowSkip =
+        canShowSkip(context, dSelectedPage, fSelectedInterests);
+    print(dSelectedPage);
+    print(fCanShowSkip);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -255,9 +283,30 @@ class _BackButtonAndSkip extends StatelessWidget {
     );
   }
 
-  bool canShowSkip(BuildContext context, ProfileCreationFlowEnum currentPage) {
+  bool canShowSkip(
+    BuildContext context,
+    ProfileCreationFlowEnum currentPage,
+    Map<String, List<String>> selectedInterests,
+  ) {
+    printI(selectedInterests['education']?.isEmpty);
     return switch (currentPage) {
       ProfileCreationFlowEnum.uploadName => false,
+      ProfileCreationFlowEnum.uploadSportInterest =>
+        selectedInterests['sports']?.isEmpty ?? true,
+      ProfileCreationFlowEnum.uploadArtInterest =>
+        selectedInterests['arts']?.isEmpty ?? true,
+      ProfileCreationFlowEnum.uploadTechInterest =>
+        selectedInterests['technology']?.isEmpty ?? true,
+      ProfileCreationFlowEnum.uploadEducationInterest =>
+        selectedInterests['education']?.isEmpty ?? true,
+      ProfileCreationFlowEnum.uploadFoodInterest =>
+        selectedInterests['food']?.isEmpty ?? true,
+      ProfileCreationFlowEnum.uploadWellnessInterest =>
+        selectedInterests['wellness']?.isEmpty ?? true,
+      ProfileCreationFlowEnum.uploadAnimalInterest =>
+        selectedInterests['animals']?.isEmpty ?? true,
+      ProfileCreationFlowEnum.uploadSocialInterest =>
+        selectedInterests['social']?.isEmpty ?? true,
       ProfileCreationFlowEnum.uploadProfilePics => context.select(
           (ProfileCreationFlowCubit cubit) =>
               cubit.state.fFlowModel.profilePicsList!.every((e) => e == null)),
@@ -267,13 +316,6 @@ class _BackButtonAndSkip extends StatelessWidget {
       ProfileCreationFlowEnum.uploadGender => context.select(
           (ProfileCreationFlowCubit cubit) =>
               cubit.state.fFlowModel.gender == null),
-      ProfileCreationFlowEnum.uploadInterest =>
-        context.select((ProfileCreationFlowCubit cubit) {
-          final interests =
-              cubit.state.fSelectedInterestMap.values.expand((e) => e);
-          return interests
-              .isEmpty; // If no interests are selected, show the button
-        }),
       ProfileCreationFlowEnum.uploadSearchRadius => context.select(
           (ProfileCreationFlowCubit cubit) =>
               cubit.state.fFlowModel.radius == null),

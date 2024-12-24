@@ -25,7 +25,10 @@ class NextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final dSelectedPage = context.select(
         (ProfileCreationFlowCubit cubit) => cubit.state.fProfileCreationStage);
-    final fCanShowNext = !canShowSkip(context, dSelectedPage);
+    final fSelectedInterests = context.select(
+        (ProfileCreationFlowCubit cubit) => cubit.state.fSelectedInterestMap);
+    final fCanShowNext =
+        !canShowSkip(context, dSelectedPage, fSelectedInterests);
     return fCanShowNext
         ? PrimaryGradientButton(
             fOnPressed: fOnPressed,
@@ -34,9 +37,29 @@ class NextButton extends StatelessWidget {
         : const SizedBox.shrink();
   }
 
-  bool canShowSkip(BuildContext context, ProfileCreationFlowEnum currentPage) {
+  bool canShowSkip(
+    BuildContext context,
+    ProfileCreationFlowEnum currentPage,
+    Map<String, List<String>> selectedInterests,
+  ) {
     return switch (currentPage) {
       ProfileCreationFlowEnum.uploadName => false,
+      ProfileCreationFlowEnum.uploadSportInterest =>
+        selectedInterests['sports']?.isEmpty ?? true,
+      ProfileCreationFlowEnum.uploadArtInterest =>
+        selectedInterests['arts']?.isEmpty ?? true,
+      ProfileCreationFlowEnum.uploadTechInterest =>
+        selectedInterests['technology']?.isEmpty ?? true,
+      ProfileCreationFlowEnum.uploadEducationInterest =>
+        selectedInterests['education']?.isEmpty ?? true,
+      ProfileCreationFlowEnum.uploadFoodInterest =>
+        selectedInterests['food']?.isEmpty ?? true,
+      ProfileCreationFlowEnum.uploadWellnessInterest =>
+        selectedInterests['wellness']?.isEmpty ?? true,
+      ProfileCreationFlowEnum.uploadAnimalInterest =>
+        selectedInterests['animals']?.isEmpty ?? true,
+      ProfileCreationFlowEnum.uploadSocialInterest =>
+        selectedInterests['social']?.isEmpty ?? true,
       ProfileCreationFlowEnum.uploadProfilePics => context.select(
           (ProfileCreationFlowCubit cubit) =>
               cubit.state.fFlowModel.profilePicsList!.every((e) => e == null)),
@@ -46,13 +69,6 @@ class NextButton extends StatelessWidget {
       ProfileCreationFlowEnum.uploadGender => context.select(
           (ProfileCreationFlowCubit cubit) =>
               cubit.state.fFlowModel.gender == null),
-      ProfileCreationFlowEnum.uploadInterest =>
-        context.select((ProfileCreationFlowCubit cubit) {
-          final interests =
-              cubit.state.fSelectedInterestMap.values.expand((e) => e);
-          return interests
-              .isEmpty; // If no interests are selected, show the button
-        }),
       ProfileCreationFlowEnum.uploadSearchRadius => context.select(
           (ProfileCreationFlowCubit cubit) =>
               cubit.state.fFlowModel.radius == null),

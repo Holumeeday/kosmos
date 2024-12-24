@@ -32,7 +32,7 @@ class SignInWithEmailCubit extends Cubit<SignInWithEmailState> {
       // Emit the state if response status is failed or success with the error message
       // if available
       if (fResponse.status == true) {
-        final user = UserModel.fromMap(fResponse.data);
+        final user = UserModel.fromMapRemote(fResponse.data);
         // Save the user data
         fUserStorage.setUser(user);
 
