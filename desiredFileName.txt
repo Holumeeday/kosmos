@@ -1,5 +1,7 @@
 {
   "fi": [
+    "setInterestCategories",
+    "setInterests",
     "setActivitySource",
     "bringPeopleTogetherCreateActivities",
     "dontWorryItsBetweenUs",
@@ -83,6 +85,8 @@
   ],
 
   "fr": [
+    "setInterestCategories",
+    "setInterests",
     "setActivitySource",
     "bringPeopleTogetherCreateActivities",
     "dontWorryItsBetweenUs",
@@ -166,6 +170,8 @@
   ],
 
   "hi": [
+    "setInterestCategories",
+    "setInterests",
     "setActivitySource",
     "bringPeopleTogetherCreateActivities",
     "dontWorryItsBetweenUs",
@@ -249,6 +255,8 @@
   ],
 
   "si": [
+    "setInterestCategories",
+    "setInterests",
     "setActivitySource",
     "bringPeopleTogetherCreateActivities",
     "dontWorryItsBetweenUs",
@@ -332,6 +340,8 @@
   ],
 
   "ta": [
+    "setInterestCategories",
+    "setInterests",
     "setActivitySource",
     "bringPeopleTogetherCreateActivities",
     "dontWorryItsBetweenUs",
@@ -415,6 +425,8 @@
   ],
 
   "zh": [
+    "setInterestCategories",
+    "setInterests",
     "setActivitySource",
     "bringPeopleTogetherCreateActivities",
     "dontWorryItsBetweenUs",

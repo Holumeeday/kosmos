@@ -364,7 +364,7 @@ class AuthRemoteApiRepository {
         'user/onboarding',
         body: {
           if (fullName != null) 'fullName': fullName,
-          if (searchRadius != null) 'searchRadius': searchRadius,
+          if (searchRadius != null) 'searchRadius': searchRadius.round(),
           if (birthday != null) 'birthday': birthday,
           if (pictures != null) 'pictures': pictures,
           if (gender != null) 'gender': gender.name,
