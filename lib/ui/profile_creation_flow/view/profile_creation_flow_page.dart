@@ -46,7 +46,7 @@ class __ProfileCreationFlowPageState extends State<_ProfileCreationFlowPage>
     super.initState();
     final fCurrentUser = context.read<UserProfileStorage>().fUserModel;
     // Navigate to the next profile flow if the user name is already set
-    if (fCurrentUser.data?.fullName != null) {
+    if (fCurrentUser.fullName != null) {
       context.read<ProfileCreationFlowCubit>().nextPage();
     }
   }

@@ -74,15 +74,15 @@ class _SignInPhoneNumberPageState extends State<SignInPhoneNumberPage> {
       listener: (context, state) {
         if (state.status == SignInPhoneStatus.success) {
           if (state.data?.status == true) {
-            if (state.user?.data?.fullName != null) {
+            if (state.user?.fullName != null) {
               showDialog<void>(
                 context: context,
                 barrierDismissible: false,
                 builder: (BuildContext dialogContext) {
                   return Dialog(
                     child: AuthSuccessInfoDialog(
-                      fTitle: context.loc.welcomeBackUser(
-                          state.user?.data?.fullName ?? 'User'),
+                      fTitle: context.loc
+                          .welcomeBackUser(state.user?.fullName ?? 'User'),
                       fMessage: context.loc.youAreAlllSignedInAndReadyToRoll,
                       fOnLetGo: () {
                         // Set login status to true which will re-direct the user

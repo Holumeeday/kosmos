@@ -367,7 +367,7 @@ class AuthRemoteApiRepository {
           if (searchRadius != null) 'searchRadius': searchRadius.round(),
           if (birthday != null) 'birthday': birthday,
           if (pictures != null) 'pictures': pictures,
-          if (gender != null) 'gender': gender.name,
+          if (gender != null) 'gender': gender.backendName,
           if (interestMap != null && interestMap.isNotEmpty)
             'interests': interestMap,
           if (location != null) 'locations': location.toMap(),

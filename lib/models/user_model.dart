@@ -5,33 +5,6 @@ import 'package:playkosmos_v3/models/activity_interest_groups.dart';
 import 'package:playkosmos_v3/models/location_model.dart';
 
 class UserModel {
-  final UserDataModel? data;
-
-  UserModel({
-    this.data,
-  });
-
-  UserModel copyWith({
-    UserDataModel? data,
-  }) =>
-      UserModel(
-        data: data ?? this.data,
-      );
-
-  factory UserModel.fromJson(String str) => UserModel.fromMap(json.decode(str));
-
-  String toJson() => json.encode(toMap());
-
-  factory UserModel.fromMap(Map<String, dynamic> json) => UserModel(
-        data: json["data"] == null ? null : UserDataModel.fromMap(json["data"]),
-      );
-
-  Map<String, dynamic> toMap() => {
-        "data": data?.toMap(),
-      };
-}
-
-class UserDataModel {
   final String? id;
   final String? fullName;
   final String? email;
@@ -46,7 +19,7 @@ class UserDataModel {
   final Locations? locations;
   final int? searchRadius;
 
-  UserDataModel({
+  UserModel({
     this.id,
     this.fullName,
     this.email,
@@ -62,7 +35,7 @@ class UserDataModel {
     this.searchRadius,
   });
 
-  UserDataModel copyWith({
+  UserModel copyWith({
     String? id,
     String? fullName,
     String? email,
@@ -77,7 +50,7 @@ class UserDataModel {
     Locations? locations,
     int? searchRadius,
   }) =>
-      UserDataModel(
+      UserModel(
         id: id ?? this.id,
         fullName: fullName ?? this.fullName,
         email: email ?? this.email,
@@ -93,12 +66,11 @@ class UserDataModel {
         searchRadius: searchRadius ?? this.searchRadius,
       );
 
-  factory UserDataModel.fromJson(String str) =>
-      UserDataModel.fromMap(json.decode(str));
+  factory UserModel.fromJson(String str) => UserModel.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory UserDataModel.fromMap(Map<String, dynamic> json) => UserDataModel(
+  factory UserModel.fromMap(Map<String, dynamic> json) => UserModel(
         id: json["id"],
         fullName: json["fullName"],
         email: json["email"],
@@ -124,21 +96,21 @@ class UserDataModel {
       );
 
   Map<String, dynamic> toMap() => {
-        "id": id,
-        "fullName": fullName,
-        "email": email,
-        "phone": phone,
-        "emailVerified": emailVerified,
-        "phoneVerified": phoneVerified,
-        "bio": bio,
-        "pictures":
-            pictures == null ? [] : List<dynamic>.from(pictures!.map((x) => x)),
+        if (id != null) "id": id,
+        if (fullName != null) "fullName": fullName,
+        if (email != null) "email": email,
+        if (phone != null) "phone": phone,
+        if (emailVerified != null) "emailVerified": emailVerified,
+        if (phoneVerified != null) "phoneVerified": phoneVerified,
+        if (bio != null) "bio": bio,
+        if (pictures != null)
+          "pictures": List<dynamic>.from(pictures!.map((x) => x)),
         if (birthday != null)
           "birthday":
               "${birthday!.year.toString().padLeft(4, '0')}-${birthday!.month.toString().padLeft(2, '0')}-${birthday!.day.toString().padLeft(2, '0')}",
-        "gender": gender?.name,
-        "interests": interests?.toJson(),
-        "locations": locations?.toMap(),
-        "searchRadius": searchRadius,
+        if (gender != null) "gender": gender?.backendName,
+        if (interests != null) "interests": interests?.toJson(),
+        if (locations != null) "locations": locations?.toMap(),
+        if (searchRadius != null) "searchRadius": searchRadius,
       };
 }

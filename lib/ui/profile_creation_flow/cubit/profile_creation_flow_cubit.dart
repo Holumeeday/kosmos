@@ -241,8 +241,7 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
       // Emit the state if response status is failed or success with the error message
       // if available
       if (fResponse.status == true) {
-        fUserRepository.setUser(fUserRepository.fUserModel.copyWith(
-            data: fUserRepository.fUserModel.data?.copyWith(fullName: name)));
+        _updateUserRepository(name: name);
         emit(
           state.copyWith(
             uploadNameStatus: ProfileCreationUploadNameStatus.success,
@@ -270,8 +269,8 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
     }
   }
 
-  /// Upload name and Bio
-  void uploadOtherDetails({
+  /// Upload name and bio details
+  Future<void> uploadOtherDetails({
     String? name,
     int? searchRadius,
     String? birthday,
@@ -279,54 +278,136 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
     ActivityInterestGroupsList? interests,
     Locations? location,
   }) async {
-    // Since we can call this when the bloc is closed we need to check
     if (!isClosed) {
       emit(state.copyWith(
           uploadOthersStatus: ProfileCreationUploadOthersStatus.loading));
     }
+
     try {
+      final formattedBirthday = state.fFlowModel.dateOfBirth != null
+          ? DateFormat('yyyy-MM-dd').format(state.fFlowModel.dateOfBirth!)
+          : null;
+
+      final selectedInterests =
+          _mapSelectedInterests(state.fSelectedInterestMap);
+
       final fResponse = await fAuthRepository.setOnboarding(
         fullName: name,
         searchRadius: state.fFlowModel.radius,
-        birthday: state.fFlowModel.dateOfBirth != null
-            ? DateFormat('yyyy-MM-dd').format(state.fFlowModel.dateOfBirth!)
-            : null,
+        birthday: formattedBirthday,
         gender: state.fFlowModel.gender,
-        interests: state.fSelectedInterestMap.isNotEmpty
-            ? ActivityInterestGroupsList(groups: [
-                for (final item in state.fSelectedInterestMap.entries)
-                  ActivityInterestGroups(
-                    categoryName: item.key,
-                    interests: item.value,
-                  )
-              ])
-            : null,
+        interests: selectedInterests,
         location: state.fFlowModel.location,
       );
 
-      // Since we can call this when the bloc is closed we need to check
+      if (fResponse.status) {
+        _updateUserRepository(
+          name: name,
+          searchRadius: state.fFlowModel.radius?.round(),
+          birthday: state.fFlowModel.dateOfBirth,
+          gender: state.fFlowModel.gender,
+          interests: selectedInterests,
+          location: state.fFlowModel.location,
+        );
+      }
+
       if (isClosed) return;
 
-      // Emit the state if response status is failed or success with the error message
-      // if available
-      if (fResponse.status == true) {
-        emit(
-          state.copyWith(
-            uploadOthersStatus: ProfileCreationUploadOthersStatus.success,
-            data: fResponse,
-          ),
-        );
-      } else {
-        addError(fResponse.status);
-        emit(
-          state.copyWith(
-            uploadOthersStatus: ProfileCreationUploadOthersStatus.failure,
-            data: fResponse,
-            errorMessage: fResponse.message,
+      emit(
+        state.copyWith(
+          uploadOthersStatus: fResponse.status
+              ? ProfileCreationUploadOthersStatus.success
+              : ProfileCreationUploadOthersStatus.failure,
+          data: fResponse,
+          errorMessage: fResponse.status ? null : fResponse.message,
+        ),
+      );
+    } catch (e) {
+      _handleError(e);
+    }
+  }
+
+  /// Upload images to AWS bucket
+  Future<void> uploadImages({required List<File?> images}) async {
+    final newImages = images.whereType<File>().toList();
+
+    try {
+      final fResponse = await fAuthRepository.getOnboardingImageUrls(
+        totalImages: newImages.length,
+      );
+
+      if (!fResponse.status) return;
+
+      final fileUploadUrls = FileUploadPartModel.fromMap(fResponse.data);
+      final uploadedImageUrls =
+          await _uploadFilesToAWS(newImages, fileUploadUrls);
+
+      if (uploadedImageUrls.isNotEmpty) {
+        await fAuthRepository.setOnboarding(pictures: uploadedImageUrls);
+        fUserRepository.setUser(
+          fUserRepository.fUserModel.copyWith(
+            pictures: uploadedImageUrls,
           ),
         );
       }
-    } on PlaykosmosException catch (e) {
+    } catch (_) {
+      // Handle or log exceptions as needed
+    }
+  }
+
+  /// Map selected interests to ActivityInterestGroupsList
+  ActivityInterestGroupsList? _mapSelectedInterests(
+      Map<String, List<String>> selectedInterestMap) {
+    if (selectedInterestMap.isEmpty) return null;
+
+    return ActivityInterestGroupsList(
+      groups: selectedInterestMap.entries
+          .map((entry) => ActivityInterestGroups(
+                categoryName: entry.key,
+                interests: entry.value,
+              ))
+          .toList(),
+    );
+  }
+
+  /// Update user repository with new details
+  void _updateUserRepository({
+    String? name,
+    int? searchRadius,
+    DateTime? birthday,
+    GenderEnum? gender,
+    ActivityInterestGroupsList? interests,
+    Locations? location,
+  }) {
+    fUserRepository.setUser(fUserRepository.fUserModel.copyWith(
+      fullName: name,
+      searchRadius: searchRadius,
+      birthday: birthday,
+      gender: gender,
+      interests: interests,
+      locations: location,
+    ));
+  }
+
+  /// Upload files to AWS and return their URLs
+  Future<List<String>> _uploadFilesToAWS(
+      List<File> files, FileUploadPartModel fileUploadUrls) async {
+    final uploadedImageUrls = <String>[];
+
+    for (final (index, imageUrl) in (fileUploadUrls.url ?? []).indexed) {
+      await fAuthRepository.uploadImagesWithFile(
+        image: files[index],
+        uploadPath: imageUrl.uploadUrl!,
+      );
+      uploadedImageUrls.add(imageUrl.fileUrl!);
+    }
+
+    return uploadedImageUrls;
+  }
+
+  /// Handle errors and update state
+  void _handleError(Object e) {
+    if (e is PlaykosmosException) {
       addError(e);
       emit(
         state.copyWith(
@@ -334,43 +415,8 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
           uploadOthersStatus: ProfileCreationUploadOthersStatus.failure,
         ),
       );
+    } else {
+      printE(e);
     }
-  }
-
-  /// Upload image to aws bucket
-  Future<void> uploadImages({
-    required List<File?> images,
-  }) async {
-    final newImages = <File>[
-      for (final item in images)
-        if (item != null) item
-    ];
-    try {
-      final fResponse = await fAuthRepository.getOnboardingImageUrls(
-        totalImages: newImages.length,
-      );
-
-      if (!fResponse.status) return;
-      final fFileUploadUrls = FileUploadPartModel.fromMap(fResponse.data);
-      final dUploadedImages = <String>[];
-      printI(fFileUploadUrls.toMap());
-      for (final (index, image)
-          in (fFileUploadUrls.url ?? <FileUploadUrl>[]).indexed) {
-        // Upload file
-        await fAuthRepository.uploadImagesWithFile(
-          image: newImages[index],
-          uploadPath: image.uploadUrl!,
-        );
-        dUploadedImages.add(image.fileUrl!);
-      }
-      // if upload was successful set the profile pic urls
-      if (dUploadedImages.isNotEmpty) {
-        await fAuthRepository.setOnboarding(pictures: dUploadedImages);
-        fUserRepository.setUser(fUserRepository.fUserModel.copyWith(
-            data: fUserRepository.fUserModel.data?.copyWith(
-          pictures: dUploadedImages,
-        )));
-      }
-    } catch (_) {}
   }
 }
