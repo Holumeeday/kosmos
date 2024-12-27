@@ -50,9 +50,21 @@ final List<String> sampleStories = [
   "https://example.com/story4.jpg",
 ];
 
-/// Generates a list of `BuddiesModel` with random data.
-///
-/// The number of buddies to generate is determined by the `totalBuddies` parameter.
+/// Sample reviews used for generating dummy data.
+final List<String> sampleReviews = [
+  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vehicula nec nulla eu ultrices. Donec ac ultrices eros.",
+  "This buddy is fantastic! Always up for an adventure and a great conversationalist. Highly recommended!",
+  "I had an amazing time hanging out with this buddy. They are so friendly and fun to be around.",
+  "One of the most genuine people I’ve met. Their advice and support have been invaluable. Would love to meet again!",
+  "Not quite what I expected. While they were polite, the vibe just wasn’t there for me.",
+  "Very organized and reliable! They made our trip a breeze and took care of all the small details. Definitely a 5-star experience.",
+  "Great energy and enthusiasm, but could work on punctuality. Overall, still a good experience.",
+  "We went hiking together, and it was incredible! This buddy knew all the best trails and hidden spots.",
+  "A great listener and very empathetic. They gave me some great tips on personal development too!",
+  "The buddy was okay, but I feel like the conversation didn’t flow as naturally as I had hoped.",
+];
+
+/// Generates a list of `BuddiesModel` with random data and dummy reviews.
 List<BuddiesModel> generateBuddiesList(int totalBuddies) {
   return List.generate(totalBuddies, (index) {
     // Shuffle sample data for randomness.
@@ -60,6 +72,26 @@ List<BuddiesModel> generateBuddiesList(int totalBuddies) {
     final shuffledImages = [...sampleImages]..shuffle(random);
     final shuffledStories = [...sampleStories]..shuffle(random);
     final shuffledBio = sampleBios[random.nextInt(sampleBios.length)];
+
+    // Generate dummy reviews for the buddy.
+    final List<Review> reviews = List.generate(random.nextInt(10) + 1, (reviewIndex) {
+      final reviewer = BuddiesModel(
+        userName: "Reviewer $reviewIndex",
+        profileImages: shuffledImages.take(1).toList(),
+        bio: "This is a reviewer’s bio",
+      );
+      return Review(
+        reviewer: reviewer,
+        rating: random.nextInt(5) + 1, // Random rating between 1 and 5.
+        review: sampleReviews[random.nextInt(sampleReviews.length)]
+            .substring(0, random.nextInt(20) + 50), // Varying review length.
+        timeOfReview: DateTime.now().subtract(Duration(days: random.nextInt(365))),
+      );
+    });
+
+    // Calculate the total rating and review count.
+    final double totalRating =double.parse ((reviews.fold(0, (sum, review) => sum + review.rating) /reviews.length).toStringAsFixed(1));
+    final int reviewCount = reviews.length;
 
     // Generate a random `BuddiesModel`.
     return BuddiesModel(
@@ -75,12 +107,15 @@ List<BuddiesModel> generateBuddiesList(int totalBuddies) {
       buddiesCount: random.nextInt(5000) + 500, // Random 500-5500 buddies.
       activityCreatedCount: random.nextInt(50) + 1, // Random 1-50 activities created.
       activityJoinedCount: random.nextInt(100) + 10, // Random 10-110 activities joined.
-      reviewCount: random.nextInt(500) + 10, // Random 10-510 reviews.
-      reviewStars: (random.nextDouble() * 5).clamp(1.0, 5.0), // Random 1.0-5.0 stars.
       activities: shuffledImages.take(5).toList(), // Pick 5 random activities.
       posts: shuffledImages.take(5).toList(), // Pick 5 random posts.
       connectionType: connectionTypes[random.nextInt(connectionTypes.length)], // Random connection type.
       stories: shuffledStories.take(3).toList(), // Pick 3 random stories.
+      reviews: Reviews(
+        count: reviewCount,
+        totalRating: totalRating,
+        reviewList: reviews,
+      ),
     );
   });
 }

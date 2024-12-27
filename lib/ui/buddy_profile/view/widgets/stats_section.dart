@@ -5,6 +5,7 @@ import 'package:playkosmos_v3/common_widgets/profile_image_with_story_indicator.
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/buddy_connections/view/buddy_connections.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/cubit/buddy_profile_cubit.dart';
+import 'package:playkosmos_v3/ui/reviews/view/reviews.dart';
 
 class UserStatsSection extends StatelessWidget {
   const UserStatsSection({super.key});
@@ -63,7 +64,9 @@ class UserStatsSection extends StatelessWidget {
                     VerticalDivider(
                       color: context.appColors.fDividerColor,
                     ),
-                    const ProfileImageWithStoryIndicator()
+                     ProfileImageWithStoryIndicator(
+                      fImage: state.fBuddiesModel.profileImages[0],
+                    )
                   ],
                 ),
               ),
@@ -98,10 +101,13 @@ class UserStatsSection extends StatelessWidget {
                       color: context.appColors.fDividerColor,
                     ),
                     BuildStatItem(
+                        fOntap: () {
+                          context.push(const ReviewsPage());
+                        },
                         fRating: true,
-                        fValue: state.fBuddiesModel.reviewStars.toString(),
+                        fValue: state.fBuddiesModel.reviews.totalRating.toString(),
                         fLabel:
-                            "${state.fBuddiesModel.reviewCount.formatNumToCompact()} ${context.loc.setReviews(state.fBuddiesModel.reviewCount)}"),
+                            "${state.fBuddiesModel.reviews.count.formatNumToCompact()} ${context.loc.setReviews(state.fBuddiesModel.reviews.count)}"),
                   ],
                 ),
               ),

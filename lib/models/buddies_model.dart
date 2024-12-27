@@ -1,4 +1,3 @@
-
 /// Represents a buddy user in the system with their profile and interaction data.
 /// @author: Chidera Chijama
 class BuddiesModel {
@@ -38,12 +37,6 @@ class BuddiesModel {
   /// Number of activities this buddy has joined
   final int activityJoinedCount;
 
-  /// Number of reviews received
-  final int reviewCount;
-
-  /// Average rating from reviews (0-5 stars)
-  final double reviewStars;
-
   /// List of activity identifiers
   final List<String> activities;
 
@@ -56,15 +49,24 @@ class BuddiesModel {
   /// List of stories
   final List<String> stories;
 
+  /// Followers list (other buddies)
   final List<BuddiesModel>? followersList;
 
+  /// Following list (other buddies)
   final List<BuddiesModel>? followingList;
-    final List<BuddiesModel>? buddiesList;
-  
+
+  /// Buddies list (other buddies)
+  final List<BuddiesModel>? buddiesList;
+
+  /// Reviews of this buddy
+  final Reviews reviews;
 
   /// Creates a new BuddiesModel instance with default values
-   const BuddiesModel(  {this.followersList,
-    this.followingList, this.buddiesList,this.distance = 3,
+  const BuddiesModel({
+    this.followersList,
+    this.followingList,
+    this.buddiesList,
+    this.distance = 3,
     this.similarInterestsCount = 15,
     this.mutualBuddiesCount = 12,
     this.userName = 'Jordyn Vaccaro',
@@ -91,8 +93,6 @@ class BuddiesModel {
     this.buddiesCount = 3200000,
     this.activityCreatedCount = 300,
     this.activityJoinedCount = 1200,
-    this.reviewCount = 300,
-    this.reviewStars = 4.5,
     this.activities = const [
       "https://elections.civichive.org/wp-content/uploads/2022/12/Abiola-Latifu-Kolawole-PRP.jpg",
       "https://pbs.twimg.com/profile_images/1510691230555987973/agTnpSpG_400x400.jpg",
@@ -109,6 +109,7 @@ class BuddiesModel {
       "https://example.com/story2.jpg",
       "https://example.com/story3.jpg",
     ],
+    this.reviews = const Reviews(),
   });
 
   /// Creates a copy of this BuddiesModel with the given fields replaced with new values
@@ -134,6 +135,7 @@ class BuddiesModel {
     List<BuddiesModel>? followersList,
     List<BuddiesModel>? followingList,
     List<BuddiesModel>? buddiesList,
+    Reviews? reviews,
   }) {
     return BuddiesModel(
       distance: distance ?? this.distance,
@@ -149,19 +151,54 @@ class BuddiesModel {
       buddiesCount: buddiesCount ?? this.buddiesCount,
       activityCreatedCount: activityCreatedCount ?? this.activityCreatedCount,
       activityJoinedCount: activityJoinedCount ?? this.activityJoinedCount,
-      reviewCount: reviewCount ?? this.reviewCount,
-      reviewStars: reviewStars ?? this.reviewStars,
       activities: activities ?? this.activities,
       posts: posts ?? this.posts,
       connectionType: connectionType ?? this.connectionType,
       stories: stories ?? this.stories,
-      followersList: followersList?? this.followersList,
-      followingList: followingList?? this.followingList,
-      buddiesList: buddiesList?? this.buddiesList
+      followersList: followersList ?? this.followersList,
+      followingList: followingList ?? this.followingList,
+      buddiesList: buddiesList ?? this.buddiesList,
+      reviews: reviews ?? this.reviews,
     );
   }
-
-
-
 }
 
+/// Represents the reviews section of a buddy
+class Reviews {
+  /// The total number of reviews
+  final int count;
+
+  /// The total rating value
+  final double totalRating;
+
+  /// List of individual reviews
+  final List<Review> reviewList;
+
+  const Reviews({
+    this.count = 300,
+    this.totalRating = 4.5,
+    this.reviewList = const [],
+  });
+}
+
+/// Represents a single review
+class Review {
+  /// The reviewer, represented as a BuddiesModel
+  final BuddiesModel reviewer;
+
+  /// The review rating (1-5)
+  final int rating;
+
+  /// The actual review text
+  final String review;
+
+  /// The time of the review
+  final DateTime timeOfReview;
+
+  const Review({
+    required this.reviewer,
+    required this.rating,
+    required this.review,
+    required this.timeOfReview,
+  });
+}

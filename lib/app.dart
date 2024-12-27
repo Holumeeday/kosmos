@@ -8,6 +8,7 @@ import 'package:playkosmos_v3/ui/buddy_connections/cubit/buddy_connections_cubit
 import 'package:playkosmos_v3/ui/buddy_profile/cubit/buddy_profile_cubit.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/view/buddy_profile_page.dart';
 import 'package:playkosmos_v3/ui/main/cubit/main_page_cubit.dart';
+import 'package:playkosmos_v3/ui/reviews/cubit/reviews_cubit.dart';
 import 'package:playkosmos_v3/ui/select_language/cubit/select_language_cubit.dart';
 import 'package:playkosmos_v3/ui/sign_up_phone_number/cubit/sign_up_phone_number_cubit.dart';
 import 'package:playkosmos_v3/ui/splash/splash_page.dart';
@@ -75,7 +76,11 @@ class _AppBloc extends StatelessWidget {
           create: (_) => BuddyProfileCubit(),
         ),
         BlocProvider(
-      create: (_) => BuddyConnectionsCubit(),)
+          create: (_) => BuddyConnectionsCubit(),
+        ),
+        BlocProvider(
+          create: (_) => ReviewsCubit(),
+        ),
       ],
       child: const _AppView(),
     );
