@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:playkosmos_v3/common_widgets/show_all_button.dart';
 import 'package:playkosmos_v3/common_widgets/sizes.dart';
 import 'package:playkosmos_v3/data_transfer_objects/activity_interest_groups.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
@@ -153,7 +154,7 @@ class _InterestHeader extends StatelessWidget {
           const HRelativeSpace(32),
           if (getScreenWidth(context) >= 480)
             Text(
-              fIsClosed ? context.loc.close : context.loc.open,
+           fIsClosed ? context.loc.close : context.loc.open,
               style: context.appTextTheme.header3!.copyWith(fontSize: 14),
             ),
           IconButton(
@@ -297,62 +298,13 @@ class _InterestGroupListState extends State<_InterestGroupList>
                           .setShowAll(widget.fInterestGroup);
                     },
                     child:
-                        _ShowAllButton(fShowAll: widget.fInterestGroup.showAll),
+                         ShowAllButton(fShowAll: widget.fInterestGroup.showAll, fText1: context.loc.showAll2,fText2: context.loc.showLess,),
                   ),
                 ),
             ],
           ),
         ),
       ],
-    );
-  }
-}
-
-class _ShowAllButton extends StatelessWidget {
-  const _ShowAllButton({
-    required this.fShowAll,
-  });
-
-  /// Show all
-  final bool fShowAll;
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedSwitcher(
-      duration: Durations.extralong4,
-      transitionBuilder: (Widget child, Animation<double> animation) {
-        return FadeTransition(
-          opacity: animation,
-          child: child,
-        );
-      },
-      child: !fShowAll
-          ? Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  context.loc.showAll2,
-                  style: context.appTextTheme.buttonSmall,
-                ),
-                Icon(
-                  Icons.keyboard_arrow_down_rounded,
-                  color: context.appTextTheme.buttonSmall?.color,
-                ),
-              ],
-            )
-          : Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  context.loc.showLess,
-                  style: context.appTextTheme.buttonSmall,
-                ),
-                Icon(
-                  Icons.keyboard_arrow_up_rounded,
-                  color: context.appTextTheme.buttonSmall?.color,
-                ),
-              ],
-            ),
     );
   }
 }

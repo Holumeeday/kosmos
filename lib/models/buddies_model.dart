@@ -1,3 +1,4 @@
+
 /// Represents a buddy user in the system with their profile and interaction data.
 /// @author: Chidera Chijama
 class BuddiesModel {
@@ -52,9 +53,18 @@ class BuddiesModel {
   /// Type of connection with the current user
   final String connectionType;
 
+  /// List of stories
+  final List<String> stories;
+
+  final List<BuddiesModel>? followersList;
+
+  final List<BuddiesModel>? followingList;
+    final List<BuddiesModel>? buddiesList;
+  
+
   /// Creates a new BuddiesModel instance with default values
-  const BuddiesModel({
-    this.distance = 3,
+   const BuddiesModel(  {this.followersList,
+    this.followingList, this.buddiesList,this.distance = 3,
     this.similarInterestsCount = 15,
     this.mutualBuddiesCount = 12,
     this.userName = 'Jordyn Vaccaro',
@@ -87,27 +97,18 @@ class BuddiesModel {
       "https://elections.civichive.org/wp-content/uploads/2022/12/Abiola-Latifu-Kolawole-PRP.jpg",
       "https://pbs.twimg.com/profile_images/1510691230555987973/agTnpSpG_400x400.jpg",
       "https://dailytrust.com/wp-content/uploads/2022/11/Prince-Adewole-Adebayo-1.jpg",
-      "https://elections.civichive.org/wp-content/uploads/2022/12/Adenuga-Sunday-Oluwafemi-BP.jpg",
-      "https://elections.civichive.org/wp-content/uploads/2022/12/Ado-Ibrahim-Abdulmalik-YPP.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/7/7c/Hamza_al-Mustapha_2023.jpg",
-      "https://cdn.businessday.ng/2022/04/Abiru-1.png",
-      "https://pbs.twimg.com/profile_images/1495721772523692034/GnC5MJjS_400x400.jpg",
-      "https://pbs.twimg.com/profile_images/1530445927739162625/xtGDZZIm_400x400.jpg",
-      "https://stears-elections.s3.eu-west-1.amazonaws.com/static/candidate-photos/president/APP-Charles-Nnadi.png"
     ],
     this.posts = const [
       "https://elections.civichive.org/wp-content/uploads/2022/12/Abiola-Latifu-Kolawole-PRP.jpg",
       "https://pbs.twimg.com/profile_images/1510691230555987973/agTnpSpG_400x400.jpg",
       "https://dailytrust.com/wp-content/uploads/2022/11/Prince-Adewole-Adebayo-1.jpg",
-      "https://elections.civichive.org/wp-content/uploads/2022/12/Adenuga-Sunday-Oluwafemi-BP.jpg",
-      "https://elections.civichive.org/wp-content/uploads/2022/12/Ado-Ibrahim-Abdulmalik-YPP.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/7/7c/Hamza_al-Mustapha_2023.jpg",
-      "https://cdn.businessday.ng/2022/04/Abiru-1.png",
-      "https://pbs.twimg.com/profile_images/1495721772523692034/GnC5MJjS_400x400.jpg",
-      "https://pbs.twimg.com/profile_images/1530445927739162625/xtGDZZIm_400x400.jpg",
-      "https://stears-elections.s3.eu-west-1.amazonaws.com/static/candidate-photos/president/APP-Charles-Nnadi.png"
     ],
-    this.connectionType = "followingYou",
+    this.connectionType = "followingUser",
+    this.stories = const [
+      "https://example.com/story1.jpg",
+      "https://example.com/story2.jpg",
+      "https://example.com/story3.jpg",
+    ],
   });
 
   /// Creates a copy of this BuddiesModel with the given fields replaced with new values
@@ -129,6 +130,10 @@ class BuddiesModel {
     List<String>? activities,
     List<String>? posts,
     String? connectionType,
+    List<String>? stories,
+    List<BuddiesModel>? followersList,
+    List<BuddiesModel>? followingList,
+    List<BuddiesModel>? buddiesList,
   }) {
     return BuddiesModel(
       distance: distance ?? this.distance,
@@ -149,6 +154,14 @@ class BuddiesModel {
       activities: activities ?? this.activities,
       posts: posts ?? this.posts,
       connectionType: connectionType ?? this.connectionType,
+      stories: stories ?? this.stories,
+      followersList: followersList?? this.followersList,
+      followingList: followingList?? this.followingList,
+      buddiesList: buddiesList?? this.buddiesList
     );
   }
+
+
+
 }
+

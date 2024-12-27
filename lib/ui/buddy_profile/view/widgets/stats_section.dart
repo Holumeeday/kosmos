@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
+import 'package:playkosmos_v3/common_widgets/profile_image_with_story_indicator.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
+import 'package:playkosmos_v3/ui/buddy_connections/view/buddy_connections.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/cubit/buddy_profile_cubit.dart';
-import 'package:playkosmos_v3/utils/theme/app_colors.dart';
 
 class UserStatsSection extends StatelessWidget {
   const UserStatsSection({super.key});
@@ -22,47 +23,47 @@ class UserStatsSection extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     BuildStatItem(
-                        value: state.fBuddiesModel.followingCount
-                            .formatNumToCompact(),
-                        label: context.loc.followingUser),
+                      fValue: state.fBuddiesModel.followingCount
+                          .formatNumToCompact(),
+                      fLabel: context.loc.followingUser,
+                      fOntap: () {
+                        context.push(const BuddyConnectionsPage(
+                          fInitialIndex: 0,
+                        ));
+                      },
+                    ),
                     VerticalDivider(
                       color: context.appColors.fDividerColor,
                     ),
                     BuildStatItem(
-                      value: state.fBuddiesModel.followersCount
+                      fValue: state.fBuddiesModel.followersCount
                           .formatNumToCompact(),
-                      label: context.loc
+                      fLabel: context.loc
                           .setFollowers(state.fBuddiesModel.followersCount),
+                      fOntap: () {
+                        context.push(const BuddyConnectionsPage(
+                          fInitialIndex: 1,
+                        ));
+                      },
                     ),
                     VerticalDivider(
                       color: context.appColors.fDividerColor,
                     ),
                     BuildStatItem(
-                      value: state.fBuddiesModel.buddiesCount
-                          .formatNumToCompact(),
-                      label: context.loc
+                      fValue:
+                          state.fBuddiesModel.buddiesCount.formatNumToCompact(),
+                      fLabel: context.loc
                           .setBuddies(state.fBuddiesModel.followersCount),
+                      fOntap: () {
+                        context.push(const BuddyConnectionsPage(
+                          fInitialIndex: 2,
+                        ));
+                      },
                     ),
                     VerticalDivider(
                       color: context.appColors.fDividerColor,
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(2),
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                            // center: Alignment.topCenter,
-                            stops: [.5, .8, 1],
-                            colors: AppColor.fPrimaryGradient),
-                        shape: BoxShape.circle,
-                      ),
-                      child: CircleAvatar(
-                        backgroundColor: context.colors.surface,
-                        radius: getRelativeScreenHeight(32, context),
-                        child: CircleAvatar(
-                          radius: getRelativeScreenHeight(30, context),
-                        ),
-                      ),
-                    )
+                    const ProfileImageWithStoryIndicator()
                   ],
                 ),
               ),
@@ -80,26 +81,26 @@ class UserStatsSection extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     BuildStatItem(
-                        value: state.fBuddiesModel.activityCreatedCount
+                        fValue: state.fBuddiesModel.activityCreatedCount
                             .formatNumToCompact(),
-                        label: context.loc.setActivitiesCreated(
+                        fLabel: context.loc.setActivitiesCreated(
                             state.fBuddiesModel.activityCreatedCount)),
                     VerticalDivider(
                       color: context.appColors.fDividerColor,
                     ),
                     BuildStatItem(
-                      value: state.fBuddiesModel.activityJoinedCount
+                      fValue: state.fBuddiesModel.activityJoinedCount
                           .formatNumToCompact(),
-                      label: context.loc.setActivityJoined(
+                      fLabel: context.loc.setActivityJoined(
                           state.fBuddiesModel.activityJoinedCount),
                     ),
                     VerticalDivider(
                       color: context.appColors.fDividerColor,
                     ),
                     BuildStatItem(
-                        rating: true,
-                        value: state.fBuddiesModel.reviewStars.toString(),
-                        label:
+                        fRating: true,
+                        fValue: state.fBuddiesModel.reviewStars.toString(),
+                        fLabel:
                             "${state.fBuddiesModel.reviewCount.formatNumToCompact()} ${context.loc.setReviews(state.fBuddiesModel.reviewCount)}"),
                   ],
                 ),
@@ -118,36 +119,42 @@ class UserStatsSection extends StatelessWidget {
 class BuildStatItem extends StatelessWidget {
   const BuildStatItem({
     super.key,
-    required this.value,
-    required this.label,
-    this.rating = false,
+    required this.fValue,
+    required this.fLabel,
+    this.fRating = false,
+    this.fOntap,
   });
-  final String value;
-  final String label;
-  final bool rating;
+  final String fValue;
+  final String fLabel;
+  final bool fRating;
+  final void Function()? fOntap;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        rating
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.star, color: Colors.amber, size: 20),
-                  const HSpace(4),
-                  Text(value,
-                      style: context.textTheme.displayLarge!
-                          .copyWith(fontSize: 18)),
-                ],
-              )
-            : Text(value,
-                style: context.textTheme.displayLarge!.copyWith(fontSize: 18)),
-        const VSpace(4),
-        Text(label,
-            style: context.textTheme.headlineSmall!
-                .copyWith(color: context.appColors.darkGreyColor)),
-      ],
+    return InkWell(
+      onTap: fOntap,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          fRating
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.star, color: Colors.amber, size: 20),
+                    const HSpace(4),
+                    Text(fValue,
+                        style: context.textTheme.displayLarge!
+                            .copyWith(fontSize: 18)),
+                  ],
+                )
+              : Text(fValue,
+                  style:
+                      context.textTheme.displayLarge!.copyWith(fontSize: 18)),
+          const VSpace(4),
+          Text(fLabel,
+              style: context.textTheme.headlineSmall!
+                  .copyWith(color: context.appColors.darkGreyColor)),
+        ],
+      ),
     );
   }
 }

@@ -144,7 +144,7 @@ class _ActivityFeedReactionState extends State<ActivityFeedReaction> {
                         // Playmates attending text
                         TextWithBackground(
                           fText: context.loc.playmatesAttending,
-                          fBackgroundColor: context.colors.secondary,
+                          fTextColor: context.colors.secondary,
                           fTextSize: 12,
                           fFontWeight: FontWeight.w500,
                           fPadding: const EdgeInsets.all(4),
