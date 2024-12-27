@@ -7,6 +7,7 @@ import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/cubit/profile_creation_flow_cubit.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/next_button.dart';
+import 'package:playkosmos_v3/utils/snack_bar_util.dart';
 
 /// This is the page for uploading pics for the profile creation
 /// section
@@ -59,12 +60,53 @@ class UploadPicsPage extends StatelessWidget {
                     return ImageSlot(
                       image: dSelectedImages[index],
                       onAdd: () async {
+                        print(9 - dSelectedImages.whereType<File>().length);
                         final picker = ImagePicker();
-                        final pickedFile =
-                            await picker.pickImage(source: ImageSource.gallery);
+                        final fLimit =
+                            9 - dSelectedImages.whereType<File>().length;
+                        // Allow multiple image selection
+                        final pickedFiles = await picker.pickMultiImage(
+                          limit: fLimit > 1 ? fLimit : 2,
+                        );
 
-                        if (pickedFile != null && context.mounted) {
-                          dSelectedImages[index] = File(pickedFile.path);
+                        // Selected images file path
+                        final dSelectedImagesFilePaths =
+                            dSelectedImages.map((e) => e?.path).toList();
+
+                        if (pickedFiles.isNotEmpty) {
+                          int replacementIndex =
+                              index; // Start replacing from the clicked index
+
+                          for (var pickedFile in pickedFiles) {
+                            // If file is already selected, ignore
+                            if (dSelectedImagesFilePaths
+                                .contains(pickedFile.path)) continue;
+
+                            final file = File(pickedFile.path);
+                            final fileSize =
+                                await file.length(); // Get file size in bytes
+
+                            const int maxSizeInBytes =
+                                2 * 1024 * 1024; // 2 MB in bytes
+
+                            if (fileSize > maxSizeInBytes) {
+                              SnackBarUtil.showError(
+                                  message: context.loc.selectedImageExceed2Mb);
+                              continue;
+                            }
+
+                            // Replace existing image at the index or add if index exceeds the list length
+                            if (replacementIndex < dSelectedImages.length) {
+                              dSelectedImages[replacementIndex] =
+                                  File(pickedFile.path);
+                            } else {
+                              dSelectedImages.add(File(pickedFile.path));
+                            }
+
+                            replacementIndex++;
+                          }
+
+                          // Update state with the modified image list
                           if (context.mounted) {
                             context
                                 .read<ProfileCreationFlowCubit>()

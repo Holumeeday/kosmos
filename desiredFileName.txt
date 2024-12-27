@@ -1,5 +1,7 @@
 {
   "fi": [
+    "checkYourMessage",
+    "selectedImageExceed2Mb",
     "setInterestCategories",
     "setInterestCategoryPageTitle",
     "setInterests",
@@ -86,6 +88,8 @@
   ],
 
   "fr": [
+    "checkYourMessage",
+    "selectedImageExceed2Mb",
     "setInterestCategories",
     "setInterestCategoryPageTitle",
     "setInterests",
@@ -172,6 +176,8 @@
   ],
 
   "hi": [
+    "checkYourMessage",
+    "selectedImageExceed2Mb",
     "setInterestCategories",
     "setInterestCategoryPageTitle",
     "setInterests",
@@ -258,6 +264,8 @@
   ],
 
   "si": [
+    "checkYourMessage",
+    "selectedImageExceed2Mb",
     "setInterestCategories",
     "setInterestCategoryPageTitle",
     "setInterests",
@@ -344,6 +352,8 @@
   ],
 
   "ta": [
+    "checkYourMessage",
+    "selectedImageExceed2Mb",
     "setInterestCategories",
     "setInterestCategoryPageTitle",
     "setInterests",
@@ -430,6 +440,8 @@
   ],
 
   "zh": [
+    "checkYourMessage",
+    "selectedImageExceed2Mb",
     "setInterestCategories",
     "setInterestCategoryPageTitle",
     "setInterests",

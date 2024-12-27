@@ -1,4 +1,6 @@
 {
+  "checkYourMessage": "Check your message",
+  "selectedImageExceed2Mb": "The selected image exceeds 2 MB. Please choose a smaller image.",
   "setInterestCategories": "{category, select, sports{Sports, Fitness, and Adventure} arts{Arts, Creativity, and Expression} technology{Technology, Gaming, and Innovation} food{Culinary Arts and Food Experiences} education{Education, Learning, and Personal Development} social{Social, Community, and Networking} wellness{Relaxation, Wellness, and Nature} animals{Animal and Wildlife} other{--}}",
   "@setInterestCategories": {
     "description": "The different activity categories",

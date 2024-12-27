@@ -30,9 +30,12 @@ class NextButton extends StatelessWidget {
     final fCanShowNext =
         !canShowSkip(context, dSelectedPage, fSelectedInterests);
     return fCanShowNext
-        ? PrimaryGradientButton(
-            fOnPressed: fOnPressed,
-            fChild: Text(fText ?? context.loc.nextText),
+        ? Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: PrimaryGradientButton(
+              fOnPressed: fOnPressed,
+              fChild: Text(fText ?? context.loc.nextText),
+            ),
           )
         : const SizedBox.shrink();
   }

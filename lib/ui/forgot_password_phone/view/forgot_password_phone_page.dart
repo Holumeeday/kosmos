@@ -74,7 +74,7 @@ class _ForgotPasswordPhoneState extends State<_ForgotPasswordPhone> {
                 context,
                 builder: (_) => Dialog(
                   child: AuthSuccessInfoDialog(
-                    fTitle: context.loc.checkYourInbox,
+                    fTitle: context.loc.checkYourMessage,
                     fMessage: context.loc.dingDingCheckInboxMessage,
                     fOnLetGo: () {
                       context.goNamed(
@@ -139,25 +139,9 @@ class _ForgotPasswordPhoneState extends State<_ForgotPasswordPhone> {
                   PrimaryGradientButton(
                     fDisabled: !_dCanNext,
                     fOnPressed: () {
-                      showCustomDialog(
-                        barrierDismissible: false,
-                        context,
-                        builder: (_) => Dialog(
-                          child: AuthSuccessInfoDialog(
-                            fTitle: context.loc.checkYourInbox,
-                            fMessage: context.loc.dingDingCheckInboxMessage,
-                            fOnLetGo: () {
-                              context.goNamed(
-                                AppRoute.forgotPasswordOtpScreen,
-                                queryParameters: {
-                                  'phone': _fPhoneController.text,
-                                  'is-email': false.toString()
-                                },
-                              );
-                            },
-                          ),
-                        ),
-                      );
+                      context
+                          .read<ForgotPasswordPhoneCubit>()
+                          .forgotPasswordPhone();
                     },
                     fChild: Text(context.loc.nextText),
                   ),
