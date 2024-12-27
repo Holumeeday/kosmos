@@ -69,7 +69,7 @@ class EmailOtpVerificationCubit extends Cubit<EmailOtpVerificationState> {
     emit(state.copyWith(
         resendOtpStatus: EmailResendOtpVerificationStatus.loading));
     try {
-      final fResponse = await fAuthRepository.forgotPasswordEmail(
+      final fResponse = await fAuthRepository.resendOtpEmail(
         email: fEmail,
       );
       // Emit the state if response status is failed or success with the error message

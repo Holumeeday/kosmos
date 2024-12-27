@@ -20,6 +20,7 @@ class ForgotPasswordOtpVerificationState extends Equatable {
   final ForgotPasswordResendOtpVerificationStatus resendOtpStatus;
   final GenericResponse? data;
   final String? otp;
+  final bool canResendOtp;
 
   const ForgotPasswordOtpVerificationState({
     this.otp,
@@ -27,12 +28,14 @@ class ForgotPasswordOtpVerificationState extends Equatable {
     this.errorMessage,
     this.status = ForgotPasswordOtpVerificationStatus.initial,
     this.data,
+    this.canResendOtp = false,
   });
 
   @override
   List<Object?> get props => [
         errorMessage,
         status,
+        canResendOtp,
         data,
         otp,
         resendOtpStatus,
@@ -43,12 +46,14 @@ class ForgotPasswordOtpVerificationState extends Equatable {
     ForgotPasswordOtpVerificationStatus? status,
     GenericResponse? data,
     String? otp,
+bool?    canResendOtp ,
     ForgotPasswordResendOtpVerificationStatus? resendOtpStatus,
   }) {
     return ForgotPasswordOtpVerificationState(
       resendOtpStatus: resendOtpStatus ?? this.resendOtpStatus,
       errorMessage: errorMessage ?? this.errorMessage,
       status: status ?? this.status,
+      canResendOtp: canResendOtp ?? this.canResendOtp,
       data: data ?? this.data,
       otp: otp ?? this.otp,
     );

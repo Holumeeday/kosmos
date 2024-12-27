@@ -176,6 +176,40 @@ class AuthRemoteApiRepository {
     }
   }
 
+  /// Resend OTP for email
+  Future<GenericResponse> resendOtpEmail({
+    required String email,
+  }) async {
+    try {
+      final res = await _remoteApi.post(
+        'auth/register/email/resend-otp',
+        body: {
+          'email': email,
+        },
+      );
+      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  /// Resend OTP for phone
+  Future<GenericResponse> resendOtpPhone({
+    required String phone,
+  }) async {
+    try {
+      final res = await _remoteApi.post(
+        'auth/register/phone/resend-otp',
+        body: {
+          'phone': phone,
+        },
+      );
+      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
+    } catch (_) {
+      rethrow;
+    }
+  }
+
   /// Resend OTP for forgot password email
   Future<GenericResponse> resendOtpForgotPasswordEmail({
     required String email,

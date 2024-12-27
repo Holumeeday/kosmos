@@ -29,6 +29,13 @@ class ForgotPasswordOtpVerificationCubit
           const ForgotPasswordOtpVerificationState(),
         );
 
+
+
+  /// Setting the [canResendOtp] value
+  void setResendingOtp(bool value) {
+    emit(state.copyWith(canResendOtp: value));
+  }
+
   /// Verify the otp
   void verifyOtp() async {
     if (state.otp == null) return;

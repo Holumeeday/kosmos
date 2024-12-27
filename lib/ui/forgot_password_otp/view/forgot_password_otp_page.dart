@@ -129,8 +129,13 @@ class _EmailOtpView extends StatelessWidget {
                   context.read<ForgotPasswordOtpVerificationCubit>().verifyOtp,
               fOnResendCode:
                   context.read<ForgotPasswordOtpVerificationCubit>().resendOtp,
-              fCanResendOtp: true,
-              fOnEndCountdown: () {},
+              fCanResendOtp: fIsEmail
+                  ? true
+                  : context.select((ForgotPasswordOtpVerificationCubit cubit) =>
+                      cubit.state.canResendOtp),
+              fOnEndCountdown: () => context
+                  .read<ForgotPasswordOtpVerificationCubit>()
+                  .setResendingOtp(true),
               fOnChanged: (String value) {
                 context
                     .read<ForgotPasswordOtpVerificationCubit>()
