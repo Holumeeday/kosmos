@@ -4,6 +4,7 @@ import 'package:playkosmos_v3/constants/countries_list.dart';
 import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/data_transfer_objects/playkosmos_exception.dart';
 import 'package:playkosmos_v3/enums/phone_otp_method_enum.dart';
+import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/models/country_model.dart';
 import 'package:playkosmos_v3/models/generic_respose_model.dart';
 
@@ -26,20 +27,15 @@ class SignUpWithPhoneNumberCubit extends Cubit<SignUpWithPhoneNumberState> {
   SignUpWithPhoneNumberCubit({
     required this.fAuthRepository,
   }) : super(SignUpWithPhoneNumberState(
-          fSelectedOtpOption: PhoneOtpMethodEnum.sms.name,
+          fSelectedOtpOption: PhoneOtpMethodEnum.sms,
           fSelectedCountryCode:
               kCountriesList.where((x) => x.name == 'Finland').single,
           fPhoneNumber: '',
         ));
 
   /// Updates the selected OTP option.
-  void setOtpOption(String option) {
-    final selectedOption = PhoneOtpMethodEnum.values
-        .firstWhere(
-          (element) => element.name.toLowerCase() == option.toLowerCase(),
-        )
-        .name;
-    emit(state.copyWith(fSelectedOtpOption: selectedOption));
+  void setOtpOption(PhoneOtpMethodEnum option) {
+    emit(state.copyWith(fSelectedOtpOption: option));
   }
 
   /// Updates the selected country code.
@@ -54,7 +50,7 @@ class SignUpWithPhoneNumberCubit extends Cubit<SignUpWithPhoneNumberState> {
 
   /// Combines the selected country code and phone number into a full phone number.
   String getFullPhoneNumber() {
-    return '${state.fSelectedCountryCode.phoneCode}${state.fPhoneNumber}';
+    return '${state.fSelectedCountryCode.phoneCodeAndPlus}${state.fPhoneNumber.truncateLeadingZero()}';
   }
 
   /// Sign up with phone

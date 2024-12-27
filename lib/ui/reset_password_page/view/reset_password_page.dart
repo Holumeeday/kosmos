@@ -70,7 +70,7 @@ class __ResetPasswordPageState extends State<ResetPasswordPage> {
                 builder: (BuildContext dialogContext) {
               return Dialog(
                 child: AuthSuccessInfoDialog(
-                  fTitle: context.loc.passswordResetSuccessfully,
+                  fTitle: context.loc.passswordResetSuccessful,
                   fMessage: context.loc.yourPasswordResetWasSuccessfulMessage,
                   fOnLetGo: () {
                     context.go(

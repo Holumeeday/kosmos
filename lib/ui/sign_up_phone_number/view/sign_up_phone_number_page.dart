@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
-import 'package:playkosmos_v3/common_widgets/styled_localization.dart';
 import 'package:playkosmos_v3/enums/phone_otp_method_enum.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/sign_up_phone_number/cubit/sign_up_phone_number_cubit.dart';
@@ -96,7 +95,6 @@ class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
             child: BlocBuilder<SignUpWithPhoneNumberCubit,
                 SignUpWithPhoneNumberState>(
               builder: (context, state) {
-                const kOtpOptions = PhoneOtpMethodEnum.values;
                 return Form(
                   key: _fFormKey,
                   child: Column(
@@ -134,44 +132,62 @@ class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
                               return BlocProvider.value(
                                 value:
                                     context.read<SignUpWithPhoneNumberCubit>(),
-                                child: Dialog(
-                                    child: OtpOptions(
-                                  fTitle: context
-                                      .loc.howWouldYouLikeToReceiveTheCode,
-                                  fcontent: Column(
-                                    children: kOtpOptions.map((option) {
-                                      return BlocSelector<
-                                          SignUpWithPhoneNumberCubit,
-                                          SignUpWithPhoneNumberState,
-                                          String>(
-                                        selector: (state) =>
-                                            state.fSelectedOtpOption,
-                                        builder: (context, selectedOption) {
-                                          return RadioListTile<String>(
-                                            title: _buildRichTextTitle(
-                                                context, option.name),
-                                            value: option.name,
-                                            groupValue: selectedOption,
-                                            onChanged: (value) {
-                                              if (value != null) {
-                                                context
-                                                    .read<
-                                                        SignUpWithPhoneNumberCubit>()
-                                                    .setOtpOption(value);
-                                              }
-                                            },
-                                          );
-                                        },
-                                      );
-                                    }).toList(),
-                                  ),
-                                  fOnLetGo: () {
-                                    context.pop();
-                                    context
-                                        .read<SignUpWithPhoneNumberCubit>()
-                                        .signUpPhone();
-                                  },
-                                )),
+                                child: Builder(builder: (context) {
+                                  final fSelectedOtpMethod = context.select(
+                                      (SignUpWithPhoneNumberCubit cubit) =>
+                                          cubit.state.fSelectedOtpOption);
+                                  return Dialog(
+                                      child: OtpOptions(
+                                    fTitle: context
+                                        .loc.howWouldYouLikeToReceiveTheCode,
+                                    fcontent: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        // Whatsapp
+                                        RadioListTile(
+                                          contentPadding: EdgeInsets.zero,
+                                          value: PhoneOtpMethodEnum.whatsapp,
+                                          groupValue: fSelectedOtpMethod,
+                                          title: Text(
+                                            context.loc.whatsapp,
+                                            style: context
+                                                .appTextTheme.buttonLarge,
+                                          ),
+                                          onChanged: (v) {
+                                            context
+                                                .read<
+                                                    SignUpWithPhoneNumberCubit>()
+                                                .setOtpOption(v!);
+                                          },
+                                        ),
+                                        // Sms
+                                        RadioListTile(
+                                          contentPadding: EdgeInsets.zero,
+                                          value: PhoneOtpMethodEnum.sms,
+                                          groupValue: fSelectedOtpMethod,
+                                          title: Text(
+                                            context.loc.sms,
+                                            style: context
+                                                .appTextTheme.buttonLarge,
+                                          ),
+                                          onChanged: (v) {
+                                            context
+                                                .read<
+                                                    SignUpWithPhoneNumberCubit>()
+                                                .setOtpOption(v!);
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                    fOnLetGo: () {
+                                      context.pop();
+                                      context
+                                          .read<SignUpWithPhoneNumberCubit>()
+                                          .signUpPhone();
+                                    },
+                                  ));
+                                }),
                               );
                             },
                           );
@@ -186,25 +202,6 @@ class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
           ),
         ),
       ),
-    );
-  }
-
-  /// Builds the dynamic RichText title based on the option.
-  Widget _buildRichTextTitle(BuildContext context, String option) {
-    final isSms = option == 'SMS';
-    final title = isSms ? context.loc.sms : context.loc.whatsapp;
-    final subtitle = isSms ? context.loc.onlyOnceText : context.loc.unlimited;
-
-    return StylingLocalizations(
-      fLocalizedText: "$title ($subtitle)",
-      fTextToStyle: [title, "($subtitle)"],
-      fGeneralStyle: Theme.of(context).textTheme.displayLarge?.copyWith(
-            fontSize: 18,
-          ),
-      fStyleText: Theme.of(context).textTheme.displayLarge?.copyWith(
-            fontSize: 18,
-            color: Colors.grey,
-          ),
     );
   }
 }

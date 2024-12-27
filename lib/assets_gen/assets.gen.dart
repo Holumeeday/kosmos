@@ -12,13 +12,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:vector_graphics/vector_graphics.dart';
 
-class $AssetsPngsGen {
-  const $AssetsPngsGen();
-
-  /// Directory path: assets/pngs/onboarding
-  $AssetsPngsOnboardingGen get onboarding => const $AssetsPngsOnboardingGen();
-}
-
 class $AssetsSvgsGen {
   const $AssetsSvgsGen();
 
@@ -39,37 +32,11 @@ class $AssetsSvgsGen {
       const $AssetsSvgsPostReactionIconsGen();
 }
 
-class $AssetsPngsOnboardingGen {
-  const $AssetsPngsOnboardingGen();
+class $AssetsWebpGen {
+  const $AssetsWebpGen();
 
-  /// File path: assets/pngs/onboarding/create-onboarding.png
-  AssetGenImage get createOnboarding =>
-      const AssetGenImage('assets/pngs/onboarding/create-onboarding.png');
-
-  /// File path: assets/pngs/onboarding/earn-onboarding.png
-  AssetGenImage get earnOnboarding =>
-      const AssetGenImage('assets/pngs/onboarding/earn-onboarding.png');
-
-  /// File path: assets/pngs/onboarding/meet-onboarding.png
-  AssetGenImage get meetOnboarding =>
-      const AssetGenImage('assets/pngs/onboarding/meet-onboarding.png');
-
-  /// File path: assets/pngs/onboarding/stay-connected-onboarding.png
-  AssetGenImage get stayConnectedOnboarding => const AssetGenImage(
-      'assets/pngs/onboarding/stay-connected-onboarding.png');
-
-  /// File path: assets/pngs/onboarding/welcome-onboarding.png
-  AssetGenImage get welcomeOnboarding =>
-      const AssetGenImage('assets/pngs/onboarding/welcome-onboarding.png');
-
-  /// List of all assets
-  List<AssetGenImage> get values => [
-        createOnboarding,
-        earnOnboarding,
-        meetOnboarding,
-        stayConnectedOnboarding,
-        welcomeOnboarding
-      ];
+  /// Directory path: assets/webp/onboarding
+  $AssetsWebpOnboardingGen get onboarding => const $AssetsWebpOnboardingGen();
 }
 
 class $AssetsSvgsAuthGen {
@@ -291,11 +258,44 @@ class $AssetsSvgsPostReactionIconsGen {
       ];
 }
 
+class $AssetsWebpOnboardingGen {
+  const $AssetsWebpOnboardingGen();
+
+  /// File path: assets/webp/onboarding/create-onboarding.webp
+  AssetGenImage get createOnboarding =>
+      const AssetGenImage('assets/webp/onboarding/create-onboarding.webp');
+
+  /// File path: assets/webp/onboarding/earn-onboarding.webp
+  AssetGenImage get earnOnboarding =>
+      const AssetGenImage('assets/webp/onboarding/earn-onboarding.webp');
+
+  /// File path: assets/webp/onboarding/meet-onboarding.webp
+  AssetGenImage get meetOnboarding =>
+      const AssetGenImage('assets/webp/onboarding/meet-onboarding.webp');
+
+  /// File path: assets/webp/onboarding/stay-connected-onboarding.webp
+  AssetGenImage get stayConnectedOnboarding => const AssetGenImage(
+      'assets/webp/onboarding/stay-connected-onboarding.webp');
+
+  /// File path: assets/webp/onboarding/welcome-onboarding.webp
+  AssetGenImage get welcomeOnboarding =>
+      const AssetGenImage('assets/webp/onboarding/welcome-onboarding.webp');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [
+        createOnboarding,
+        earnOnboarding,
+        meetOnboarding,
+        stayConnectedOnboarding,
+        welcomeOnboarding
+      ];
+}
+
 class Assets {
   Assets._();
 
-  static const $AssetsPngsGen pngs = $AssetsPngsGen();
   static const $AssetsSvgsGen svgs = $AssetsSvgsGen();
+  static const $AssetsWebpGen webp = $AssetsWebpGen();
 }
 
 class AssetGenImage {

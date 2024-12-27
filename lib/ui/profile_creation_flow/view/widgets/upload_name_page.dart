@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
@@ -90,6 +91,12 @@ class _UploadNamePageState extends State<UploadNamePage> {
           CustomTextFormField(
             fHintText: context.loc.tellUsAboutYourselfOptional,
             fTextController: _fBioController,
+            fTextInputFormatters: [
+              LengthLimitingTextInputFormatter(
+                150,
+                maxLengthEnforcement: MaxLengthEnforcement.enforced,
+              )
+            ],
             fMaxLines: 5,
             fValidator: ValidationUtil.bioValidator,
           ),
@@ -118,6 +125,8 @@ class _UploadNamePageState extends State<UploadNamePage> {
             },
             fChild: Text(context.loc.nextText),
           ),
+
+          const VSpace(16),
         ],
       ),
     );

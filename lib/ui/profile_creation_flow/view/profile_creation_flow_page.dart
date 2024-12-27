@@ -105,7 +105,7 @@ class __ProfileCreationFlowPageState extends State<_ProfileCreationFlowPage>
                         fTitle: '',
                         fMessage: context.loc.profileCreationDialogMessage,
                         fWidget: Image.asset(
-                            Assets.pngs.onboarding.welcomeOnboarding.path),
+                            Assets.webp.onboarding.welcomeOnboarding.path),
                         fOnLetGo: () {
                           context.go(AppRoute.homeScreenPath);
                         }),

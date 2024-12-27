@@ -1,5 +1,7 @@
 {
+  "phoneNumberInvalid": "Phone number is invalid",
   "checkYourMessage": "Check your message",
+  "discoverAndEnjoyAmazingActivities": "Discover and enjoy amazing activities near you and across the globe!",
   "selectedImageExceed2Mb": "The selected image exceeds 2 MB. Please choose a smaller image.",
   "setInterestCategories": "{category, select, sports{Sports, Fitness, and Adventure} arts{Arts, Creativity, and Expression} technology{Technology, Gaming, and Innovation} food{Culinary Arts and Food Experiences} education{Education, Learning, and Personal Development} social{Social, Community, and Networking} wellness{Relaxation, Wellness, and Nature} animals{Animal and Wildlife} other{--}}",
   "@setInterestCategories": {
@@ -82,7 +84,7 @@
   "loginWithNumber": "Login with Number",
   "mutualBuddies": "Mutual buddies",
   "noWorriesForgotPasswordCaption": "No worries, forgetting happens to the best of us! We’ve got your back — a reset code is on its way to save the day. Hang tight, and you’ll be back in no time!",
-  "passswordResetSuccessfully": "Password Reset Successfully",
+  "passswordResetSuccessful": "Password Reset Successful",
   "profileCreationDialogMessage": "Woohoo, you did it! Your profile is ready, and you’re officially part of the Playkosmos family, Now the real fun begins — dive in, explore, and make the most of your new adventure. Let’s go! ",
   "resend": "Resend",
   "searchCountryCode": "Search country code",

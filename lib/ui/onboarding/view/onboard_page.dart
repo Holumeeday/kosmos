@@ -39,25 +39,25 @@ class _OnboardPageState extends State<OnboardPage> {
     _dOnboardPageList = [
       OnboardPageModel(
         title: 'meet',
-        image: Assets.pngs.onboarding.meetOnboarding.path,
+        image: Assets.webp.onboarding.meetOnboarding.path,
         imageType: OnboardingImageType.meetOnboardImage,
         percentValue: 0.25,
       ),
       OnboardPageModel(
         title: 'create',
-        image: Assets.pngs.onboarding.createOnboarding.path,
+        image: Assets.webp.onboarding.createOnboarding.path,
         imageType: OnboardingImageType.createOnboardImage,
         percentValue: 0.5,
       ),
       OnboardPageModel(
         title: 'earn',
-        image: Assets.pngs.onboarding.earnOnboarding.path,
+        image: Assets.webp.onboarding.earnOnboarding.path,
         imageType: OnboardingImageType.earnOnboardImage,
         percentValue: 0.75,
       ),
       OnboardPageModel(
         title: 'stayConnected',
-        image: Assets.pngs.onboarding.stayConnectedOnboarding.path,
+        image: Assets.webp.onboarding.stayConnectedOnboarding.path,
         imageType: OnboardingImageType.stayConnectedOnboardImage,
         percentValue: 1,
       ),

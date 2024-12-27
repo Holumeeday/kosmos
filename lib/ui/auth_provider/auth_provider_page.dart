@@ -87,7 +87,7 @@ class _AppLogoWithText extends StatelessWidget {
         const PlaykosmosLogoVertical(),
         const VSpace(8),
         Text(
-          context.loc.exploreFunActivitiesNearbyAfar,
+          context.loc.discoverAndEnjoyAmazingActivities,
           textAlign: TextAlign.center,
           style: context.appTextTheme.body?.copyWith(
             color: Colors.white,

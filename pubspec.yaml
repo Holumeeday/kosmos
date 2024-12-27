@@ -74,7 +74,7 @@ flutter:
     - assets/svgs/auth/
     - assets/svgs/icons/
     - assets/svgs/post_reaction_icons/
-    - assets/pngs/onboarding/
+    - assets/webp/onboarding/
 
   fonts:
     - family: DMSans

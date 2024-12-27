@@ -19,7 +19,7 @@ enum SignUpWithPhoneStatus {
 
 class SignUpWithPhoneNumberState extends Equatable {
   /// The selected OTP option for receiving the code.
-  final String fSelectedOtpOption;
+  final PhoneOtpMethodEnum fSelectedOtpOption;
 
   /// The selected country code model.
   final CountryModel fSelectedCountryCode;
@@ -58,7 +58,7 @@ class SignUpWithPhoneNumberState extends Equatable {
 
   /// Creates a new state with updated values while keeping others unchanged.
   SignUpWithPhoneNumberState copyWith({
-    String? fSelectedOtpOption,
+    PhoneOtpMethodEnum? fSelectedOtpOption,
     CountryModel? fSelectedCountryCode,
     String? fPhoneNumber,
     GenericResponse? data,

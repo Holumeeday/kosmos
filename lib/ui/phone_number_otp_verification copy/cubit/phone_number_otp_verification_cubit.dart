@@ -76,7 +76,7 @@ class PhoneNumberOtpVerificationCubit
       resendOtpStatus: PhoneNumberResendOtpVerificationStatus.loading,
     ));
     try {
-      final fResponse = await fAuthRepository.forgotPasswordPhone(
+      final fResponse = await fAuthRepository.resendOtpForgotPasswordPhone(
         phone: fPhone,
       );
       // Emit the state if response status is failed or success with the error message

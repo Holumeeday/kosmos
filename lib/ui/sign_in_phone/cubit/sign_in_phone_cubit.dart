@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:playkosmos_v3/constants/constants.dart';
 import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/data_transfer_objects/playkosmos_exception.dart';
+import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/models/country_model.dart';
 import 'package:playkosmos_v3/models/generic_respose_model.dart';
 import 'package:playkosmos_v3/models/user_model.dart';
@@ -39,7 +40,7 @@ class SignInPhoneCubit extends Cubit<SignInPhoneState> {
 
   /// Combines the selected country code and phone number into a full phone number.
   String getFullPhoneNumber() {
-    return '${state.fSelectedCountryCode.phoneCode}${state.fPhoneNumber}';
+    return '${state.fSelectedCountryCode.phoneCodeAndPlus}${state.fPhoneNumber.truncateLeadingZero()}';
   }
 
   /// Sign in with phone

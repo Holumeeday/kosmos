@@ -392,17 +392,30 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
   /// Upload files to AWS and return their URLs
   Future<List<String>> _uploadFilesToAWS(
       List<File> files, FileUploadPartModel fileUploadUrls) async {
-    final uploadedImageUrls = <String>[];
+    final uploadTasks = <Future<String?>>[];
 
+    // Iterate over the upload URLs and initiate upload tasks
     for (final (index, imageUrl) in (fileUploadUrls.url ?? []).indexed) {
-      await fAuthRepository.uploadImagesWithFile(
-        image: files[index],
-        uploadPath: imageUrl.uploadUrl!,
-      );
-      uploadedImageUrls.add(imageUrl.fileUrl!);
+      final uploadTask = Future<String?>(() async {
+        try {
+          await fAuthRepository.uploadImagesWithFile(
+            image: files[index],
+            uploadPath: imageUrl.uploadUrl!,
+          );
+          return imageUrl.fileUrl!;
+        } catch (e) {
+          return null;
+        }
+      });
+
+      uploadTasks.add(uploadTask);
     }
 
-    return uploadedImageUrls;
+    // Wait for all uploads to complete
+    final results = await Future.wait(uploadTasks);
+
+    // Filter out any failed uploads (null values) and return successful URLs
+    return results.whereType<String>().toList();
   }
 
   /// Handle errors and update state
