@@ -77,6 +77,8 @@
     "youAreAlllSignedInAndReadyToRoll",
     "youAreOfficiallyBackInActionMessage",
     "followBack",
+    "open",
+    "expand",
     "yourPasswordResetWasSuccessfulMessage"
   ],
 
@@ -158,6 +160,8 @@
     "youAreAlllSignedInAndReadyToRoll",
     "youAreOfficiallyBackInActionMessage",
     "followBack",
+    "open",
+    "expand",
     "yourPasswordResetWasSuccessfulMessage"
   ],
 
@@ -239,6 +243,8 @@
     "youAreAlllSignedInAndReadyToRoll",
     "youAreOfficiallyBackInActionMessage",
     "followBack",
+    "open",
+    "expand",
     "yourPasswordResetWasSuccessfulMessage"
   ],
 
@@ -320,6 +326,8 @@
     "youAreAlllSignedInAndReadyToRoll",
     "youAreOfficiallyBackInActionMessage",
     "followBack",
+    "open",
+    "expand",
     "yourPasswordResetWasSuccessfulMessage"
   ],
 
@@ -401,6 +409,8 @@
     "youAreAlllSignedInAndReadyToRoll",
     "youAreOfficiallyBackInActionMessage",
     "followBack",
+    "open",
+    "expand",
     "yourPasswordResetWasSuccessfulMessage"
   ],
 
@@ -482,6 +492,8 @@
     "youAreAlllSignedInAndReadyToRoll",
     "youAreOfficiallyBackInActionMessage",
     "followBack",
+    "open",
+    "expand",
     "yourPasswordResetWasSuccessfulMessage"
   ]
 }

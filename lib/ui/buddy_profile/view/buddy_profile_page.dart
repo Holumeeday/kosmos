@@ -6,9 +6,8 @@ import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/connection_type_enum.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/cubit/buddy_profile_cubit.dart';
-import 'package:playkosmos_v3/ui/buddy_profile/view/widget/build_image_grid.dart';
-
-import 'package:playkosmos_v3/ui/buddy_profile/view/widget/stats_section.dart';
+import 'package:playkosmos_v3/ui/buddy_profile/view/widgets/build_image_grid.dart';
+import 'package:playkosmos_v3/ui/buddy_profile/view/widgets/stats_section.dart';
 
 /// A profile page that displays buddy information
 /// @author: Chidera
