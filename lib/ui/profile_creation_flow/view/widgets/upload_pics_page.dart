@@ -60,7 +60,6 @@ class UploadPicsPage extends StatelessWidget {
                     return ImageSlot(
                       image: dSelectedImages[index],
                       onAdd: () async {
-                        print(9 - dSelectedImages.whereType<File>().length);
                         final picker = ImagePicker();
                         final fLimit =
                             9 - dSelectedImages.whereType<File>().length;
@@ -100,7 +99,9 @@ class UploadPicsPage extends StatelessWidget {
                               dSelectedImages[replacementIndex] =
                                   File(pickedFile.path);
                             } else {
-                              dSelectedImages.add(File(pickedFile.path));
+                              if (dSelectedImages.length != 9) {
+                                dSelectedImages.add(File(pickedFile.path));
+                              }
                             }
 
                             replacementIndex++;

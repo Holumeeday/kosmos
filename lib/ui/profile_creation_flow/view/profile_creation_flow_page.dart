@@ -78,6 +78,7 @@ class __ProfileCreationFlowPageState extends State<_ProfileCreationFlowPage>
             if (state.uploadNameStatus ==
                 ProfileCreationUploadNameStatus.success) {
               if (state.data?.status != true) return;
+              context.read<AuthFlowStorage>().setHasCompletedStep2();
               context.read<ProfileCreationFlowCubit>().nextPage();
             } else if (state.uploadNameStatus ==
                     ProfileCreationUploadNameStatus.failure &&

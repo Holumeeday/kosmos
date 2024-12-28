@@ -82,7 +82,6 @@ class AuthFlowStorage {
     final jsonModel = fAuthModel
         .copyWith(
           isLoggedIn: true,
-          hasCompletedStep2: true,
           isVerified: true,
         )
         .toJson();
