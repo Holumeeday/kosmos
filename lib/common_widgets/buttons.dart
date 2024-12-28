@@ -546,7 +546,6 @@ class PrimaryGradientButton extends StatelessWidget {
         padding: EdgeInsets.zero,
         shadowColor: context.colors.primary,
       ).copyWith(
-          backgroundColor: const WidgetStatePropertyAll(Colors.transparent),
 
           /// Override button's elevation to remove default shadow.
           elevation: WidgetStateProperty.all(0),

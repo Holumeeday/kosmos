@@ -26,7 +26,7 @@ extension ConnectionTypeUI on String {
     switch (type) {
       case ConnectionTypeEnum.userFollowing:
         return PrimaryGradientButton(
-          fPadding: const EdgeInsets.symmetric(horizontal: 16),
+          fPadding: const EdgeInsets.symmetric(horizontal: 12),
           fOnPressed: onPressed ?? () {},
           fGradientColors: List.generate(3, (index) {
             return const Color(0xFFEDEDED);
@@ -42,7 +42,7 @@ extension ConnectionTypeUI on String {
 
       case ConnectionTypeEnum.followingUser:
         return PrimaryGradientButton(
-          fPadding: const EdgeInsets.symmetric(horizontal: 16),
+          fPadding: const EdgeInsets.symmetric(horizontal: 12),
           fOnPressed: onPressed ?? () {},
           fChild: Text(
             context.loc.followBack,
@@ -55,7 +55,7 @@ extension ConnectionTypeUI on String {
 
       case ConnectionTypeEnum.stranger:
         return PrimaryGradientButton(
-          fPadding: const EdgeInsets.symmetric(horizontal: 16),
+          fPadding: const EdgeInsets.symmetric(horizontal: 12),
           fOnPressed: onPressed ?? () {},
           fChild: Text(
             context.loc.followUser,
@@ -67,7 +67,7 @@ extension ConnectionTypeUI on String {
         );
       case ConnectionTypeEnum.buddy:
         return PrimaryGradientButton(
-          fPadding: const EdgeInsets.symmetric(horizontal: 16),
+          fPadding: const EdgeInsets.symmetric(horizontal: 12),
           fGradientColors: List.generate(3, (index) {
             return const Color(0xFFD3D3D3);
           }),

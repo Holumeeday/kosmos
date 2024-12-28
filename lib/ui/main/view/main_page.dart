@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/assets_gen/assets.gen.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
+import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/buddies/view/buddies_page.dart';
+import 'package:playkosmos_v3/ui/home_profile/view/home_profile_page.dart';
+import 'package:playkosmos_v3/ui/logout/cubit/logout_cubit.dart';
 import 'package:playkosmos_v3/ui/main/cubit/main_page_cubit.dart';
 import 'package:playkosmos_v3/ui/main/view/widgets/bottom_nav_bar.dart';
 import 'package:playkosmos_v3/ui/main/view/widgets/home_page.dart';
+import 'package:playkosmos_v3/utils/utils.dart';
 
 /// The main page that defines the Home, Buddies, Inbox and Profile
 /// tabs. It manages the navigation between them
@@ -42,98 +47,110 @@ class _MainPageState extends State<MainPage> {
       (MainPageCubit cubit) => cubit.state.dSelectedTabIndex,
     );
 
-    return Scaffold(
-      appBar: CustomAppBar(
-        fElevation: 0,
-        fSemanticLabel: context.loc.playkosmosMainScreen,
-        fLeadingWidth: 220,
-        fLeading: Padding(
-          padding: const EdgeInsets.only(left: 20),
-          child: Row(
-            children: [
-              Assets.svgs.branding.logoColoredBg.svg(
-                height: 32,
-                width: 32,
+    return BlocListener<LogoutCubit, LogoutState>(
+      listener: (context, state) async {
+        if (state.status == LogoutStatus.success) {
+          if (state.data?.status == true) {
+            await context.read<AuthFlowStorage>().logOut();
+            if (mounted) {
+              context.go(AppRoute.authProviderScreenPath);
+            }
+          }
+        }
+      },
+      child: Scaffold(
+        appBar: CustomAppBar(
+          fElevation: 0,
+          fSemanticLabel: context.loc.playkosmosMainScreen,
+          fLeadingWidth: 220,
+          fLeading: Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Row(
+              children: [
+                Assets.svgs.branding.logoColoredBg.svg(
+                  height: 32,
+                  width: 32,
+                ),
+                const HSpace(16),
+                Assets.svgs.branding.logoText.svg(
+                  height: 17,
+                  width: 119,
+                ),
+              ],
+            ),
+          ),
+          fActions: [
+            //Search
+            Visibility(
+              visible: fLandingIndex != 4,
+              child: IconButton(
+                onPressed: () {},
+                iconSize: 25,
+                icon: const Icon(Icons.search_rounded),
               ),
-              const HSpace(16),
-              Assets.svgs.branding.logoText.svg(
-                height: 17,
-                width: 119,
+            ),
+
+            const MessagesNotificationBadge(),
+            const HSpace(18),
+
+            //Notifications
+            Padding(
+              padding: EdgeInsets.only(
+                right: (fLandingIndex == 4) ? 0 : 10,
               ),
+              child: Semantics(
+                label:
+                    '${context.loc.notificationBadge}. ${context.loc.youHaveNNewNotifications(11)}',
+                button: true,
+                excludeSemantics: true,
+                child: Assets.svgs.icons.settingsIcon.svg(
+                  colorFilter: ColorFilter.mode(
+                    context.appColors.textColor!,
+                    BlendMode.srcIn,
+                  ),
+                  height: 25,
+                  width: 25,
+                ),
+              ),
+            ),
+
+            // More
+            Visibility(
+              visible: fLandingIndex == 4,
+              child: Semantics(
+                label: context.loc.moreOptions,
+                button: true,
+                excludeSemantics: true,
+                child: IconButton(
+                  onPressed: () {},
+                  iconSize: 30,
+                  icon: const Icon(Icons.menu_rounded),
+                ),
+              ),
+            ),
+          ],
+        ),
+        body: SafeArea(
+          child: PageView(
+            controller: _fPageController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: const [
+              // Home
+              HomePage(),
+
+              // Buddies
+              BuddiesPage(),
+
+              // Inbox
+              SizedBox(),
+
+              // Profile
+              HomeProfilePage(),
             ],
           ),
         ),
-        fActions: [
-          //Search
-          Visibility(
-            visible: fLandingIndex != 4,
-            child: IconButton(
-              onPressed: () {},
-              iconSize: 25,
-              icon: const Icon(Icons.search_rounded),
-            ),
-          ),
-
-          const MessagesNotificationBadge(),
-          const HSpace(18),
-
-          //Notifications
-          Padding(
-            padding: EdgeInsets.only(
-              right: (fLandingIndex == 4) ? 0 : 10,
-            ),
-            child: Semantics(
-              label:
-                  '${context.loc.notificationBadge}. ${context.loc.youHaveNNewNotifications(11)}',
-              button: true,
-              excludeSemantics: true,
-              child: Assets.svgs.icons.settingsIcon.svg(
-                colorFilter: ColorFilter.mode(
-                  context.appColors.textColor!,
-                  BlendMode.srcIn,
-                ),
-                height: 25,
-                width: 25,
-              ),
-            ),
-          ),
-
-          // More
-          Visibility(
-            visible: fLandingIndex == 4,
-            child: Semantics(
-              label: context.loc.moreOptions,
-              button: true,
-              excludeSemantics: true,
-              child: IconButton(
-                onPressed: () {},
-                iconSize: 30,
-                icon: const Icon(Icons.menu_rounded),
-              ),
-            ),
-          ),
-        ],
+        bottomNavigationBar: BottomNavBar(fPageController: _fPageController),
       ),
-      body: SafeArea(
-        child: PageView(
-          controller: _fPageController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: const [
-            // Home
-            HomePage(),
-
-            // Buddies
-            BuddiesPage(),
-
-            // Inbox
-            SizedBox(),
-
-            // Profile
-            SizedBox(),
-          ],
-        ),
-      ),
-      bottomNavigationBar: BottomNavBar(fPageController: _fPageController),
     );
   }
 }

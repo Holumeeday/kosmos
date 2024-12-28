@@ -110,7 +110,7 @@ class AuthFlowStorage {
   /// - `isLoggedIn` to `false`
   /// - `isVerified` to `false`
   /// - `hasCompletedStep2` to `false`
-  void logOut() {
+  Future<void> logOut() async {
     final jsonModel = fAuthModel
         .copyWith(
           isLoggedIn: false,
@@ -118,6 +118,6 @@ class AuthFlowStorage {
           hasCompletedStep2: false,
         )
         .toJson();
-    _updateAuthStorage(jsonModel);
+    return _updateAuthStorage(jsonModel);
   }
 }
