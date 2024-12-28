@@ -7,6 +7,12 @@ import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/auth_provider/auth_provider_page.dart';
+import 'package:playkosmos_v3/ui/buddies/cubit/buddies_cubit.dart';
+import 'package:playkosmos_v3/ui/buddies/view/buddies_page.dart';
+import 'package:playkosmos_v3/ui/buddy_connections/cubit/buddy_connections_cubit.dart';
+import 'package:playkosmos_v3/ui/buddy_connections/view/buddy_connections.dart';
+import 'package:playkosmos_v3/ui/buddy_profile/cubit/buddy_profile_cubit.dart';
+import 'package:playkosmos_v3/ui/buddy_profile/view/buddy_profile_page.dart';
 import 'package:playkosmos_v3/ui/create_password/cubit/create_password_cubit.dart';
 import 'package:playkosmos_v3/ui/create_password/view/create_password_page.dart';
 import 'package:playkosmos_v3/ui/email_otp_verification/cubit/email_otp_verification_cubit.dart';
@@ -243,6 +249,29 @@ mixin GoRouterMixin {
               fUserRepository: context.read<UserProfileStorage>(),
               fAuthRepository: context.read<AuthRemoteApiRepository>(),
             ),
+          ),
+        );
+      case AppRoute.homeBuddiesScreenPath:
+        return _createRoute(
+          routeScreen: BlocProvider(
+            child: const BuddiesPage(),
+            create: (context) => BuddiesCubit(),
+          ),
+        );
+      case AppRoute.buddyConnectionsScreenPath:
+        final fInitIndex =
+            int.parse(state.pathParameters['initIndex'] as String);
+        return _createRoute(
+          routeScreen: BlocProvider(
+            child: BuddyConnectionsPage(fInitialIndex: fInitIndex),
+            create: (context) => BuddyConnectionsCubit(),
+          ),
+        );
+      case AppRoute.buddyProfileScreenPath:
+        return _createRoute(
+          routeScreen: BlocProvider(
+            child: const BuddyProfilePage(),
+            create: (context) => BuddyProfileCubit(),
           ),
         );
       default:

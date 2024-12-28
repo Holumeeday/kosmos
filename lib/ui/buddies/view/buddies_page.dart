@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/connection_type_enum.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
@@ -7,7 +8,7 @@ import 'package:playkosmos_v3/ui/buddies/cubit/buddies_cubit.dart';
 import 'package:playkosmos_v3/ui/buddies/view/widgets/interest_chips.dart';
 import 'package:playkosmos_v3/ui/buddies/view/widgets/next_arrow_button.dart';
 import 'package:playkosmos_v3/ui/buddies/view/widgets/overlapping_profiles.dart';
-import 'package:playkosmos_v3/ui/buddy_profile/view/buddy_profile_page.dart';
+import 'package:playkosmos_v3/utils/utils.dart';
 
 /// Buddies Page
 /// A page that displays a user profile with details like distance, interests, and mutual buddies.
@@ -127,7 +128,9 @@ class BuddiesPage extends StatelessWidget {
                                 const HRelativeSpace(5),
                                 NextArrowButton(
                                   fOnTap: () {
-                                    context.push(const BuddyProfilePage());
+                                    context.push(
+                                      AppRoute.buddyProfileScreenPath,
+                                    );
                                   },
                                 ),
                               ],
