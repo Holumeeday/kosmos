@@ -31,7 +31,7 @@ class BuddyProfilePage extends StatelessWidget {
                       .copyWith(color: context.colors.onSurface, fontSize: 28)),
               fActions: [
                 // follow, following, unfollow button
-                state.fBuddiesModel.connectionType.toConnectionButton(context),
+                state.fBuddyModel.connectionType.toConnectionButton(context),
 
                 const HRelativeSpace(10),
                 // Message Button
@@ -68,7 +68,7 @@ class BuddyProfilePage extends StatelessWidget {
                           width: double.infinity,
                           height: getScreenHeight(context) * 0.6,
                           child: CarouselWidget(
-                            images: state.fBuddiesModel.profileImages,
+                            images: state.fBuddyModel.profileImages,
                           ),
                         ),
 
@@ -99,10 +99,10 @@ class BuddyProfilePage extends StatelessWidget {
                         fTabs: [
                           Tab(
                               text:
-                                  '${context.loc.setActivities(state.fBuddiesModel.activities.length)} (${state.fBuddiesModel.activities.length})'),
+                                  '${context.loc.setActivities(state.fBuddyModel.activities.length)} (${state.fBuddyModel.activities.length})'),
                           Tab(
                               text:
-                                  '${context.loc.setPosts(state.fBuddiesModel.posts.length)}  (${state.fBuddiesModel.posts.length})'),
+                                  '${context.loc.setPosts(state.fBuddyModel.posts.length)}  (${state.fBuddyModel.posts.length})'),
                         ],
                       ),
                     ),
@@ -112,11 +112,11 @@ class BuddyProfilePage extends StatelessWidget {
               body: // Tabbar view
                   TabBarView(children: [
                 BuildImageGrid(
-                  fImages: state.fBuddiesModel.activities,
+                  fImages: state.fBuddyModel.activities,
                   fLabel: context.loc.activity,
                 ),
                 BuildImageGrid(
-                  fImages: state.fBuddiesModel.posts,
+                  fImages: state.fBuddyModel.posts,
                   fLabel: context.loc.post,
                 )
               ]),

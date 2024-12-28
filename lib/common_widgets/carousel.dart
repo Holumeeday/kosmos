@@ -39,7 +39,7 @@ class _CarouselWidgetState extends State<CarouselWidget> {
   Widget build(BuildContext context) {
     return BlocBuilder<BuddyProfileCubit, BuddyProfileState>(
       builder: (context, state) {
-        final fImageLength = state.fBuddiesModel.profileImages.length;
+        final fImageLength = state.fBuddyModel.profileImages.length;
 
         return Stack(
           children: [
@@ -63,7 +63,7 @@ class _CarouselWidgetState extends State<CarouselWidget> {
                       image: DecorationImage(
                         fit: BoxFit.cover,
                         image: NetworkImage(
-                          state.fBuddiesModel.profileImages[pagePosition],
+                          state.fBuddyModel.profileImages[pagePosition],
                         ),
                       ),
                     ),

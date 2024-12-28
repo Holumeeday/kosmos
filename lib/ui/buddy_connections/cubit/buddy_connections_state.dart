@@ -1,7 +1,7 @@
 part of 'buddy_connections_cubit.dart';
 
 /// Represents the state for the Buddy Connections feature.
-/// 
+///
 /// Holds data about the lists of followers, buddies, and those being followed,
 /// as well as their respective "show all" toggle states.
 /// @author - Chidera Chijama
@@ -19,28 +19,28 @@ class BuddyConnectionsState extends Equatable {
   });
 
   /// List of all users being followed by the current user.
-  final List<BuddiesModel> fFollowing;
+  final List<BuddyModel> fFollowing;
 
   /// Filtered list of users being followed with connection type `'buddy'`.
-  final List<BuddiesModel> fFollowingListBuddies;
+  final List<BuddyModel> fFollowingListBuddies;
 
   /// Indicates whether to show all followers or limit the displayed list.
   final bool fFollowingShowAll;
 
   /// List of all users following the current user.
-  final List<BuddiesModel> fFollowers;
+  final List<BuddyModel> fFollowers;
 
   /// Filtered list of users following with connection type `'buddy'`.
-  final List<BuddiesModel> fFollowersListBuddies;
+  final List<BuddyModel> fFollowersListBuddies;
 
   /// Indicates whether to show all followers or limit the displayed list.
   final bool fFollowersShowAll;
 
   /// List of all buddies connected with the current user.
-  final List<BuddiesModel> fBuddies;
+  final List<BuddyModel> fBuddies;
 
   /// Filtered list of buddies with connection type `'buddy'`.
-  final List<BuddiesModel> fBuddiesListBuddies;
+  final List<BuddyModel> fBuddiesListBuddies;
 
   /// Indicates whether to show all buddies or limit the displayed list.
   final bool fBuddiesShowAll;
@@ -60,15 +60,15 @@ class BuddyConnectionsState extends Equatable {
 
   /// Creates a copy of the current state with updated values for the specified fields.
   BuddyConnectionsState copyWith({
-    List<BuddiesModel>? fFollowing,
+    List<BuddyModel>? fFollowing,
     bool? fFollowingShowAll,
-    List<BuddiesModel>? fFollowingListBuddies,
-    List<BuddiesModel>? fFollowers,
+    List<BuddyModel>? fFollowingListBuddies,
+    List<BuddyModel>? fFollowers,
     bool? fFollowersShowAll,
-    List<BuddiesModel>? fFollowersListBuddies,
-    List<BuddiesModel>? fBuddies,
+    List<BuddyModel>? fFollowersListBuddies,
+    List<BuddyModel>? fBuddies,
     bool? fBuddiesShowAll,
-    List<BuddiesModel>? fBuddiesListBuddies,
+    List<BuddyModel>? fBuddiesListBuddies,
   }) {
     return BuddyConnectionsState(
       fFollowing: fFollowing ?? this.fFollowing,
@@ -81,8 +81,7 @@ class BuddyConnectionsState extends Equatable {
           fFollowersListBuddies ?? this.fFollowersListBuddies,
       fBuddies: fBuddies ?? this.fBuddies,
       fBuddiesShowAll: fBuddiesShowAll ?? this.fBuddiesShowAll,
-      fBuddiesListBuddies:
-          fBuddiesListBuddies ?? this.fBuddiesListBuddies,
+      fBuddiesListBuddies: fBuddiesListBuddies ?? this.fBuddiesListBuddies,
     );
   }
 }

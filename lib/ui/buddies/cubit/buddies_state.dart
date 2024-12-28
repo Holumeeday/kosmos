@@ -11,7 +11,6 @@ class BuddiesState extends Equatable {
     required this.fBuddiesModel,
   });
 
-
   BuddiesState copyWith({BuddiesModel? fBuddiesModel}) {
     return BuddiesState(
       fBuddiesModel: fBuddiesModel ?? this.fBuddiesModel,
