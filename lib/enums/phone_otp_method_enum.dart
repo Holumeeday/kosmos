@@ -1,7 +1,7 @@
 /// Enum used for selecting between whatsapp and sms otp method
 enum PhoneOtpMethodEnum {
-  sms('SMS'),
-  whatsapp('Whatsapp');
+  whatsapp('Whatsapp'),
+  sms('SMS');
 
   final String name;
   const PhoneOtpMethodEnum(this.name);

@@ -32,6 +32,7 @@ class NonSecureStorage {
     dynamic value;
     try {
       value = _storage.read(key);
+      printI(value);
     } catch (e) {
       printE(e);
     }
@@ -39,18 +40,18 @@ class NonSecureStorage {
   }
 
   /// Add value to database using key
-  void setValue(String key, dynamic value) {
+  Future<void> setValue(String key, dynamic value) async {
     try {
-      _storage.write(key, value);
+      await _storage.write(key, value);
     } catch (e, s) {
       printE(e, s);
     }
   }
 
   /// Deletes the value in key
-  void delKey(String key) {
+  Future<void> delKey(String key) async {
     try {
-      _storage.delete(key);
+      await _storage.delete(key);
     } catch (e, s) {
       printE(e, s);
     }

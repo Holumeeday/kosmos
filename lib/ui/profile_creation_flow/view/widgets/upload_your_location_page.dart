@@ -53,6 +53,9 @@ class UploadYourLocationPage extends StatelessWidget {
                     .read<PermissionsRepository>()
                     .requestLocationPermission();
                 if (fIsPermitted && context.mounted) {
+                  // Getting the user location while the user continues on other process
+                  context.read<ProfileCreationFlowCubit>().setLocation();
+
                   // Navigate to the next stage
                   context.read<ProfileCreationFlowCubit>().nextPage();
                 }

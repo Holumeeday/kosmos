@@ -6,6 +6,14 @@ import 'package:playkosmos_v3/utils/utils.dart';
 ///
 /// @author: Godwin Mathias
 extension StringExtension on String {
+  /// Removes the first leading zero from the string, if present.
+  String truncateLeadingZero() {
+    if (isNotEmpty && this[0] == '0') {
+      return substring(1);
+    }
+    return this;
+  }
+
   /// Checks if its an image or video
   bool get isVideo => lookupMimeType(this)?.contains('video') ?? false;
 

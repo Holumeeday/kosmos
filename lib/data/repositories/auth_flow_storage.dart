@@ -1,6 +1,7 @@
 import 'package:playkosmos_v3/constants/constants.dart';
 import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/models/auth_model.dart';
+import 'package:playkosmos_v3/utils/cookies/cookie_storage.dart';
 
 /// A service that manages authentication flow,
 /// including initialization, onboarding, login, and verification states.
@@ -15,10 +16,15 @@ class AuthFlowStorage {
   /// Requires a [NonSecureStorage] instance for local storage operations.
   AuthFlowStorage({
     required NonSecureStorage fStorage,
-  }) : _fLocalStorage = fStorage;
+    required CookiesStorage fCookiesStorage,
+  })  : _fLocalStorage = fStorage,
+        _fCookiesStorage = fCookiesStorage;
 
   /// Reference to the non-secure local storage service.
   final NonSecureStorage _fLocalStorage;
+
+  /// The app cookies storage (for getting the user session infos)
+  final CookiesStorage _fCookiesStorage;
 
   /// Stream to listen for changes to the authentication storage key.
   ///
@@ -37,8 +43,8 @@ class AuthFlowStorage {
   ///
   /// This method serializes the provided [json] and updates the
   /// value associated with the authentication storage key.
-  void _updateAuthStorage(Map<String, dynamic> json) {
-    _fLocalStorage.setValue(kAuthStorageKey, json);
+  Future<void> _updateAuthStorage(Map<String, dynamic> json) async {
+    await _fLocalStorage.setValue(kAuthStorageKey, json);
   }
 
   /// Sets the initialization state of the app.
@@ -71,15 +77,15 @@ class AuthFlowStorage {
   /// - `isLoggedIn` to `true`
   /// - `hasCompletedStep2` to `true`
   /// - `isVerified` to `true`
-  void setLogIn() {
+  Future<void> setLogIn() async {
+    if (!(await _fCookiesStorage.isUserLoggedIn())) return;
     final jsonModel = fAuthModel
         .copyWith(
           isLoggedIn: true,
-          hasCompletedStep2: true,
           isVerified: true,
         )
         .toJson();
-    _updateAuthStorage(jsonModel);
+    await _updateAuthStorage(jsonModel);
   }
 
   /// Sets the verification state for the user.

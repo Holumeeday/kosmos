@@ -38,18 +38,19 @@ class ValidationUtil {
 
   /// To validate user's number
   static String? numberValidator(String? value) {
-    if (value != null && value.length > 4) {
+    if (value == null || value.isEmpty) return _loc.enterPhoneNumber;
+    if (value.length > 4) {
       return null;
     }
-    return _loc.enterPhoneNumber;
+    return _loc.phoneNumberInvalid;
   }
 
   /// Bio validator
   static String? bioValidator(String? value) {
-    if (value == null || value.length >= 150 || value.isEmpty) {
-      return null;
+    if (value != null && value.length > 150) {
+      return _loc.bioTooShort;
     }
-    return _loc.bioTooShort;
+    return null;
   }
 
   /// To validate user's dob,

@@ -2,15 +2,13 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/ui/buddies/cubit/buddies_cubit.dart';
 import 'package:playkosmos_v3/ui/buddy_connections/cubit/buddy_connections_cubit.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/cubit/buddy_profile_cubit.dart';
-import 'package:playkosmos_v3/ui/buddy_profile/view/buddy_profile_page.dart';
 import 'package:playkosmos_v3/ui/main/cubit/main_page_cubit.dart';
 import 'package:playkosmos_v3/ui/select_language/cubit/select_language_cubit.dart';
-import 'package:playkosmos_v3/ui/sign_up_phone_number/cubit/sign_up_phone_number_cubit.dart';
-import 'package:playkosmos_v3/ui/splash/splash_page.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// Root widget of the application responsible for setting up global dependencies,
@@ -25,10 +23,14 @@ class App extends StatelessWidget {
   const App({
     super.key,
     required this.fNonSecureStorage,
+    required this.fCookiesStorage,
   });
 
   /// The non-secure storage repository for app data storage
   final NonSecureStorage fNonSecureStorage;
+
+  /// The app cookies storage
+  final CookiesStorage fCookiesStorage;
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +42,28 @@ class App extends StatelessWidget {
         RepositoryProvider(
           create: (context) => AuthFlowStorage(
             fStorage: fNonSecureStorage,
+            fCookiesStorage: fCookiesStorage,
+          ),
+        ),
+        RepositoryProvider(
+          create: (context) => UserProfileStorage(
+            fStorage: fNonSecureStorage,
           ),
         ),
         RepositoryProvider(
           create: (context) => PermissionsRepository(),
+        ),
+        RepositoryProvider(
+          create: (context) => AuthRemoteApiRepository(
+            remoteApi: AuthRemoteApiNodeJs(
+              fCookStorage: fCookiesStorage,
+            ),
+          ),
+        ),
+        RepositoryProvider(
+          create: (context) => AppRoute(
+            fAuthStorage: context.read<AuthFlowStorage>(),
+          ),
         ),
       ],
       child: const _AppBloc(),
@@ -63,9 +83,6 @@ class _AppBloc extends StatelessWidget {
           create: (_) => SelectLanguageCubit(),
         ),
         BlocProvider(
-          create: (_) => SignUpWithPhoneNumberCubit(),
-        ),
-        BlocProvider(
           create: (_) => MainPageCubit(),
         ),
         BlocProvider(
@@ -75,7 +92,8 @@ class _AppBloc extends StatelessWidget {
           create: (_) => BuddyProfileCubit(),
         ),
         BlocProvider(
-      create: (_) => BuddyConnectionsCubit(),)
+          create: (_) => BuddyConnectionsCubit(),
+        )
       ],
       child: const _AppView(),
     );
@@ -84,18 +102,30 @@ class _AppBloc extends StatelessWidget {
 
 /// Main app view widget that configures the MaterialApp with themes, locale,
 /// and localization
-class _AppView extends StatelessWidget {
+class _AppView extends StatefulWidget {
   const _AppView();
+
+  @override
+  State<_AppView> createState() => _AppViewState();
+}
+
+class _AppViewState extends State<_AppView> {
+  late GoRouter _fRouter;
+
+  @override
+  void initState() {
+    super.initState();
+    _fRouter = context.read<AppRoute>().router;
+  }
 
   @override
   Widget build(BuildContext context) {
     final dLocale = context
         .select((SelectLanguageCubit cubit) => cubit.state.dSelectedLocale);
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: _fRouter,
       title: 'Playkosmos',
-      navigatorKey: GetContext.navigatorKey,
       debugShowCheckedModeBanner: false,
-      home: const BuddyProfilePage(),
       builder: DevicePreview.appBuilder,
       // Enables device preview for development
       theme: MyThemes.lightTheme,

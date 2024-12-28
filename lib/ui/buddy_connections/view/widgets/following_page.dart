@@ -6,9 +6,9 @@ import 'package:playkosmos_v3/extensions/connection_type_enum.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/buddy_connections/cubit/buddy_connections_cubit.dart';
 import 'package:playkosmos_v3/ui/buddy_connections/view/widgets/search_field.dart';
-import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_interest_page.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 import 'package:sliver_tools/sliver_tools.dart';
+
 /// A page to display following categorized into mutual and all following.
 ///
 /// Includes:

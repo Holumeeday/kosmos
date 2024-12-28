@@ -6,15 +6,14 @@ import 'package:playkosmos_v3/extensions/connection_type_enum.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/buddy_connections/cubit/buddy_connections_cubit.dart';
 import 'package:playkosmos_v3/ui/buddy_connections/view/widgets/search_field.dart';
-import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/upload_interest_page.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 /// Displays a page showing mutual buddies and all buddies with their respective details.
-/// 
+///
 /// Includes functionalities such as search, show all/show less toggling,
 /// and categorized lists.
-/// 
+///
 /// @author: Chidera Chijama
 class BuddiesTabPage extends StatelessWidget {
   const BuddiesTabPage({super.key});

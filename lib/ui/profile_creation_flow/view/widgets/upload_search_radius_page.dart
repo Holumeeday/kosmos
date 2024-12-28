@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:playkosmos_v3/assets_gen/assets.gen.dart';
-import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/enums/enums.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
+import 'package:playkosmos_v3/data/data.dart';
+import 'package:playkosmos_v3/enums/enums.dart';
+import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/cubit/profile_creation_flow_cubit.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/gradient_slider_tracker.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/next_button.dart';
-import 'package:playkosmos_v3/utils/theme/app_colors.dart';
+import 'package:playkosmos_v3/utils/utils.dart';
 
 /// Select search radius page
 ///
@@ -127,25 +127,11 @@ class UploadSearchRadiusPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: NextButton(
                 fOnPressed: () async {
-                  if (context.mounted) {
-                    showDialog(
-                        context: context,
-                        builder: (_) {
-                          return Dialog(
-                            child: AuthSuccessInfoDialog(
-                                fTitle: '',
-                                fMessage:
-                                    context.loc.profileCreationDialogMessage,
-                                fWidget: Image.asset(Assets
-                                    .pngs.onboarding.welcomeOnboarding.path),
-                                fOnLetGo: () {
-                                  context.pop();
-                                }),
-                          );
-                        });
-
-                    context.read<ProfileCreationFlowCubit>().nextPage();
-                  }
+                  final user = context.read<UserProfileStorage>().fUserModel;
+                  printI(user.toMap());
+                  context
+                      .read<ProfileCreationFlowCubit>()
+                      .uploadOtherDetails(true);
                 },
                 fText: context.loc.done,
               ),

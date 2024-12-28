@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/onboarding/view/onboard_page.dart';
 import 'package:playkosmos_v3/ui/select_language/view/widgets/select_language_list.dart';
+import 'package:playkosmos_v3/utils/utils.dart';
 
 /*
 This class enables us change the language of the app
@@ -55,7 +56,7 @@ class SelectLanguagePage extends StatelessWidget {
         child: PrimaryGradientButton(
           fShape: BoxShape.circle,
           fOnPressed: () {
-            context.push(const OnboardPage());
+            context.push(AppRoute.onboardingScreenPath);
           },
           fChild: Semantics(
             label: context.loc.continueToNextScreen,

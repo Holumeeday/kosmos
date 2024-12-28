@@ -11,7 +11,7 @@ class GoRouterObserver extends NavigatorObserver {
   /// List of screens to be in portrait mode
   static const portraitScreensPath = [];
 
-  /// Track track the previous page on pop
+  /// Track the previous page on pop
   ValueNotifier<String> lastPage = ValueNotifier('/');
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {

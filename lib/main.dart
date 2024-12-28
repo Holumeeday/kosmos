@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playkosmos_v3/app.dart';
 import 'package:playkosmos_v3/bloc_observer.dart';
 import 'package:playkosmos_v3/data/data.dart';
+import 'package:playkosmos_v3/utils/cookies/cookie_storage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +16,10 @@ void main() async {
   // Load the database into memory
   await fNonSecureStorage.initDb();
 
+  // Initialize cookies storage
+  final fCookiesStorage = CookiesStorage();
+  await fCookiesStorage.init();
+
   // Add a custom bloc observer
   Bloc.observer = AppBlocObserver();
 
@@ -22,6 +27,7 @@ void main() async {
     enabled: !kReleaseMode,
     builder: (_) => App(
       fNonSecureStorage: fNonSecureStorage,
+      fCookiesStorage: fCookiesStorage,
     ),
   ));
 }

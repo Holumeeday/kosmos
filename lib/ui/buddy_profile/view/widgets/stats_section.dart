@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/common_widgets/profile_image_with_story_indicator.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/buddy_connections/view/buddy_connections.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/cubit/buddy_profile_cubit.dart';
+import 'package:playkosmos_v3/utils/utils.dart';
 
 class UserStatsSection extends StatelessWidget {
   const UserStatsSection({super.key});
@@ -27,9 +28,8 @@ class UserStatsSection extends StatelessWidget {
                           .formatNumToCompact(),
                       fLabel: context.loc.followingUser,
                       fOntap: () {
-                        context.push(const BuddyConnectionsPage(
-                          fInitialIndex: 0,
-                        ));
+                        context.pushNamed(AppRoute.buddyConnectionsScreenPath,
+                            pathParameters: {'initIndex': '0'});
                       },
                     ),
                     VerticalDivider(
@@ -41,9 +41,8 @@ class UserStatsSection extends StatelessWidget {
                       fLabel: context.loc
                           .setFollowers(state.fBuddiesModel.followersCount),
                       fOntap: () {
-                        context.push(const BuddyConnectionsPage(
-                          fInitialIndex: 1,
-                        ));
+                        context.pushNamed(AppRoute.buddyConnectionsScreenPath,
+                            pathParameters: {'initIndex': '1'});
                       },
                     ),
                     VerticalDivider(
@@ -55,9 +54,8 @@ class UserStatsSection extends StatelessWidget {
                       fLabel: context.loc
                           .setBuddies(state.fBuddiesModel.followersCount),
                       fOntap: () {
-                        context.push(const BuddyConnectionsPage(
-                          fInitialIndex: 2,
-                        ));
+                        context.pushNamed(AppRoute.buddyConnectionsScreenPath,
+                            pathParameters: {'initIndex': '2'});
                       },
                     ),
                     VerticalDivider(

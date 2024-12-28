@@ -1,6 +1,6 @@
 /*
 The model used by the auth service for routing
-@author: Godwin
+@author: Godwin Mathias
  */
 class AuthModel {
   /// If the app has been initialized i.e opened for the first time
