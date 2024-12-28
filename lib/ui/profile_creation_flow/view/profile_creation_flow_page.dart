@@ -182,6 +182,10 @@ class __ProfileCreationFlowPageState extends State<_ProfileCreationFlowPage>
                       // Animals Interest
                       UploadInterestPerCategoryPage(fCategoryTitle: 'animals'),
 
+                      // Religion & Spirituality
+                      UploadInterestPerCategoryPage(
+                          fCategoryTitle: 'spirituality'),
+
                       // Location selection
                       UploadYourLocationPage(),
 
@@ -305,6 +309,8 @@ class _BackButtonAndSkip extends StatelessWidget {
         selectedInterests['wellness']?.isEmpty ?? true,
       ProfileCreationFlowEnum.uploadAnimalInterest =>
         selectedInterests['animals']?.isEmpty ?? true,
+      ProfileCreationFlowEnum.uploadSpiritualityInterest =>
+        selectedInterests['spirituality']?.isEmpty ?? true,
       ProfileCreationFlowEnum.uploadSocialInterest =>
         selectedInterests['social']?.isEmpty ?? true,
       ProfileCreationFlowEnum.uploadProfilePics => context.select(

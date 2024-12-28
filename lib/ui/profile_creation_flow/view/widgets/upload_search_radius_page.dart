@@ -129,7 +129,9 @@ class UploadSearchRadiusPage extends StatelessWidget {
                 fOnPressed: () async {
                   final user = context.read<UserProfileStorage>().fUserModel;
                   printI(user.toMap());
-                  context.read<ProfileCreationFlowCubit>().uploadOtherDetails();
+                  context
+                      .read<ProfileCreationFlowCubit>()
+                      .uploadOtherDetails(true);
                 },
                 fText: context.loc.done,
               ),

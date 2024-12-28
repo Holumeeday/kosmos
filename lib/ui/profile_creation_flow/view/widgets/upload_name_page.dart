@@ -26,9 +26,6 @@ class _UploadNamePageState extends State<UploadNamePage> {
   /// If user name is valid
   bool? _dNameIsValid;
 
-  /// If user bio is valid
-  bool? _dBioIsValid;
-
   /// Bio text count
   int _dBioTextCount = 0;
 
@@ -47,8 +44,6 @@ class _UploadNamePageState extends State<UploadNamePage> {
     _fBioController = TextEditingController()
       ..addListener(() {
         if (mounted) {
-          _dBioIsValid =
-              ValidationUtil.bioValidator(_fBioController.text) == null;
           _dBioTextCount = _fBioController.text.length;
           setState(() {});
         }
@@ -114,7 +109,7 @@ class _UploadNamePageState extends State<UploadNamePage> {
 
           // Next button
           PrimaryGradientButton(
-            fDisabled: !((_dNameIsValid ?? false) && (_dBioIsValid ?? true)),
+            fDisabled: !(_dNameIsValid ?? false),
             fOnPressed: () {
               context.read<ProfileCreationFlowCubit>().uploadNameBio(
                     name: _fNameController.text,

@@ -12,6 +12,7 @@ enum ProfileCreationFlowEnum {
   uploadSocialInterest,
   uploadWellnessInterest,
   uploadAnimalInterest,
+  uploadSpiritualityInterest,
   uploadLocation,
   uploadSearchRadius,
 }

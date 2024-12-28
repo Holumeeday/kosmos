@@ -169,18 +169,9 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
     final position = await LocationUtil.getLocation();
     if (position == null) return;
     // The getting of location property takes time sometimes
-    if (!isClosed) {
-      emit(state.copyWith(
-          fFlowModel: state.fFlowModel.copyWith(
-              location: Locations(
-                  latitude: position.latitude,
-                  longitude: position.longitude))));
-    } else {
-      // In case it was closed we can just add the values directly to the API
-      uploadOtherDetails(
-          location: Locations(
-              latitude: position.latitude, longitude: position.longitude));
-    }
+    uploadOtherDetails(false,
+        location: Locations(
+            latitude: position.latitude, longitude: position.longitude));
   }
 
   /// Sets the user's gender.
@@ -223,7 +214,7 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
     );
   }
 
-  /// --------------- API upload section ----------------
+  /// --------------- API upload section ----------------  ///
 
   /// Upload name and Bio
   void uploadNameBio({
@@ -270,7 +261,8 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
   }
 
   /// Upload name and bio details
-  Future<void> uploadOtherDetails({
+  Future<void> uploadOtherDetails(
+    bool shouldLoad, {
     String? name,
     int? searchRadius,
     String? birthday,
@@ -278,7 +270,7 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
     ActivityInterestGroupsList? interests,
     Locations? location,
   }) async {
-    if (!isClosed) {
+    if (!isClosed && shouldLoad) {
       emit(state.copyWith(
           uploadOthersStatus: ProfileCreationUploadOthersStatus.loading));
     }
@@ -311,7 +303,7 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
         );
       }
 
-      if (isClosed) return;
+      if (!shouldLoad || isClosed) return;
 
       emit(
         state.copyWith(

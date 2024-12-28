@@ -31,7 +31,7 @@ class NextButton extends StatelessWidget {
         !canShowSkip(context, dSelectedPage, fSelectedInterests);
     return fCanShowNext
         ? Padding(
-            padding: const EdgeInsets.only(bottom: 16),
+            padding: const EdgeInsets.only(bottom: 20),
             child: PrimaryGradientButton(
               fOnPressed: fOnPressed,
               fChild: Text(fText ?? context.loc.nextText),
@@ -46,6 +46,8 @@ class NextButton extends StatelessWidget {
     Map<String, List<String>> selectedInterests,
   ) {
     return switch (currentPage) {
+      ProfileCreationFlowEnum.uploadSpiritualityInterest =>
+        selectedInterests['spirituality']?.isEmpty ?? true,
       ProfileCreationFlowEnum.uploadName => false,
       ProfileCreationFlowEnum.uploadSportInterest =>
         selectedInterests['sports']?.isEmpty ?? true,
