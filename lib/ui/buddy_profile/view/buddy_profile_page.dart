@@ -71,10 +71,7 @@ class BuddyProfilePage extends StatelessWidget {
                             images: state.fBuddiesModel.profileImages,
                           ),
                         ),
-
-                        // User Content Section
-                        // _buildUserContent(),
-
+                        
                         // Stats Section
                         const VSpace(8),
                         const UserStatsSection(),
