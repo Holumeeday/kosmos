@@ -1,6 +1,6 @@
 /// Represents a buddy user in the system with their profile and interaction data.
 /// @author: Chidera Chijama
-class BuddiesModel {
+class BuddyModel {
   /// Distance from the current user in miles
   final int distance;
 
@@ -50,19 +50,19 @@ class BuddiesModel {
   final List<String> stories;
 
   /// Followers list (other buddies)
-  final List<BuddiesModel>? followersList;
+  final List<BuddyModel>? followersList;
 
   /// Following list (other buddies)
-  final List<BuddiesModel>? followingList;
+  final List<BuddyModel>? followingList;
 
   /// Buddies list (other buddies)
-  final List<BuddiesModel>? buddiesList;
+  final List<BuddyModel>? buddiesList;
 
   /// Reviews of this buddy
   final Reviews reviews;
 
-  /// Creates a new BuddiesModel instance with default values
-  const BuddiesModel({
+  /// Creates a new BuddyModel instance with default values
+  const BuddyModel({
     this.followersList,
     this.followingList,
     this.buddiesList,
@@ -112,8 +112,8 @@ class BuddiesModel {
     this.reviews = const Reviews(),
   });
 
-  /// Creates a copy of this BuddiesModel with the given fields replaced with new values
-  BuddiesModel copyWith({
+  /// Creates a copy of this BuddyModel with the given fields replaced with new values
+  BuddyModel copyWith({
     int? distance,
     int? similarInterestsCount,
     int? mutualBuddiesCount,
@@ -132,12 +132,12 @@ class BuddiesModel {
     List<String>? posts,
     String? connectionType,
     List<String>? stories,
-    List<BuddiesModel>? followersList,
-    List<BuddiesModel>? followingList,
-    List<BuddiesModel>? buddiesList,
+    List<BuddyModel>? followersList,
+    List<BuddyModel>? followingList,
+    List<BuddyModel>? buddiesList,
     Reviews? reviews,
   }) {
-    return BuddiesModel(
+    return BuddyModel(
       distance: distance ?? this.distance,
       similarInterestsCount:
           similarInterestsCount ?? this.similarInterestsCount,
@@ -161,6 +161,7 @@ class BuddiesModel {
       reviews: reviews ?? this.reviews,
     );
   }
+  
 }
 
 /// Represents the reviews section of a buddy
@@ -179,12 +180,14 @@ class Reviews {
     this.totalRating = 4.5,
     this.reviewList = const [],
   });
+
+  
 }
 
 /// Represents a single review
 class Review {
-  /// The reviewer, represented as a BuddiesModel
-  final BuddiesModel reviewer;
+  /// The reviewer, represented as a BuddyModel
+  final BuddyModel reviewer;
 
   /// The review rating (1-5)
   final int rating;
@@ -201,4 +204,184 @@ class Review {
     required this.review,
     required this.timeOfReview,
   });
+
+
 }
+    /// List of buddies
+  final List<BuddyModel> buddies = [
+    BuddyModel(
+      userName: "John Doe",
+      bio: "Avid traveler, coffee lover, and photographer.",
+      distance: 5,
+      similarInterestsCount: 8,
+      mutualBuddiesCount: 4,
+      profileImages: [
+        "https://randomuser.me/api/portraits/men/1.jpg",
+        "https://randomuser.me/api/portraits/men/2.jpg",
+      ],
+      interests: [
+        'horseRiding',
+        'dogAgilityTraining',
+        'petPhotography',
+        'birdWatching',
+        'wildlifeSafaris',
+        'aquariumVisits',
+        'volunteeringAtShelters',
+      ],
+      followersCount: 1500,
+      followingCount: 300,
+      buddiesCount: 120,
+      activityCreatedCount: 10,
+      activityJoinedCount: 50,
+ 
+      activities: [
+        "https://placeimg.com/640/480/nature",
+        "https://placeimg.com/640/480/arch",
+      ],
+      posts: [
+        "https://placeimg.com/640/480/tech",
+        "https://placeimg.com/640/480/people",
+      ],
+      stories: ["https://placeimg.com/640/480/animals"],
+    ),
+    const BuddyModel(
+      userName: "Jane Smith",
+      bio: "Fitness enthusiast and plant-based food explorer.",
+      distance: 10,
+      similarInterestsCount: 12,
+      mutualBuddiesCount: 7,
+      profileImages: [
+        "https://randomuser.me/api/portraits/women/1.jpg",
+        "https://randomuser.me/api/portraits/women/2.jpg",
+      ],
+      interests: [
+        'horseRiding',
+        'dogAgilityTraining',
+        'petPhotography',
+        'birdWatching',
+        'wildlifeSafaris',
+        'aquariumVisits',
+        'volunteeringAtShelters',
+      ],
+      followersCount: 2500,
+      followingCount: 500,
+      buddiesCount: 200,
+      activityCreatedCount: 20,
+      activityJoinedCount: 100,
+      activities: [
+        "https://placeimg.com/640/480/sports",
+        "https://placeimg.com/640/480/health",
+      ],
+      posts: [
+        "https://placeimg.com/640/480/food",
+        "https://placeimg.com/640/480/fitness",
+      ],
+      connectionType: "Following",
+      stories: ["https://placeimg.com/640/480/nature"],
+    ),
+    const BuddyModel(
+      userName: "Alex Brown",
+      bio: "Tech geek and gamer. Let's build something cool!",
+      distance: 2,
+      similarInterestsCount: 15,
+      mutualBuddiesCount: 5,
+      profileImages: [
+        "https://randomuser.me/api/portraits/men/3.jpg",
+        "https://randomuser.me/api/portraits/men/4.jpg",
+      ],
+      interests: [
+        'horseRiding',
+        'dogAgilityTraining',
+        'petPhotography',
+        'birdWatching',
+        'wildlifeSafaris',
+        'aquariumVisits',
+        'volunteeringAtShelters',
+      ],
+      followersCount: 3000,
+      followingCount: 700,
+      buddiesCount: 250,
+      activityCreatedCount: 15,
+      activityJoinedCount: 120,
+      
+      activities: [
+        "https://placeimg.com/640/480/tech",
+        "https://placeimg.com/640/480/games",
+      ],
+      posts: [
+        "https://placeimg.com/640/480/coding",
+        "https://placeimg.com/640/480/hardware",
+      ],
+      stories: ["https://placeimg.com/640/480/abstract"],
+    ),
+    const BuddyModel(
+      userName: "Emma White",
+      bio: "Artist and designer who loves nature and creativity.",
+      distance: 8,
+      similarInterestsCount: 10,
+      mutualBuddiesCount: 6,
+      profileImages: [
+        "https://randomuser.me/api/portraits/women/3.jpg",
+        "https://randomuser.me/api/portraits/women/4.jpg",
+      ],
+      interests: [
+        'horseRiding',
+        'dogAgilityTraining',
+        'petPhotography',
+        'birdWatching',
+        'wildlifeSafaris',
+        'aquariumVisits',
+        'volunteeringAtShelters',
+      ],
+      followersCount: 4000,
+      followingCount: 900,
+      buddiesCount: 300,
+      activityCreatedCount: 25,
+      activityJoinedCount: 80,
+      
+      activities: [
+        "https://placeimg.com/640/480/art",
+        "https://placeimg.com/640/480/design",
+      ],
+      posts: [
+        "https://placeimg.com/640/480/landscape",
+        "https://placeimg.com/640/480/crafts",
+      ],
+      stories: ["https://placeimg.com/640/480/sketch"],
+    ),
+    const BuddyModel(
+      userName: "Liam Gray",
+      bio: "Entrepreneur and innovator. Always looking for opportunities.",
+      distance: 12,
+      similarInterestsCount: 20,
+      mutualBuddiesCount: 10,
+      profileImages: [
+        "https://randomuser.me/api/portraits/men/5.jpg",
+        "https://randomuser.me/api/portraits/men/6.jpg",
+      ],
+      interests: [
+        'horseRiding',
+        'dogAgilityTraining',
+        'petPhotography',
+        'birdWatching',
+        'wildlifeSafaris',
+        'aquariumVisits',
+        'volunteeringAtShelters',
+      ],
+      followersCount: 5000,
+      followingCount: 1500,
+      buddiesCount: 350,
+      activityCreatedCount: 50,
+      activityJoinedCount: 200,
+      
+      activities: [
+        "https://placeimg.com/640/480/business",
+        "https://placeimg.com/640/480/startup",
+      ],
+      posts: [
+        "https://placeimg.com/640/480/finance",
+        "https://placeimg.com/640/480/strategy",
+      ],
+      stories: ["https://placeimg.com/640/480/ideas"],
+    ),
+  ];

@@ -14,14 +14,13 @@ final List<String> connectionTypes = [
 
 /// Sample interests used for generating random buddy data.
 final List<String> sampleInterests = [
-  "Art",
-  "Hockey",
-  "Sport",
-  "Baseball",
-  "Rugby",
-  "Visual Arts",
-  "Ice Hockey",
-  "Softball",
+  'horseRiding',
+  'dogAgilityTraining',
+  'petPhotography',
+  'birdWatching',
+  'wildlifeSafaris',
+  'aquariumVisits',
+  'volunteeringAtShelters',
 ];
 
 /// Sample bios used for generating random buddy data.
@@ -64,8 +63,8 @@ final List<String> sampleReviews = [
   "The buddy was okay, but I feel like the conversation didn’t flow as naturally as I had hoped.",
 ];
 
-/// Generates a list of `BuddiesModel` with random data and dummy reviews.
-List<BuddiesModel> generateBuddiesList(int totalBuddies) {
+/// Generates a list of `BuddyModel` with random data and dummy reviews.
+List<BuddyModel> generateBuddiesList(int totalBuddies) {
   return List.generate(totalBuddies, (index) {
     // Shuffle sample data for randomness.
     final shuffledInterests = [...sampleInterests]..shuffle(random);
@@ -75,7 +74,7 @@ List<BuddiesModel> generateBuddiesList(int totalBuddies) {
 
     // Generate dummy reviews for the buddy.
     final List<Review> reviews = List.generate(random.nextInt(10) + 1, (reviewIndex) {
-      final reviewer = BuddiesModel(
+      final reviewer = BuddyModel(
         userName: "Reviewer $reviewIndex",
         profileImages: shuffledImages.take(1).toList(),
         bio: "This is a reviewer’s bio",
@@ -93,23 +92,27 @@ List<BuddiesModel> generateBuddiesList(int totalBuddies) {
     final double totalRating =double.parse ((reviews.fold(0, (sum, review) => sum + review.rating) /reviews.length).toStringAsFixed(1));
     final int reviewCount = reviews.length;
 
-    // Generate a random `BuddiesModel`.
-    return BuddiesModel(
+    // Generate a random `BuddyModel`.
+    return BuddyModel(
       distance: random.nextInt(100) + 1, // Random distance between 1-100 miles.
-      similarInterestsCount: random.nextInt(20), // Random 0-20 similar interests.
+      similarInterestsCount:
+          random.nextInt(20), // Random 0-20 similar interests.
       mutualBuddiesCount: random.nextInt(30), // Random 0-30 mutual buddies.
       userName: "Buddy $index", // Generate unique user names, e.g., "Buddy 0".
       interests: shuffledInterests.take(3).toList(), // Pick 3 random interests.
       profileImages: shuffledImages.take(3).toList(), // Pick 3 random images.
       bio: shuffledBio, // Pick a random bio.
-      followersCount: random.nextInt(10000) + 1000, // Random 1000-11000 followers.
-      followingCount: random.nextInt(10000) + 1000, // Random 1000-11000 following.
+      followersCount:
+          random.nextInt(10000) + 1000, // Random 1000-11000 followers.
+      followingCount:
+          random.nextInt(10000) + 1000, // Random 1000-11000 following.
       buddiesCount: random.nextInt(5000) + 500, // Random 500-5500 buddies.
       activityCreatedCount: random.nextInt(50) + 1, // Random 1-50 activities created.
       activityJoinedCount: random.nextInt(100) + 10, // Random 10-110 activities joined.
       activities: shuffledImages.take(5).toList(), // Pick 5 random activities.
       posts: shuffledImages.take(5).toList(), // Pick 5 random posts.
-      connectionType: connectionTypes[random.nextInt(connectionTypes.length)], // Random connection type.
+      connectionType: connectionTypes[
+          random.nextInt(connectionTypes.length)], // Random connection type.
       stories: shuffledStories.take(3).toList(), // Pick 3 random stories.
       reviews: Reviews(
         count: reviewCount,
@@ -123,16 +126,18 @@ List<BuddiesModel> generateBuddiesList(int totalBuddies) {
 /// Creates a subset of the buddies list within the specified range.
 ///
 /// This ensures safe sublist creation by clamping the range within valid bounds.
-List<BuddiesModel> getFollowersList(
-    List<BuddiesModel> buddies, int startIndex, int count) {
+List<BuddyModel> getFollowersList(
+    List<BuddyModel> buddies, int startIndex, int count) {
   final endIndex = (startIndex + count).clamp(0, buddies.length);
   return buddies.sublist(startIndex, endIndex);
 }
 
 // Generate the full list of buddies.
-final List<BuddiesModel> fullBuddiesList = generateBuddiesList(500);
+final List<BuddyModel> fullBuddiesList = generateBuddiesList(500);
 
 // Subset lists for specific purposes.
-final List<BuddiesModel> followersList = getFollowersList(fullBuddiesList, 0, 50);
-final List<BuddiesModel> followingList = getFollowersList(fullBuddiesList, 50, 100);
-final List<BuddiesModel> buddiesList = getFollowersList(fullBuddiesList, 100, 150);
+final List<BuddyModel> followersList = getFollowersList(fullBuddiesList, 0, 50);
+final List<BuddyModel> followingList =
+    getFollowersList(fullBuddiesList, 50, 100);
+final List<BuddyModel> buddiesList =
+    getFollowersList(fullBuddiesList, 100, 150);

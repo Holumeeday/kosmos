@@ -3,11 +3,11 @@ part of 'reviews_cubit.dart';
 class ReviewsState extends Equatable {
   const ReviewsState({
     required this.fBuddy,
-   required this.fFilteredReviews,
-   required this.fSelectedRating ,
+    required this.fFilteredReviews,
+    required this.fSelectedRating,
   });
 
-  final BuddiesModel fBuddy;
+  final BuddyModel fBuddy;
   final List<Review> fFilteredReviews;
   final String fSelectedRating;
 
@@ -15,7 +15,7 @@ class ReviewsState extends Equatable {
   List<Object> get props => [fBuddy, fFilteredReviews, fSelectedRating];
 
   ReviewsState copyWith({
-    BuddiesModel? fBuddy,
+    BuddyModel? fBuddy,
     List<Review>? fFilteredReviews,
     String? fSelectedRating,
   }) {
