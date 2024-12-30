@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
-import 'package:playkosmos_v3/common_widgets/styled_localization.dart';
 import 'package:playkosmos_v3/enums/phone_otp_method_enum.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/phone_number_otp_verification%20copy/view/phone_number_otp_verification_page.dart';
 import 'package:playkosmos_v3/ui/sign_up_phone_number/cubit/sign_up_phone_number_cubit.dart';
 import 'package:playkosmos_v3/ui/sign_up_phone_number/view/widgets/otp_options.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
@@ -27,7 +26,7 @@ class SignUpPhoneNumberPage extends StatefulWidget {
 }
 
 class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
-  // Email controller
+  // Phone controller
   late TextEditingController _fPhoneController;
 
   /// The global key for validation of the form
@@ -35,9 +34,6 @@ class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
 
   /// If email is valid
   bool? _dIsValidPhone;
-
-  // User name
-  final fUsername = 'John Doe';
 
   @override
   void initState() {
@@ -47,6 +43,11 @@ class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
         if (mounted) {
           _dIsValidPhone =
               ValidationUtil.numberValidator(_fPhoneController.text) == null;
+          if (_dIsValidPhone ?? false) {
+            context
+                .read<SignUpWithPhoneNumberCubit>()
+                .setPhoneNumber(_fPhoneController.text);
+          }
           setState(() {});
         }
       });
@@ -60,113 +61,147 @@ class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CustomAppBar(
-        fElevation: 0,
+    return ShowAsyncBusyIndicator(
+      fInAsync: context.select(
+        (SignUpWithPhoneNumberCubit cubit) =>
+            cubit.state.status == SignUpWithPhoneStatus.loading,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child:
-            BlocBuilder<SignUpWithPhoneNumberCubit, SignUpWithPhoneNumberState>(
-          builder: (context, state) {
-            const kOtpOptions = PhoneOtpMethodEnum.values;
-            return Form(
-              key: _fFormKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      context.loc.enterYourNumber,
-                      style: context.appTextTheme.header1,
-                    ),
-                  ),
-                  const VSpace(56),
+      fChild:
+          BlocListener<SignUpWithPhoneNumberCubit, SignUpWithPhoneNumberState>(
+        listener: (context, state) {
+          if (state.status == SignUpWithPhoneStatus.success) {
+            // If sign up was successful
+            if (state.data?.status == true) {
+              context.pushNamed(
+                AppRoute.phoneNumberOtpVerificationScreen,
+                pathParameters: {
+                  'phone': context
+                      .read<SignUpWithPhoneNumberCubit>()
+                      .getFullPhoneNumber(),
+                },
+              );
+            }
+          } else if (state.status == SignUpWithPhoneStatus.failure &&
+              state.errorMessage != null) {
+            SnackBarUtil.showError(message: state.errorMessage!);
+          }
+        },
+        child: Scaffold(
+          appBar: const CustomAppBar(
+            fElevation: 0,
+          ),
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: BlocBuilder<SignUpWithPhoneNumberCubit,
+                SignUpWithPhoneNumberState>(
+              builder: (context, state) {
+                return Form(
+                  key: _fFormKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          context.loc.enterYourNumber,
+                          style: context.appTextTheme.header1,
+                        ),
+                      ),
+                      const VSpace(56),
 
-                  // Phone number text field
-                  CustomPhoneField(
-                    fTextController: _fPhoneController,
-                    fValidator: ValidationUtil.numberValidator,
-                    fOnCountryChanged: (value) {
-                      context
-                          .read<SignUpWithPhoneNumberCubit>()
-                          .setCountryCode(value);
-                    },
-                  ),
-                  const VSpace(56),
-
-                  // Login button
-                  PrimaryGradientButton(
-                    fDisabled: !(_dIsValidPhone ?? false),
-                    fOnPressed: () {
-                      showDialog(
-                        context: context,
-                        barrierDismissible: true,
-                        builder: (_) {
-                          return Dialog(
-                              child: OtpOptions(
-                            fTitle: context.loc.howWouldYouLikeToReceiveTheCode,
-                            fcontent: Column(
-                              children: kOtpOptions.map((option) {
-                                return BlocSelector<SignUpWithPhoneNumberCubit,
-                                    SignUpWithPhoneNumberState, String>(
-                                  selector: (state) => state.fSelectedOtpOption,
-                                  builder: (context, selectedOption) {
-                                    return RadioListTile<String>(
-                                      title: _buildRichTextTitle(
-                                          context, option.name),
-                                      value: option.name,
-                                      groupValue: selectedOption,
-                                      onChanged: (value) {
-                                        if (value != null) {
-                                          context
-                                              .read<
-                                                  SignUpWithPhoneNumberCubit>()
-                                              .setOtpOption(value);
-                                        }
-                                      },
-                                    );
-                                  },
-                                );
-                              }).toList(),
-                            ),
-                            fOnLetGo: () {
-                              context.pop();
-                              context
-                                  .push(const PhoneNumberOtpVerificationPage());
-                            },
-                          ));
+                      // Phone number text field
+                      CustomPhoneField(
+                        fTextController: _fPhoneController,
+                        fValidator: ValidationUtil.numberValidator,
+                        fOnCountryChanged: (value) {
+                          context
+                              .read<SignUpWithPhoneNumberCubit>()
+                              .setCountryCode(value);
                         },
-                      );
-                    },
-                    fChild: Text(context.loc.loginText),
-                  )
-                ],
-              ),
-            );
-          },
+                      ),
+                      const VSpace(56),
+
+                      // Login button
+                      PrimaryGradientButton(
+                        fDisabled: !(_dIsValidPhone ?? false),
+                        fOnPressed: () {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: true,
+                            builder: (_) {
+                              return BlocProvider.value(
+                                value:
+                                    context.read<SignUpWithPhoneNumberCubit>(),
+                                child: Builder(builder: (context) {
+                                  final fSelectedOtpMethod = context.select(
+                                      (SignUpWithPhoneNumberCubit cubit) =>
+                                          cubit.state.fSelectedOtpOption);
+                                  return Dialog(
+                                      child: OtpOptions(
+                                    fTitle: context
+                                        .loc.howWouldYouLikeToReceiveTheCode,
+                                    fcontent: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        // Whatsapp
+                                        RadioListTile(
+                                          contentPadding: EdgeInsets.zero,
+                                          value: PhoneOtpMethodEnum.whatsapp,
+                                          groupValue: fSelectedOtpMethod,
+                                          title: Text(
+                                            context.loc.whatsapp,
+                                            style: context
+                                                .appTextTheme.buttonLarge,
+                                          ),
+                                          onChanged: (v) {
+                                            context
+                                                .read<
+                                                    SignUpWithPhoneNumberCubit>()
+                                                .setOtpOption(v!);
+                                          },
+                                        ),
+                                        // Sms
+                                        RadioListTile(
+                                          contentPadding: EdgeInsets.zero,
+                                          value: PhoneOtpMethodEnum.sms,
+                                          groupValue: fSelectedOtpMethod,
+                                          title: Text(
+                                            context.loc.sms,
+                                            style: context
+                                                .appTextTheme.buttonLarge,
+                                          ),
+                                          onChanged: (v) {
+                                            context
+                                                .read<
+                                                    SignUpWithPhoneNumberCubit>()
+                                                .setOtpOption(v!);
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                    fOnLetGo: () {
+                                      context.pop();
+                                      context
+                                          .read<SignUpWithPhoneNumberCubit>()
+                                          .signUpPhone();
+                                    },
+                                  ));
+                                }),
+                              );
+                            },
+                          );
+                        },
+                        fChild: Text(context.loc.nextText),
+                      )
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
         ),
       ),
-    );
-  }
-
-  /// Builds the dynamic RichText title based on the option.
-  Widget _buildRichTextTitle(BuildContext context, String option) {
-    final isSms = option == 'SMS';
-    final title = isSms ? context.loc.sms : context.loc.whatsapp;
-    final subtitle = isSms ? context.loc.onlyOnceText : context.loc.unlimited;
-
-    return StylingLocalizations(
-      fLocalizedText: "$title ($subtitle)",
-      fTextToStyle: [title, "($subtitle)"],
-      fGeneralStyle: Theme.of(context).textTheme.displayLarge?.copyWith(
-            fontSize: 18,
-          ),
-      fStyleText: Theme.of(context).textTheme.displayLarge?.copyWith(
-            fontSize: 18,
-            color: Colors.grey,
-          ),
     );
   }
 }

@@ -7,6 +7,7 @@ import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/cubit/profile_creation_flow_cubit.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/next_button.dart';
+import 'package:playkosmos_v3/utils/snack_bar_util.dart';
 
 /// This is the page for uploading pics for the profile creation
 /// section
@@ -22,30 +23,33 @@ class UploadPicsPage extends StatelessWidget {
       selector: (state) => state.fFlowModel.profilePicsList,
       builder: (context, state) {
         final dSelectedImages = [...?state];
-        return SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Title
-              Text(
-                context.loc.uploadYourPics,
-                style: context.appTextTheme.header1,
-              ),
-              const VSpace(12),
-              Text(
-                context.loc.timeToShowOffYourProfilePics,
-                style: context.appTextTheme.caption,
-              ),
-              const VSpace(40),
+        return LayoutBuilder(builder: (context, constraint) {
+          final fMaxWidth = constraint.maxWidth;
+          const fItemsWidth = 122;
+          final fCrossAxisCount = fMaxWidth ~/ fItemsWidth;
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: CustomScrollView(
+              slivers: [
+                // Title
+                SliverToBoxAdapter(
+                  child: Text(
+                    context.loc.uploadYourPics,
+                    style: context.appTextTheme.header1,
+                  ),
+                ),
+                const SliverToBoxAdapter(child: VSpace(12)),
 
-              // Image selection grid
-              LayoutBuilder(builder: (context, constraint) {
-                final fMaxWidth = constraint.maxWidth;
-                const fItemsWidth = 122;
-                final fCrossAxisCount = fMaxWidth ~/ fItemsWidth;
-                return GridView.builder(
-                  shrinkWrap: true,
+                SliverToBoxAdapter(
+                  child: Text(
+                    context.loc.timeToShowOffYourProfilePics,
+                    style: context.appTextTheme.caption,
+                  ),
+                ),
+                const SliverToBoxAdapter(child: VSpace(40)),
+
+                // Image selection grid
+                SliverGrid.builder(
                   itemCount: dSelectedImages.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: fCrossAxisCount,
@@ -57,14 +61,58 @@ class UploadPicsPage extends StatelessWidget {
                       image: dSelectedImages[index],
                       onAdd: () async {
                         final picker = ImagePicker();
-                        final pickedFile =
-                            await picker.pickImage(source: ImageSource.gallery);
+                        final fLimit =
+                            9 - dSelectedImages.whereType<File>().length;
+                        // Allow multiple image selection
+                        final pickedFiles = await picker.pickMultiImage(
+                          limit: fLimit > 1 ? fLimit : 2,
+                        );
 
-                        if (pickedFile != null && context.mounted) {
-                          dSelectedImages[index] = File(pickedFile.path);
-                          context
-                              .read<ProfileCreationFlowCubit>()
-                              .changeSelectedImageFiles(dSelectedImages);
+                        // Selected images file path
+                        final dSelectedImagesFilePaths =
+                            dSelectedImages.map((e) => e?.path).toList();
+
+                        if (pickedFiles.isNotEmpty) {
+                          int replacementIndex =
+                              index; // Start replacing from the clicked index
+
+                          for (var pickedFile in pickedFiles) {
+                            // If file is already selected, ignore
+                            if (dSelectedImagesFilePaths
+                                .contains(pickedFile.path)) continue;
+
+                            final file = File(pickedFile.path);
+                            final fileSize =
+                                await file.length(); // Get file size in bytes
+
+                            const int maxSizeInBytes =
+                                2 * 1024 * 1024; // 2 MB in bytes
+
+                            if (fileSize > maxSizeInBytes) {
+                              SnackBarUtil.showError(
+                                  message: context.loc.selectedImageExceed2Mb);
+                              continue;
+                            }
+
+                            // Replace existing image at the index or add if index exceeds the list length
+                            if (replacementIndex < dSelectedImages.length) {
+                              dSelectedImages[replacementIndex] =
+                                  File(pickedFile.path);
+                            } else {
+                              if (dSelectedImages.length != 9) {
+                                dSelectedImages.add(File(pickedFile.path));
+                              }
+                            }
+
+                            replacementIndex++;
+                          }
+
+                          // Update state with the modified image list
+                          if (context.mounted) {
+                            context
+                                .read<ProfileCreationFlowCubit>()
+                                .changeSelectedImageFiles(dSelectedImages);
+                          }
                         }
                       },
                       onRemove: () {
@@ -75,18 +123,23 @@ class UploadPicsPage extends StatelessWidget {
                       },
                     );
                   },
-                );
-              }),
+                ),
 
-              const VSpace(40),
+                const SliverToBoxAdapter(child: VSpace(40)),
 
-              // The next button
-              NextButton(fOnPressed: () {
-                context.read<ProfileCreationFlowCubit>().nextPage();
-              }),
-            ],
-          ),
-        );
+                // The next button
+                SliverToBoxAdapter(
+                  child: NextButton(fOnPressed: () {
+                    context
+                        .read<ProfileCreationFlowCubit>()
+                        .uploadImages(images: dSelectedImages);
+                    context.read<ProfileCreationFlowCubit>().nextPage();
+                  }),
+                ),
+              ],
+            ),
+          );
+        });
       },
     );
   }
@@ -132,7 +185,7 @@ class ImageSlot extends StatelessWidget {
                 ),
               ),
             ))
-          : SizedBox(
+          : Container(
               height: 122,
               width: 122,
               child: Stack(

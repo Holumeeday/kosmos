@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
@@ -25,9 +26,6 @@ class _UploadNamePageState extends State<UploadNamePage> {
   /// If user name is valid
   bool? _dNameIsValid;
 
-  /// If user bio is valid
-  bool? _dBioIsValid;
-
   /// Bio text count
   int _dBioTextCount = 0;
 
@@ -46,8 +44,6 @@ class _UploadNamePageState extends State<UploadNamePage> {
     _fBioController = TextEditingController()
       ..addListener(() {
         if (mounted) {
-          _dBioIsValid =
-              ValidationUtil.bioValidator(_fBioController.text) == null;
           _dBioTextCount = _fBioController.text.length;
           setState(() {});
         }
@@ -90,6 +86,12 @@ class _UploadNamePageState extends State<UploadNamePage> {
           CustomTextFormField(
             fHintText: context.loc.tellUsAboutYourselfOptional,
             fTextController: _fBioController,
+            fTextInputFormatters: [
+              LengthLimitingTextInputFormatter(
+                150,
+                maxLengthEnforcement: MaxLengthEnforcement.enforced,
+              )
+            ],
             fMaxLines: 5,
             fValidator: ValidationUtil.bioValidator,
           ),
@@ -107,12 +109,19 @@ class _UploadNamePageState extends State<UploadNamePage> {
 
           // Next button
           PrimaryGradientButton(
-            fDisabled: !((_dNameIsValid ?? false) && (_dBioIsValid ?? true)),
+            fDisabled: !(_dNameIsValid ?? false),
             fOnPressed: () {
-              context.read<ProfileCreationFlowCubit>().nextPage();
+              context.read<ProfileCreationFlowCubit>().uploadNameBio(
+                    name: _fNameController.text,
+                    bio: _fBioController.text.isEmpty
+                        ? null
+                        : _fBioController.text,
+                  );
             },
             fChild: Text(context.loc.nextText),
           ),
+
+          const VSpace(16),
         ],
       ),
     );

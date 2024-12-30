@@ -52,8 +52,8 @@ class NonSecureSembastStorageImpl implements Storage {
   /// - [key]: The key of the record to be read.
   /// - Returns: The value associated with the key, or `null` if the key doesn't exist.
   @override
-  Future<dynamic> read(String key) async {
-    return await _store.record(key).get(_db);
+  dynamic read(String key) {
+    return _store.record(key).getSync(_db);
   }
 
   /// Listens for changes to a specific key in the database.

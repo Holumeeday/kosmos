@@ -22,11 +22,15 @@ class ResendCountdown extends StatelessWidget {
   /// Text button text
   final String? fButtonText;
 
+  /// The countdown duration
+  final Duration fCountdownDuration;
+
   const ResendCountdown({
     super.key,
     required this.fCanResendOtp,
     required this.fResendOtpCall,
     required this.fEndCountdown,
+    required this.fCountdownDuration,
     this.fText,
     this.fButtonText,
   });
@@ -57,10 +61,10 @@ class ResendCountdown extends StatelessWidget {
               )
             : TweenAnimationBuilder<Duration>(
                 tween: Tween(
-                  begin: const Duration(minutes: 15),
+                  begin: fCountdownDuration,
                   end: const Duration(),
                 ),
-                duration: const Duration(minutes: 15),
+                duration: fCountdownDuration,
                 onEnd: fEndCountdown,
                 builder: (_, value, __) {
                   final String minutes =

@@ -1,13 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/assets_gen/assets.gen.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/constants/constants.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/sign_in_email/view/sign_in_email_page.dart';
-import 'package:playkosmos_v3/ui/sign_in_phone/view/sign_in_phone_page.dart';
-import 'package:playkosmos_v3/ui/sign_up_phone_number/view/sign_up_phone_number_page.dart';
-import 'package:playkosmos_v3/ui/signup_with_email/view/sign_up_with_email_page.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// The authentication provider selection page
@@ -90,7 +87,7 @@ class _AppLogoWithText extends StatelessWidget {
         const PlaykosmosLogoVertical(),
         const VSpace(8),
         Text(
-          context.loc.exploreFunActivitiesNearbyAfar,
+          context.loc.discoverAndEnjoyAmazingActivities,
           textAlign: TextAlign.center,
           style: context.appTextTheme.body?.copyWith(
             color: Colors.white,
@@ -126,9 +123,9 @@ class _AuthProviderButtons extends StatelessWidget {
         _AuthButton(
           fOnPressed: () {
             if (fIsSignUp) {
-              context.push(const SignUpWithEmailPage());
+              context.push(AppRoute.signUpEmailScreenPath);
             } else {
-              context.push(const SignInEmailPage());
+              context.push(AppRoute.signInEmailScreenPath);
             }
           },
           fAuthIcon: Assets.svgs.auth.emailGradient.svg(),
@@ -142,9 +139,9 @@ class _AuthProviderButtons extends StatelessWidget {
         _AuthButton(
           fOnPressed: () {
             if (fIsSignUp) {
-              context.push(const SignUpPhoneNumberPage());
+              context.push(AppRoute.signUpPhoneScreenPath);
             } else {
-              context.push(const SignInPhoneNumberPage());
+              context.push(AppRoute.signInPhoneScreenPath);
             }
           },
           fAuthIcon: Assets.svgs.auth.phoneGradient.svg(),
@@ -245,7 +242,8 @@ class _GradientContainerWithText extends StatelessWidget {
               text: fIsSignUp ? context.loc.loginText : context.loc.signUp,
               recognizer: TapGestureRecognizer()
                 ..onTap = () {
-                  context.push(AuthProviderPage(fIsSignUp: !fIsSignUp));
+                  context.goNamed(AppRoute.authProviderScreen,
+                      queryParameters: {'is-sign-up': (!fIsSignUp).toString()});
                 },
               style: context.appTextTheme.buttonLarge?.copyWith(
                 color: Colors.white,

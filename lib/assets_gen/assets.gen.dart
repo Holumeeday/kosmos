@@ -7,17 +7,10 @@
 // ignore_for_file: type=lint
 // ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart' as _svg;
-import 'package:vector_graphics/vector_graphics.dart' as _vg;
-
-class $AssetsPngsGen {
-  const $AssetsPngsGen();
-
-  /// Directory path: assets/pngs/onboarding
-  $AssetsPngsOnboardingGen get onboarding => const $AssetsPngsOnboardingGen();
-}
+import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:vector_graphics/vector_graphics.dart';
 
 class $AssetsSvgsGen {
   const $AssetsSvgsGen();
@@ -39,37 +32,11 @@ class $AssetsSvgsGen {
       const $AssetsSvgsPostReactionIconsGen();
 }
 
-class $AssetsPngsOnboardingGen {
-  const $AssetsPngsOnboardingGen();
+class $AssetsWebpGen {
+  const $AssetsWebpGen();
 
-  /// File path: assets/pngs/onboarding/create-onboarding.png
-  AssetGenImage get createOnboarding =>
-      const AssetGenImage('assets/pngs/onboarding/create-onboarding.png');
-
-  /// File path: assets/pngs/onboarding/earn-onboarding.png
-  AssetGenImage get earnOnboarding =>
-      const AssetGenImage('assets/pngs/onboarding/earn-onboarding.png');
-
-  /// File path: assets/pngs/onboarding/meet-onboarding.png
-  AssetGenImage get meetOnboarding =>
-      const AssetGenImage('assets/pngs/onboarding/meet-onboarding.png');
-
-  /// File path: assets/pngs/onboarding/stay-connected-onboarding.png
-  AssetGenImage get stayConnectedOnboarding => const AssetGenImage(
-      'assets/pngs/onboarding/stay-connected-onboarding.png');
-
-  /// File path: assets/pngs/onboarding/welcome-onboarding.png
-  AssetGenImage get welcomeOnboarding =>
-      const AssetGenImage('assets/pngs/onboarding/welcome-onboarding.png');
-
-  /// List of all assets
-  List<AssetGenImage> get values => [
-        createOnboarding,
-        earnOnboarding,
-        meetOnboarding,
-        stayConnectedOnboarding,
-        welcomeOnboarding
-      ];
+  /// Directory path: assets/webp/onboarding
+  $AssetsWebpOnboardingGen get onboarding => const $AssetsWebpOnboardingGen();
 }
 
 class $AssetsSvgsAuthGen {
@@ -291,24 +258,52 @@ class $AssetsSvgsPostReactionIconsGen {
       ];
 }
 
+class $AssetsWebpOnboardingGen {
+  const $AssetsWebpOnboardingGen();
+
+  /// File path: assets/webp/onboarding/create-onboarding.webp
+  AssetGenImage get createOnboarding =>
+      const AssetGenImage('assets/webp/onboarding/create-onboarding.webp');
+
+  /// File path: assets/webp/onboarding/earn-onboarding.webp
+  AssetGenImage get earnOnboarding =>
+      const AssetGenImage('assets/webp/onboarding/earn-onboarding.webp');
+
+  /// File path: assets/webp/onboarding/meet-onboarding.webp
+  AssetGenImage get meetOnboarding =>
+      const AssetGenImage('assets/webp/onboarding/meet-onboarding.webp');
+
+  /// File path: assets/webp/onboarding/stay-connected-onboarding.webp
+  AssetGenImage get stayConnectedOnboarding => const AssetGenImage(
+      'assets/webp/onboarding/stay-connected-onboarding.webp');
+
+  /// File path: assets/webp/onboarding/welcome-onboarding.webp
+  AssetGenImage get welcomeOnboarding =>
+      const AssetGenImage('assets/webp/onboarding/welcome-onboarding.webp');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [
+        createOnboarding,
+        earnOnboarding,
+        meetOnboarding,
+        stayConnectedOnboarding,
+        welcomeOnboarding
+      ];
+}
+
 class Assets {
   Assets._();
 
-  static const $AssetsPngsGen pngs = $AssetsPngsGen();
   static const $AssetsSvgsGen svgs = $AssetsSvgsGen();
+  static const $AssetsWebpGen webp = $AssetsWebpGen();
 }
 
 class AssetGenImage {
-  const AssetGenImage(
-    this._assetName, {
-    this.size,
-    this.flavors = const {},
-  });
+  const AssetGenImage(this._assetName, {this.size = null});
 
   final String _assetName;
 
   final Size? size;
-  final Set<String> flavors;
 
   Image image({
     Key? key,
@@ -328,7 +323,7 @@ class AssetGenImage {
     ImageRepeat repeat = ImageRepeat.noRepeat,
     Rect? centerSlice,
     bool matchTextDirection = false,
-    bool gaplessPlayback = true,
+    bool gaplessPlayback = false,
     bool isAntiAlias = false,
     String? package,
     FilterQuality filterQuality = FilterQuality.low,
@@ -382,22 +377,20 @@ class AssetGenImage {
 class SvgGenImage {
   const SvgGenImage(
     this._assetName, {
-    this.size,
-    this.flavors = const {},
+    this.size = null,
   }) : _isVecFormat = false;
 
   const SvgGenImage.vec(
     this._assetName, {
-    this.size,
-    this.flavors = const {},
+    this.size = null,
   }) : _isVecFormat = true;
 
   final String _assetName;
+
   final Size? size;
-  final Set<String> flavors;
   final bool _isVecFormat;
 
-  _svg.SvgPicture svg({
+  SvgPicture svg({
     Key? key,
     bool matchTextDirection = false,
     AssetBundle? bundle,
@@ -410,30 +403,19 @@ class SvgGenImage {
     WidgetBuilder? placeholderBuilder,
     String? semanticsLabel,
     bool excludeFromSemantics = false,
-    _svg.SvgTheme? theme,
+    SvgTheme? theme,
     ColorFilter? colorFilter,
     Clip clipBehavior = Clip.hardEdge,
     @deprecated Color? color,
     @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
     @deprecated bool cacheColorFilter = false,
   }) {
-    final _svg.BytesLoader loader;
-    if (_isVecFormat) {
-      loader = _vg.AssetBytesLoader(
-        _assetName,
-        assetBundle: bundle,
-        packageName: package,
-      );
-    } else {
-      loader = _svg.SvgAssetLoader(
-        _assetName,
-        assetBundle: bundle,
-        packageName: package,
-        theme: theme,
-      );
-    }
-    return _svg.SvgPicture(
-      loader,
+    return SvgPicture(
+      _isVecFormat
+          ? AssetBytesLoader(_assetName,
+              assetBundle: bundle, packageName: package)
+          : SvgAssetLoader(_assetName,
+              assetBundle: bundle, packageName: package),
       key: key,
       matchTextDirection: matchTextDirection,
       width: width,
@@ -444,6 +426,7 @@ class SvgGenImage {
       placeholderBuilder: placeholderBuilder,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
+      theme: theme,
       colorFilter: colorFilter ??
           (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
       clipBehavior: clipBehavior,

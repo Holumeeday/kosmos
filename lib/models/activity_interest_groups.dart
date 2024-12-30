@@ -4,6 +4,46 @@ This class defines activity interest
 */
 import 'package:equatable/equatable.dart';
 
+class ActivityInterestGroupsList extends Equatable {
+  /// List of activity interest groups
+  final List<ActivityInterestGroups> groups;
+
+  const ActivityInterestGroupsList({required this.groups});
+
+  /// Creates an empty list of activity interest groups
+  factory ActivityInterestGroupsList.empty() {
+    return const ActivityInterestGroupsList(groups: []);
+  }
+
+  /// Serializes the list of activity interest groups to JSON
+  Map<String, dynamic> toJson() {
+    return {
+      for (final item in groups)
+        if (item.interests.isNotEmpty) item.categoryName: item.interests,
+    };
+  }
+
+  /// Deserializes JSON to a list of activity interest groups
+  factory ActivityInterestGroupsList.fromJson(Map<String, dynamic> json) {
+    return ActivityInterestGroupsList(groups: [
+      for (final item in json.entries)
+        ActivityInterestGroups(
+            categoryName: item.key, interests: List<String>.from(item.value))
+    ]);
+  }
+
+  @override
+  List<Object?> get props => [groups];
+
+  ActivityInterestGroupsList copyWith({
+    List<ActivityInterestGroups>? groups,
+  }) {
+    return ActivityInterestGroupsList(
+      groups: groups ?? this.groups,
+    );
+  }
+}
+
 class ActivityInterestGroups extends Equatable {
   ///The name of the category
   final String categoryName;

@@ -1,14 +1,9 @@
 import 'dart:io';
 
 import 'package:equatable/equatable.dart';
-import 'package:playkosmos_v3/data_transfer_objects/activity_interest_groups.dart';
-
-/// Gender types
-enum GenderEnum {
-  male,
-  female,
-  preferNotToSay,
-}
+import 'package:playkosmos_v3/enums/enums.dart';
+import 'package:playkosmos_v3/models/activity_interest_groups.dart';
+import 'package:playkosmos_v3/models/location_model.dart';
 
 class ProfileCreationFlowModel extends Equatable {
   /// Image upload list
@@ -23,11 +18,8 @@ class ProfileCreationFlowModel extends Equatable {
   /// The interests of the user
   final List<ActivityInterestGroups>? interests;
 
-  /// The latitude
-  final double? latitude;
-
-  /// User's location longitude
-  final double? longitude;
+  /// The user location
+  final Locations? location;
 
   /// The radius of coverage in meters
   final double? radius;
@@ -35,19 +27,14 @@ class ProfileCreationFlowModel extends Equatable {
   /// The unit of radius: miles or kilometers
   final String? radiusUnits;
 
-  /// The location of the user
-  final String? location;
-
   const ProfileCreationFlowModel({
     this.dateOfBirth,
     this.gender,
     this.profilePicsList,
     this.interests,
-    this.latitude,
-    this.longitude,
+    this.location,
     this.radius,
     this.radiusUnits,
-    this.location,
   });
 
   /// To update the info
@@ -55,23 +42,19 @@ class ProfileCreationFlowModel extends Equatable {
     GenderEnum? gender,
     List<File?>? profilePicsList,
     List<ActivityInterestGroups>? interests,
-    double? latitude,
-    double? longitude,
+    Locations? location,
     double? radius,
     String? radiusUnits,
-    String? location,
     DateTime? dateOfBirth,
   }) {
     return ProfileCreationFlowModel(
       gender: gender ?? this.gender,
       profilePicsList: profilePicsList ?? this.profilePicsList,
       interests: interests ?? this.interests,
-      latitude: latitude ?? this.latitude,
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
-      longitude: longitude ?? this.longitude,
+      location: location ?? this.location,
       radius: radius ?? this.radius,
       radiusUnits: radiusUnits ?? this.radiusUnits,
-      location: location ?? this.location,
     );
   }
 
@@ -80,12 +63,10 @@ class ProfileCreationFlowModel extends Equatable {
     return 'ProfileCreationFlowModel: {\n'
         '   profilePicsList: ${profilePicsList?.map((e) => e?.path)}, \n'
         '   interests: $interests, \n'
-        '   latitude: $latitude, \n'
+        '   location: $location, \n'
         '   gender: $gender, \n'
-        '   longitude: $longitude, \n'
         '   radius: $radius, \n'
         '   radiusUnits: $radiusUnits, \n'
-        '   location: $location\n'
         '}';
   }
 
@@ -94,11 +75,9 @@ class ProfileCreationFlowModel extends Equatable {
       'profile_pictures': profilePicsList,
       'gender': gender,
       'interests': interests,
-      'latitude': latitude,
-      'longitude': longitude,
+      'location': location?.toMap(),
       'radius': radius,
       'radius_units': radiusUnits,
-      'location': location,
     };
   }
 
@@ -108,10 +87,8 @@ class ProfileCreationFlowModel extends Equatable {
         dateOfBirth,
         gender,
         interests,
-        latitude,
-        longitude,
+        location,
         radius,
         radiusUnits,
-        location,
       ];
 }

@@ -1,27 +1,61 @@
 part of 'forgot_password_otp_cubit.dart';
 
-class ForgotPasswordOtpVerificationState extends Equatable {
-  /// if user can resend otp
-  final bool dCanResendOtp;
+enum ForgotPasswordOtpVerificationStatus {
+  initial,
+  loading,
+  failure,
+  success,
+}
 
-  /// Show success dialog
-  final bool dShowSuccessDialog;
+enum ForgotPasswordResendOtpVerificationStatus {
+  initial,
+  loading,
+  failure,
+  success,
+}
+
+class ForgotPasswordOtpVerificationState extends Equatable {
+  final String? errorMessage;
+  final ForgotPasswordOtpVerificationStatus status;
+  final ForgotPasswordResendOtpVerificationStatus resendOtpStatus;
+  final GenericResponse? data;
+  final String? otp;
+  final bool canResendOtp;
 
   const ForgotPasswordOtpVerificationState({
-    required this.dCanResendOtp,
-    required this.dShowSuccessDialog,
+    this.otp,
+    this.resendOtpStatus = ForgotPasswordResendOtpVerificationStatus.initial,
+    this.errorMessage,
+    this.status = ForgotPasswordOtpVerificationStatus.initial,
+    this.data,
+    this.canResendOtp = false,
   });
 
   @override
-  List<Object> get props => [dCanResendOtp, dShowSuccessDialog];
+  List<Object?> get props => [
+        errorMessage,
+        status,
+        canResendOtp,
+        data,
+        otp,
+        resendOtpStatus,
+      ];
 
   ForgotPasswordOtpVerificationState copyWith({
-    bool? dCanResendOtp,
-    bool? dShowSuccessDialog,
+    String? errorMessage,
+    ForgotPasswordOtpVerificationStatus? status,
+    GenericResponse? data,
+    String? otp,
+bool?    canResendOtp ,
+    ForgotPasswordResendOtpVerificationStatus? resendOtpStatus,
   }) {
     return ForgotPasswordOtpVerificationState(
-      dCanResendOtp: dCanResendOtp ?? this.dCanResendOtp,
-      dShowSuccessDialog: dShowSuccessDialog ?? this.dShowSuccessDialog,
+      resendOtpStatus: resendOtpStatus ?? this.resendOtpStatus,
+      errorMessage: errorMessage ?? this.errorMessage,
+      status: status ?? this.status,
+      canResendOtp: canResendOtp ?? this.canResendOtp,
+      data: data ?? this.data,
+      otp: otp ?? this.otp,
     );
   }
 }

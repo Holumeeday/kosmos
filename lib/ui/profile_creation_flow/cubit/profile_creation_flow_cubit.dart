@@ -2,10 +2,17 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:intl/intl.dart';
 import 'package:playkosmos_v3/constants/interests_constants.dart';
-import 'package:playkosmos_v3/data_transfer_objects/activity_interest_groups.dart';
+import 'package:playkosmos_v3/data/data.dart';
+import 'package:playkosmos_v3/data_transfer_objects/playkosmos_exception.dart';
 import 'package:playkosmos_v3/enums/enums.dart';
+import 'package:playkosmos_v3/models/activity_interest_groups.dart';
+import 'package:playkosmos_v3/models/file_upload_url_path_model.dart';
+import 'package:playkosmos_v3/models/generic_respose_model.dart';
+import 'package:playkosmos_v3/models/location_model.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/models/profile_creation_flow_model.dart';
+import 'package:playkosmos_v3/utils/utils.dart';
 
 part 'profile_creation_flow_state.dart';
 
@@ -14,16 +21,24 @@ part 'profile_creation_flow_state.dart';
 ///
 /// @author: Godwin Mathias
 class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
+  ///  Authentication repository
+  final AuthRemoteApiRepository fAuthRepository;
+
+  /// The user storage repository
+  final UserProfileStorage fUserRepository;
+
   /// Initializes the cubit with the default profile creation state.
-  ProfileCreationFlowCubit()
-      : super(
+  ProfileCreationFlowCubit({
+    required this.fAuthRepository,
+    required this.fUserRepository,
+  }) : super(
           ProfileCreationFlowState(
             fProfileCreationStage: ProfileCreationFlowEnum.uploadName,
             fSelectedInterestMap: const {},
             fFlowModel: ProfileCreationFlowModel(
-                interests: const [...kActivityInterestGroup],
-                profilePicsList: List.filled(5, null),
-                radiusUnits: UnitOfLocationMeasurementEnum.miles.name),
+                interests: const [...kActivityInterestGroups],
+                profilePicsList: List.filled(9, null),
+                radiusUnits: UnitOfLocationMeasurementEnum.kilometres.name),
           ),
         );
 
@@ -149,6 +164,16 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
     );
   }
 
+  /// Sets the user current location data
+  Future<void> setLocation() async {
+    final position = await LocationUtil.getLocation();
+    if (position == null) return;
+    // The getting of location property takes time sometimes
+    uploadOtherDetails(false,
+        location: Locations(
+            latitude: position.latitude, longitude: position.longitude));
+  }
+
   /// Sets the user's gender.
   ///
   /// [fGender] - The selected gender.
@@ -174,7 +199,6 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
 
   /// Updates the selected location measure option.
   void setLocationMeasure(String option) {
-
 // Debugging print
     emit(state.copyWith(
       fFlowModel: state.fFlowModel.copyWith(radiusUnits: option),
@@ -188,5 +212,216 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
         fFlowModel: state.fFlowModel.copyWith(radius: searchRadius),
       ),
     );
+  }
+
+  /// --------------- API upload section ----------------  ///
+
+  /// Upload name and Bio
+  void uploadNameBio({
+    required String name,
+    String? bio,
+  }) async {
+    emit(state.copyWith(
+        uploadNameStatus: ProfileCreationUploadNameStatus.loading));
+    try {
+      final fResponse = await fAuthRepository.setUsernameBio(
+        fullName: name,
+        bio: bio,
+      );
+
+      // Emit the state if response status is failed or success with the error message
+      // if available
+      if (fResponse.status == true) {
+        _updateUserRepository(name: name);
+        emit(
+          state.copyWith(
+            uploadNameStatus: ProfileCreationUploadNameStatus.success,
+            data: fResponse,
+          ),
+        );
+      } else {
+        addError(fResponse.status);
+        emit(
+          state.copyWith(
+            uploadNameStatus: ProfileCreationUploadNameStatus.failure,
+            data: fResponse,
+            errorMessage: fResponse.message,
+          ),
+        );
+      }
+    } on PlaykosmosException catch (e) {
+      addError(e);
+      emit(
+        state.copyWith(
+          errorMessage: e.message,
+          uploadNameStatus: ProfileCreationUploadNameStatus.failure,
+        ),
+      );
+    }
+  }
+
+  /// Upload name and bio details
+  Future<void> uploadOtherDetails(
+    bool shouldLoad, {
+    String? name,
+    int? searchRadius,
+    String? birthday,
+    GenderEnum? gender,
+    ActivityInterestGroupsList? interests,
+    Locations? location,
+  }) async {
+    if (!isClosed && shouldLoad) {
+      emit(state.copyWith(
+          uploadOthersStatus: ProfileCreationUploadOthersStatus.loading));
+    }
+
+    try {
+      final formattedBirthday = state.fFlowModel.dateOfBirth != null
+          ? DateFormat('yyyy-MM-dd').format(state.fFlowModel.dateOfBirth!)
+          : null;
+
+      final selectedInterests =
+          _mapSelectedInterests(state.fSelectedInterestMap);
+
+      final fResponse = await fAuthRepository.setOnboarding(
+        fullName: name,
+        searchRadius: state.fFlowModel.radius,
+        birthday: formattedBirthday,
+        gender: state.fFlowModel.gender,
+        interests: selectedInterests,
+        location: state.fFlowModel.location,
+      );
+
+      if (fResponse.status) {
+        _updateUserRepository(
+          name: name,
+          searchRadius: state.fFlowModel.radius?.round(),
+          birthday: state.fFlowModel.dateOfBirth,
+          gender: state.fFlowModel.gender,
+          interests: selectedInterests,
+          location: state.fFlowModel.location,
+        );
+      }
+
+      if (!shouldLoad || isClosed) return;
+
+      emit(
+        state.copyWith(
+          uploadOthersStatus: fResponse.status
+              ? ProfileCreationUploadOthersStatus.success
+              : ProfileCreationUploadOthersStatus.failure,
+          data: fResponse,
+          errorMessage: fResponse.status ? null : fResponse.message,
+        ),
+      );
+    } catch (e) {
+      _handleError(e);
+    }
+  }
+
+  /// Upload images to AWS bucket
+  Future<void> uploadImages({required List<File?> images}) async {
+    final newImages = images.whereType<File>().toList();
+
+    try {
+      final fResponse = await fAuthRepository.getOnboardingImageUrls(
+        totalImages: newImages.length,
+      );
+
+      if (!fResponse.status) return;
+
+      final fileUploadUrls = FileUploadPartModel.fromMap(fResponse.data);
+      final uploadedImageUrls =
+          await _uploadFilesToAWS(newImages, fileUploadUrls);
+
+      if (uploadedImageUrls.isNotEmpty) {
+        await fAuthRepository.setOnboarding(pictures: uploadedImageUrls);
+        fUserRepository.setUser(
+          fUserRepository.fUserModel.copyWith(
+            pictures: uploadedImageUrls,
+          ),
+        );
+      }
+    } catch (_) {
+      // Handle or log exceptions as needed
+    }
+  }
+
+  /// Map selected interests to ActivityInterestGroupsList
+  ActivityInterestGroupsList? _mapSelectedInterests(
+      Map<String, List<String>> selectedInterestMap) {
+    if (selectedInterestMap.isEmpty) return null;
+
+    return ActivityInterestGroupsList(
+      groups: selectedInterestMap.entries
+          .map((entry) => ActivityInterestGroups(
+                categoryName: entry.key,
+                interests: entry.value,
+              ))
+          .toList(),
+    );
+  }
+
+  /// Update user repository with new details
+  void _updateUserRepository({
+    String? name,
+    int? searchRadius,
+    DateTime? birthday,
+    GenderEnum? gender,
+    ActivityInterestGroupsList? interests,
+    Locations? location,
+  }) {
+    fUserRepository.setUser(fUserRepository.fUserModel.copyWith(
+      fullName: name,
+      searchRadius: searchRadius,
+      birthday: birthday,
+      gender: gender,
+      interests: interests,
+      locations: location,
+    ));
+  }
+
+  /// Upload files to AWS and return their URLs
+  Future<List<String>> _uploadFilesToAWS(
+      List<File> files, FileUploadPartModel fileUploadUrls) async {
+    final uploadTasks = <Future<String?>>[];
+
+    // Iterate over the upload URLs and initiate upload tasks
+    for (final (index, imageUrl) in (fileUploadUrls.url ?? []).indexed) {
+      final uploadTask = Future<String?>(() async {
+        try {
+          await fAuthRepository.uploadImagesWithFile(
+            image: files[index],
+            uploadPath: imageUrl.uploadUrl!,
+          );
+          return imageUrl.fileUrl!;
+        } catch (e) {
+          return null;
+        }
+      });
+
+      uploadTasks.add(uploadTask);
+    }
+
+    // Wait for all uploads to complete
+    final results = await Future.wait(uploadTasks);
+
+    // Filter out any failed uploads (null values) and return successful URLs
+    return results.whereType<String>().toList();
+  }
+
+  /// Handle errors and update state
+  void _handleError(Object e) {
+    if (e is PlaykosmosException) {
+      addError(e);
+      emit(
+        state.copyWith(
+          errorMessage: e.message,
+          uploadOthersStatus: ProfileCreationUploadOthersStatus.failure,
+        ),
+      );
+    } else {
+      printE(e);
+    }
   }
 }

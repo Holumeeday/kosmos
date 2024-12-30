@@ -1,27 +1,56 @@
 part of 'email_otp_verification_cubit.dart';
 
-class EmailOtpVerificationState extends Equatable {
-  /// if user can resend otp
-  final bool dCanResendOtp;
+enum EmailOtpVerificationStatus {
+  initial,
+  loading,
+  failure,
+  success,
+}
 
-  /// Show success dialog
-  final bool dShowSuccessDialog;
+enum EmailResendOtpVerificationStatus {
+  initial,
+  loading,
+  failure,
+  success,
+}
+
+class EmailOtpVerificationState extends Equatable {
+  final String? errorMessage;
+  final EmailOtpVerificationStatus status;
+  final EmailResendOtpVerificationStatus resendOtpStatus;
+  final GenericResponse? data;
+  final String? otp;
 
   const EmailOtpVerificationState({
-    required this.dCanResendOtp,
-    required this.dShowSuccessDialog,
+    this.otp,
+    this.resendOtpStatus = EmailResendOtpVerificationStatus.initial,
+    this.errorMessage,
+    this.status = EmailOtpVerificationStatus.initial,
+    this.data,
   });
 
   @override
-  List<Object> get props => [dCanResendOtp, dShowSuccessDialog];
+  List<Object?> get props => [
+        errorMessage,
+        status,
+        data,
+        otp,
+        resendOtpStatus,
+      ];
 
   EmailOtpVerificationState copyWith({
-    bool? dCanResendOtp,
-    bool? dShowSuccessDialog,
+    String? errorMessage,
+    EmailOtpVerificationStatus? status,
+    GenericResponse? data,
+    String? otp,
+    EmailResendOtpVerificationStatus? resendOtpStatus,
   }) {
     return EmailOtpVerificationState(
-      dCanResendOtp: dCanResendOtp ?? this.dCanResendOtp,
-      dShowSuccessDialog: dShowSuccessDialog ?? this.dShowSuccessDialog,
+      resendOtpStatus: resendOtpStatus ?? this.resendOtpStatus,
+      errorMessage: errorMessage ?? this.errorMessage,
+      status: status ?? this.status,
+      data: data ?? this.data,
+      otp: otp ?? this.otp,
     );
   }
 }
