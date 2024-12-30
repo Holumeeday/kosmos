@@ -100,7 +100,7 @@ class UserStatsSection extends StatelessWidget {
                     ),
                     BuildStatItem(
                         fOntap: () {
-                          context.push(const ReviewsPage());
+                          context.push(AppRoute.reviewsScreenPath);
                         },
                         fRating: true,
                         fValue: state.fBuddiesModel.reviews.totalRating.toString(),
