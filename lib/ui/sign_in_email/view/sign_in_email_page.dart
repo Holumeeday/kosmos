@@ -91,7 +91,12 @@ class __SignInEmailPageForm extends State<_SignInEmailForm> {
                       fOnLetGo: () {
                         // Set login status to true which will re-direct the user
                         // to home page
-                        context.read<AuthFlowStorage>().setLogIn().then((_) {
+                        context
+                            .read<AuthFlowStorage>()
+                            .setLogIn(
+                              hasCompletedStep2: true,
+                            )
+                            .then((_) {
                           if (context.mounted) {
                             context.go(AppRoute.homeScreenPath);
                           }
@@ -102,7 +107,12 @@ class __SignInEmailPageForm extends State<_SignInEmailForm> {
                 },
               );
             } else {
-              context.read<AuthFlowStorage>().setLogIn().then((_) {
+              context
+                  .read<AuthFlowStorage>()
+                  .setLogIn(
+                    hasCompletedStep2: false,
+                  )
+                  .then((_) {
                 if (context.mounted) {
                   context.go(AppRoute.profileCreationFlowScreenPath);
                 }

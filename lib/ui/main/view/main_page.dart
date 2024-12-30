@@ -52,6 +52,7 @@ class _MainPageState extends State<MainPage> {
         if (state.status == LogoutStatus.success) {
           if (state.data?.status == true) {
             await context.read<AuthFlowStorage>().logOut();
+            await context.read<UserProfileStorage>().removeUser();
             if (mounted) {
               context.go(AppRoute.authProviderScreenPath);
             }

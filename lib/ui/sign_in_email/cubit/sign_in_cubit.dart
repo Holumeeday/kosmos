@@ -38,6 +38,7 @@ class SignInWithEmailCubit extends Cubit<SignInWithEmailState> {
 
         emit(
           state.copyWith(
+            user: user,
             status: SignInWithEmailStatus.success,
             data: fResponse,
           ),
