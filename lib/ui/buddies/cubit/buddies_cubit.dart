@@ -13,41 +13,7 @@ part 'buddies_state.dart';
  */
 class BuddiesCubit extends Cubit<BuddiesState> {
   BuddiesCubit()
-      : super(const BuddiesState(
-          fBuddiesModel: BuddiesModel(
-          
-          ),
+      : super(BuddiesState(
+          fBuddiesModel: BuddiesModel(),
         ));
-
-  /// get the user's name
-  void getUserName(String userName) {
-    emit(state.copyWith(
-        fBuddiesModel: state.fBuddiesModel.copyWith(userName: userName)));
-  }
-
-  /// get the distance text
-  void getDistance(int distance) {
-    emit(state.copyWith(
-        fBuddiesModel: state.fBuddiesModel.copyWith(distance: distance)));
-  }
-
-  /// get the number of mutual buddies
-  void getMutualBuddyCount(int count) {
-    emit(state.copyWith(
-        fBuddiesModel:
-            state.fBuddiesModel.copyWith(mutualBuddiesCount: count)));
-  }
-
-  /// get the number of similar interests
-  void getSimilarInterestCount(int count) {
-    emit(state.copyWith(
-        fBuddiesModel:
-            state.fBuddiesModel.copyWith(similarInterestsCount: count)));
-  }
-
-  /// get the interest list
-  void getInterestList(List<String> interests) {
-    emit(state.copyWith(
-        fBuddiesModel: state.fBuddiesModel.copyWith(interests: interests)));
-  }
 }

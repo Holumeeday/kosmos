@@ -8,21 +8,22 @@ import 'package:playkosmos_v3/extensions/extensions.dart';
 class InterestChips extends StatelessWidget {
   const InterestChips({
     super.key,
-    required this.kInterests,
+    required this.fInterests,
   });
 
-  final List<String> kInterests;
+  final List<String> fInterests;
 
   @override
   Widget build(BuildContext context) {
     return Wrap(
       spacing: 7,
       runSpacing: 0,
-      children: kInterests.map((interest) {
+      children: fInterests.map((interest) {
         return Chip(
-          labelPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          labelPadding: EdgeInsets.zero,
           backgroundColor: Colors.black,
-          label: Text(interest,
+          label: Text(context.loc.setInterests(interest),
               style:
                   context.textTheme.bodyMedium!.copyWith(color: Colors.white)),
           shape: RoundedRectangleBorder(
