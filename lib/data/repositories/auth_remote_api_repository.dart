@@ -563,4 +563,16 @@ class AuthRemoteApiRepository {
       rethrow;
     }
   }
+
+  /// Logout of the app
+  Future<GenericResponse> logout() async {
+    try {
+      final res = await _remoteApi.post(
+        'auth/logout',
+      );
+      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
+    } catch (_) {
+      rethrow;
+    }
+  }
 }

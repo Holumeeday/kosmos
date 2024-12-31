@@ -238,8 +238,6 @@ class _BackButtonAndSkip extends StatelessWidget {
         (ProfileCreationFlowCubit cubit) => cubit.state.fSelectedInterestMap);
     final fCanShowSkip =
         canShowSkip(context, dSelectedPage, fSelectedInterests);
-    print(dSelectedPage);
-    print(fCanShowSkip);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
@@ -293,7 +291,6 @@ class _BackButtonAndSkip extends StatelessWidget {
     ProfileCreationFlowEnum currentPage,
     Map<String, List<String>> selectedInterests,
   ) {
-    printI(selectedInterests['education']?.isEmpty);
     return switch (currentPage) {
       ProfileCreationFlowEnum.uploadName => false,
       ProfileCreationFlowEnum.uploadSportInterest =>

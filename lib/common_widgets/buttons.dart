@@ -516,6 +516,9 @@ class PrimaryGradientButton extends StatelessWidget {
   /// Indicate if button is disabled
   final bool fDisabled;
 
+  /// The [fChild] padding
+  final EdgeInsets fPadding;
+
   /// Creates a `PrimaryGradientButton`.
   ///
   /// Requires:
@@ -532,6 +535,7 @@ class PrimaryGradientButton extends StatelessWidget {
     this.fShape,
     this.fHeight = 56,
     this.fWidth = double.infinity,
+    this.fPadding = const EdgeInsets.symmetric(horizontal: 8),
   });
 
   @override
@@ -542,7 +546,6 @@ class PrimaryGradientButton extends StatelessWidget {
         padding: EdgeInsets.zero,
         shadowColor: context.colors.primary,
       ).copyWith(
-          backgroundColor: const WidgetStatePropertyAll(Colors.transparent),
 
           /// Override button's elevation to remove default shadow.
           elevation: WidgetStateProperty.all(0),
@@ -594,7 +597,8 @@ class PrimaryGradientButton extends StatelessWidget {
                 : null,
           ),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
+            padding: fPadding,
+
             /// Center-align the content inside the button.
             alignment: Alignment.center,
 

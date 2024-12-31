@@ -3,43 +3,28 @@ import 'package:equatable/equatable.dart';
 import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/data_transfer_objects/playkosmos_exception.dart';
 import 'package:playkosmos_v3/models/generic_respose_model.dart';
-import 'package:playkosmos_v3/models/user_model.dart';
 
-part 'sign_in_state.dart';
+part 'logout_state.dart';
 
-class SignInWithEmailCubit extends Cubit<SignInWithEmailState> {
+class LogoutCubit extends Cubit<LogoutState> {
   /// The authentication api repository
   final AuthRemoteApiRepository fAuthRepository;
 
-  /// The user profile storage
-  final UserProfileStorage fUserStorage;
-  SignInWithEmailCubit({
+  LogoutCubit({
     required this.fAuthRepository,
-    required this.fUserStorage,
-  }) : super(const SignInWithEmailState());
+  }) : super(const LogoutState());
 
-  /// Sign in with email
-  void signInEmail({
-    required String email,
-    required String password,
-  }) async {
-    emit(state.copyWith(status: SignInWithEmailStatus.loading));
+  /// Logout
+  void logout() async {
+    emit(state.copyWith(status: LogoutStatus.loading));
     try {
-      final fResponse = await fAuthRepository.loginWithEmail(
-        email: email,
-        password: password,
-      );
+      final fResponse = await fAuthRepository.logout();
       // Emit the state if response status is failed or success with the error message
       // if available
       if (fResponse.status == true) {
-        final user = UserModel.fromMapRemote(fResponse.data);
-        // Save the user data
-        fUserStorage.setUser(user);
-
         emit(
           state.copyWith(
-            user: user,
-            status: SignInWithEmailStatus.success,
+            status: LogoutStatus.success,
             data: fResponse,
           ),
         );
@@ -47,7 +32,7 @@ class SignInWithEmailCubit extends Cubit<SignInWithEmailState> {
         addError(fResponse.status);
         emit(
           state.copyWith(
-            status: SignInWithEmailStatus.failure,
+            status: LogoutStatus.failure,
             data: fResponse,
             errorMessage: fResponse.message,
           ),
@@ -58,7 +43,7 @@ class SignInWithEmailCubit extends Cubit<SignInWithEmailState> {
       emit(
         state.copyWith(
           errorMessage: e.message,
-          status: SignInWithEmailStatus.failure,
+          status: LogoutStatus.failure,
         ),
       );
     }

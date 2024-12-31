@@ -77,12 +77,15 @@ class AuthFlowStorage {
   /// - `isLoggedIn` to `true`
   /// - `hasCompletedStep2` to `true`
   /// - `isVerified` to `true`
-  Future<void> setLogIn() async {
+  Future<void> setLogIn({
+    required bool hasCompletedStep2,
+  }) async {
     if (!(await _fCookiesStorage.isUserLoggedIn())) return;
     final jsonModel = fAuthModel
         .copyWith(
           isLoggedIn: true,
           isVerified: true,
+          hasCompletedStep2: hasCompletedStep2,
         )
         .toJson();
     await _updateAuthStorage(jsonModel);
@@ -110,7 +113,7 @@ class AuthFlowStorage {
   /// - `isLoggedIn` to `false`
   /// - `isVerified` to `false`
   /// - `hasCompletedStep2` to `false`
-  void logOut() {
+  Future<void> logOut() async {
     final jsonModel = fAuthModel
         .copyWith(
           isLoggedIn: false,
@@ -118,6 +121,6 @@ class AuthFlowStorage {
           hasCompletedStep2: false,
         )
         .toJson();
-    _updateAuthStorage(jsonModel);
+    return _updateAuthStorage(jsonModel);
   }
 }
