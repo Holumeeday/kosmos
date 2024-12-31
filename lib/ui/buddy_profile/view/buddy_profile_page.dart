@@ -5,6 +5,7 @@ import 'package:playkosmos_v3/assets_gen/assets.gen.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/connection_type_enum.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
+import 'package:playkosmos_v3/models/buddy_model.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/cubit/buddy_profile_cubit.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/view/widgets/build_image_grid.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/view/widgets/stats_section.dart';
@@ -12,7 +13,10 @@ import 'package:playkosmos_v3/ui/buddy_profile/view/widgets/stats_section.dart';
 /// A profile page that displays buddy information
 /// @author: Chidera
 class BuddyProfilePage extends StatelessWidget {
-  const BuddyProfilePage({super.key});
+  const BuddyProfilePage({super.key,
+  //  required this.buddy
+  });
+  // final BuddyModel buddy;
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +75,6 @@ class BuddyProfilePage extends StatelessWidget {
                             images: state.fBuddyModel.profileImages,
                           ),
                         ),
-
-                        // User Content Section
-                        // _buildUserContent(),
 
                         // Stats Section
                         const VSpace(8),

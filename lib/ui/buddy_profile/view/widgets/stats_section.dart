@@ -62,7 +62,7 @@ class UserStatsSection extends StatelessWidget {
                     VerticalDivider(
                       color: context.appColors.fDividerColor,
                     ),
-                     ProfileImageWithStoryIndicator(
+                    ProfileImageWithStoryIndicator(
                       fImage: state.fBuddyModel.profileImages[0],
                     )
                   ],
@@ -103,9 +103,10 @@ class UserStatsSection extends StatelessWidget {
                           context.push(AppRoute.reviewsScreenPath);
                         },
                         fRating: true,
-                        fValue: state.fBuddyModel.reviews.totalRating. toString(),
+                        fValue:
+                            state.fBuddyModel.reviews.averageRating.toString(),
                         fLabel:
-                            "${state.fBuddyModel.reviews.count .formatNumToCompact()} ${context.loc.setReviews(state.fBuddyModel.reviews.count)}"),
+                            "${state.fBuddyModel.reviews.count.formatNumToCompact()} ${context.loc.setReviews(state.fBuddyModel.reviews.count)}"),
                   ],
                 ),
               ),
