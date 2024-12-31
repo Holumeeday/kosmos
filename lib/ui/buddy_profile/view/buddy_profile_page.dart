@@ -25,10 +25,8 @@ class BuddyProfilePage extends StatelessWidget {
               fElevation: 0,
               fShowBackButton: true,
               // fLeadingWidth: 220,
-              fTitle: Text(context.loc.profile,
-                  overflow: TextOverflow.ellipsis,
-                  style: context.textTheme.displayLarge!
-                      .copyWith(color: context.colors.onSurface, fontSize: 28)),
+fTitleText: context.loc.profile,
+fIsLargeDisplayTitle: true,
               fActions: [
                 // follow, following, unfollow button
                 state.fBuddiesModel.connectionType.toConnectionButton(context),
