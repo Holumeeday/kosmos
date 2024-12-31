@@ -35,7 +35,7 @@ extension NumExtension on num {
   }
 
   ///To format an int to compact form i.e from 200000 to 200k
-  String formatNumToCompact() => _removeTrailingZeros(NumberFormat.compact(
+  String formatNumToCompact() => removeTrailingZeros(NumberFormat.compact(
         locale: _loc.localeName,
       ).format(this));
 
@@ -43,7 +43,7 @@ extension NumExtension on num {
   /// Examples:
   /// - "12.0" -> "12"
   /// - "4.2" -> "4.2"
-  String _removeTrailingZeros(String value) {
+  String removeTrailingZeros(String value) {
     if (value.endsWith(".0")) {
       return value.substring(0, value.length - 2);
     }

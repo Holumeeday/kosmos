@@ -185,7 +185,7 @@ class ImageSlot extends StatelessWidget {
                 ),
               ),
             ))
-          : Container(
+          : SizedBox(
               height: 122,
               width: 122,
               child: Stack(

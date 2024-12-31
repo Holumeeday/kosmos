@@ -8,7 +8,7 @@ import 'package:playkosmos_v3/utils/theme/app_colors.dart';
 /// This widget wraps the profile image inside a gradient circle to signify 
 /// the presence of a story, commonly used in social media applications.
 ///
-/// @author: [Your Name]
+/// @author: Chidera Chijama
 class ProfileImageWithStoryIndicator extends StatelessWidget {
   /// The URL of the profile image to display.
   ///

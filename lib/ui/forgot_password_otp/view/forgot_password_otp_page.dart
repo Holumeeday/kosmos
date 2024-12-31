@@ -38,7 +38,6 @@ class ForgotPasswordOtpVerificationPage extends StatelessWidget {
 
 class _EmailOtpView extends StatelessWidget {
   const _EmailOtpView({
-    super.key,
     this.fEmail,
     this.fPhone,
     required this.fIsEmail,

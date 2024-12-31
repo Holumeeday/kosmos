@@ -1,8 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:playkosmos_v3/constants/buddies_list.dart';
 // ignore: unused_import
 import 'package:playkosmos_v3/enums/connection_type.dart';
-import 'package:playkosmos_v3/models/buddies_model.dart';
+import 'package:playkosmos_v3/models/buddy_model.dart';
 
 part 'buddies_state.dart';
 
@@ -13,7 +14,7 @@ part 'buddies_state.dart';
  */
 class BuddiesCubit extends Cubit<BuddiesState> {
   BuddiesCubit()
-      : super(BuddiesState(
-          fBuddiesModel: BuddiesModel(),
+      : super( BuddiesState(
+          fBuddiesModel: fullBuddiesList,
         ));
 }

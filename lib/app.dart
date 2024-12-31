@@ -9,6 +9,7 @@ import 'package:playkosmos_v3/ui/buddy_connections/cubit/buddy_connections_cubit
 import 'package:playkosmos_v3/ui/buddy_profile/cubit/buddy_profile_cubit.dart';
 import 'package:playkosmos_v3/ui/logout/cubit/logout_cubit.dart';
 import 'package:playkosmos_v3/ui/main/cubit/main_page_cubit.dart';
+import 'package:playkosmos_v3/ui/reviews/cubit/reviews_cubit.dart';
 import 'package:playkosmos_v3/ui/select_language/cubit/select_language_cubit.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
@@ -96,6 +97,9 @@ class _AppBloc extends StatelessWidget {
           create: (_) => BuddyConnectionsCubit(),
         ),
         BlocProvider(
+          create: (_) => ReviewsCubit(),
+        ),
+         BlocProvider(
           create: (context) => LogoutCubit(
             fAuthRepository: context.read<AuthRemoteApiRepository>(),
           ),

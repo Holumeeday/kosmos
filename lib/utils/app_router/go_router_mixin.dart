@@ -33,6 +33,8 @@ import 'package:playkosmos_v3/ui/profile_creation_flow/cubit/profile_creation_fl
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/profile_creation_flow_page.dart';
 import 'package:playkosmos_v3/ui/reset_password_page/cubit/reset_password_cubit.dart';
 import 'package:playkosmos_v3/ui/reset_password_page/view/reset_password_page.dart';
+import 'package:playkosmos_v3/ui/reviews/cubit/reviews_cubit.dart';
+import 'package:playkosmos_v3/ui/reviews/view/reviews.dart';
 import 'package:playkosmos_v3/ui/select_language/cubit/select_language_cubit.dart';
 import 'package:playkosmos_v3/ui/select_language/view/select_language_page.dart';
 import 'package:playkosmos_v3/ui/sign_in_email/cubit/sign_in_cubit.dart';
@@ -272,6 +274,13 @@ mixin GoRouterMixin {
           routeScreen: BlocProvider(
             child: const BuddyProfilePage(),
             create: (context) => BuddyProfileCubit(),
+          ),
+        );
+              case AppRoute.reviewsScreenPath:
+        return _createRoute(
+          routeScreen: BlocProvider(
+            child: const ReviewsPage(),
+            create: (context) => ReviewsCubit(),
           ),
         );
       default:

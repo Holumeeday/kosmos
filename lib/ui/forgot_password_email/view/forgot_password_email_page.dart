@@ -19,7 +19,7 @@ class ForgotPasswordEmailPage extends StatelessWidget {
 }
 
 class _ForgotPasswordEmailForm extends StatefulWidget {
-  const _ForgotPasswordEmailForm({super.key});
+  const _ForgotPasswordEmailForm();
 
   @override
   State<_ForgotPasswordEmailForm> createState() =>

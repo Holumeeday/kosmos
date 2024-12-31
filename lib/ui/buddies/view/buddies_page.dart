@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/connection_type_enum.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/models/buddies_model.dart';
+import 'package:playkosmos_v3/models/buddy_model.dart';
 import 'package:playkosmos_v3/ui/buddies/cubit/buddies_cubit.dart';
 import 'package:playkosmos_v3/ui/buddies/view/widgets/interest_chips.dart';
 import 'package:playkosmos_v3/ui/buddies/view/widgets/next_arrow_button.dart';
@@ -23,10 +23,10 @@ class BuddiesPage extends StatelessWidget {
       builder: (context, state) {
         return PageView.builder(
           scrollDirection: Axis.vertical,
-          itemCount: state.fBuddiesModel.buddies.length,
+          itemCount: state.fBuddiesModel.length,
           itemBuilder: (context, index) {
             return _BuddyProfile(
-              fProfile: state.fBuddiesModel.buddies[index],
+              fProfile: state.fBuddiesModel[index],
             );
           },
         );
