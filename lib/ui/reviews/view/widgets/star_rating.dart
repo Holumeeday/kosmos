@@ -5,6 +5,7 @@ import 'package:playkosmos_v3/extensions/extensions.dart';
 /// 
 /// The number of stars, current rating, and the ability to change the rating 
 /// can be customized through the widget's properties.
+/// @author - Chidera Chijama
 class StarRating extends StatelessWidget {
   /// The total number of stars in the rating system.
   final int starCount;
