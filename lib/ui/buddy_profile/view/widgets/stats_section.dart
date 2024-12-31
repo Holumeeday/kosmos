@@ -5,7 +5,6 @@ import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/common_widgets/profile_image_with_story_indicator.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/cubit/buddy_profile_cubit.dart';
-import 'package:playkosmos_v3/ui/reviews/view/reviews.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 class UserStatsSection extends StatelessWidget {

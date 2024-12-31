@@ -10,6 +10,12 @@ import 'package:playkosmos_v3/ui/reviews/view/widgets/read_more.dart';
 import 'package:playkosmos_v3/ui/reviews/view/widgets/star_rating.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
+/// Displays a detailed review page for a specific buddy.
+///
+/// This page includes an app bar, overall rating section, and two tabs 
+/// (Creator and Participant reviews) with filtered review lists.
+/// Reviews can be filtered by rating using a dropdown.
+/// @author- Chidera Chijama
 class ReviewsPage extends StatelessWidget {
   const ReviewsPage({super.key});
 
@@ -20,6 +26,7 @@ class ReviewsPage extends StatelessWidget {
         final reviews = state.fBuddy.reviews;
 
         return Scaffold(
+          // App bar displaying buddy name and review count
           appBar: CustomAppBar(
             fElevation: 0,
             fShowBackButton: true,
@@ -36,45 +43,51 @@ class ReviewsPage extends StatelessWidget {
             child: DefaultTabController(
               length: 2,
               child: NestedScrollView(
+                // Header containing the overall ratings and tabs
                 headerSliverBuilder: (context, innerBoxIsScrolled) {
                   return [
                     SliverToBoxAdapter(
                       child: Column(
                         children: [
+                          // Divider separating sections
                           Divider(
                             color: context.appColors.fDividerColor,
                             height: 1,
                           ),
+                          // Section displaying overall ratings
                           Padding(
                             padding: const EdgeInsets.all(20),
                             child: Container(
                               padding: const EdgeInsets.symmetric(
                                   vertical: 12, horizontal: 20),
                               decoration: BoxDecoration(
-                                  color: context.appColors.reviewColor,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: context.colors.onSurface
-                                          .withOpacity(0.06), // Shadow color
-                                      offset:
-                                          const Offset(0, 6), // X = 0, Y = 6
-                                      blurRadius: 10, // Blur amount
-                                      spreadRadius: 0, // Spread amount
-                                    ),
-                                  ],
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(
-                                      color: context.appColors.onReviewColor!
-                                          .withOpacity(0.1))),
+                                color: context.appColors.reviewColor,
+                                boxShadow: [
+                                  // Shadow styling for the rating container
+                                  BoxShadow(
+                                    color: context.colors.onSurface
+                                        .withOpacity(0.06),
+                                    offset: const Offset(0, 6),
+                                    blurRadius: 10,
+                                  ),
+                                ],
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: context.appColors.onReviewColor!
+                                      .withOpacity(0.1),
+                                ),
+                              ),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
+                                  // Label for overall ratings
                                   Text(
                                     context.loc.overallRatings,
                                     style: context.appTextTheme.header3!
                                         .copyWith(fontSize: 18),
                                   ),
+                                  // Display of average rating and total reviews
                                   Column(
                                     children: [
                                       Row(
@@ -113,57 +126,58 @@ class ReviewsPage extends StatelessWidget {
                         ],
                       ),
                     ),
+                    // Tab navigation for Creator and Participant reviews
                     SliverAppBar(
-                        pinned: true,
-                        stretch: false,
-                        toolbarHeight: 0,
-                        floating: true,
-                        snap: true,
-                        forceElevated: innerBoxIsScrolled,
-                        automaticallyImplyLeading: false,
-                        bottom: CustomTabbar(
-                          fTabs: [
-                            Tab(
-                                text:
-                                    '${context.loc.creator} (${state.fBuddy.reviews.creatorReviewList.length})'),
-                            Tab(
-                                text:
-                                    '${context.loc.participant}  (${state.fBuddy.reviews.participantReviewList.length})'),
-                          ],
-                        ))
+                      pinned: true,
+                      floating: true,
+                      snap: true,
+                      automaticallyImplyLeading: false,
+                      bottom: CustomTabbar(
+                        fTabs: [
+                          Tab(
+                              text:
+                                  '${context.loc.creator} (${state.fBuddy.reviews.creatorReviewList.length})'),
+                          Tab(
+                              text:
+                                  '${context.loc.participant}  (${state.fBuddy.reviews.participantReviewList.length})'),
+                        ],
+                      ),
+                    ),
                   ];
                 },
-                body: // Tabbar view
-                    TabBarView(
-                        //  key: ValueKey(state.fSelectedRating),
-                        children: [
-                      ReviewTabView(
-                        rating: reviews.creatorOverallRating.toString(),
-                        label: context.loc.creator,
-                        reviews: state.fFilteredCreatorReviews,
-                        onChanged: (value) {
-                          WidgetsBinding.instance.addPostFrameCallback((_) {
-                            if (value != null) {
-                              context
-                                  .read<ReviewsCubit>()
-                                  .filterCreatorReviews(value);
-                            }
-                          });
-                        },
-                      ),
-                      ReviewTabView(
-                        rating: reviews.participantOverallRating.toString(),
-                        label: context.loc.participant,
-                        reviews: state.fFilteredParticipantReviews,
-                        onChanged: (value) {
+                // Tab bar views for Creator and Participant reviews
+                body: TabBarView(
+                  children: [
+                    // Creator reviews tab
+                    ReviewTabView(
+                      rating: reviews.creatorOverallRating.toString(),
+                      label: context.loc.creator,
+                      reviews: state.fFilteredCreatorReviews,
+                      onChanged: (value) {
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
                           if (value != null) {
                             context
                                 .read<ReviewsCubit>()
-                                .filterParticipantReviews(value);
+                                .filterCreatorReviews(value);
                           }
-                        },
-                      )
-                    ]),
+                        });
+                      },
+                    ),
+                    // Participant reviews tab
+                    ReviewTabView(
+                      rating: reviews.participantOverallRating.toString(),
+                      label: context.loc.participant,
+                      reviews: state.fFilteredParticipantReviews,
+                      onChanged: (value) {
+                        if (value != null) {
+                          context
+                              .read<ReviewsCubit>()
+                              .filterParticipantReviews(value);
+                        }
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -173,6 +187,10 @@ class ReviewsPage extends StatelessWidget {
   }
 }
 
+/// Displays a single review tab with filters and a list of reviews.
+///
+/// Provides a dropdown for rating-based filtering, and lists reviews with 
+/// reviewer details, rating, date, and review text.
 class ReviewTabView extends StatelessWidget {
   const ReviewTabView({
     super.key,
@@ -201,11 +219,11 @@ class ReviewTabView extends StatelessWidget {
 
     return reviews.isEmpty
         ? Center(
+            // Display when no reviews are available
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Text(
                 context.loc.noReview,
-                overflow: TextOverflow.clip,
                 textAlign: TextAlign.center,
                 style: context.textTheme.displayLarge!.copyWith(
                   color: context.colors.primary,
@@ -216,7 +234,7 @@ class ReviewTabView extends StatelessWidget {
           )
         : CustomScrollView(
             slivers: [
-              // Dropdown and Filter
+              // Dropdown filter for ratings
               SliverPinnedHeader(
                 child: Container(
                   color: context.appColors.reviewColor,
@@ -252,8 +270,8 @@ class ReviewTabView extends StatelessWidget {
                         onChanged: onChanged,
                         popupProps: PopupProps.menu(
                           fit: FlexFit.tight,
-                          itemBuilder:
-                              (context, item, isDisabled, isSelected) => Column(
+                          itemBuilder: (context, item, isDisabled, isSelected) =>
+                              Column(
                             children: [
                               num.tryParse(item) != null
                                   ? Padding(
@@ -264,7 +282,6 @@ class ReviewTabView extends StatelessWidget {
                                       ),
                                     )
                                   : Container(
-                                      width: double.infinity,
                                       padding: const EdgeInsets.all(20),
                                       color: context.appColors.reviewColor,
                                       child: Text(
@@ -283,14 +300,8 @@ class ReviewTabView extends StatelessWidget {
                         ),
                         decoratorProps: const DropDownDecoratorProps(
                           decoration: InputDecoration(
-                            enabledBorder:
-                                OutlineInputBorder(borderSide: BorderSide.none),
                             border: InputBorder.none,
-                            filled: false,
                           ),
-                        ),
-                        clickProps: const ClickProps(
-                          containedInkWell: true,
                         ),
                         suffixProps: const DropdownSuffixProps(
                           dropdownButtonProps: DropdownButtonProps(
@@ -304,10 +315,6 @@ class ReviewTabView extends StatelessWidget {
                           return Container(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 8, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: Colors.transparent,
-                              borderRadius: BorderRadius.circular(4),
-                            ),
                             child: num.tryParse(s!) != null
                                 ? StarRating(
                                     starCount: 5,
@@ -326,7 +333,7 @@ class ReviewTabView extends StatelessWidget {
                 ),
               ),
 
-              // Reviews List
+              // List of reviews
               SliverList(
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
@@ -337,6 +344,7 @@ class ReviewTabView extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          // Reviewer details
                           ListTile(
                             contentPadding: const EdgeInsets.all(0),
                             leading: ProfileImageWithStoryIndicator(
@@ -347,6 +355,7 @@ class ReviewTabView extends StatelessWidget {
                               style: context.textTheme.titleSmall,
                             ),
                           ),
+                          // Review rating and date
                           Row(
                             children: [
                               StarRating(
@@ -362,6 +371,7 @@ class ReviewTabView extends StatelessWidget {
                             ],
                           ),
                           const VSpace(17),
+                          // Review text with "Read More" option
                           ReadMoreText(text: review.review),
                         ],
                       ),
