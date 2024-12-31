@@ -20,7 +20,7 @@ class SignInEmailPage extends StatelessWidget {
 }
 
 class _SignInEmailForm extends StatefulWidget {
-  const _SignInEmailForm({super.key});
+  const _SignInEmailForm();
 
   @override
   State<_SignInEmailForm> createState() => __SignInEmailPageForm();

@@ -86,6 +86,8 @@ class AppColors extends ThemeExtension<AppColors> {
   final Color? unselectedStepperColor;
 
   final Color? fHyperLinkColor;
+  final Color? reviewColor;
+    final Color? onReviewColor;
 
   AppColors({
     required this.textColor,
@@ -167,6 +169,9 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.shimmerColor,
     required this.unselectedStepperColor,
     required this.fHyperLinkColor,
+    required this.reviewColor,
+    required this.onReviewColor,
+
   });
 
   @override
@@ -281,10 +286,10 @@ class AppColors extends ThemeExtension<AppColors> {
       shimmerColor: Color.lerp(shimmerColor, other.shimmerColor, t),
       unselectedStepperColor:
           Color.lerp(unselectedStepperColor, other.unselectedStepperColor, t),
-      fHyperLinkColor:
-      Color.lerp(fHyperLinkColor, other.fHyperLinkColor, t),
+      fHyperLinkColor: Color.lerp(fHyperLinkColor, other.fHyperLinkColor, t),
+      reviewColor: Color.lerp(reviewColor, other.fHyperLinkColor, t),
+      onReviewColor: Color.lerp(onReviewColor, other.fHyperLinkColor, t),
     );
-
   }
 
   @override
@@ -368,99 +373,104 @@ class AppColors extends ThemeExtension<AppColors> {
     Color? shimmerColor,
     Color? unselectedStepperColor,
     Color? fHyperLinkColor,
+    Color? reviewColor,
   }) =>
       AppColors(
-        textColor: textColor ?? this.textColor,
-        darkGreyColor: darkGreyColor ?? this.darkGreyColor,
-        greyShade85Color: greyShade85Color ?? this.greyShade85Color,
-        modalDividerColor: modalDividerColor ?? this.modalDividerColor,
-        durationModalTextColor:
-            durationModalTextColor ?? this.durationModalTextColor,
-        starColor: starColor ?? this.starColor,
-        textBoxColor: textBoxColor ?? this.textBoxColor,
-        venueDurationGreyColor:
-            venueDurationGreyColor ?? this.venueDurationGreyColor,
-        redColor: redColor ?? this.redColor,
-        greenColor: greenColor ?? this.greenColor,
-        playmatesColor: playmatesColor ?? this.playmatesColor,
-        teamsColor: teamsColor ?? this.teamsColor,
-        storesColor: storesColor ?? this.storesColor,
-        venuesColor: venuesColor ?? this.venuesColor,
-        textBgOnImageCard: textBgOnImageCard ?? this.textBgOnImageCard,
-        combatSports: combatSports ?? this.combatSports,
-        footAndHandSports: footAndHandSports ?? this.footAndHandSports,
-        netSports: netSports ?? this.netSports,
-        racketSports: racketSports ?? this.racketSports,
-        sticksAndBatSports: sticksAndBatSports ?? this.sticksAndBatSports,
-        winterAndWaterSports: winterAndWaterSports ?? this.winterAndWaterSports,
-        games: games ?? this.games,
-        mentalAndSpiritual: mentalAndSpiritual ?? this.mentalAndSpiritual,
-        racingAndAthleticsSports:
-            racingAndAthleticsSports ?? this.racingAndAthleticsSports,
-        fitness: fitness ?? this.fitness,
-        sectionFilled: sectionFilled ?? this.sectionFilled,
-        sectionNotFilled: sectionNotFilled ?? this.sectionNotFilled,
-        sectionAlmostFilled: sectionAlmostFilled ?? this.sectionAlmostFilled,
-        classesActivity: classesActivity ?? this.classesActivity,
-        competitionActivity: competitionActivity ?? this.competitionActivity,
-        eventsActivity: eventsActivity ?? this.eventsActivity,
-        exerciseActivity: exerciseActivity ?? this.exerciseActivity,
-        gamesActivity: gamesActivity ?? this.gamesActivity,
-        outdoorTripActivity: outdoorTripActivity ?? this.outdoorTripActivity,
-        programmeActivity: programmeActivity ?? this.programmeActivity,
-        runningActivity: runningActivity ?? this.runningActivity,
-        seminarActivity: seminarActivity ?? this.seminarActivity,
-        trainingActivity: trainingActivity ?? this.trainingActivity,
-        walkingActivity: walkingActivity ?? this.walkingActivity,
-        webinarActivity: webinarActivity ?? this.webinarActivity,
-        workshopActivity: workshopActivity ?? this.workshopActivity,
-        othersActivity: othersActivity ?? this.othersActivity,
-        bronzePlan: bronzePlan ?? this.bronzePlan,
-        silverPlan: silverPlan ?? this.silverPlan,
-        goldPlan: goldPlan ?? this.goldPlan,
-        diamondPlan: diamondPlan ?? this.diamondPlan,
-        sendMessageColor: sendMessageColor ?? this.sendMessageColor,
-        ownChatBubbleColor: ownChatBubbleColor ?? this.ownChatBubbleColor,
-        fDisableField: fDisableField ?? this.fDisableField,
-        fBadgeReceived: fBadgeReceived ?? this.fBadgeReceived,
-        fActivityJoined: fActivityJoined ?? this.fActivityJoined,
-        circleAvatarColor: circleAvatarColor ?? this.circleAvatarColor,
-        fAccepted: fAccepted ?? this.fAccepted,
-        fDeclined: fDeclined ?? this.fDeclined,
-        fPaid: fPaid ?? this.fPaid,
-        fUnpaid: fUnpaid ?? this.fUnpaid,
-        fWithdrawn: fWithdrawn ?? this.fWithdrawn,
-        fAwaiting: fAwaiting ?? this.fAwaiting,
-        fPresent: fPresent ?? this.fPresent,
-        fMissed: fMissed ?? this.fMissed,
-        fAcceptDialogColor: fAcceptDialogColor ?? this.fAcceptDialogColor,
-        fPresentTextColor: fPresentTextColor ?? this.fPresentTextColor,
-        fUpcomingActivityStatusColor:
-            fUpcomingActivityStatusColor ?? this.fUpcomingActivityStatusColor,
-        fRedActivityStatusColor:
-            fRedActivityStatusColor ?? this.fRedActivityStatusColor,
-        stopAssemblingTeamColor:
-            stopAssemblingTeamColor ?? this.stopAssemblingTeamColor,
-        fUnlockedBronze: fUnlockedBronze ?? this.fUnlockedBronze,
-        fUnlockedDiamond: fUnlockedDiamond ?? this.fUnlockedDiamond,
-        fUnlockedGold: fUnlockedGold ?? this.fUnlockedGold,
-        fUnlockedSilver: fUnlockedSilver ?? this.fUnlockedSilver,
-        fAllEarningCardColor: fAllEarningCardColor ?? this.fAllEarningCardColor,
-        fPlaymateEarningCardColor:
-            fPlaymateEarningCardColor ?? this.fPlaymateEarningCardColor,
-        fStoreEarningCardColor:
-            fStoreEarningCardColor ?? this.fStoreEarningCardColor,
-        fTeamsEarningCardColor:
-            fTeamsEarningCardColor ?? this.fTeamsEarningCardColor,
-        fVenueEarningCardColor:
-            fVenueEarningCardColor ?? this.fVenueEarningCardColor,
-        fBronzeFreeColor: fBronzeFreeColor ?? this.fBronzeFreeColor,
-        fDividerColor: fDividerColor ?? this.fDividerColor,
-        shimmerColor: shimmerColor ?? this.shimmerColor,
-        unselectedStepperColor:
-            unselectedStepperColor ?? this.unselectedStepperColor,
-        fHyperLinkColor: fHyperLinkColor ?? this.fHyperLinkColor,
-      );
+          textColor: textColor ?? this.textColor,
+          darkGreyColor: darkGreyColor ?? this.darkGreyColor,
+          greyShade85Color: greyShade85Color ?? this.greyShade85Color,
+          modalDividerColor: modalDividerColor ?? this.modalDividerColor,
+          durationModalTextColor:
+              durationModalTextColor ?? this.durationModalTextColor,
+          starColor: starColor ?? this.starColor,
+          textBoxColor: textBoxColor ?? this.textBoxColor,
+          venueDurationGreyColor:
+              venueDurationGreyColor ?? this.venueDurationGreyColor,
+          redColor: redColor ?? this.redColor,
+          greenColor: greenColor ?? this.greenColor,
+          playmatesColor: playmatesColor ?? this.playmatesColor,
+          teamsColor: teamsColor ?? this.teamsColor,
+          storesColor: storesColor ?? this.storesColor,
+          venuesColor: venuesColor ?? this.venuesColor,
+          textBgOnImageCard: textBgOnImageCard ?? this.textBgOnImageCard,
+          combatSports: combatSports ?? this.combatSports,
+          footAndHandSports: footAndHandSports ?? this.footAndHandSports,
+          netSports: netSports ?? this.netSports,
+          racketSports: racketSports ?? this.racketSports,
+          sticksAndBatSports: sticksAndBatSports ?? this.sticksAndBatSports,
+          winterAndWaterSports:
+              winterAndWaterSports ?? this.winterAndWaterSports,
+          games: games ?? this.games,
+          mentalAndSpiritual: mentalAndSpiritual ?? this.mentalAndSpiritual,
+          racingAndAthleticsSports:
+              racingAndAthleticsSports ?? this.racingAndAthleticsSports,
+          fitness: fitness ?? this.fitness,
+          sectionFilled: sectionFilled ?? this.sectionFilled,
+          sectionNotFilled: sectionNotFilled ?? this.sectionNotFilled,
+          sectionAlmostFilled: sectionAlmostFilled ?? this.sectionAlmostFilled,
+          classesActivity: classesActivity ?? this.classesActivity,
+          competitionActivity: competitionActivity ?? this.competitionActivity,
+          eventsActivity: eventsActivity ?? this.eventsActivity,
+          exerciseActivity: exerciseActivity ?? this.exerciseActivity,
+          gamesActivity: gamesActivity ?? this.gamesActivity,
+          outdoorTripActivity: outdoorTripActivity ?? this.outdoorTripActivity,
+          programmeActivity: programmeActivity ?? this.programmeActivity,
+          runningActivity: runningActivity ?? this.runningActivity,
+          seminarActivity: seminarActivity ?? this.seminarActivity,
+          trainingActivity: trainingActivity ?? this.trainingActivity,
+          walkingActivity: walkingActivity ?? this.walkingActivity,
+          webinarActivity: webinarActivity ?? this.webinarActivity,
+          workshopActivity: workshopActivity ?? this.workshopActivity,
+          othersActivity: othersActivity ?? this.othersActivity,
+          bronzePlan: bronzePlan ?? this.bronzePlan,
+          silverPlan: silverPlan ?? this.silverPlan,
+          goldPlan: goldPlan ?? this.goldPlan,
+          diamondPlan: diamondPlan ?? this.diamondPlan,
+          sendMessageColor: sendMessageColor ?? this.sendMessageColor,
+          ownChatBubbleColor: ownChatBubbleColor ?? this.ownChatBubbleColor,
+          fDisableField: fDisableField ?? this.fDisableField,
+          fBadgeReceived: fBadgeReceived ?? this.fBadgeReceived,
+          fActivityJoined: fActivityJoined ?? this.fActivityJoined,
+          circleAvatarColor: circleAvatarColor ?? this.circleAvatarColor,
+          fAccepted: fAccepted ?? this.fAccepted,
+          fDeclined: fDeclined ?? this.fDeclined,
+          fPaid: fPaid ?? this.fPaid,
+          fUnpaid: fUnpaid ?? this.fUnpaid,
+          fWithdrawn: fWithdrawn ?? this.fWithdrawn,
+          fAwaiting: fAwaiting ?? this.fAwaiting,
+          fPresent: fPresent ?? this.fPresent,
+          fMissed: fMissed ?? this.fMissed,
+          fAcceptDialogColor: fAcceptDialogColor ?? this.fAcceptDialogColor,
+          fPresentTextColor: fPresentTextColor ?? this.fPresentTextColor,
+          fUpcomingActivityStatusColor:
+              fUpcomingActivityStatusColor ?? this.fUpcomingActivityStatusColor,
+          fRedActivityStatusColor:
+              fRedActivityStatusColor ?? this.fRedActivityStatusColor,
+          stopAssemblingTeamColor:
+              stopAssemblingTeamColor ?? this.stopAssemblingTeamColor,
+          fUnlockedBronze: fUnlockedBronze ?? this.fUnlockedBronze,
+          fUnlockedDiamond: fUnlockedDiamond ?? this.fUnlockedDiamond,
+          fUnlockedGold: fUnlockedGold ?? this.fUnlockedGold,
+          fUnlockedSilver: fUnlockedSilver ?? this.fUnlockedSilver,
+          fAllEarningCardColor:
+              fAllEarningCardColor ?? this.fAllEarningCardColor,
+          fPlaymateEarningCardColor:
+              fPlaymateEarningCardColor ?? this.fPlaymateEarningCardColor,
+          fStoreEarningCardColor:
+              fStoreEarningCardColor ?? this.fStoreEarningCardColor,
+          fTeamsEarningCardColor:
+              fTeamsEarningCardColor ?? this.fTeamsEarningCardColor,
+          fVenueEarningCardColor:
+              fVenueEarningCardColor ?? this.fVenueEarningCardColor,
+          fBronzeFreeColor: fBronzeFreeColor ?? this.fBronzeFreeColor,
+          fDividerColor: fDividerColor ?? this.fDividerColor,
+          shimmerColor: shimmerColor ?? this.shimmerColor,
+          unselectedStepperColor:
+              unselectedStepperColor ?? this.unselectedStepperColor,
+          fHyperLinkColor: fHyperLinkColor ?? this.fHyperLinkColor,
+          reviewColor: reviewColor ?? this.reviewColor,
+           onReviewColor: onReviewColor ?? this.onReviewColor,
+          );
 }
 
 /// This class defines various colors used in the app
@@ -550,4 +560,7 @@ class AppColor {
   static const Color fShimmerColor = Color(0xFFC2C2C2);
   static const Color fUnselectedStepperColor = Color(0xFFE7E7E7);
   static const Color fHyperLinkColor = Color(0xFF5085F7);
+  static const Color fReviewColor = Color(0xFFF5F5F5);
+  static const Color fOnReviewColor = Color(0xFF141414);
+
 }

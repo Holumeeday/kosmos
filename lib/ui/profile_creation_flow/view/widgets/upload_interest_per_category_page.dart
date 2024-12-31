@@ -103,7 +103,6 @@ class UploadInterestPerCategoryPage extends StatelessWidget {
         ],
       ),
     );
-    ;
   }
 }
 

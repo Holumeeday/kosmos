@@ -31,7 +31,7 @@ class _EmailOtpVerificationForm extends StatelessWidget {
   final String fEmail;
 
   const _EmailOtpVerificationForm({
-    super.key,
+   
     required this.fEmail,
   });
 
@@ -65,7 +65,7 @@ class _EmailOtpView extends StatelessWidget {
   final String fEmail;
 
   const _EmailOtpView({
-    super.key,
+
     required this.fEmail,
   });
 

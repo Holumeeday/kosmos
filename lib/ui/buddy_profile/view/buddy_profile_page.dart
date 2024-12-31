@@ -12,7 +12,10 @@ import 'package:playkosmos_v3/ui/buddy_profile/view/widgets/stats_section.dart';
 /// A profile page that displays buddy information
 /// @author: Chidera
 class BuddyProfilePage extends StatelessWidget {
-  const BuddyProfilePage({super.key});
+  const BuddyProfilePage({super.key,
+  //  required this.buddy
+  });
+  // final BuddyModel buddy;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +72,7 @@ fIsLargeDisplayTitle: true,
                             images: state.fBuddyModel.profileImages,
                           ),
                         ),
-                        
+
                         // Stats Section
                         const VSpace(8),
                         const UserStatsSection(),
