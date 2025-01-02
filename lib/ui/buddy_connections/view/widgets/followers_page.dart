@@ -142,9 +142,12 @@ class FollowersPage extends StatelessWidget {
                                 follower.userName,
                                 style: context.textTheme.bodyLarge,
                               ),
-                              trailing: follower.connectionType
-                                  .toConnectionButton(context,
-                                      height: 40, width: 130),
+                              trailing: IntrinsicWidth(
+                                  child: follower.connectionType
+                                      .toConnectionButton(
+                                context,
+                                height: 40,
+                              )),
                             ),
                             const SizedBox(height: 16),
                           ],

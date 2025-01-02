@@ -35,7 +35,7 @@ extension ConnectionTypeUI on String {
             context.loc.followingUser,
             style: context.appTextTheme.buttonMedium?.copyWith(
               color: Colors.black,
-              fontSize: 14,
+              fontSize: 16,
             ),
           ),
         );
@@ -48,7 +48,7 @@ extension ConnectionTypeUI on String {
             context.loc.followBack,
             style: context.appTextTheme.buttonMedium?.copyWith(
               color: Colors.white,
-              fontSize: 16,
+              
             ),
           ),
         );
@@ -61,7 +61,7 @@ extension ConnectionTypeUI on String {
             context.loc.followUser,
             style: context.appTextTheme.buttonMedium?.copyWith(
               color: Colors.white,
-              fontSize: 16,
+              
             ),
           ),
         );
@@ -76,7 +76,7 @@ extension ConnectionTypeUI on String {
             context.loc.buddies,
             style: context.appTextTheme.buttonMedium?.copyWith(
               color: Colors.black,
-              fontSize: 16,
+             
             ),
           ),
         );

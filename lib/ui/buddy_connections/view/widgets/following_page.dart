@@ -134,10 +134,13 @@ class FollowingPage extends StatelessWidget {
                               followingList[index].userName,
                               style: context.textTheme.bodyLarge,
                             ),
-                            trailing: followingList[index]
-                                .connectionType
-                                .toConnectionButton(context,
-                                    height: 40, width: 130),
+                            trailing:IntrinsicWidth(
+                               
+                                  child:followingList[index].connectionType
+                                      .toConnectionButton(
+                                    context,
+                                    height: 40,
+                                  )),
                           ),
                           const SizedBox(height: 16),
                         ],

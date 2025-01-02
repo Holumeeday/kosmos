@@ -129,18 +129,19 @@ class BuddiesTabPage extends StatelessWidget {
                         return Column(
                           children: [
                             ListTile(
-                              leading: ProfileImageWithStoryIndicator(
-                                fImage: buddiesList[index].profileImages[0],
-                              ),
-                              title: Text(
-                                buddiesList[index].userName,
-                                style: context.textTheme.bodyLarge,
-                              ),
-                              trailing: buddiesList[index]
-                                  .connectionType
-                                  .toConnectionButton(context,
-                                      height: 40, width: 130),
-                            ),
+                                leading: ProfileImageWithStoryIndicator(
+                                  fImage: buddiesList[index].profileImages[0],
+                                ),
+                                title: Text(
+                                  buddiesList[index].userName,
+                                  style: context.textTheme.bodyLarge,
+                                ),
+                                trailing: IntrinsicWidth(
+                                  child: buddiesList[index]
+                                      .connectionType
+                                      .toConnectionButton(context,
+                                          height: 40, width: 130),
+                                )),
                             const SizedBox(height: 16),
                           ],
                         );

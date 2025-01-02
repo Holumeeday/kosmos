@@ -36,12 +36,12 @@ class AppTextStyles {
 
   /// The third-largest header style for smaller headings or labels.
   ///
-  /// - Font size: 24
+  /// - Font size: 14
   /// - Letter spacing: -0.38
   /// - Font weight: Bold (700)
   static const header3 = TextStyle(
     fontFamily: FontFamily.dMSans,
-    fontSize: 24,
+    fontSize: 14,
     letterSpacing: -0.38,
     fontWeight: FontWeight.w700,
   );
@@ -136,7 +136,7 @@ class AppTextTheme extends ThemeExtension<AppTextTheme> {
   final TextStyle? header2;
 
   /// Small display headers, used for subtitles or smaller headings.
-  /// - Font Size: 24
+  /// - Font Size: 14
   /// - Letter Spacing: -0.38
   /// - Weight: Bold (w700)
   final TextStyle? header3;

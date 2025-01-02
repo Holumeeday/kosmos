@@ -39,3 +39,4 @@ export 'carousel.dart';
 export 'carousel_indicator.dart';
 export 'custom_tabbar.dart';
 export 'show_all_button.dart';
+export 'info_summary_widget.dart';

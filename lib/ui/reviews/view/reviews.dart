@@ -12,7 +12,7 @@ import 'package:sliver_tools/sliver_tools.dart';
 
 /// Displays a detailed review page for a specific buddy.
 ///
-/// This page includes an app bar, overall rating section, and two tabs 
+/// This page includes an app bar, overall rating section, and two tabs
 /// (Creator and Participant reviews) with filtered review lists.
 /// Reviews can be filtered by rating using a dropdown.
 /// @author- Chidera Chijama
@@ -55,70 +55,49 @@ class ReviewsPage extends StatelessWidget {
                             height: 1,
                           ),
                           // Section displaying overall ratings
-                          Padding(
-                            padding: const EdgeInsets.all(20),
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 12, horizontal: 20),
-                              decoration: BoxDecoration(
-                                color: context.appColors.reviewColor,
-                                boxShadow: [
-                                  // Shadow styling for the rating container
-                                  BoxShadow(
-                                    color: context.colors.onSurface
-                                        .withOpacity(0.06),
-                                    offset: const Offset(0, 6),
-                                    blurRadius: 10,
-                                  ),
-                                ],
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: context.appColors.onReviewColor!
-                                      .withOpacity(0.1),
+                          InfoSummaryContainer(
+                            fPadding: const EdgeInsets.symmetric(
+                                vertical: 12, horizontal: 20),
+                            fChild: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                // Label for overall ratings
+                                Text(
+                                  context.loc.overallRatings,
+                                  style: context.textTheme.displayLarge!
+                                      .copyWith(fontSize: 18),
                                 ),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  // Label for overall ratings
-                                  Text(
-                                    context.loc.overallRatings,
-                                    style: context.appTextTheme.header3!
-                                        .copyWith(fontSize: 18),
-                                  ),
-                                  // Display of average rating and total reviews
-                                  Column(
-                                    children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          const Icon(Icons.star,
-                                              color: Colors.amber, size: 20),
-                                          const HSpace(4),
-                                          Text(
-                                            reviews.averageRating.toString(),
-                                            style: context
-                                                .textTheme.displayLarge!
-                                                .copyWith(fontSize: 18),
-                                          ),
-                                        ],
-                                      ),
-                                      Text(
-                                        '${reviews.count} ${context.loc.setReviews(reviews.count)}',
-                                        overflow: TextOverflow.ellipsis,
-                                        style: context.textTheme.headlineSmall!
-                                            .copyWith(
-                                                color: context.colors.tertiary),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
+                                // Display of average rating and total reviews
+                                Column(
+                                  children: [
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Icon(Icons.star,
+                                            color: Colors.amber, size: 20),
+                                        const HSpace(4),
+                                        Text(
+                                          reviews.averageRating.toString(),
+                                          style: context.textTheme.displayLarge!
+                                              .copyWith(fontSize: 18),
+                                        ),
+                                      ],
+                                    ),
+                                    Text(
+                                      '${reviews.count} ${context.loc.setReviews(reviews.count)}',
+                                      overflow: TextOverflow.ellipsis,
+                                      style: context.textTheme.headlineSmall!
+                                          .copyWith(
+                                              color: context.colors.tertiary),
+                                    ),
+                                  ],
+                                )
+                              ],
                             ),
                           ),
+
                           Divider(
                             color: context.appColors.fDividerColor,
                             height: 1,
@@ -132,6 +111,7 @@ class ReviewsPage extends StatelessWidget {
                       floating: true,
                       snap: true,
                       automaticallyImplyLeading: false,
+                      toolbarHeight: 0,
                       bottom: CustomTabbar(
                         fTabs: [
                           Tab(
@@ -189,7 +169,7 @@ class ReviewsPage extends StatelessWidget {
 
 /// Displays a single review tab with filters and a list of reviews.
 ///
-/// Provides a dropdown for rating-based filtering, and lists reviews with 
+/// Provides a dropdown for rating-based filtering, and lists reviews with
 /// reviewer details, rating, date, and review text.
 class ReviewTabView extends StatelessWidget {
   const ReviewTabView({
@@ -235,6 +215,7 @@ class ReviewTabView extends StatelessWidget {
         : CustomScrollView(
             slivers: [
               // Dropdown filter for ratings
+
               SliverPinnedHeader(
                 child: Container(
                   color: context.appColors.reviewColor,
@@ -270,8 +251,8 @@ class ReviewTabView extends StatelessWidget {
                         onChanged: onChanged,
                         popupProps: PopupProps.menu(
                           fit: FlexFit.tight,
-                          itemBuilder: (context, item, isDisabled, isSelected) =>
-                              Column(
+                          itemBuilder:
+                              (context, item, isDisabled, isSelected) => Column(
                             children: [
                               num.tryParse(item) != null
                                   ? Padding(
@@ -321,7 +302,7 @@ class ReviewTabView extends StatelessWidget {
                                     rating: double.parse(s),
                                   )
                                 : Text(
-                                    "                  ${context.loc.all}",
+                                    "                  ${context.loc.all}   ",
                                     style: context.textTheme.displayLarge!
                                         .copyWith(fontSize: 18),
                                   ),
@@ -334,50 +315,53 @@ class ReviewTabView extends StatelessWidget {
               ),
 
               // List of reviews
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) {
-                    final review = reviews[index];
+              SliverClip(
+                clipOverlap: true,
+                child: SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      final review = reviews[index];
 
-                    return Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          // Reviewer details
-                          ListTile(
-                            contentPadding: const EdgeInsets.all(0),
-                            leading: ProfileImageWithStoryIndicator(
-                              fImage: review.reviewer.profileImages[0],
-                            ),
-                            title: Text(
-                              review.reviewer.userName,
-                              style: context.textTheme.titleSmall,
-                            ),
-                          ),
-                          // Review rating and date
-                          Row(
-                            children: [
-                              StarRating(
-                                rating: review.rating.toDouble(),
-                                starCount: 5,
+                      return Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Reviewer details
+                            ListTile(
+                              contentPadding: const EdgeInsets.all(0),
+                              leading: ProfileImageWithStoryIndicator(
+                                fImage: review.reviewer.profileImages[0],
                               ),
-                              const HSpace(12),
-                              Text(
-                                review.timeOfReview.convertToDateMonthYear,
-                                style: context.textTheme.titleSmall!
-                                    .copyWith(color: context.colors.tertiary),
+                              title: Text(
+                                review.reviewer.userName,
+                                style: context.textTheme.titleSmall,
                               ),
-                            ],
-                          ),
-                          const VSpace(17),
-                          // Review text with "Read More" option
-                          ReadMoreText(text: review.review),
-                        ],
-                      ),
-                    );
-                  },
-                  childCount: reviews.length,
+                            ),
+                            // Review rating and date
+                            Row(
+                              children: [
+                                StarRating(
+                                  rating: review.rating.toDouble(),
+                                  starCount: 5,
+                                ),
+                                const HSpace(12),
+                                Text(
+                                  review.timeOfReview.convertToDateMonthYear,
+                                  style: context.textTheme.titleSmall!
+                                      .copyWith(color: context.colors.tertiary),
+                                ),
+                              ],
+                            ),
+                            const VSpace(17),
+                            // Review text with "Read More" option
+                            ReadMoreText(text: review.review),
+                          ],
+                        ),
+                      );
+                    },
+                    childCount: reviews.length,
+                  ),
                 ),
               ),
             ],
