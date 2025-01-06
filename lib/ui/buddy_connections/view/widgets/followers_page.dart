@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/common_widgets/profile_image_with_story_indicator.dart';
-import 'package:playkosmos_v3/extensions/connection_type_enum.dart';
+import 'package:playkosmos_v3/extensions/connection_type_extention.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/buddy_connections/cubit/buddy_connections_cubit.dart';
 import 'package:playkosmos_v3/ui/buddy_connections/view/widgets/search_field.dart';
@@ -142,9 +142,12 @@ class FollowersPage extends StatelessWidget {
                                 follower.userName,
                                 style: context.textTheme.bodyLarge,
                               ),
-                              trailing: follower.connectionType
-                                  .toConnectionButton(context,
-                                      height: 40, width: 130),
+                              trailing: IntrinsicWidth(
+                                  child: follower.connectionType
+                                      .toConnectionButton(
+                                context,
+                                height: 40,
+                              )),
                             ),
                             const SizedBox(height: 16),
                           ],

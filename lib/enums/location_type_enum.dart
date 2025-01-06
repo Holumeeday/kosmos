@@ -1,0 +1,3 @@
+enum LocationTypeEnum {
+  physical,virtual
+}

@@ -1,6 +1,7 @@
 /// Represents a buddy user in the system with their profile and interaction data.
 /// @author: Chidera Chijama
-class BuddyModel {
+///
+class DummyBuddyModel {
   /// Distance from the current user in miles
   final int distance;
 
@@ -50,19 +51,19 @@ class BuddyModel {
   final List<String> stories;
 
   /// Followers list (other buddies)
-  final List<BuddyModel>? followersList;
+  final List<DummyBuddyModel>? followersList;
 
   /// Following list (other buddies)
-  final List<BuddyModel>? followingList;
+  final List<DummyBuddyModel>? followingList;
 
   /// Buddies list (other buddies)
-  final List<BuddyModel>? buddiesList;
+  final List<DummyBuddyModel>? buddiesList;
 
   /// Reviews of this buddy
   final Reviews reviews;
 
   /// Creates a new BuddyModel instance with default values
-  const BuddyModel({
+  const DummyBuddyModel({
     this.followersList,
     this.followingList,
     this.buddiesList,
@@ -113,7 +114,7 @@ class BuddyModel {
   });
 
   /// Creates a copy of this BuddyModel with the given fields replaced with new values
-  BuddyModel copyWith({
+  DummyBuddyModel copyWith({
     int? distance,
     int? similarInterestsCount,
     int? mutualBuddiesCount,
@@ -132,12 +133,12 @@ class BuddyModel {
     List<String>? posts,
     String? connectionType,
     List<String>? stories,
-    List<BuddyModel>? followersList,
-    List<BuddyModel>? followingList,
-    List<BuddyModel>? buddiesList,
+    List<DummyBuddyModel>? followersList,
+    List<DummyBuddyModel>? followingList,
+    List<DummyBuddyModel>? buddiesList,
     Reviews? reviews,
   }) {
-    return BuddyModel(
+    return DummyBuddyModel(
       distance: distance ?? this.distance,
       similarInterestsCount:
           similarInterestsCount ?? this.similarInterestsCount,
@@ -196,7 +197,7 @@ class Reviews {
 /// Represents a single review
 class Review {
   /// The reviewer, represented as a BuddyModel
-  final BuddyModel reviewer;
+  final DummyBuddyModel reviewer;
 
   /// The review rating (1-5)
   final int rating;

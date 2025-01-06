@@ -5,13 +5,13 @@ part of 'buddies_cubit.dart';
 /// @author: Chidera Chijama
 
 class BuddiesState extends Equatable {
-  final List< BuddyModel> fBuddiesModel;
+  final List<DummyBuddyModel> fBuddiesModel;
 
   const BuddiesState({
     required this.fBuddiesModel,
   });
 
-  BuddiesState copyWith({List<BuddyModel>? fBuddiesModel}) {
+  BuddiesState copyWith({List<DummyBuddyModel>? fBuddiesModel}) {
     return BuddiesState(
       fBuddiesModel: fBuddiesModel ?? this.fBuddiesModel,
     );

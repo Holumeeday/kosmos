@@ -9,12 +9,17 @@ import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/auth_provider/auth_provider_page.dart';
 import 'package:playkosmos_v3/ui/buddies/cubit/buddies_cubit.dart';
 import 'package:playkosmos_v3/ui/buddies/view/buddies_page.dart';
+import 'package:playkosmos_v3/ui/buddy_activities/activity_details.dart';
+import 'package:playkosmos_v3/ui/buddy_activities/buddy_activities.dart';
+import 'package:playkosmos_v3/ui/buddy_activities/cubit/buddy_activities_cubit.dart';
 import 'package:playkosmos_v3/ui/buddy_connections/cubit/buddy_connections_cubit.dart';
 import 'package:playkosmos_v3/ui/buddy_connections/view/buddy_connections.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/cubit/buddy_profile_cubit.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/view/buddy_profile_page.dart';
 import 'package:playkosmos_v3/ui/create_password/cubit/create_password_cubit.dart';
 import 'package:playkosmos_v3/ui/create_password/view/create_password_page.dart';
+import 'package:playkosmos_v3/ui/edit_review/cubit/edit_review_cubit.dart';
+import 'package:playkosmos_v3/ui/edit_review/view/edit_review.dart';
 import 'package:playkosmos_v3/ui/email_otp_verification/cubit/email_otp_verification_cubit.dart';
 import 'package:playkosmos_v3/ui/email_otp_verification/view/email_otp_verification_page.dart';
 import 'package:playkosmos_v3/ui/forgot_password_email/cubit/forgot_password_email_cubit.dart';
@@ -261,8 +266,7 @@ mixin GoRouterMixin {
           ),
         );
       case AppRoute.buddyConnectionsScreenPath:
-        final fInitIndex =
-            int.parse(state.pathParameters['initIndex'] as String);
+        final fInitIndex = state.extra as int;
         return _createRoute(
           routeScreen: BlocProvider(
             child: BuddyConnectionsPage(fInitialIndex: fInitIndex),
@@ -276,11 +280,35 @@ mixin GoRouterMixin {
             create: (context) => BuddyProfileCubit(),
           ),
         );
-              case AppRoute.reviewsScreenPath:
+      case AppRoute.reviewsScreenPath:
         return _createRoute(
           routeScreen: BlocProvider(
             child: const ReviewsPage(),
             create: (context) => ReviewsCubit(),
+          ),
+        );
+      case AppRoute.buddyActivitiesScreenPath:
+        final fIsCreator = state.extra as bool;
+        return _createRoute(
+          routeScreen: BlocProvider(
+            child: BuddyActivitiesPage(
+              fIsCreator: fIsCreator,
+            ),
+            create: (context) => BuddyActivitiesCubit(),
+          ),
+        );
+      case AppRoute.activityDetailsScreenPath:
+        return _createRoute(
+          routeScreen: BlocProvider(
+            child: const ActivityDetailsPage(),
+            create: (context) => BuddyActivitiesCubit(),
+          ),
+        );
+      case AppRoute.editReviewPath:
+        return _createRoute(
+          routeScreen: BlocProvider(
+            child: const EditReviewPage(),
+            create: (context) => EditReviewCubit(),
           ),
         );
       default:

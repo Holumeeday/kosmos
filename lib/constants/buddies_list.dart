@@ -64,7 +64,7 @@ final List<String> sampleReviews = [
 ];
 
 /// Generates a list of `BuddyModel` with random data and dummy reviews.
-List<BuddyModel> generateBuddiesList(int totalBuddies) {
+List<DummyBuddyModel> generateBuddiesList(int totalBuddies) {
   return List.generate(totalBuddies, (index) {
     // Shuffle sample data for randomness.
     final shuffledInterests = [...sampleInterests]..shuffle(random);
@@ -73,9 +73,9 @@ List<BuddyModel> generateBuddiesList(int totalBuddies) {
     final shuffledBio = sampleBios[random.nextInt(sampleBios.length)];
 
     // Generate dummy reviewers as full buddies.
-    final List<BuddyModel> reviewers = List.generate(
+    final List<DummyBuddyModel> reviewers = List.generate(
       random.nextInt(10) + 1, // Random number of reviewers between 1 and 10.
-      (reviewIndex) => BuddyModel(
+      (reviewIndex) => DummyBuddyModel(
         userName: "Reviewer $reviewIndex",
         profileImages: shuffledImages.take(1).toList(),
         bio: sampleBios[random.nextInt(sampleBios.length)],
@@ -96,7 +96,8 @@ List<BuddyModel> generateBuddiesList(int totalBuddies) {
     );
 
     // Generate dummy reviews for the buddy.
-    final List<Review> allReviews = List.generate(reviewers.length, (reviewIndex) {
+    final List<Review> allReviews =
+        List.generate(reviewers.length, (reviewIndex) {
       return Review(
         reviewer: reviewers[reviewIndex],
         rating: random.nextInt(5) + 1, // Random rating between 1 and 5.
@@ -107,9 +108,11 @@ List<BuddyModel> generateBuddiesList(int totalBuddies) {
     });
 
     // Split reviews into creator and participant reviews (non-equal parts).
-    final int creatorCount = (allReviews.length * 0.6).round(); // 60% for creator.
+    final int creatorCount =
+        (allReviews.length * 0.6).round(); // 60% for creator.
     final List<Review> creatorReviews = allReviews.take(creatorCount).toList();
-    final List<Review> participantReviews = allReviews.skip(creatorCount).toList();
+    final List<Review> participantReviews =
+        allReviews.skip(creatorCount).toList();
 
     // Calculate the creator and participant average ratings.
     final double creatorAverageRating = creatorReviews.isNotEmpty
@@ -127,7 +130,7 @@ List<BuddyModel> generateBuddiesList(int totalBuddies) {
         : 0.0;
 
     // Generate a random `BuddyModel`.
-    return BuddyModel(
+    return DummyBuddyModel(
       distance: random.nextInt(100) + 1, // Random distance between 1-100 miles.
       similarInterestsCount:
           random.nextInt(20), // Random 0-20 similar interests.
@@ -164,21 +167,23 @@ List<BuddyModel> generateBuddiesList(int totalBuddies) {
     );
   });
 }
+
 /// Creates a subset of the buddies list within the specified range.
 ///
 /// This ensures safe sublist creation by clamping the range within valid bounds.
-List<BuddyModel> getFollowersList(
-    List<BuddyModel> buddies, int startIndex, int count) {
+List<DummyBuddyModel> getFollowersList(
+    List<DummyBuddyModel> buddies, int startIndex, int count) {
   final endIndex = (startIndex + count).clamp(0, buddies.length);
   return buddies.sublist(startIndex, endIndex);
 }
 
 // Generate the full list of buddies.
-final List<BuddyModel> fullBuddiesList = generateBuddiesList(500);
+final List<DummyBuddyModel> fullBuddiesList = generateBuddiesList(500);
 
 // Subset lists for specific purposes.
-final List<BuddyModel> followersList = getFollowersList(fullBuddiesList, 0, 50);
-final List<BuddyModel> followingList =
+final List<DummyBuddyModel> followersList =
+    getFollowersList(fullBuddiesList, 0, 50);
+final List<DummyBuddyModel> followingList =
     getFollowersList(fullBuddiesList, 50, 100);
-final List<BuddyModel> buddiesList =
+final List<DummyBuddyModel> buddiesList =
     getFollowersList(fullBuddiesList, 100, 150);

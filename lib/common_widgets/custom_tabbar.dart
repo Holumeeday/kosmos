@@ -14,6 +14,8 @@ class CustomTabbar extends StatelessWidget implements PreferredSizeWidget {
     required this.fTabs,
     this.fController,
     this.fOnTap,
+    this.fIsScrollable = false,
+    this.fTabAlignment,
   });
 
   /// A list of widgets to display as tabs.
@@ -24,6 +26,9 @@ class CustomTabbar extends StatelessWidget implements PreferredSizeWidget {
 
   /// A callback function triggered when a tab is tapped.
   final void Function(int)? fOnTap;
+  final TabAlignment? fTabAlignment;
+
+  final bool fIsScrollable;
 
   /// Defines the preferred height for the TabBar.
   @override
@@ -34,6 +39,7 @@ class CustomTabbar extends StatelessWidget implements PreferredSizeWidget {
     return TabBar(
       onTap: fOnTap,
       controller: fController,
+      isScrollable: fIsScrollable,
 
       // Divider settings for the TabBar
       dividerColor: context.appColors.fDividerColor,
@@ -46,7 +52,7 @@ class CustomTabbar extends StatelessWidget implements PreferredSizeWidget {
       labelColor: AppColor.fPrimaryColor,
 
       // Alignment for tabs
-      tabAlignment: TabAlignment.fill,
+      tabAlignment: fTabAlignment ?? TabAlignment.fill,
 
       // Style for the unselected tab's label
       unselectedLabelColor: context.colors.onSurface,

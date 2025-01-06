@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
-import 'package:playkosmos_v3/extensions/connection_type_enum.dart';
+import 'package:playkosmos_v3/extensions/connection_type_extention.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/models/buddy_model.dart';
 import 'package:playkosmos_v3/ui/buddies/cubit/buddies_cubit.dart';
@@ -40,7 +40,7 @@ class _BuddyProfile extends StatelessWidget {
     required this.fProfile,
   });
 
-  final BuddyModel fProfile;
+  final DummyBuddyModel fProfile;
 
   @override
   Widget build(BuildContext context) {

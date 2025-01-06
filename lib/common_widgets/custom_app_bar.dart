@@ -66,6 +66,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// Back button semantic lable
   final String? fBackButtonSemanticLabel;
 
+  final bool fIsLargeDisplayTitle;
+
   ///This displays a custom app bar with certain things already fixed.
   ///[fShowBackButton] which decides if to show a black button defaults to true.
   ///[fOnBackButtonPressed] is the function of the back button and always
@@ -95,6 +97,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.fLeading,
     this.fSemanticLabel,
     this.fBackButtonSemanticLabel,
+    this.fIsLargeDisplayTitle = false,
   });
 
   @override
@@ -119,15 +122,31 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         //If the title is null, check if there's a text, if there is use it else
         //there's no title widget
         title: fTitle ??
+            // If a custom title widget (`fTitle`) is provided, use it.
             (fTitleText != null
                 ? Text(
-                    fTitleText!,
-                    style: TextStyle(
-                      fontSize: fTitleTextSize,
-                      fontWeight: FontWeight.w500,
-                      color: fTitleTextColor ?? context.appColors.textColor,
-                    ),
+                    fTitleText!, 
+                    overflow: TextOverflow
+                        .ellipsis, 
+                    style: fIsLargeDisplayTitle
+                        // Apply the `displayLarge` text style for large display titles.
+                        ? context.textTheme.displayLarge!.copyWith(
+                            color: context.colors
+                                .onSurface,
+                            fontSize: 28,
+                          )
+                        // Use custom styling for non-large display titles.
+                        : TextStyle(
+                            fontSize:
+                                fTitleTextSize, 
+                            fontWeight: FontWeight
+                                .bold,
+                            color: fTitleTextColor ??
+                                context.appColors
+                                    .textColor, // Use the provided or default text color.
+                          ),
                   )
+                // If `fTitleText` is null, do not display a title.
                 : null),
         centerTitle: fCenterTitle,
         elevation: fElevation,

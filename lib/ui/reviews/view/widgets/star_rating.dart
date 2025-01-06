@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 
 /// A widget that displays a star rating system.
-/// 
-/// The number of stars, current rating, and the ability to change the rating 
+///
+/// The number of stars, current rating, and the ability to change the rating
 /// can be customized through the widget's properties.
 /// @author - Chidera Chijama
 class StarRating extends StatelessWidget {
@@ -13,6 +13,8 @@ class StarRating extends StatelessWidget {
   /// The current rating value (can include fractional values for half-stars).
   final double rating;
 
+  final double? starSize;
+
   /// A callback triggered when a star is tapped, providing the new rating value.
   final void Function(double)? onRatingChanged;
 
@@ -20,8 +22,9 @@ class StarRating extends StatelessWidget {
   const StarRating({
     super.key,
     this.starCount = 5, // Defaults to 5 stars.
-    this.rating = .0,   // Defaults to no rating.
+    this.rating = .0, // Defaults to no rating.
     this.onRatingChanged,
+    this.starSize,
   });
 
   /// Builds an individual star widget based on its index and the current rating.
@@ -34,18 +37,19 @@ class StarRating extends StatelessWidget {
       icon = Icon(
         Icons.star,
         color: context.appColors.darkGreyColor, // Grey for unselected stars.
+        size: starSize,
       );
     } else if (index > rating - 1 && index < rating) {
       // Half star if the index is within a fractional range.
-      icon = const Icon(
-        Icons.star_half,
-        color: Colors.amber, // Amber color for selected stars.
-      );
+      icon = Icon(Icons.star_half,
+          color: Colors.amber, // Amber color for selected stars.
+          size: starSize);
     } else {
       // Full star for indices less than the rating.
-      icon = const Icon(
+      icon = Icon(
         Icons.star,
         color: Colors.amber, // Amber color for selected stars.
+        size: starSize,
       );
     }
 

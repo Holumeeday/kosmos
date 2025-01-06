@@ -8,26 +8,32 @@ class ReviewsState extends Equatable {
     required this.fSelectedRating,
   });
 
-  final BuddyModel fBuddy;
+  final DummyBuddyModel fBuddy;
   final List<Review> fFilteredParticipantReviews;
   final List<Review> fFilteredCreatorReviews;
 
   final String fSelectedRating;
 
   @override
-  List<Object> get props => [fBuddy, fFilteredCreatorReviews, fFilteredParticipantReviews, fSelectedRating];
+  List<Object> get props => [
+        fBuddy,
+        fFilteredCreatorReviews,
+        fFilteredParticipantReviews,
+        fSelectedRating
+      ];
 
   ReviewsState copyWith({
-    BuddyModel? fBuddy,
-      List<Review>? fFilteredParticipantReviews,
-   List<Review>? fFilteredCreatorReviews,
+    DummyBuddyModel? fBuddy,
+    List<Review>? fFilteredParticipantReviews,
+    List<Review>? fFilteredCreatorReviews,
     String? fSelectedRating,
   }) {
     return ReviewsState(
       fBuddy: fBuddy ?? this.fBuddy,
-      fFilteredCreatorReviews: fFilteredCreatorReviews ?? this.fFilteredCreatorReviews,
-      fFilteredParticipantReviews: fFilteredParticipantReviews ?? this.fFilteredParticipantReviews,
-
+      fFilteredCreatorReviews:
+          fFilteredCreatorReviews ?? this.fFilteredCreatorReviews,
+      fFilteredParticipantReviews:
+          fFilteredParticipantReviews ?? this.fFilteredParticipantReviews,
       fSelectedRating: fSelectedRating ?? this.fSelectedRating,
     );
   }

@@ -18,10 +18,10 @@ class UserNameAndPlan extends StatelessWidget {
   final int? fMaxLines;
 
   ///The text size
-  final double fTextSize;
+  final double? fTextSize;
 
   ///The font size
-  final FontWeight fFontWeight;
+  final FontWeight? fFontWeight;
 
   ///To move to profile
   final VoidCallback? fOnTap;
@@ -46,7 +46,7 @@ class UserNameAndPlan extends StatelessWidget {
     required this.fUserName,
     this.fSubscriptionPlan,
     required this.fTextSize,
-    this.fFontWeight = FontWeight.w400,
+    this.fFontWeight, 
     this.fOnTap,
     this.fMaxLines,
     this.fMainAlignment = MainAxisAlignment.start,
@@ -64,9 +64,9 @@ class UserNameAndPlan extends StatelessWidget {
         fUserName,
         overflow: TextOverflow.ellipsis,
         maxLines: fMaxLines,
-        style: TextStyle(
-          fontSize: fTextSize,
-          fontWeight: fFontWeight,
+        style: context.appTextTheme.header3!.copyWith(
+          fontSize: fTextSize ?? 16,
+          fontWeight: fFontWeight ?? FontWeight.w700,
           color: fNameTextColor ?? context.appColors.textColor,
         ),
       ),

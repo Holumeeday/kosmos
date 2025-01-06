@@ -51,7 +51,7 @@
       "gender": "String"
     }
   },
-
+"activityFee":"Activity Fee",
   "bioTooShort": "Bio is too short. Add more details",
   "buddies":"Buddies",
   "alrightTimeToCreateEnterASecretCode": "Alright, it’s time to enter your secret code!  Type it in below and let’s unlock your next move!",
@@ -62,6 +62,7 @@
   "createPassword": "Create password",
   "dingDingCheckInboxMessage": "Ding-ding! Your reset code has just landed in your inbox! Go check it out, and let’s get you back on track in no time",
   "dontHaveAnAccount": "Don''t have an account? ",
+  "editReview": "Edit Review",
   "enterFullName": "Enter full name",
   "enterYourCode": "Enter your code",
   "enterYourEmailAddress": "Enter your email address",
@@ -83,6 +84,7 @@
   "loginWithGoogle": "Login with Google",
   "loginWithNumber": "Login with Number",
   "mutualBuddies": "Mutual buddies",
+  "none": "None",
   "noWorriesForgotPasswordCaption": "No worries, forgetting happens to the best of us! We’ve got your back — a reset code is on its way to save the day. Hang tight, and you’ll be back in no time!",
   "overallRatings":"Overall Ratings",
   "passswordResetSuccessful": "Password Reset Successful",
@@ -92,6 +94,7 @@
   "shareAnythingYouLike": "Share anything you like, it’ll stay live for 24 hours.",
   "showAll2": "Show All",
   "showLess": "Show Less",
+  "showSomeLove": "Show some love! Rate and review this participant!",
   "signIn": "Sign In",
   "signUp": "Sign up",
   "signUpWithEmail": "Sign up with Email",
@@ -99,11 +102,14 @@
   "signUpWithNumber": "Sign up with Number",
   "similarInterests": "Similar interests",
   "sms": "SMS",
+  "taggedBuddies": "Tagged Buddies",
   "tellUsAboutYourselfOptional": "Tell us about yourself (optional)",
   "tellUsYourInterest": "What sparks your excitement? Tell us your interests!",
   "thisIsTheNameEveryoneWillSee": "This is the name everyone will see — make it shine!",
   "timeToLockThingsDownPasswordCreationMessage": "Time to lock things down, Create a password that’s as strong as your coffee and as unique as you are.",
   "timeToShowOffYourProfilePics": "Time to show off your awesome self! Upload your profile pic!",
+  "title":"Title",
+  "type": "Type",
   "uploadYourPics": "Upload your pics",
   "weAreSendingYouASecretCodeToVerifyEmail": "We’re sending you a secret code to prove this email address is really yours, Keep an eye out",
   "welcomeBackUser": "Welcome back, {username}",
@@ -2932,6 +2938,10 @@
   "@participantConfirmed": {
     "description": "When the otp has been read and confirmed"
   },
+    "participantsAllowed": "Participants Allowed",
+  "@participantsAllowed": {
+    "description": "number of participants Allowed"
+  },
   "participantOtpConfirmedCanMark": "This participant OTP has been confirmed, you can now mark the participant as present for this activity",
   "@participantOtpConfirmedCanMark": {
     "description": "When the otp has been confirmed"
@@ -3578,6 +3588,16 @@
       }
     }
   },
+  "setLocationType": "{locationType, select, physical{Physical Location} online{Online} other{--}}",
+"@setLocationType": {
+  "description": "To choose between the location type: physical or online",
+  "placeholders": {
+    "locationType": {
+      "type": "String"
+    }
+  }
+},
+
   "filterByActivityType": "Filter by Activity type",
   "@filterByActivityType": {
     "description": "Filter by activity type"
@@ -5636,7 +5656,7 @@
   "viewAttendingPlaymates": "View attending playmates",
   "postRemovedFromBookmark": "Post removed from bookmark",
   "postBookmarkedString": "Post bookmarked",
-  "nReviews": "{count, plural, other{{count} reviews} =1{{count} review}}",
+  "nReviews": "{count, plural, other{{count} Reviews} =1{{count} Review}}",
   "@nReviews": {
     "description": "number of reviews",
     "placeholders": {
