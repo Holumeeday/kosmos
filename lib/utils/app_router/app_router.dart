@@ -126,6 +126,10 @@ class AppRoute with GoRouterMixin {
             path: activityDetailsScreenPath,
             name: activityDetailsScreen,
           ),
+          createGoRoute(
+            path: editReviewPath,
+            name: editReviewScreen,
+          ),
         ],
         redirect: (context, state) {
           /// Pages used for authentication
@@ -244,8 +248,9 @@ class AppRoute with GoRouterMixin {
   static const String buddyConnectionsScreenPath = '/buddy-connections';
   static const String buddyProfileScreenPath = '/buddy-profile';
   static const String reviewsScreenPath = '/reviews';
-  static const String buddyActivitiesScreenPath = '/buddyActivities';
-  static const String activityDetailsScreenPath = '/activityDetails';
+  static const String buddyActivitiesScreenPath = '/buddy-activities';
+  static const String activityDetailsScreenPath = '/activity-details';
+  static const String editReviewPath = '/edit-review';
 
   /// Route names
 
@@ -272,8 +277,9 @@ class AppRoute with GoRouterMixin {
   static const String buddyConnectionsScreen = 'buddy-connections';
   static const String buddyProfileScreen = 'buddy-profile';
   static const String reviewsScreen = 'reviews';
-  static const String buddyActivitiesScreen = 'buddyActivities';
-  static const String activityDetailsScreen = 'activityDetails';
+  static const String buddyActivitiesScreen = 'buddy-activities';
+  static const String activityDetailsScreen = 'activity-details';
+  static const String editReviewScreen = 'edit-review';
 }
 
 class StreamListenable extends ValueNotifier<dynamic> {

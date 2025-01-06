@@ -7,13 +7,17 @@
 // ignore_for_file: type=lint
 // ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
-import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:vector_graphics/vector_graphics.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart' as _svg;
+import 'package:vector_graphics/vector_graphics.dart' as _vg;
 
 class $AssetsSvgsGen {
   const $AssetsSvgsGen();
+
+  /// Directory path: assets/svgs/activity_types
+  $AssetsSvgsActivityTypesGen get activityTypes =>
+      const $AssetsSvgsActivityTypesGen();
 
   /// Directory path: assets/svgs/auth
   $AssetsSvgsAuthGen get auth => const $AssetsSvgsAuthGen();
@@ -37,6 +41,84 @@ class $AssetsWebpGen {
 
   /// Directory path: assets/webp/onboarding
   $AssetsWebpOnboardingGen get onboarding => const $AssetsWebpOnboardingGen();
+}
+
+class $AssetsSvgsActivityTypesGen {
+  const $AssetsSvgsActivityTypesGen();
+
+  /// File path: assets/svgs/activity_types/classes.svg
+  SvgGenImage get classes =>
+      const SvgGenImage('assets/svgs/activity_types/classes.svg');
+
+  /// File path: assets/svgs/activity_types/competition.svg
+  SvgGenImage get competition =>
+      const SvgGenImage('assets/svgs/activity_types/competition.svg');
+
+  /// File path: assets/svgs/activity_types/events.svg
+  SvgGenImage get events =>
+      const SvgGenImage('assets/svgs/activity_types/events.svg');
+
+  /// File path: assets/svgs/activity_types/exercise.svg
+  SvgGenImage get exercise =>
+      const SvgGenImage('assets/svgs/activity_types/exercise.svg');
+
+  /// File path: assets/svgs/activity_types/games.svg
+  SvgGenImage get games =>
+      const SvgGenImage('assets/svgs/activity_types/games.svg');
+
+  /// File path: assets/svgs/activity_types/others.svg
+  SvgGenImage get others =>
+      const SvgGenImage('assets/svgs/activity_types/others.svg');
+
+  /// File path: assets/svgs/activity_types/outdoor_trip.svg
+  SvgGenImage get outdoorTrip =>
+      const SvgGenImage('assets/svgs/activity_types/outdoor_trip.svg');
+
+  /// File path: assets/svgs/activity_types/programme.svg
+  SvgGenImage get programme =>
+      const SvgGenImage('assets/svgs/activity_types/programme.svg');
+
+  /// File path: assets/svgs/activity_types/running.svg
+  SvgGenImage get running =>
+      const SvgGenImage('assets/svgs/activity_types/running.svg');
+
+  /// File path: assets/svgs/activity_types/seminar.svg
+  SvgGenImage get seminar =>
+      const SvgGenImage('assets/svgs/activity_types/seminar.svg');
+
+  /// File path: assets/svgs/activity_types/training.svg
+  SvgGenImage get training =>
+      const SvgGenImage('assets/svgs/activity_types/training.svg');
+
+  /// File path: assets/svgs/activity_types/walking.svg
+  SvgGenImage get walking =>
+      const SvgGenImage('assets/svgs/activity_types/walking.svg');
+
+  /// File path: assets/svgs/activity_types/webinar.svg
+  SvgGenImage get webinar =>
+      const SvgGenImage('assets/svgs/activity_types/webinar.svg');
+
+  /// File path: assets/svgs/activity_types/workshop.svg
+  SvgGenImage get workshop =>
+      const SvgGenImage('assets/svgs/activity_types/workshop.svg');
+
+  /// List of all assets
+  List<SvgGenImage> get values => [
+        classes,
+        competition,
+        events,
+        exercise,
+        games,
+        others,
+        outdoorTrip,
+        programme,
+        running,
+        seminar,
+        training,
+        walking,
+        webinar,
+        workshop
+      ];
 }
 
 class $AssetsSvgsAuthGen {
@@ -299,11 +381,16 @@ class Assets {
 }
 
 class AssetGenImage {
-  const AssetGenImage(this._assetName, {this.size = null});
+  const AssetGenImage(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  });
 
   final String _assetName;
 
   final Size? size;
+  final Set<String> flavors;
 
   Image image({
     Key? key,
@@ -323,7 +410,7 @@ class AssetGenImage {
     ImageRepeat repeat = ImageRepeat.noRepeat,
     Rect? centerSlice,
     bool matchTextDirection = false,
-    bool gaplessPlayback = false,
+    bool gaplessPlayback = true,
     bool isAntiAlias = false,
     String? package,
     FilterQuality filterQuality = FilterQuality.low,
@@ -377,20 +464,22 @@ class AssetGenImage {
 class SvgGenImage {
   const SvgGenImage(
     this._assetName, {
-    this.size = null,
+    this.size,
+    this.flavors = const {},
   }) : _isVecFormat = false;
 
   const SvgGenImage.vec(
     this._assetName, {
-    this.size = null,
+    this.size,
+    this.flavors = const {},
   }) : _isVecFormat = true;
 
   final String _assetName;
-
   final Size? size;
+  final Set<String> flavors;
   final bool _isVecFormat;
 
-  SvgPicture svg({
+  _svg.SvgPicture svg({
     Key? key,
     bool matchTextDirection = false,
     AssetBundle? bundle,
@@ -403,19 +492,30 @@ class SvgGenImage {
     WidgetBuilder? placeholderBuilder,
     String? semanticsLabel,
     bool excludeFromSemantics = false,
-    SvgTheme? theme,
+    _svg.SvgTheme? theme,
     ColorFilter? colorFilter,
     Clip clipBehavior = Clip.hardEdge,
     @deprecated Color? color,
     @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
     @deprecated bool cacheColorFilter = false,
   }) {
-    return SvgPicture(
-      _isVecFormat
-          ? AssetBytesLoader(_assetName,
-              assetBundle: bundle, packageName: package)
-          : SvgAssetLoader(_assetName,
-              assetBundle: bundle, packageName: package),
+    final _svg.BytesLoader loader;
+    if (_isVecFormat) {
+      loader = _vg.AssetBytesLoader(
+        _assetName,
+        assetBundle: bundle,
+        packageName: package,
+      );
+    } else {
+      loader = _svg.SvgAssetLoader(
+        _assetName,
+        assetBundle: bundle,
+        packageName: package,
+        theme: theme,
+      );
+    }
+    return _svg.SvgPicture(
+      loader,
       key: key,
       matchTextDirection: matchTextDirection,
       width: width,
@@ -426,7 +526,6 @@ class SvgGenImage {
       placeholderBuilder: placeholderBuilder,
       semanticsLabel: semanticsLabel,
       excludeFromSemantics: excludeFromSemantics,
-      theme: theme,
       colorFilter: colorFilter ??
           (color == null ? null : ColorFilter.mode(color, colorBlendMode)),
       clipBehavior: clipBehavior,

@@ -5,35 +5,38 @@ class OverlappingProfiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 26, 
+    return const SizedBox(
+      height: 26,
       width: 60,
       child: Stack(
         children: [
-          _buildProfileImage(
-            "",
-            0,
-          ),
-          _buildProfileImage(
-            "",
-            16,
-          ),
-          _buildProfileImage(
-            "",
-            32,
-          ),
+          BuildProfileImage(imageUrl: "", leftPosition: 0),
+          BuildProfileImage(imageUrl: "", leftPosition: 16),
+          BuildProfileImage(imageUrl: "", leftPosition: 32),
         ],
       ),
     );
   }
+}
 
-  /// Helper function to create circular images with left margin
-  Widget _buildProfileImage(String imageUrl, double leftPosition) {
+class BuildProfileImage extends StatelessWidget {
+  const BuildProfileImage({
+    super.key,
+    required this.imageUrl,
+    required this.leftPosition,
+    this.size,
+  });
+
+  final String imageUrl;
+  final double leftPosition;
+  final double? size;
+  @override
+  Widget build(BuildContext context) {
     return Positioned(
       right: leftPosition,
       child: Container(
-        width: 24,
-        height: 24,
+        width: size ?? 24,
+        height: size ?? 24,
         decoration: BoxDecoration(
           color: Colors.lightBlue,
           shape: BoxShape.circle,

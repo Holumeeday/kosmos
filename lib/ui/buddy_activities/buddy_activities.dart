@@ -85,7 +85,7 @@ class BuddyActivitiesPage extends StatelessWidget {
                         ),
                         trailing: InkWell(
                           onTap: () {
-                            context.push(AppRoute.activityDetailsScreenPath);
+                            context.pushNamed(AppRoute.activityDetailsScreen,);
                           },
                           child: Text(
                             context.loc.viewActivity,

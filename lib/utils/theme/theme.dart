@@ -292,6 +292,8 @@ class MyThemes {
         fontWeight: FontWeight.w700,
         color: Colors.white,
       ),
+
+      /// fontSize=20, fontWeight=500, color=white
       displayMedium: TextStyle(
         fontSize: 20,
         fontWeight: FontWeight.w500,
