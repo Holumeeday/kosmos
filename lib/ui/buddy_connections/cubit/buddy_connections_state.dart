@@ -19,28 +19,28 @@ class BuddyConnectionsState extends Equatable {
   });
 
   /// List of all users being followed by the current user.
-  final List<BuddyModel> fFollowing;
+  final List<DummyBuddyModel> fFollowing;
 
   /// Filtered list of users being followed with connection type `'buddy'`.
-  final List<BuddyModel> fFollowingListBuddies;
+  final List<DummyBuddyModel> fFollowingListBuddies;
 
   /// Indicates whether to show all followers or limit the displayed list.
   final bool fFollowingShowAll;
 
   /// List of all users following the current user.
-  final List<BuddyModel> fFollowers;
+  final List<DummyBuddyModel> fFollowers;
 
   /// Filtered list of users following with connection type `'buddy'`.
-  final List<BuddyModel> fFollowersListBuddies;
+  final List<DummyBuddyModel> fFollowersListBuddies;
 
   /// Indicates whether to show all followers or limit the displayed list.
   final bool fFollowersShowAll;
 
   /// List of all buddies connected with the current user.
-  final List<BuddyModel> fBuddies;
+  final List<DummyBuddyModel> fBuddies;
 
   /// Filtered list of buddies with connection type `'buddy'`.
-  final List<BuddyModel> fBuddiesListBuddies;
+  final List<DummyBuddyModel> fBuddiesListBuddies;
 
   /// Indicates whether to show all buddies or limit the displayed list.
   final bool fBuddiesShowAll;
@@ -60,15 +60,15 @@ class BuddyConnectionsState extends Equatable {
 
   /// Creates a copy of the current state with updated values for the specified fields.
   BuddyConnectionsState copyWith({
-    List<BuddyModel>? fFollowing,
+    List<DummyBuddyModel>? fFollowing,
     bool? fFollowingShowAll,
-    List<BuddyModel>? fFollowingListBuddies,
-    List<BuddyModel>? fFollowers,
+    List<DummyBuddyModel>? fFollowingListBuddies,
+    List<DummyBuddyModel>? fFollowers,
     bool? fFollowersShowAll,
-    List<BuddyModel>? fFollowersListBuddies,
-    List<BuddyModel>? fBuddies,
+    List<DummyBuddyModel>? fFollowersListBuddies,
+    List<DummyBuddyModel>? fBuddies,
     bool? fBuddiesShowAll,
-    List<BuddyModel>? fBuddiesListBuddies,
+    List<DummyBuddyModel>? fBuddiesListBuddies,
   }) {
     return BuddyConnectionsState(
       fFollowing: fFollowing ?? this.fFollowing,

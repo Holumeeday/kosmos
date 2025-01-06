@@ -40,7 +40,7 @@ class _BuddyProfile extends StatelessWidget {
     required this.fProfile,
   });
 
-  final BuddyModel fProfile;
+  final DummyBuddyModel fProfile;
 
   @override
   Widget build(BuildContext context) {

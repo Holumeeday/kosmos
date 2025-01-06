@@ -6,5 +6,5 @@ part 'buddy_profile_state.dart';
 
 class BuddyProfileCubit extends Cubit<BuddyProfileState> {
   BuddyProfileCubit()
-      : super(const BuddyProfileState(fBuddyModel: BuddyModel()));
+      : super(const BuddyProfileState(fBuddyModel: DummyBuddyModel()));
 }

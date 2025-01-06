@@ -4,9 +4,9 @@ class BuddyProfileState extends Equatable {
   const BuddyProfileState({
     required this.fBuddyModel,
   });
-  final BuddyModel fBuddyModel;
+  final DummyBuddyModel fBuddyModel;
 
-  BuddyProfileState copyWith({BuddyModel? fBuddyModel}) {
+  BuddyProfileState copyWith({DummyBuddyModel? fBuddyModel}) {
     return BuddyProfileState(
       fBuddyModel: fBuddyModel ?? this.fBuddyModel,
     );
