@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/data/data.dart';
+import 'package:playkosmos_v3/data/repositories/buddies_remote_api_repository.dart';
 import 'package:playkosmos_v3/ui/buddies/cubit/buddies_cubit.dart';
 import 'package:playkosmos_v3/ui/buddy_connections/cubit/buddy_connections_cubit.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/cubit/buddy_profile_cubit.dart';
@@ -11,6 +12,7 @@ import 'package:playkosmos_v3/ui/logout/cubit/logout_cubit.dart';
 import 'package:playkosmos_v3/ui/main/cubit/main_page_cubit.dart';
 import 'package:playkosmos_v3/ui/reviews/cubit/reviews_cubit.dart';
 import 'package:playkosmos_v3/ui/select_language/cubit/select_language_cubit.dart';
+import 'package:playkosmos_v3/utils/location_manager.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// Root widget of the application responsible for setting up global dependencies,
@@ -67,6 +69,10 @@ class App extends StatelessWidget {
             fAuthStorage: context.read<AuthFlowStorage>(),
           ),
         ),
+        RepositoryProvider(
+          create: (context) => BuddiesRemoteApiRepository(
+              remoteApi: AuthRemoteApiNodeJs(fCookStorage: fCookiesStorage)),
+        ),
       ],
       child: const _AppBloc(),
     );
@@ -88,7 +94,9 @@ class _AppBloc extends StatelessWidget {
           create: (_) => MainPageCubit(),
         ),
         BlocProvider(
-          create: (_) => BuddiesCubit(),
+          create: (_) => BuddiesCubit(
+            fBuddiesRepository: context.read<BuddiesRemoteApiRepository>(),
+          ),
         ),
         BlocProvider(
           create: (_) => BuddyProfileCubit(),
@@ -99,7 +107,7 @@ class _AppBloc extends StatelessWidget {
         BlocProvider(
           create: (_) => ReviewsCubit(),
         ),
-         BlocProvider(
+        BlocProvider(
           create: (context) => LogoutCubit(
             fAuthRepository: context.read<AuthRemoteApiRepository>(),
           ),
@@ -121,11 +129,21 @@ class _AppView extends StatefulWidget {
 
 class _AppViewState extends State<_AppView> {
   late GoRouter _fRouter;
-
+  late LocationManager _locationManager;
   @override
   void initState() {
     super.initState();
     _fRouter = context.read<AppRoute>().router;
+    _locationManager = LocationManager(context.read<AuthRemoteApiRepository>());
+    // Start location tracking when the app initializes
+    _locationManager.startTracking();
+  }
+
+  @override
+  void dispose() {
+    // Stop location tracking when the app is closed
+    _locationManager.stopTracking();
+    super.dispose();
   }
 
   @override

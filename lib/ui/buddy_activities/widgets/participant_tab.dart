@@ -36,10 +36,8 @@ class _ParticipantTabState extends State<ParticipantTab> {
                 child: Column(
                   children: [
                     ListTile(
-                      title: Text(
-                        context.loc.edit,
-                        style: context.textTheme.headlineLarge!
-                      ),
+                      title: Text(context.loc.edit,
+                          style: context.textTheme.headlineLarge!),
                       onTap: () {
                         context.push(AppRoute.editReviewPath);
                       },
@@ -139,7 +137,7 @@ class _ParticipantTabState extends State<ParticipantTab> {
                     ),
                     title: Text(
                       followingList[index].userName,
-                      style: context.textTheme.bodyLarge,
+                      style: context.appTextTheme.buttonMedium,
                     ),
                     trailing: trailing(index, context)),
                 const SizedBox(height: 16),

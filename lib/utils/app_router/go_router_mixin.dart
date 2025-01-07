@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/data/data.dart';
+import 'package:playkosmos_v3/data/repositories/buddies_remote_api_repository.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/auth_provider/auth_provider_page.dart';
 import 'package:playkosmos_v3/ui/buddies/cubit/buddies_cubit.dart';
@@ -262,7 +263,9 @@ mixin GoRouterMixin {
         return _createRoute(
           routeScreen: BlocProvider(
             child: const BuddiesPage(),
-            create: (context) => BuddiesCubit(),
+            create: (context) => BuddiesCubit(
+              fBuddiesRepository: context.read<BuddiesRemoteApiRepository>(),
+            ),
           ),
         );
       case AppRoute.buddyConnectionsScreenPath:

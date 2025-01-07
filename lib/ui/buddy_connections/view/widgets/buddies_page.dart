@@ -66,7 +66,7 @@ class BuddiesTabPage extends StatelessWidget {
                                   ),
                                   title: Text(
                                     buddy.userName,
-                                    style: context.textTheme.bodyLarge,
+                                    style: context.appTextTheme.buttonMedium,
                                   ),
                                 ),
                                 const SizedBox(height: 16),
@@ -134,7 +134,7 @@ class BuddiesTabPage extends StatelessWidget {
                                 ),
                                 title: Text(
                                   buddiesList[index].userName,
-                                  style: context.textTheme.bodyLarge,
+                                  style: context.appTextTheme.buttonMedium,
                                 ),
                                 trailing: IntrinsicWidth(
                                   child: buddiesList[index]

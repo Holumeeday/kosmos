@@ -122,7 +122,7 @@ class ActivityType extends StatelessWidget {
     // Render activity type
     return Row(
       children: [
-        SvgPicture.asset(iconPath, height: 24, width: 24, color: color),
+        SvgPicture.asset(iconPath, height: 24, width: 24, colorFilter: ColorFilter.mode(color!, BlendMode.srcIn) ),
         const HSpace(8),
         Text(
           label,

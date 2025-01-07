@@ -66,7 +66,7 @@ class FollowingPage extends StatelessWidget {
                                 ),
                                 title: Text(
                                   buddy.userName,
-                                  style: context.textTheme.bodyLarge,
+                                  style: context.appTextTheme.buttonMedium,
                                 ),
                               ),
                               const SizedBox(height: 16),
@@ -132,15 +132,15 @@ class FollowingPage extends StatelessWidget {
                             ),
                             title: Text(
                               followingList[index].userName,
-                              style: context.textTheme.bodyLarge,
+                              style: context.appTextTheme.buttonMedium,
                             ),
-                            trailing:IntrinsicWidth(
-                               
-                                  child:followingList[index].connectionType
-                                      .toConnectionButton(
-                                    context,
-                                    height: 40,
-                                  )),
+                            trailing: IntrinsicWidth(
+                                child: followingList[index]
+                                    .connectionType
+                                    .toConnectionButton(
+                                      context,
+                                      height: 40,
+                                    )),
                           ),
                           const SizedBox(height: 16),
                         ],

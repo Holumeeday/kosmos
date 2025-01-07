@@ -133,9 +133,7 @@ class SubscriptionPlanIcon extends StatelessWidget {
                   fSubscriptionPlan,
                 ),
                 textAlign: TextAlign.center,
-                style: fTextTheme.bodyLarge?.copyWith(
-                  fontWeight: FontWeight.w400,
-                ),
+                style: context.appTextTheme.body 
               ),
             ),
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/connection_type_extention.dart';
@@ -9,27 +10,65 @@ import 'package:playkosmos_v3/ui/buddies/cubit/buddies_cubit.dart';
 import 'package:playkosmos_v3/ui/buddies/view/widgets/interest_chips.dart';
 import 'package:playkosmos_v3/ui/buddies/view/widgets/next_arrow_button.dart';
 import 'package:playkosmos_v3/ui/buddies/view/widgets/overlapping_profiles.dart';
+import 'package:playkosmos_v3/ui/sign_in_email/cubit/sign_in_cubit.dart';
+import 'package:playkosmos_v3/ui/sign_in_phone/cubit/sign_in_phone_cubit.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// Buddies Page
 /// A page that displays a user profile with details like distance, interests, and mutual buddies.
 /// @author: Chidera Chijama
-class BuddiesPage extends StatelessWidget {
+class BuddiesPage extends StatefulWidget {
   const BuddiesPage({super.key});
 
   @override
+  State<BuddiesPage> createState() => _BuddiesPageState();
+}
+
+class _BuddiesPageState extends State<BuddiesPage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    context.read<BuddiesCubit>().fetchBuddies();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BuddiesCubit, BuddiesState>(
+    return BlocConsumer<BuddiesCubit, BuddiesState>(
+      listener: (context, state) {
+        if (state.status == BuddiesStatus.failure &&
+            state.errorMessage != null) {
+          SnackBarUtil.showError(message: state.errorMessage!);
+        }
+      },
       builder: (context, state) {
-        return PageView.builder(
-          scrollDirection: Axis.vertical,
-          itemCount: state.fBuddiesModel.length,
-          itemBuilder: (context, index) {
-            return _BuddyProfile(
-              fProfile: state.fBuddiesModel[index],
-            );
-          },
-        );
+        return state.fBuddiesModel == null
+            ? const Center(child: CircularProgressIndicator())
+            : ShowAsyncBusyIndicator(
+                fInAsync: context.select((BuddiesCubit cubit) =>
+                    cubit.state.status == BuddiesStatus.loading),
+                fChild: PageView.builder(
+                  scrollDirection: Axis.vertical,
+                  itemCount: state.fBuddiesModel!.length,
+                  itemBuilder: (context, index) {
+                    return _BuddyProfile(
+                      fBuddyId: state.fBuddiesModel![index].id,
+                    );
+                  },
+                ));
+        //  ShowAsyncBusyIndicator(
+
+        //     fInAsync: context.select((BuddiesCubit cubit) =>
+        //         cubit.state.status == BuddiesStatus.loading),
+        //     fChild: PageView.builder(
+        //       scrollDirection: Axis.vertical,
+        //       itemCount: state.fBuddiesModel!.length,
+        //       itemBuilder: (context, index) {
+        //         return _BuddyProfile(
+        //           fBuddyId: state.fBuddiesModel![index].id,
+        //         );
+        //       },
+        //     ));
       },
     );
   }
@@ -37,23 +76,35 @@ class BuddiesPage extends StatelessWidget {
 
 class _BuddyProfile extends StatelessWidget {
   const _BuddyProfile({
-    required this.fProfile,
+    required this.fBuddyId,
   });
 
-  final DummyBuddyModel fProfile;
+  final String fBuddyId;
 
   @override
   Widget build(BuildContext context) {
+    final fProfile =
+        context.watch<BuddiesCubit>().state.fBuddiesModel!.firstWhere(
+              (element) => element.id == fBuddyId,
+            );
+    double distance = Geolocator.distanceBetween(
+      fProfile.location!.latitude!,
+      fProfile.location!.longitude!,
+      context.read<SignInWithEmailCubit>().state.user?.locations!.latitude! ??
+          context.read<SignInPhoneCubit>().state.user!.locations!.latitude!,
+      context.read<SignInWithEmailCubit>().state.user?.locations!.longitude! ??
+          context.read<SignInPhoneCubit>().state.user!.locations!.longitude!,
+    );
     return Stack(
       children: [
         // Background Image
-        if (fProfile.profileImages.isNotEmpty)
+        if (fProfile.pictures!.isNotEmpty)
           Positioned.fill(
               child: Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage(fProfile.profileImages.first))),
+                    image: NetworkImage(fProfile.pictures!.first))),
           )),
 
         // Gradient Overlay at the bottom
@@ -95,7 +146,7 @@ class _BuddyProfile extends StatelessWidget {
                             Icon(Icons.location_on_sharp,
                                 color: context.colors.primary),
                             Text(
-                              "${fProfile.distance} ${context.loc.miles} ${context.loc.away}",
+                              "$distance ${context.loc.miles} ${context.loc.away}",
                               style: context.textTheme.bodyMedium!
                                   .copyWith(color: context.colors.primary),
                             )
@@ -104,7 +155,7 @@ class _BuddyProfile extends StatelessWidget {
                         context),
                     _buildBadge(
                         Text(
-                          "${fProfile.similarInterestsCount} ${context.loc.similarInterests} ",
+                          "${fProfile.similarInterests!.length} ${context.loc.similarInterests} ",
                           style: context.textTheme.headlineSmall!
                               .copyWith(color: context.appColors.textColor),
                         ),
@@ -114,7 +165,7 @@ class _BuddyProfile extends StatelessWidget {
                           children: [
                             const OverlappingProfiles(),
                             Text(
-                              " ${fProfile.mutualBuddiesCount > 12 ? '+' : ''}${fProfile.mutualBuddiesCount} ${context.loc.mutualBuddies}",
+                              " ${fProfile.mutualBuddies!.total! > 12 ? '+' : ''}${fProfile.mutualBuddies!.total} ${context.loc.mutualBuddies}",
                               style: context.textTheme.headlineSmall!
                                   .copyWith(color: context.appColors.textColor),
                             )
@@ -132,7 +183,7 @@ class _BuddyProfile extends StatelessWidget {
                   children: [
                     Expanded(
                       child: TextScaleFactorClamp(
-                        fChild: Text(fProfile.userName,
+                        fChild: Text(fProfile.fullname!,
                             style: context.textTheme.displayLarge!
                                 .copyWith(color: Colors.white, fontSize: 28)),
                       ),
@@ -141,7 +192,7 @@ class _BuddyProfile extends StatelessWidget {
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        fProfile.connectionType.toConnectionButton(context),
+                        // fProfile.l connectionType.toConnectionButton(context),
                         const HSpace(5),
                         NextArrowButton(
                           fOnTap: () {
@@ -159,7 +210,7 @@ class _BuddyProfile extends StatelessWidget {
                 // Interests Chips
                 InterestChips(
                   // Should only show few interests here
-                  fInterests: fProfile.interests.take(4).toList(),
+                  fInterests: fProfile.interests!.take(4).toList(),
                 )
               ],
             ),

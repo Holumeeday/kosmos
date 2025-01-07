@@ -1,6 +1,111 @@
+import 'package:playkosmos_v3/models/location_model.dart';
+
 /// Represents a buddy user in the system with their profile and interaction data.
 /// @author: Chidera Chijama
 ///
+class BuddyModel {
+  late String id;
+  List<String>? pictures;
+  Locations? location;
+  List<String>? similarInterests;
+  MutualBuddies? mutualBuddies;
+  bool? following;
+  bool? follower;
+  String? fullname;
+  List<String>? interests;
+
+  BuddyModel(
+      { required this.id,
+       this.pictures,
+      this.location,
+      this.similarInterests,
+      this.mutualBuddies,
+      this.following,
+      this.follower,
+      this.fullname,
+      this.interests});
+
+  BuddyModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    pictures = json['pictures'].cast<String>();
+    location = json['location'] != null
+        ?  Locations.fromJson(json['location'])
+        : null;
+    similarInterests = json['similarInterests'].cast<String>();
+    mutualBuddies = json['mutualBuddies'] != null
+        ? new MutualBuddies.fromJson(json['mutualBuddies'])
+        : null;
+    following = json['following'];
+    follower = json['follower'];
+    fullname = json['fullname'];
+    interests = json['interests'].cast<String>();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = id;
+    data['pictures'] = pictures;
+    if (location != null) {
+      data['location'] = location!.toJson();
+    }
+    data['similarInterests'] = similarInterests;
+    if (mutualBuddies != null) {
+      data['mutualBuddies'] = mutualBuddies!.toJson();
+    }
+    data['following'] = following;
+    data['follower'] = follower;
+    data['fullname'] = fullname;
+    data['interests'] = interests;
+    return data;
+  }
+}
+
+
+
+class MutualBuddies {
+  List<Buddies>? buddies;
+  int? total;
+
+  MutualBuddies({this.buddies, this.total});
+
+  MutualBuddies.fromJson(Map<String, dynamic> json) {
+    if (json['buddies'] != null) {
+      buddies = <Buddies>[];
+      json['buddies'].forEach((v) {
+        buddies!.add(new Buddies.fromJson(v));
+      });
+    }
+    total = json['total'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (buddies != null) {
+      data['buddies'] = buddies!.map((v) => v.toJson()).toList();
+    }
+    data['total'] = total;
+    return data;
+  }
+}
+
+class Buddies {
+  String? id;
+  List<String>? pictures;
+
+  Buddies({this.id, this.pictures});
+
+  Buddies.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    pictures = json['pictures'].cast<String>();
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = id;
+    data['pictures'] = pictures;
+    return data;
+  }
+}
 class DummyBuddyModel {
   /// Distance from the current user in miles
   final int distance;
