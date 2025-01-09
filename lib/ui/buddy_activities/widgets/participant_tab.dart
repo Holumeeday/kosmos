@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:playkosmos_v3/common_widgets/activity_more_option_user_modal.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/constants/buddies_list.dart';
 import 'package:playkosmos_v3/extensions/connection_type_extention.dart';
@@ -42,17 +41,17 @@ class _ParticipantTabState extends State<ParticipantTab> {
                         context.push(AppRoute.editReviewPath);
                       },
                     ),
-                    Divider(),
+                    const Divider(),
                     ListTile(
                       title: Text(
                         context.loc.delete,
                         style: context.textTheme.headlineLarge!.copyWith(
-                          color: Color(0xffAA0606),
+                          color: const Color(0xffAA0606),
                         ),
                       ),
                       onTap: () {},
                     ),
-                    Divider(),
+                    const Divider(),
                   ],
                 ),
               );

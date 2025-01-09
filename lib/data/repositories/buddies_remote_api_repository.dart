@@ -9,24 +9,17 @@ class BuddiesRemoteApiRepository {
     required RemoteApi remoteApi,
   }) : _remoteApi = remoteApi;
 
-
   // Example method to fetch buddies data
   Future<GenericResponse> fetchBuddies() async {
-     try {
-      final res = await _remoteApi.get(
-        'buddies?limit=10&page=9',
-        queryParameters: {
-          "limit":10,
-          "page":1
-        }
-      );
+    try {
+      int limit = 10;
+      int page = 1;
+      final res = await _remoteApi.get('buddies?limit=$limit&page=$page',
+          // queryParameters: {"limit": 10, "page": 1}
+          );
       return GenericResponse.fromJson(res.data as Map<String, dynamic>);
     } catch (_) {
       rethrow;
     }
   }
-
-
 }
-
-

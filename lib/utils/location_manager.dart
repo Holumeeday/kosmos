@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
@@ -8,51 +9,56 @@ import 'package:playkosmos_v3/ui/sign_in_email/cubit/sign_in_cubit.dart';
 import 'package:playkosmos_v3/ui/sign_in_phone/cubit/sign_in_phone_cubit.dart';
 
 class LocationManager {
-  LocationManager(this._authRemoteApiRepository);
-  // Stores the last updated position
+  LocationManager(this._authRemoteApiRepository, this._permissionsRepository);
   Position? _lastUpdatedPosition;
-
-  // Stream subscription for location updates
   StreamSubscription<Position>? _locationSubscription;
-
   final AuthRemoteApiRepository _authRemoteApiRepository;
+  final PermissionsRepository _permissionsRepository;
 
-  // Minimum distance (in meters) for a significant location update
   final double significantDistance = 50;
 
-  /// Starts listening to location updates
-  void startTracking() {
-    const locationSettings = LocationSettings(
-      accuracy: LocationAccuracy.high,
-      distanceFilter: 20, // Only trigger if the user moves more than 20 meters
-    );
+  void startTracking() async {
+    try {
+      final fIsPermitted =
+          await _permissionsRepository.requestLocationPermission();
+      if (fIsPermitted) {
+        debugPrint('Location permisions are disabled.');
+        return null;
+      }
+      log("@########### permisions1 $fIsPermitted");
+      const locationSettings = LocationSettings(
+        accuracy: LocationAccuracy.medium,
+        distanceFilter: 20,
+      );
 
-    _locationSubscription =
-        Geolocator.getPositionStream(locationSettings: locationSettings).listen(
-      (Position position) async {
-        try {
-          // Check for significant changes
-          if (_lastUpdatedPosition == null ||
-              _isSignificantChange(_lastUpdatedPosition!, position)) {
-            // Update location in the database
-            await _authRemoteApiRepository.updateLocation(Locations(
-                latitude: position.latitude, longitude: position.longitude));
-            // Update the last known position
-            _lastUpdatedPosition = position;
+      _locationSubscription =
+          Geolocator.getPositionStream(locationSettings: locationSettings)
+              .listen(
+        (Position position) async {
+          try {
+            if (_lastUpdatedPosition == null ||
+                _isSignificantChange(_lastUpdatedPosition!, position)) {
+              log('###### $_lastUpdatedPosition, $position');
+              await _authRemoteApiRepository.updateLocation(Locations(
+                  latitude: position.latitude, longitude: position.longitude));
+              _lastUpdatedPosition = position;
+            }
+          } catch (e) {
+            debugPrint('Error updating location: $e');
           }
-        } catch (e) {
-          debugPrint('Error updating location: $e');
-        }
-      },
-    );
+        },
+      );
+
+      debugPrint('Location tracking started.');
+    } catch (e) {
+      debugPrint('Error starting location tracking: $e');
+    }
   }
 
-  /// Stops listening to location updates
   void stopTracking() {
     _locationSubscription?.cancel();
   }
 
-  /// Checks if the new position is significantly different from the last position
   bool _isSignificantChange(Position oldPosition, Position newPosition) {
     double distance = Geolocator.distanceBetween(
       oldPosition.latitude,
@@ -60,21 +66,57 @@ class LocationManager {
       newPosition.latitude,
       newPosition.longitude,
     );
-
-    return distance >
-        significantDistance; // Return true if distance exceeds the threshold
+    return distance > significantDistance;
   }
 
-  Locations? getCurrentUserLocation(BuildContext context) {
-    // Check the `SignInWithEmailCubit` for user location
-    final emailLocation =
-        context.read<SignInWithEmailCubit>().state.user?.locations;
+  Future<Locations?> getCurrentUserLocation() async {
+    try {
+      // final fIsPermitted =
+      //     await _permissionsRepository.requestLocationPermission();
+      // log("@########### permisions $fIsPermitted");
 
-    // Check the `SignInWithPhoneCubit` for user location
-    final phoneLocation =
-        context.read<SignInPhoneCubit>().state.user?.locations;
+      // if (fIsPermitted) {
+      //   debugPrint('Location permisions are disabled.');
+      //   return null;
+      // }
+ bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!serviceEnabled) {
+        debugPrint('Location services are disabled.');
+        return null;
+      }
 
-    // Return the first non-null location
-    return emailLocation ?? phoneLocation;
+      LocationPermission permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+        if (permission == LocationPermission.denied) {
+          debugPrint('Location permissions are denied.');
+          return null;
+        }
+      }
+
+      if (permission == LocationPermission.deniedForever) {
+        debugPrint(
+            'Location permissions are permanently denied. Cannot access location.');
+        return null;
+      }
+      Position position = await Geolocator.getCurrentPosition();
+
+      if (_lastUpdatedPosition == null ||
+          _isSignificantChange(_lastUpdatedPosition!, position)) {
+        await _authRemoteApiRepository.updateLocation(Locations(
+          latitude: position.latitude,
+          longitude: position.longitude,
+        ));
+        _lastUpdatedPosition = position;
+      }
+
+      return Locations(
+        latitude: position.latitude,
+        longitude: position.longitude,
+      );
+    } catch (e) {
+      debugPrint('Error getting current location: $e');
+      return null;
+    }
   }
 }

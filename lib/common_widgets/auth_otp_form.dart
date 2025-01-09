@@ -81,14 +81,14 @@ class _AuthOTPFormState extends State<AuthOTPForm> {
     _fOtpController = TextEditingController()
       ..addListener(() {
         if (mounted) {
-          final _fCurrentText = _fOtpController.text;
+          final fCurrentText = _fOtpController.text;
           // Regex pattern to check if the input is a number and exactly 6 digits long.
-          final isValidOtp = RegExp(r'^\d{6}$').hasMatch(_fCurrentText);
+          final isValidOtp = RegExp(r'^\d{6}$').hasMatch(fCurrentText);
 
           // Enable the "Next" button if the OTP is 6 digits long and valid.
           _dCanNext = isValidOtp;
           if (isValidOtp) {
-            widget.fOnChanged.call(_fCurrentText);
+            widget.fOnChanged.call(fCurrentText);
           }
           setState(() {});
         }

@@ -52,6 +52,7 @@ import 'package:playkosmos_v3/ui/sign_up_phone_number/view/sign_up_phone_number_
 import 'package:playkosmos_v3/ui/signup_with_email/cubit/sign_up_with_email_cubit.dart';
 import 'package:playkosmos_v3/ui/signup_with_email/view/sign_up_with_email_page.dart';
 import 'package:playkosmos_v3/ui/splash/splash_page.dart';
+import 'package:playkosmos_v3/utils/location_manager.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 mixin GoRouterMixin {
@@ -264,6 +265,7 @@ mixin GoRouterMixin {
           routeScreen: BlocProvider(
             child: const BuddiesPage(),
             create: (context) => BuddiesCubit(
+              fLocationManager: context.read<LocationManager>(),
               fBuddiesRepository: context.read<BuddiesRemoteApiRepository>(),
             ),
           ),

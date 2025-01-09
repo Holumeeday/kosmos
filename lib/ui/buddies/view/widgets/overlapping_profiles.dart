@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class OverlappingProfiles extends StatelessWidget {
-  const OverlappingProfiles({super.key});
-
+  const OverlappingProfiles({super.key, required this.fProfilePictures});
+ final  List<String> fProfilePictures;
   @override
   Widget build(BuildContext context) {
     return const SizedBox(

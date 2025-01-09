@@ -73,6 +73,8 @@ class App extends StatelessWidget {
           create: (context) => BuddiesRemoteApiRepository(
               remoteApi: AuthRemoteApiNodeJs(fCookStorage: fCookiesStorage)),
         ),
+          RepositoryProvider(
+          create: (context) => LocationManager(context.read<AuthRemoteApiRepository>(), context.read<PermissionsRepository>()))
       ],
       child: const _AppBloc(),
     );
@@ -95,6 +97,8 @@ class _AppBloc extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => BuddiesCubit(
+              fLocationManager: context.read<LocationManager>(),
+
             fBuddiesRepository: context.read<BuddiesRemoteApiRepository>(),
           ),
         ),
@@ -134,7 +138,7 @@ class _AppViewState extends State<_AppView> {
   void initState() {
     super.initState();
     _fRouter = context.read<AppRoute>().router;
-    _locationManager = LocationManager(context.read<AuthRemoteApiRepository>());
+    _locationManager = LocationManager(context.read<AuthRemoteApiRepository>(), context.read<PermissionsRepository>());
     // Start location tracking when the app initializes
     _locationManager.startTracking();
   }

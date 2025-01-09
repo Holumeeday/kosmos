@@ -235,11 +235,11 @@ class ActivityDetailsTab extends StatelessWidget {
           content(Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              RestrictionLabel(context.loc.participantsAllowed, context),
+              restrictionLabel(context.loc.participantsAllowed, context),
               const VSpace(8),
               Text('100', style: context.appTextTheme.buttonMedium),
               const VSpace(16),
-              RestrictionLabel(context.loc.ageLimit, context),
+              restrictionLabel(context.loc.ageLimit, context),
               const VSpace(16),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -252,7 +252,7 @@ class ActivityDetailsTab extends StatelessWidget {
                 ],
               ),
               const VSpace(16),
-              RestrictionLabel(context.loc.genderRestriction, context),
+              restrictionLabel(context.loc.genderRestriction, context),
               const VSpace(8),
               Text(context.loc.none, style: context.appTextTheme.buttonMedium),
             ],
@@ -272,7 +272,7 @@ class ActivityDetailsTab extends StatelessWidget {
     );
   }
 
-  Container RestrictionLabel(String fText, BuildContext context) {
+  Container restrictionLabel(String fText, BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       decoration: BoxDecoration(
