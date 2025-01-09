@@ -114,6 +114,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         // Disable the default semantic strategy for the app bar
         excludeHeaderSemantics: true,
         titleSpacing: 4,
+        
         backgroundColor: fAppBarColor,
         leadingWidth: leadingWidth,
         toolbarHeight: fAppBarHeight,

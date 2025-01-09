@@ -52,7 +52,7 @@ class _BuddiesPageState extends State<BuddiesPage> {
                   itemBuilder: (context, index) {
                     return _BuddyProfile(
                       fBuddyId: state.fBuddiesModel![index].id,
-                      fLocation: state.fUserLocation!,
+                      // fLocation: state.fUserLocation!,
                     );
                   },
                 ));
@@ -77,23 +77,23 @@ class _BuddiesPageState extends State<BuddiesPage> {
 class _BuddyProfile extends StatelessWidget {
   const _BuddyProfile({
     required this.fBuddyId,
-    required this.fLocation,
+    // required this.fLocation,
   });
 
   final String fBuddyId;
-  final Locations fLocation;
+  // final Locations fLocation;
   @override
   Widget build(BuildContext context) {
     final fProfile =
         context.watch<BuddiesCubit>().state.fBuddiesModel!.firstWhere(
               (element) => element.id == fBuddyId,
             );
-    double distance = Geolocator.distanceBetween(
-      fProfile.location!.latitude ?? 0,
-      fProfile.location!.longitude ?? 0,
-      fLocation.latitude ?? 0,
-      fLocation.longitude ?? 0,
-    );
+    // double distance = Geolocator.distanceBetween(
+    //   fProfile.location!.latitude ?? 0,
+    //   fProfile.location!.longitude ?? 0,
+    //   fLocation.latitude ?? 0,
+    //   fLocation.longitude ?? 0,
+    // );
     return Stack(
       children: [
         // Background Image
@@ -143,21 +143,21 @@ class _BuddyProfile extends StatelessWidget {
                   runSpacing: 9,
                   spacing: 8,
                   children: [
-                    if (fProfile.similarInterests.isNotEmpty)
-                      _buildBadge(
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(Icons.location_on_sharp,
-                                  color: context.colors.primary),
-                              Text(
-                                "${distance.round()} ${context.loc.miles} ${context.loc.away}",
-                                style: context.textTheme.bodyMedium!
-                                    .copyWith(color: context.colors.primary),
-                              )
-                            ],
-                          ),
-                          context),
+                    // if (fProfile.similarInterests.isNotEmpty)
+                    _buildBadge(
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.location_on_sharp,
+                                color: context.colors.primary),
+                            Text(
+                              "${0.round()} ${context.loc.miles} ${context.loc.away}",
+                              style: context.textTheme.bodyMedium!
+                                  .copyWith(color: context.colors.primary),
+                            )
+                          ],
+                        ),
+                        context),
                     if (fProfile.similarInterests.isNotEmpty)
                       _buildBadge(
                           Text(
@@ -166,27 +166,25 @@ class _BuddyProfile extends StatelessWidget {
                                 .copyWith(color: context.appColors.textColor),
                           ),
                           context),
-                    if (fProfile.mutualBuddies!.total != 0)
-                      _buildBadge(
-                          Row(
-                            children: [
-                              OverlappingProfiles(
-                                fProfilePictures: fProfile
-                                    .mutualBuddies!.buddies
-                                    .take(3) // Take the first three elements
-                                    .map((buddy) => buddy.pictures
-                                        .first) // Map each buddy to its pictures list
-                                    .toList(), // Convert the result to a list
-                              ),
-                              Text(
-                                " ${fProfile.mutualBuddies!.total > 12 ? '+' : ''}${fProfile.mutualBuddies!.total} ${context.loc.mutualBuddies}",
-                                style: context.textTheme.headlineSmall!
-                                    .copyWith(
-                                        color: context.appColors.textColor),
-                              )
-                            ],
-                          ),
-                          context),
+                    // if (fProfile.mutualBuddies!.total != 0)
+                    _buildBadge(
+                        Row(
+                          children: [
+                            OverlappingProfiles(
+                              fProfilePictures: fProfile.mutualBuddies!.buddies
+                                  .take(3) // Take the first three elements
+                                  .map((buddy) => buddy.pictures
+                                      .first) // Map each buddy to its pictures list
+                                  .toList(), // Convert the result to a list
+                            ),
+                            Text(
+                              " ${fProfile.mutualBuddies!.total > 12 ? '+' : ''}${fProfile.mutualBuddies!.total} ${context.loc.mutualBuddies}",
+                              style: context.textTheme.headlineSmall!
+                                  .copyWith(color: context.appColors.textColor),
+                            )
+                          ],
+                        ),
+                        context),
                   ],
                 ),
 
@@ -213,9 +211,8 @@ class _BuddyProfile extends StatelessWidget {
                         const HSpace(5),
                         NextArrowButton(
                           fOnTap: () {
-                            context.push(
-                              AppRoute.buddyProfileScreenPath,
-                            );
+                            context.pushNamed(AppRoute.buddyProfileScreen,
+                                extra: fBuddyId);
                           },
                         ),
                       ],

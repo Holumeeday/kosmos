@@ -204,6 +204,7 @@ class ActivityDetailsTab extends StatelessWidget {
                         (index) {
                       return BuildProfileImage(
                         imageUrl: '',
+                    
                         leftPosition: index * 27,
                         size: 40,
                       );

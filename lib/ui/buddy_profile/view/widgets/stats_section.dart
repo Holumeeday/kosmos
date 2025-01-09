@@ -71,53 +71,120 @@ class UserStatsSection extends StatelessWidget {
             Divider(
               color: context.appColors.fDividerColor,
             ),
+            TextWithBackground(
+                fText:
+                    "${context.loc.setActivitiesCreated(2)}, ${context.loc.reviews}, & ${context.loc.ratings}"),
+            Divider(
+              color: context.appColors.fDividerColor,
+            ),
             // Second Row with Activity Created, Joined, and Reviews
             Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 14,
-              ),
+              padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
               child: IntrinsicHeight(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    BuildStatItem(
-                        fOntap: () {
-                          context.pushNamed(AppRoute.buddyActivitiesScreen,
-                              extra: true);
-                        },
-                        fValue: state.fBuddyModel.activityCreatedCount
-                            .formatNumToCompact(),
-                        fLabel: context.loc.setActivitiesCreated(
-                            state.fBuddyModel.activityCreatedCount)),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(context.loc.activitiesHosted.toUpperCase(),
+                            style: context.textTheme.headlineSmall!
+                                .copyWith(color: context.colors.tertiary)),
+                        VSpace(4),
+                        IntrinsicHeight(
+                          child: Row(
+                            // crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              BuildStatItem(
+                                fOntap: () {
+                                  context.pushNamed(
+                                      AppRoute.buddyActivitiesScreen,
+                                      extra: true);
+                                },
+                                fValue: state.fBuddyModel.activityCreatedCount
+                                    .formatNumToCompact(),
+                              ),
+                              VerticalDivider(
+                                color: context.appColors.fDividerColor,
+                                width: 20,
+                              ),
+                              state.fBuddyModel.reviews.count < 1
+                                  ? Text(context.loc.noReview,
+                                      style: context.textTheme.headlineSmall!
+                                          .copyWith(
+                                              color: context
+                                                  .appColors.darkGreyColor))
+                                  : BuildStatItem(
+                                      fOntap: () {
+                                        context
+                                            .push(AppRoute.reviewsScreenPath);
+                                      },
+                                      fRating: true,
+                                      fValue: state
+                                          .fBuddyModel.reviews.averageRating
+                                          .toString(),
+                                      fLabel:
+                                          "${state.fBuddyModel.reviews.count.formatNumToCompact()} ${context.loc.setReviews(state.fBuddyModel.reviews.count)}"),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                     VerticalDivider(
                       color: context.appColors.fDividerColor,
                     ),
-                    BuildStatItem(
-                      fOntap: () {
-                        context.pushNamed(AppRoute.buddyActivitiesScreen,
-                            extra: false);
-                      },
-                      fValue: state.fBuddyModel.activityJoinedCount
-                          .formatNumToCompact(),
-                      fLabel: context.loc.setActivityJoined(
-                          state.fBuddyModel.activityJoinedCount),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(context.loc.activitiesJoined.toUpperCase(),
+                            style: context.textTheme.headlineSmall!
+                                .copyWith(color: context.colors.tertiary)),
+                        VSpace(4),
+                        IntrinsicHeight(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              BuildStatItem(
+                                fOntap: () {
+                                  context.pushNamed(
+                                      AppRoute.buddyActivitiesScreen,
+                                      extra: false);
+                                },
+                                fValue: state.fBuddyModel.activityJoinedCount
+                                    .formatNumToCompact(),
+                              ),
+                              VerticalDivider(
+                                color: context.appColors.fDividerColor,
+                                width: 20,
+                              ),
+                              state.fBuddyModel.reviews.count < 1
+                                  ? Text(context.loc.noReview,
+                                      style: context.textTheme.headlineSmall!
+                                          .copyWith(
+                                              color: context
+                                                  .appColors.darkGreyColor))
+                                  : BuildStatItem(
+                                      fOntap: () {
+                                        context
+                                            .push(AppRoute.reviewsScreenPath);
+                                      },
+                                      fRating: true,
+                                      fValue: state
+                                          .fBuddyModel.reviews.averageRating
+                                          .toString(),
+                                      fLabel:
+                                          "${state.fBuddyModel.reviews.count.formatNumToCompact()} ${context.loc.setReviews(state.fBuddyModel.reviews.count)}"),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                    VerticalDivider(
-                      color: context.appColors.fDividerColor,
-                    ),
-                    BuildStatItem(
-                        fOntap: () {
-                          context.push(AppRoute.reviewsScreenPath);
-                        },
-                        fRating: true,
-                        fValue:
-                            state.fBuddyModel.reviews.averageRating.toString(),
-                        fLabel:
-                            "${state.fBuddyModel.reviews.count.formatNumToCompact()} ${context.loc.setReviews(state.fBuddyModel.reviews.count)}"),
                   ],
                 ),
               ),
             ),
+
             Divider(
               color: context.appColors.fDividerColor,
             ),
@@ -132,12 +199,12 @@ class BuildStatItem extends StatelessWidget {
   const BuildStatItem({
     super.key,
     required this.fValue,
-    required this.fLabel,
+    this.fLabel,
     this.fRating = false,
     this.fOntap,
   });
   final String fValue;
-  final String fLabel;
+  final String? fLabel;
   final bool fRating;
   final void Function()? fOntap;
   @override
@@ -146,6 +213,7 @@ class BuildStatItem extends StatelessWidget {
       onTap: fOntap,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           fRating
               ? Row(
@@ -162,9 +230,11 @@ class BuildStatItem extends StatelessWidget {
                   style:
                       context.textTheme.displayLarge!.copyWith(fontSize: 18)),
           const VSpace(4),
-          Text(fLabel,
-              style: context.textTheme.headlineSmall!
-                  .copyWith(color: context.appColors.darkGreyColor)),
+          !fLabel.checkIsNull
+              ? Text(fLabel ?? '',
+                  style: context.textTheme.headlineSmall!
+                      .copyWith(color: context.appColors.darkGreyColor))
+              : SizedBox(),
         ],
       ),
     );
