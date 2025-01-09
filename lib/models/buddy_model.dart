@@ -1,6 +1,160 @@
+import 'package:playkosmos_v3/models/location_model.dart';
+
 /// Represents a buddy user in the system with their profile and interaction data.
 /// @author: Chidera Chijama
-///
+class BuddyModel {
+  /// Unique identifier for the buddy.
+  final String id;
+
+  /// List of picture URLs for the buddy.
+  final List<String> pictures;
+
+  /// Location information of the buddy.
+  final Locations? location;
+
+  /// List of similar interests shared with the buddy.
+  final List<String> similarInterests;
+
+  /// Information about mutual buddies.
+  final MutualBuddies? mutualBuddies;
+
+  /// Indicates whether the user is following this buddy.
+  final bool following;
+
+  /// Indicates whether this buddy is a follower of the user.
+  final bool follower;
+
+  /// Full name of the buddy.
+  final String fullname;
+
+  /// List of interests associated with the buddy.
+  final List<String> interests;
+
+  /// Constructs a BuddyModel instance.
+  BuddyModel({
+    required this.id,
+    this.pictures = const [],
+    this.location,
+    this.similarInterests = const [],
+    this.mutualBuddies,
+    this.following = false,
+    this.follower = false,
+    this.fullname = '',
+    this.interests = const [],
+  });
+
+  /// Creates a BuddyModel instance from JSON.
+  factory BuddyModel.fromJson(Map<String, dynamic> json) {
+    return BuddyModel(
+      id: json['id'] as String,
+      pictures: (json['pictures'] as List<dynamic>?)
+              ?.map((picture) => picture as String)
+              .toList() ??
+          [],
+      location: json['location'] != null
+          ? Locations.fromMap(json['location'] as Map<String, dynamic>)
+          : null,
+      similarInterests: (json['similarInterests'] as List<dynamic>?)
+              ?.map((interest) => interest as String)
+              .toList() ??
+          [],
+      mutualBuddies: json['mutualBuddies'] != null
+          ? MutualBuddies.fromJson(json['mutualBuddies'] as Map<String, dynamic>)
+          : null,
+      following: json['following'] as bool? ?? false,
+      follower: json['follower'] as bool? ?? false,
+      fullname: json['fullname'] as String? ?? '',
+      interests: (json['interests'] as List<dynamic>?)
+              ?.map((interest) => interest as String)
+              .toList() ??
+          [],
+    );
+  }
+
+  /// Converts a BuddyModel instance to JSON.
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'pictures': pictures,
+      'location': location?.toMap(),
+      'similarInterests': similarInterests,
+      'mutualBuddies': mutualBuddies?.toJson(),
+      'following': following,
+      'follower': follower,
+      'fullname': fullname,
+      'interests': interests,
+    };
+  }
+}
+
+/// Represents information about mutual buddies.
+class MutualBuddies {
+  /// List of mutual buddies.
+  final List<Buddies> buddies;
+
+  /// Total number of mutual buddies.
+  final int total;
+
+  /// Constructs a MutualBuddies instance.
+  MutualBuddies({
+    this.buddies = const [],
+    this.total = 0,
+  });
+
+  /// Creates a MutualBuddies instance from JSON.
+  factory MutualBuddies.fromJson(Map<String, dynamic> json) {
+    return MutualBuddies(
+      buddies: (json['buddies'] as List<dynamic>?)
+              ?.map((buddy) => Buddies.fromJson(buddy as Map<String, dynamic>))
+              .toList() ??
+          [],
+      total: json['total'] as int? ?? 0,
+    );
+  }
+
+  /// Converts a MutualBuddies instance to JSON.
+  Map<String, dynamic> toJson() {
+    return {
+      'buddies': buddies.map((buddy) => buddy.toJson()).toList(),
+      'total': total,
+    };
+  }
+}
+
+/// Represents a mutual buddy with minimal information.
+class Buddies {
+  /// Unique identifier for the mutual buddy.
+  final String id;
+
+  /// List of picture URLs for the mutual buddy.
+  final List<String> pictures;
+
+  /// Constructs a Buddies instance.
+  Buddies({
+    required this.id,
+    this.pictures = const [],
+  });
+
+  /// Creates a Buddies instance from JSON.
+  factory Buddies.fromJson(Map<String, dynamic> json) {
+    return Buddies(
+      id: json['id'] as String,
+      pictures: (json['pictures'] as List<dynamic>?)
+              ?.map((picture) => picture as String)
+              .toList() ??
+          [],
+    );
+  }
+
+  /// Converts a Buddies instance to JSON.
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'pictures': pictures,
+    };
+  }
+}
+
 class DummyBuddyModel {
   /// Distance from the current user in miles
   final int distance;

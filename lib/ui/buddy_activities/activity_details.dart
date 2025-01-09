@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:playkosmos_v3/assets_gen/assets.gen.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
-import 'package:playkosmos_v3/enums/location_type_enum.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/buddies/view/widgets/overlapping_profiles.dart';
 import 'package:playkosmos_v3/ui/buddy_activities/widgets/activity_details_tab.dart';
-import 'package:playkosmos_v3/ui/buddy_activities/widgets/activity_type.dart';
 import 'package:playkosmos_v3/ui/buddy_activities/widgets/participant_tab.dart';
-import 'package:playkosmos_v3/utils/theme/app_colors.dart';
 
 class ActivityDetailsPage extends StatelessWidget {
   const ActivityDetailsPage({super.key});
@@ -54,12 +48,12 @@ class ActivityDetailsPage extends StatelessWidget {
                   // VSpace( 21),
                 ];
               },
-              body:  TabBarView(children: [
-                const ActivityDetailsTab(),
+              body:  const TabBarView(children: [
+                ActivityDetailsTab(),
              ParticipantTab(),
-                const SizedBox(),
-                const SizedBox(),
-                const SizedBox(),
+                SizedBox(),
+                SizedBox(),
+                SizedBox(),
               ])),
         ),
       ),

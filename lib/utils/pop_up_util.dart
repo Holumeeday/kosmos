@@ -114,7 +114,7 @@ Future showDialogWithOneAction(
       title: Text(
         title,
         textAlign: titleTextAlign,
-        style: context.textTheme.bodyLarge,
+        style: context.appTextTheme.buttonMedium,
       ),
       content: SingleChildScrollView(
         child: Text(
@@ -181,7 +181,7 @@ Future showDefaultDialog(
         title: Text(
           title,
           textAlign: titleTextAlign,
-          style: context.textTheme.bodyLarge,
+          style: context.appTextTheme.buttonMedium,
         ),
         content: SingleChildScrollView(
           child: Text(

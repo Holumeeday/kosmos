@@ -40,3 +40,4 @@ export 'carousel_indicator.dart';
 export 'custom_tabbar.dart';
 export 'show_all_button.dart';
 export 'info_summary_widget.dart';
+export 'connection_type_buttons.dart';

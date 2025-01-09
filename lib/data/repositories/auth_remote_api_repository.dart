@@ -538,6 +538,7 @@ class AuthRemoteApiRepository {
     });
 
     try {
+      // ignore: unused_local_variable
       final res = await _remoteApi.put(
         uploadPath,
         body: formData,

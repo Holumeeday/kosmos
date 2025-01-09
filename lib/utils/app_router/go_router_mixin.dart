@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/data/data.dart';
+import 'package:playkosmos_v3/data/repositories/buddies_remote_api_repository.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/auth_provider/auth_provider_page.dart';
 import 'package:playkosmos_v3/ui/buddies/cubit/buddies_cubit.dart';
@@ -51,6 +52,7 @@ import 'package:playkosmos_v3/ui/sign_up_phone_number/view/sign_up_phone_number_
 import 'package:playkosmos_v3/ui/signup_with_email/cubit/sign_up_with_email_cubit.dart';
 import 'package:playkosmos_v3/ui/signup_with_email/view/sign_up_with_email_page.dart';
 import 'package:playkosmos_v3/ui/splash/splash_page.dart';
+import 'package:playkosmos_v3/utils/location_manager.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 mixin GoRouterMixin {
@@ -262,7 +264,10 @@ mixin GoRouterMixin {
         return _createRoute(
           routeScreen: BlocProvider(
             child: const BuddiesPage(),
-            create: (context) => BuddiesCubit(),
+            create: (context) => BuddiesCubit(
+              fLocationManager: context.read<LocationManager>(),
+              fBuddiesRepository: context.read<BuddiesRemoteApiRepository>(),
+            ),
           ),
         );
       case AppRoute.buddyConnectionsScreenPath:

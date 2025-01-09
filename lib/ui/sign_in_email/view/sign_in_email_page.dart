@@ -74,57 +74,57 @@ class __SignInEmailPageForm extends State<_SignInEmailForm> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SignInWithEmailCubit, SignInWithEmailState>(
-      listener: (context, state) {
-        if (state.status == SignInWithEmailStatus.success) {
-          if (state.data?.status == true) {
-            if (state.user?.fullName != null) {
-              showDialog<void>(
-                context: context,
-                barrierDismissible: false,
-                builder: (BuildContext dialogContext) {
-                  return Dialog(
-                    child: AuthSuccessInfoDialog(
-                      fTitle: context.loc
-                          .welcomeBackUser(state.user?.fullName ?? 'User'),
-                      fMessage: context.loc.youAreAlllSignedInAndReadyToRoll,
-                      fOnLetGo: () {
-                        // Set login status to true which will re-direct the user
-                        // to home page
-                        context
-                            .read<AuthFlowStorage>()
-                            .setLogIn(
-                              hasCompletedStep2: true,
-                            )
-                            .then((_) {
-                          if (context.mounted) {
-                            context.go(AppRoute.homeScreenPath);
-                          }
-                        });
-                      },
-                    ),
-                  );
-                },
-              );
-            } else {
-              context
-                  .read<AuthFlowStorage>()
-                  .setLogIn(
-                    hasCompletedStep2: false,
-                  )
-                  .then((_) {
-                if (context.mounted) {
-                  context.go(AppRoute.profileCreationFlowScreenPath);
-                }
-              });
-            }
+    return BlocConsumer<SignInWithEmailCubit, SignInWithEmailState>(
+        listener: (context, state) {
+      if (state.status == SignInWithEmailStatus.success) {
+        if (state.data?.status == true) {
+          if (state.user?.fullName != null) {
+            showDialog<void>(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext dialogContext) {
+                return Dialog(
+                  child: AuthSuccessInfoDialog(
+                    fTitle: context.loc
+                        .welcomeBackUser(state.user?.fullName ?? 'User'),
+                    fMessage: context.loc.youAreAlllSignedInAndReadyToRoll,
+                    fOnLetGo: () {
+                      // Set login status to true which will re-direct the user
+                      // to home page
+                      context
+                          .read<AuthFlowStorage>()
+                          .setLogIn(
+                            hasCompletedStep2: true,
+                          )
+                          .then((_) {
+                        if (context.mounted) {
+                          context.go(AppRoute.homeScreenPath);
+                        }
+                      });
+                    },
+                  ),
+                );
+              },
+            );
+          } else {
+            context
+                .read<AuthFlowStorage>()
+                .setLogIn(
+                  hasCompletedStep2: false,
+                )
+                .then((_) {
+              if (context.mounted) {
+                context.go(AppRoute.profileCreationFlowScreenPath);
+              }
+            });
           }
-        } else if (state.status == SignInWithEmailStatus.failure &&
-            state.errorMessage != null) {
-          SnackBarUtil.showError(message: state.errorMessage!);
         }
-      },
-      child: ShowAsyncBusyIndicator(
+      } else if (state.status == SignInWithEmailStatus.failure &&
+          state.errorMessage != null) {
+        SnackBarUtil.showError(message: state.errorMessage!);
+      }
+    }, builder: (context, state) {
+      return ShowAsyncBusyIndicator(
         fInAsync: context.select(
           (SignInWithEmailCubit cubit) =>
               cubit.state.status == SignInWithEmailStatus.loading,
@@ -206,7 +206,7 @@ class __SignInEmailPageForm extends State<_SignInEmailForm> {
             ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

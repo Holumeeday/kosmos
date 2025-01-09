@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/profile_creation_flow/view/widgets/next_button.dart';
 import 'package:playkosmos_v3/ui/reviews/view/widgets/star_rating.dart';
 
 class EditReviewPage extends StatefulWidget {
@@ -94,7 +93,7 @@ class _EditReviewPageState extends State<EditReviewPage> {
                     decoration: InputDecoration(
                       hintText: 'Share your thoughts here.',
                       hintStyle: context.appTextTheme.buttonMedium!
-                          .copyWith(color: const Color(0xADACAC)),
+                          .copyWith(color: const Color(0xFFADACAC)),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide(

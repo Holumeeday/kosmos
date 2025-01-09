@@ -268,7 +268,8 @@ class ReviewTabView extends StatelessWidget {
                                       child: Text(
                                         context.loc.all,
                                         textAlign: TextAlign.center,
-                                        style: context.textTheme.bodyLarge!
+                                        style: context
+                                            .appTextTheme.buttonMedium!
                                             .copyWith(
                                                 color: context.colors.tertiary),
                                       ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:playkosmos_v3/common_widgets/activity_more_option_user_modal.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/constants/buddies_list.dart';
 import 'package:playkosmos_v3/extensions/connection_type_extention.dart';
@@ -36,25 +35,23 @@ class _ParticipantTabState extends State<ParticipantTab> {
                 child: Column(
                   children: [
                     ListTile(
-                      title: Text(
-                        context.loc.edit,
-                        style: context.textTheme.headlineLarge!
-                      ),
+                      title: Text(context.loc.edit,
+                          style: context.textTheme.headlineLarge!),
                       onTap: () {
                         context.push(AppRoute.editReviewPath);
                       },
                     ),
-                    Divider(),
+                    const Divider(),
                     ListTile(
                       title: Text(
                         context.loc.delete,
                         style: context.textTheme.headlineLarge!.copyWith(
-                          color: Color(0xffAA0606),
+                          color: const Color(0xffAA0606),
                         ),
                       ),
                       onTap: () {},
                     ),
-                    Divider(),
+                    const Divider(),
                   ],
                 ),
               );
@@ -139,7 +136,7 @@ class _ParticipantTabState extends State<ParticipantTab> {
                     ),
                     title: Text(
                       followingList[index].userName,
-                      style: context.textTheme.bodyLarge,
+                      style: context.appTextTheme.buttonMedium,
                     ),
                     trailing: trailing(index, context)),
                 const SizedBox(height: 16),

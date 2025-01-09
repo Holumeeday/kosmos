@@ -70,7 +70,7 @@ class FollowersPage extends StatelessWidget {
                                   ),
                                   title: Text(
                                     buddy.userName,
-                                    style: context.textTheme.bodyLarge,
+                                    style: context.appTextTheme.buttonMedium,
                                   ),
                                 ),
                                 const SizedBox(height: 16),
@@ -140,7 +140,7 @@ class FollowersPage extends StatelessWidget {
                               ),
                               title: Text(
                                 follower.userName,
-                                style: context.textTheme.bodyLarge,
+                                style: context.appTextTheme.buttonMedium,
                               ),
                               trailing: IntrinsicWidth(
                                   child: follower.connectionType

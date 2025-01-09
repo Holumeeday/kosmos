@@ -469,7 +469,7 @@ class AppColors extends ThemeExtension<AppColors> {
               unselectedStepperColor ?? this.unselectedStepperColor,
           fHyperLinkColor: fHyperLinkColor ?? this.fHyperLinkColor,
           reviewColor: reviewColor ?? this.reviewColor,
-           onReviewColor: onReviewColor ?? this.onReviewColor,
+           onReviewColor: onReviewColor ?? onReviewColor,
           );
 }
 

@@ -31,7 +31,7 @@ class InfoSummaryContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       // Apply padding and margin to the container
-      padding: fPadding ?? EdgeInsets.all(20),
+      padding: fPadding ?? const EdgeInsets.all(20),
       margin: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         // Set the background color, defaulting to reviewColor

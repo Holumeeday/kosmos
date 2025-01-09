@@ -124,6 +124,7 @@ class CSCPickerSheet extends StatelessWidget {
 This contains a padding of 20 for horizontal and vertical around the text field
 @author: Ugochukwu Umeh
  */
+// ignore: unused_element
 class _CSCPickerTextField extends StatelessWidget {
   /// The hint text
   final String fHintText;

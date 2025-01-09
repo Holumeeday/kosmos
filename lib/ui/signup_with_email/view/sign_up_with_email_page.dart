@@ -19,7 +19,7 @@ class SignUpWithEmailPage extends StatelessWidget {
 }
 
 class _SignUpWithEmailPageView extends StatefulWidget {
-  const _SignUpWithEmailPageView({super.key});
+  const _SignUpWithEmailPageView();
 
   @override
   State<_SignUpWithEmailPageView> createState() =>
