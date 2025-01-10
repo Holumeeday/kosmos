@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +12,6 @@ import 'package:playkosmos_v3/ui/buddies/view/widgets/interest_chips.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/cubit/buddy_profile_cubit.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/view/widgets/build_image_grid.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/view/widgets/stats_section.dart';
-import 'package:playkosmos_v3/utils/app_router/app_router.dart';
 import 'package:playkosmos_v3/utils/pop_up_util.dart';
 import 'package:playkosmos_v3/utils/snack_bar_util.dart';
 
@@ -56,7 +56,7 @@ class _BuddyProfilePageState extends State<BuddyProfilePage> {
                 ),
                 const HRelativeSpace(10),
                 //  Menu Button
-                AppBarMenu(),
+                const AppBarMenu(),
               ],
             ),
             body: NestedScrollView(
@@ -86,19 +86,19 @@ class _BuddyProfilePageState extends State<BuddyProfilePage> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(16.0),
                                   child: GestureDetector(
-                                    onTap: () => setState(() {
-                                      panEnable = !panEnable;
-                                    }),
-                                    child: CircleAvatar(
-                                        backgroundColor:
-                                            Colors.white.withOpacity(0.7),
-                                        child: Icon(
-                                          panEnable
-                                              ? Icons.visibility_outlined
-                                              : Icons.visibility_off_outlined,
-                                          color: Colors.black,
-                                        )),
-                                  ),
+                                      onTap: () => setState(() {
+                                            panEnable = !panEnable;
+                                          }),
+                                      child: CircleAvatar(
+                                          backgroundColor:
+                                              Colors.white.withOpacity(0.7),
+                                          child: SvgPicture.asset(panEnable
+                                              ? const $AssetsSvgsIconsGen()
+                                                  .openedEye
+                                                  .path
+                                              : const $AssetsSvgsIconsGen()
+                                                  .closedEye
+                                                  .path))),
                                 ),
                               ),
                             ),
@@ -246,8 +246,15 @@ class _BuddyProfilePageState extends State<BuddyProfilePage> {
   }
 }
 
-class AppBarMenu extends StatelessWidget {
+class AppBarMenu extends StatefulWidget {
   const AppBarMenu({super.key});
+
+  @override
+  State<AppBarMenu> createState() => _AppBarMenuState();
+}
+
+class _AppBarMenuState extends State<AppBarMenu> {
+  bool switchValue = false;
   @override
   Widget build(BuildContext context) {
     return IconButton(
@@ -262,7 +269,7 @@ class AppBarMenu extends StatelessWidget {
                   title: Text(context.loc.copyProfileURL,
                       style: context.textTheme.headlineLarge!),
                   onTap: () async {
-                    await Clipboard.setData(ClipboardData(
+                    await Clipboard.setData(const ClipboardData(
                         text: 'https://playkosmos.com/buddy/1234'));
                     Navigator.pop(context);
 
@@ -274,7 +281,73 @@ class AppBarMenu extends StatelessWidget {
                 ListTile(
                   title: Text(context.loc.notification,
                       style: context.textTheme.headlineLarge!),
-                  onTap: () {},
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return Dialog(
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(8),
+                              ),
+                            ),
+                            child: Wrap(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 16),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(context.loc.notification,
+                                                style: context
+                                                    .textTheme.titleSmall!
+                                                    .copyWith(fontSize: 25)),
+                                            IconButton(
+                                                onPressed: () {
+                                                  context.pop();
+                                                },
+                                                icon: Icon(
+                                                  Icons.close_outlined,
+                                                  color:
+                                                      context.colors.tertiary,
+                                                ))
+                                          ],
+                                        ),
+                                      ),
+                                      const Divider(),
+                                      const VSpace(20),
+                                      NotificationRow(
+                                          switchValue: switchValue,
+                                          label: context.loc.activity),
+                                      NotificationRow(
+                                          switchValue: switchValue,
+                                          label: context.loc.post),
+                                      NotificationRow(
+                                          switchValue: switchValue,
+                                          label: context.loc.status),
+                                      const VSpace(12),
+                                      Text(
+                                        "context.loc.setStay",
+                                        
+                                        textAlign: TextAlign.center,
+                                        style: context.textTheme.headlineSmall,
+                                      ),
+                                      const VSpace(20)
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        });
+                  },
                 ),
                 const Divider(),
                 ListTile(
@@ -298,6 +371,39 @@ class AppBarMenu extends StatelessWidget {
           ]),
         );
       },
+    );
+  }
+}
+
+class NotificationRow extends StatelessWidget {
+  const NotificationRow(
+      {super.key,
+      required this.switchValue,
+      this.onChanged,
+      required this.label});
+  final bool switchValue;
+  final void Function(bool)? onChanged;
+  final String label;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              label,
+              style: context.textTheme.headlineMedium,
+            ),
+            CupertinoSwitch(
+              value: switchValue,
+              onChanged: onChanged,
+              activeColor: CupertinoColors.activeGreen,
+            ),
+          ],
+        ),
+        const VSpace(24),
+      ],
     );
   }
 }

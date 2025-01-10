@@ -47,19 +47,22 @@ class InterestChips extends StatelessWidget {
               );
             }),
             fIsProfile
-                ? Chip(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                    labelPadding: EdgeInsets.zero,
-                    backgroundColor: Colors.black,
-                    label: Text(
-                      "${context.loc.moreEllipsis}",
-                      style: context.textTheme.bodyMedium!
-                          .copyWith(color: AppColor.fPrimaryColor),
-                    ),
-                    shape: RoundedRectangleBorder(
-                      side: const BorderSide(color: Colors.white24, width: 0.7),
-                      borderRadius: BorderRadius.circular(40),
+                ? GestureDetector(
+                    child: Chip(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 4),
+                      labelPadding: EdgeInsets.zero,
+                      backgroundColor: Colors.black,
+                      label: Text(
+                        context.loc.moreEllipsis,
+                        style: context.textTheme.bodyMedium!
+                            .copyWith(color: AppColor.fPrimaryColor),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        side:
+                            const BorderSide(color: Colors.white24, width: 0.7),
+                        borderRadius: BorderRadius.circular(40),
+                      ),
                     ),
                   )
                 : SizedBox()

@@ -197,6 +197,7 @@
   "@invalidEmail": {
     "description": "Error gotten when email field contains other characters than accepted"
   },
+
   "setEmailOrPhone": "{emailOrPhone, select, email{Use Phone instead} other{Use Email instead}}",
   "@setEmailOrPhone": {
     "description": "Is the post being made in your username, team, store or venue name",
@@ -206,6 +207,21 @@
       }
     }
   },
+
+  "setStayInLoop":"{Stay in the loop. Get notified whenever {name} makes a post, uploads a status, or creates an activity.}",
+  "@setstayInTheLoop": {
+    "description": "Message shown to users to notify them about updates from a specific person. The {name} placeholder will be replaced with the person's name.",
+    "placeholders": {
+      "stayInTheLoop": {
+        "type": "String"
+      }
+    }
+  },
+
+  "stayInTheLoop": "Stay in the loop. Get notified whenever {name} makes a post, uploads a status, or creates an activity.",
+  "stayInTheLoopDescription": "Message shown to users to notify them about updates from a specific person. The {name} placeholder will be replaced with the person's name.",
+
+
   "becomeAFan": "Become a fan",
   "rate": "Rate",
   "typeYourComplaint": "Type your complaint",
@@ -848,7 +864,7 @@
   "@copyProfileURL": {
     "description": "To Copy a profile's URL"
   },
-      "copiedToClipboard": "Copy to Clipboard",
+      "copiedToClipboard": "Copied to Clipboard",
   "@copiedToClipboard": {
     "description": "To Copy to Clipboard"
   },

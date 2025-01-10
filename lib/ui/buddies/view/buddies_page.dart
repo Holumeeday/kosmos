@@ -166,25 +166,27 @@ class _BuddyProfile extends StatelessWidget {
                                 .copyWith(color: context.appColors.textColor),
                           ),
                           context),
-                    // if (fProfile.mutualBuddies!.total != 0)
-                    _buildBadge(
-                        Row(
-                          children: [
-                            OverlappingProfiles(
-                              fProfilePictures: fProfile.mutualBuddies!.buddies
-                                  .take(3) // Take the first three elements
-                                  .map((buddy) => buddy.pictures
-                                      .first) // Map each buddy to its pictures list
-                                  .toList(), // Convert the result to a list
-                            ),
-                            Text(
-                              " ${fProfile.mutualBuddies!.total > 12 ? '+' : ''}${fProfile.mutualBuddies!.total} ${context.loc.mutualBuddies}",
-                              style: context.textTheme.headlineSmall!
-                                  .copyWith(color: context.appColors.textColor),
-                            )
-                          ],
-                        ),
-                        context),
+                    if (fProfile.mutualBuddies!.total != 0)
+                      _buildBadge(
+                          Row(
+                            children: [
+                              OverlappingProfiles(
+                                fProfilePictures: fProfile
+                                    .mutualBuddies!.buddies
+                                    .take(3) // Take the first three elements
+                                    .map((buddy) => buddy.pictures
+                                        .first) // Map each buddy to its pictures list
+                                    .toList(), // Convert the result to a list
+                              ),
+                              Text(
+                                " ${fProfile.mutualBuddies!.total > 12 ? '+' : ''}${fProfile.mutualBuddies!.total} ${context.loc.mutualBuddies}",
+                                style: context.textTheme.headlineSmall!
+                                    .copyWith(
+                                        color: context.appColors.textColor),
+                              )
+                            ],
+                          ),
+                          context),
                   ],
                 ),
 

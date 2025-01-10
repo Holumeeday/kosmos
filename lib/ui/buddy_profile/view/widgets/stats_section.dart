@@ -79,7 +79,7 @@ class UserStatsSection extends StatelessWidget {
             ),
             // Second Row with Activity Created, Joined, and Reviews
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
               child: IntrinsicHeight(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -91,44 +91,48 @@ class UserStatsSection extends StatelessWidget {
                             style: context.textTheme.headlineSmall!
                                 .copyWith(color: context.colors.tertiary)),
                         VSpace(4),
-                        IntrinsicHeight(
-                          child: Row(
-                            // crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              BuildStatItem(
-                                fOntap: () {
-                                  context.pushNamed(
-                                      AppRoute.buddyActivitiesScreen,
-                                      extra: true);
-                                },
-                                fValue: state.fBuddyModel.activityCreatedCount
-                                    .formatNumToCompact(),
-                              ),
-                              VerticalDivider(
-                                color: context.appColors.fDividerColor,
-                                width: 20,
-                              ),
-                              state.fBuddyModel.reviews.count < 1
-                                  ? Text(context.loc.noReview,
-                                      style: context.textTheme.headlineSmall!
-                                          .copyWith(
-                                              color: context
-                                                  .appColors.darkGreyColor))
-                                  : BuildStatItem(
-                                      fOntap: () {
-                                        context
-                                            .push(AppRoute.reviewsScreenPath);
-                                      },
-                                      fRating: true,
-                                      fValue: state
-                                          .fBuddyModel.reviews.averageRating
-                                          .toString(),
-                                      fLabel:
-                                          "${state.fBuddyModel.reviews.count.formatNumToCompact()} ${context.loc.setReviews(state.fBuddyModel.reviews.count)}"),
-                            ],
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4.0, bottom: 10),
+                          child: IntrinsicHeight(
+                            child: Row(
+                              // crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                BuildStatItem(
+                                  fOntap: () {
+                                    context.pushNamed(
+                                        AppRoute.buddyActivitiesScreen,
+                                        extra: true);
+                                  },
+                                  fValue: state.fBuddyModel.activityCreatedCount
+                                      .formatNumToCompact(),
+                                ),
+                                VerticalDivider(
+                                  color: context.appColors.fDividerColor,
+                                  width: 20,
+                                ),
+                                state.fBuddyModel.reviews.count < 1
+                                    ? Text(context.loc.noReview,
+                                        style: context.textTheme.headlineSmall!
+                                            .copyWith(
+                                                color: context
+                                                    .appColors.darkGreyColor))
+                                    : BuildStatItem(
+                                        fOntap: () {
+                                          context
+                                              .push(AppRoute.reviewsScreenPath);
+                                        },
+                                        fRating: true,
+                                        fValue: state
+                                            .fBuddyModel.reviews.averageRating
+                                            .toString(),
+                                        fLabel:
+                                            "${state.fBuddyModel.reviews.count.formatNumToCompact()} ${context.loc.setReviews(state.fBuddyModel.reviews.count)}"),
+                              ],
+                            ),
                           ),
                         ),
+                        VSpace(10)
                       ],
                     ),
                     VerticalDivider(
@@ -141,41 +145,44 @@ class UserStatsSection extends StatelessWidget {
                             style: context.textTheme.headlineSmall!
                                 .copyWith(color: context.colors.tertiary)),
                         VSpace(4),
-                        IntrinsicHeight(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              BuildStatItem(
-                                fOntap: () {
-                                  context.pushNamed(
-                                      AppRoute.buddyActivitiesScreen,
-                                      extra: false);
-                                },
-                                fValue: state.fBuddyModel.activityJoinedCount
-                                    .formatNumToCompact(),
-                              ),
-                              VerticalDivider(
-                                color: context.appColors.fDividerColor,
-                                width: 20,
-                              ),
-                              state.fBuddyModel.reviews.count < 1
-                                  ? Text(context.loc.noReview,
-                                      style: context.textTheme.headlineSmall!
-                                          .copyWith(
-                                              color: context
-                                                  .appColors.darkGreyColor))
-                                  : BuildStatItem(
-                                      fOntap: () {
-                                        context
-                                            .push(AppRoute.reviewsScreenPath);
-                                      },
-                                      fRating: true,
-                                      fValue: state
-                                          .fBuddyModel.reviews.averageRating
-                                          .toString(),
-                                      fLabel:
-                                          "${state.fBuddyModel.reviews.count.formatNumToCompact()} ${context.loc.setReviews(state.fBuddyModel.reviews.count)}"),
-                            ],
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4.0, bottom: 10),
+                          child: IntrinsicHeight(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                BuildStatItem(
+                                  fOntap: () {
+                                    context.pushNamed(
+                                        AppRoute.buddyActivitiesScreen,
+                                        extra: false);
+                                  },
+                                  fValue: state.fBuddyModel.activityJoinedCount
+                                      .formatNumToCompact(),
+                                ),
+                                VerticalDivider(
+                                  color: context.appColors.fDividerColor,
+                                  width: 20,
+                                ),
+                                state.fBuddyModel.reviews.count < 1
+                                    ? Text(context.loc.noReview,
+                                        style: context.textTheme.headlineSmall!
+                                            .copyWith(
+                                                color: context
+                                                    .appColors.darkGreyColor))
+                                    : BuildStatItem(
+                                        fOntap: () {
+                                          context
+                                              .push(AppRoute.reviewsScreenPath);
+                                        },
+                                        fRating: true,
+                                        fValue: state
+                                            .fBuddyModel.reviews.averageRating
+                                            .toString(),
+                                        fLabel:
+                                            "${state.fBuddyModel.reviews.count.formatNumToCompact()} ${context.loc.setReviews(state.fBuddyModel.reviews.count)}"),
+                              ],
+                            ),
                           ),
                         ),
                       ],
