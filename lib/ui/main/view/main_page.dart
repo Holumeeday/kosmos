@@ -123,7 +123,11 @@ class _MainPageState extends State<MainPage> {
                 button: true,
                 excludeSemantics: true,
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    // Navigate to the MenuPage for Userprofile
+                    // context.go(AppRoute.menuPagePath);
+                    context.push(AppRoute.menuPagePath);
+                  },
                   iconSize: 30,
                   icon: const Icon(Icons.menu_rounded),
                 ),

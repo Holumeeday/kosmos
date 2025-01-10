@@ -16,10 +16,11 @@ class SignUpWithEmailCubit extends Cubit<SignUpWithEmailState> {
 
   /// Sign up with email
   void signUpEmail({required String email}) async {
+    // emit(state.copyWith(status: SignInWithEmailStatus.loading));
     emit(state.copyWith(status: SignUpWithEmailStatus.loading));
     try {
       final fResponse = await fAuthRepository.signUpEmail(email: email);
-      // Emit the state if response status is failed or success with the error message
+      // Emit the state if response status
       // if available
       if (fResponse.status == true) {
         emit(
