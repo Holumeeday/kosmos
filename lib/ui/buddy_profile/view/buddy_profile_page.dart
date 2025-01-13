@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,15 +10,15 @@ import 'package:playkosmos_v3/assets_gen/assets.gen.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/connection_type_extention.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/buddies/view/widgets/interest_chips.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/cubit/buddy_profile_cubit.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/view/widgets/build_image_grid.dart';
+import 'package:playkosmos_v3/ui/buddy_profile/view/widgets/interest_groups.dart';
 import 'package:playkosmos_v3/ui/buddy_profile/view/widgets/stats_section.dart';
 import 'package:playkosmos_v3/utils/pop_up_util.dart';
 import 'package:playkosmos_v3/utils/snack_bar_util.dart';
 
 /// A profile page that displays buddy information
-/// @author: Chidera
+/// @author: Chidera Chijama
 class BuddyProfilePage extends StatefulWidget {
   const BuddyProfilePage({super.key, required this.buddyId});
   final String buddyId;
@@ -33,6 +35,7 @@ class _BuddyProfilePageState extends State<BuddyProfilePage> {
     return BlocBuilder<BuddyProfileCubit, BuddyProfileState>(
       builder: (context, state) {
         final fProfile = state.fBuddyModel;
+        log("########## ${fProfile.interests}");
         return DefaultTabController(
           length: 2,
           child: Scaffold(
@@ -175,10 +178,30 @@ class _BuddyProfilePageState extends State<BuddyProfilePage> {
                                               // Interests Chips
                                               InterestChips(
                                                 // Should only show few interests here
-                                                fInterests: fProfile.interests
-                                                    .take(4)
-                                                    .toList(),
+                                                fInterests: fProfile.interests,
                                                 fIsProfile: true,
+                                                fOnTap: () {
+                                                  showModalBottomSheet(
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return Dialog(
+                                                          child: Wrap(
+                                                              children: [
+                                                                SingleChildScrollView(
+                                                                    child: Padding(
+                                                                        padding: const EdgeInsets.symmetric(vertical: 20),
+                                                                        child: InterestGroups(
+                                                                          fSeeMore:
+                                                                              (fInterestGroup) {
+                                                                            context.read<BuddyProfileCubit>().setSeeMore(fInterestGroup);
+                                                                          },
+                                                                          fActivityInterestGroupList:
+                                                                              state.fActivityInterestGroupList,
+                                                                        ))),
+                                                              ]),
+                                                        );
+                                                      });
+                                                },
                                               )
                                             ],
                                           ),
@@ -334,8 +357,7 @@ class _AppBarMenuState extends State<AppBarMenu> {
                                           label: context.loc.status),
                                       const VSpace(12),
                                       Text(
-                                        "context.loc.setStay",
-                                        
+                                        context.loc.setStayInLoop("name"),
                                         textAlign: TextAlign.center,
                                         style: context.textTheme.headlineSmall,
                                       ),

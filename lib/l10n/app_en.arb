@@ -208,19 +208,15 @@
     }
   },
 
-  "setStayInLoop":"{Stay in the loop. Get notified whenever {name} makes a post, uploads a status, or creates an activity.}",
+  "setStayInLoop":"Stay in the loop. Get notified whenever {name} makes a post, uploads a status, or creates an activity.",
   "@setstayInTheLoop": {
     "description": "Message shown to users to notify them about updates from a specific person. The {name} placeholder will be replaced with the person's name.",
     "placeholders": {
-      "stayInTheLoop": {
+      "name": {
         "type": "String"
       }
     }
   },
-
-  "stayInTheLoop": "Stay in the loop. Get notified whenever {name} makes a post, uploads a status, or creates an activity.",
-  "stayInTheLoopDescription": "Message shown to users to notify them about updates from a specific person. The {name} placeholder will be replaced with the person's name.",
-
 
   "becomeAFan": "Become a fan",
   "rate": "Rate",
@@ -864,7 +860,7 @@
   "@copyProfileURL": {
     "description": "To Copy a profile's URL"
   },
-      "copiedToClipboard": "Copied to Clipboard",
+    "copiedToClipboard": "Copied to Clipboard",
   "@copiedToClipboard": {
     "description": "To Copy to Clipboard"
   },

@@ -3,12 +3,15 @@ part of 'buddy_profile_cubit.dart';
 class BuddyProfileState extends Equatable {
   const BuddyProfileState({
     required this.fBuddyModel,
+    required this.fActivityInterestGroupList,
   });
   final DummyBuddyModel fBuddyModel;
+  final List<ActivityInterestGroups> fActivityInterestGroupList;
 
-  BuddyProfileState copyWith({DummyBuddyModel? fBuddyModel}) {
+  BuddyProfileState copyWith({DummyBuddyModel? fBuddyModel, List<ActivityInterestGroups>? fActivityInterestGroupList}) {
     return BuddyProfileState(
       fBuddyModel: fBuddyModel ?? this.fBuddyModel,
+      fActivityInterestGroupList: fActivityInterestGroupList?? this.fActivityInterestGroupList
     );
   }
 

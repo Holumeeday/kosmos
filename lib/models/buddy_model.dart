@@ -59,7 +59,8 @@ class BuddyModel {
               .toList() ??
           [],
       mutualBuddies: json['mutualBuddies'] != null
-          ? MutualBuddies.fromJson(json['mutualBuddies'] as Map<String, dynamic>)
+          ? MutualBuddies.fromJson(
+              json['mutualBuddies'] as Map<String, dynamic>)
           : null,
       following: json['following'] as bool? ?? false,
       follower: json['follower'] as bool? ?? false,
@@ -226,15 +227,16 @@ class DummyBuddyModel {
     this.mutualBuddiesCount = 12,
     this.userName = 'Jordyn Vaccaro',
     this.interests = const [
-      "Art",
-      "Hockey",
-      "Sport",
-      "Baseball",
-      "Rugby",
-      "Visual Arts",
-      "Ice Hockey",
-      "Softball",
-      "Softball"
+      "cricket",
+      "baseball",
+      "hockey",
+      "crochet",
+      "quilting",
+      "woodworking",
+      "telescopeObserving",
+      "meteorShowers",
+      "diyScienceKits",
+      "robotics",
     ],
     this.profileImages = const [
       "https://cdn.businessday.ng/2022/04/Abiru-1.png",

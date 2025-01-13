@@ -90,7 +90,7 @@ class UserStatsSection extends StatelessWidget {
                         Text(context.loc.activitiesHosted.toUpperCase(),
                             style: context.textTheme.headlineSmall!
                                 .copyWith(color: context.colors.tertiary)),
-                        VSpace(4),
+                        const VSpace(4),
                         Padding(
                           padding: const EdgeInsets.only(top: 4.0, bottom: 10),
                           child: IntrinsicHeight(
@@ -132,7 +132,7 @@ class UserStatsSection extends StatelessWidget {
                             ),
                           ),
                         ),
-                        VSpace(10)
+                        const VSpace(10)
                       ],
                     ),
                     VerticalDivider(
@@ -144,7 +144,7 @@ class UserStatsSection extends StatelessWidget {
                         Text(context.loc.activitiesJoined.toUpperCase(),
                             style: context.textTheme.headlineSmall!
                                 .copyWith(color: context.colors.tertiary)),
-                        VSpace(4),
+                        const VSpace(4),
                         Padding(
                           padding: const EdgeInsets.only(top: 4.0, bottom: 10),
                           child: IntrinsicHeight(
@@ -241,7 +241,7 @@ class BuildStatItem extends StatelessWidget {
               ? Text(fLabel ?? '',
                   style: context.textTheme.headlineSmall!
                       .copyWith(color: context.appColors.darkGreyColor))
-              : SizedBox(),
+              : const SizedBox(),
         ],
       ),
     );
