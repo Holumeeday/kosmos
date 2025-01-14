@@ -130,7 +130,36 @@ class AppRoute with GoRouterMixin {
             path: editReviewPath,
             name: editReviewScreen,
           ),
+           createGoRoute(
+            path: profileMenuPagePath,
+            name: profileMenuPage,
+          ),
+            createGoRoute(
+            path: accountInformationPath,
+            name: accountInformationPage,
+          ),
+          createGoRoute(
+            path: accountInformationemailPath,
+            name: accountInformationemailPage,
+          ),
+          createGoRoute(
+            path: accountInformationphonePath,
+            name: accountInformationphonePage,
+          ),
+          createGoRoute(
+            path: accountInformationpasswordPath,
+            name: accountInformationpaswordPage,
+          ),
+          createGoRoute(
+            path: accountInformationdeletaccountPath,
+            name: accountInformationdeletaccountPage,
+          ),
+          createGoRoute(
+            path: addemailPath,
+            name: addemailPage,
+          ),
         ],
+        
         redirect: (context, state) {
           /// Pages used for authentication
           final List<String> authPages = [
@@ -251,6 +280,14 @@ class AppRoute with GoRouterMixin {
   static const String buddyActivitiesScreenPath = '/buddy-activities';
   static const String activityDetailsScreenPath = '/activity-details';
   static const String editReviewPath = '/edit-review';
+  static const String profileMenuPagePath = '/menu';
+  static const String accountInformationPath = '/account-information';
+  static const String accountInformationemailPath = '/account-information-email';
+  static const String accountInformationphonePath = '/account-information-phone';
+  static const String accountInformationpasswordPath = '/account-information-password';
+  static const String accountInformationdeletaccountPath = '/account-information-delete-account';
+  static const String addemailPath = '/account-information-delete-account';
+
 
   /// Route names
 
@@ -280,6 +317,16 @@ class AppRoute with GoRouterMixin {
   static const String buddyActivitiesScreen = 'buddy-activities';
   static const String activityDetailsScreen = 'activity-details';
   static const String editReviewScreen = 'edit-review';
+
+  //Profile Menu
+  static const String profileMenuPage = 'menu';
+  static const String accountInformationPage = '/account-information';
+  static const String accountInformationemailPage = '/account-information-email';
+  static const String accountInformationphonePage = '/account-information-phone';
+  static const String accountInformationpaswordPage = '/account-information-password';
+  static const String accountInformationdeletaccountPage = '/account-information-delet-account';
+  static const String addemailPage = '/addemail';
+
 }
 
 class StreamListenable extends ValueNotifier<dynamic> {

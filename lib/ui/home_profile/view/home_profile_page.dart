@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:playkosmos_v3/common_widgets/buttons.dart';
+import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/ui/logout/cubit/logout_cubit.dart';
 
 /// The user profile in the home tab
@@ -13,19 +13,18 @@ class HomeProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final fIsLoading = context.select(
         (LogoutCubit cubit) => cubit.state.status == LogoutStatus.loading);
+
     return Center(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: fIsLoading
-            ? const CircularProgressIndicator.adaptive()
-            : PrimaryGradientButton(
+      child: fIsLoading
+          ? const CircularProgressIndicator.adaptive()
+          : PrimaryGradientButton(
                 fDisabled: fIsLoading,
                 fOnPressed: () {
                   context.read<LogoutCubit>().logout();
                 },
                 fChild: const Text('Logout'),
               ),
-      ),
+          
     );
   }
 }
