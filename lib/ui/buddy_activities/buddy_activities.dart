@@ -13,6 +13,7 @@ class BuddyActivitiesPage extends StatelessWidget {
       appBar: CustomAppBar(
         fTitleText: "name ${context.loc.setActivities(0)}",
         fIsLargeDisplayTitle: true,
+
       ),
       body: SafeArea(
           child: NestedScrollView(

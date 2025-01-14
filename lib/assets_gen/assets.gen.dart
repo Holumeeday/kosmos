@@ -268,6 +268,9 @@ class $AssetsSvgsIconsGen {
   SvgGenImage get silverSubscriptionPlan =>
       const SvgGenImage('assets/svgs/icons/silver_subscription_plan.svg');
 
+  /// File path: assets/svgs/icons/slider.svg
+  SvgGenImage get slider => const SvgGenImage('assets/svgs/icons/slider.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
         bronzeSubscriptionPlan,
@@ -288,7 +291,8 @@ class $AssetsSvgsIconsGen {
         profileFilled,
         profileOutlined,
         settingsIcon,
-        silverSubscriptionPlan
+        silverSubscriptionPlan,
+        slider
       ];
 }
 

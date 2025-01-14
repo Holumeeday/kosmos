@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/enums/location_type_enum.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/ui/buddies/view/widgets/overlapping_profiles.dart';
+import 'package:playkosmos_v3/common_widgets/overlapping_profiles.dart';
 import 'package:playkosmos_v3/ui/buddy_activities/widgets/activity_type.dart';
 import 'package:playkosmos_v3/utils/theme/app_colors.dart';
 class ActivityDetailsTab extends StatelessWidget {
