@@ -295,7 +295,7 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
       if (fResponse.status) {
         _updateUserRepository(
           name: name,
-          searchRadius: state.fFlowModel.radius?.round(),
+          searchRadius: state.fFlowModel.radius,
           birthday: state.fFlowModel.dateOfBirth,
           gender: state.fFlowModel.gender,
           interests: selectedInterests,
@@ -365,7 +365,7 @@ class ProfileCreationFlowCubit extends Cubit<ProfileCreationFlowState> {
   /// Update user repository with new details
   void _updateUserRepository({
     String? name,
-    int? searchRadius,
+    double? searchRadius,
     DateTime? birthday,
     GenderEnum? gender,
     ActivityInterestGroupsList? interests,

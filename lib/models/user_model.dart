@@ -17,7 +17,7 @@ class UserModel {
   final GenderEnum? gender;
   final ActivityInterestGroupsList? interests;
   final Locations? locations;
-  final int? searchRadius;
+  final double? searchRadius;
 
   UserModel({
     this.id,
@@ -48,7 +48,7 @@ class UserModel {
     GenderEnum? gender,
     ActivityInterestGroupsList? interests,
     Locations? locations,
-    int? searchRadius,
+    double? searchRadius,
   }) =>
       UserModel(
         id: id ?? this.id,

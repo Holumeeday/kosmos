@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
-import 'package:playkosmos_v3/models/location_model.dart';
 import 'package:playkosmos_v3/ui/buddies/cubit/buddies_cubit.dart';
-import 'package:playkosmos_v3/ui/buddies/view/widgets/interest_chips.dart';
 import 'package:playkosmos_v3/ui/buddies/view/widgets/next_arrow_button.dart';
 import 'package:playkosmos_v3/ui/buddies/view/widgets/overlapping_profiles.dart';
-import 'package:playkosmos_v3/utils/location_manager.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// Buddies Page
@@ -52,7 +48,7 @@ class _BuddiesPageState extends State<BuddiesPage> {
                   itemBuilder: (context, index) {
                     return _BuddyProfile(
                       fBuddyId: state.fBuddiesModel![index].id,
-                      fLocation: state.fUserLocation!,
+                      // fLocation: state.fUserLocation!,
                     );
                   },
                 ));
@@ -77,23 +73,23 @@ class _BuddiesPageState extends State<BuddiesPage> {
 class _BuddyProfile extends StatelessWidget {
   const _BuddyProfile({
     required this.fBuddyId,
-    required this.fLocation,
+    // required this.fLocation,
   });
 
   final String fBuddyId;
-  final Locations fLocation;
+  // final Locations fLocation;
   @override
   Widget build(BuildContext context) {
     final fProfile =
         context.watch<BuddiesCubit>().state.fBuddiesModel!.firstWhere(
               (element) => element.id == fBuddyId,
             );
-    double distance = Geolocator.distanceBetween(
-      fProfile.location!.latitude ?? 0,
-      fProfile.location!.longitude ?? 0,
-      fLocation.latitude ?? 0,
-      fLocation.longitude ?? 0,
-    );
+    // double distance = Geolocator.distanceBetween(
+    //   fProfile.location!.latitude ?? 0,
+    //   fProfile.location!.longitude ?? 0,
+    //   fLocation.latitude ?? 0,
+    //   fLocation.longitude ?? 0,
+    // );
     return Stack(
       children: [
         // Background Image
@@ -143,21 +139,21 @@ class _BuddyProfile extends StatelessWidget {
                   runSpacing: 9,
                   spacing: 8,
                   children: [
-                    if (fProfile.similarInterests.isNotEmpty)
-                      _buildBadge(
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(Icons.location_on_sharp,
-                                  color: context.colors.primary),
-                              Text(
-                                "${distance.round()} ${context.loc.miles} ${context.loc.away}",
-                                style: context.textTheme.bodyMedium!
-                                    .copyWith(color: context.colors.primary),
-                              )
-                            ],
-                          ),
-                          context),
+                    // if (fProfile.similarInterests.isNotEmpty)
+                    _buildBadge(
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.location_on_sharp,
+                                color: context.colors.primary),
+                            Text(
+                              "${0.round()} ${context.loc.miles} ${context.loc.away}",
+                              style: context.textTheme.bodyMedium!
+                                  .copyWith(color: context.colors.primary),
+                            )
+                          ],
+                        ),
+                        context),
                     if (fProfile.similarInterests.isNotEmpty)
                       _buildBadge(
                           Text(
@@ -213,9 +209,8 @@ class _BuddyProfile extends StatelessWidget {
                         const HSpace(5),
                         NextArrowButton(
                           fOnTap: () {
-                            context.push(
-                              AppRoute.buddyProfileScreenPath,
-                            );
+                            context.pushNamed(AppRoute.buddyProfileScreen,
+                                extra: fBuddyId);
                           },
                         ),
                       ],

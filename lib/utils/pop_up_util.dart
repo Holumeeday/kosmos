@@ -37,7 +37,7 @@ import 'package:playkosmos_v3/extensions/extensions.dart';
 /// - A `Future` that completes when the modal is closed.
 Future showDefaultModal(
   BuildContext context, {
-  required double maxHeight,
+  double? maxHeight, // Optional max height
   required Widget child,
   bool isScrollControlled = true,
   bool isDismissible = true,
@@ -49,8 +49,6 @@ Future showDefaultModal(
   Color? backgroundColor,
   Color? barrierColor,
 }) {
-  final double height = context.useHeightPercent(maxHeight);
-
   return showModalBottomSheet(
     context: context,
     showDragHandle: showDragHandle,
@@ -61,7 +59,9 @@ Future showDefaultModal(
     useSafeArea: true,
     enableDrag: enableDrag,
     clipBehavior: Clip.hardEdge,
-    constraints: BoxConstraints(maxHeight: height),
+    constraints: maxHeight != null
+        ? BoxConstraints(maxHeight: context.useHeightPercent(maxHeight))
+        : null, // Only apply constraints when maxHeight is provided
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(borderRadius),

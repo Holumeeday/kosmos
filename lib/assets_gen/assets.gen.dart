@@ -204,6 +204,10 @@ class $AssetsSvgsIconsGen {
   SvgGenImage get buddiesOutlined =>
       const SvgGenImage('assets/svgs/icons/buddies-outlined.svg');
 
+  /// File path: assets/svgs/icons/closed_eye.svg
+  SvgGenImage get closedEye =>
+      const SvgGenImage('assets/svgs/icons/closed_eye.svg');
+
   /// File path: assets/svgs/icons/diamond_subscription_plan.svg
   SvgGenImage get diamondSubscriptionPlan =>
       const SvgGenImage('assets/svgs/icons/diamond_subscription_plan.svg');
@@ -236,9 +240,17 @@ class $AssetsSvgsIconsGen {
   SvgGenImage get messageIcon =>
       const SvgGenImage('assets/svgs/icons/message_icon.svg');
 
+  /// File path: assets/svgs/icons/multi_post.svg
+  SvgGenImage get multiPost =>
+      const SvgGenImage('assets/svgs/icons/multi_post.svg');
+
   /// File path: assets/svgs/icons/notification-icon.svg
   SvgGenImage get notificationIcon =>
       const SvgGenImage('assets/svgs/icons/notification-icon.svg');
+
+  /// File path: assets/svgs/icons/opened_eye.svg
+  SvgGenImage get openedEye =>
+      const SvgGenImage('assets/svgs/icons/opened_eye.svg');
 
   /// File path: assets/svgs/icons/profile-filled.svg
   SvgGenImage get profileFilled =>
@@ -261,6 +273,7 @@ class $AssetsSvgsIconsGen {
         bronzeSubscriptionPlan,
         buddiesFilled,
         buddiesOutlined,
+        closedEye,
         diamondSubscriptionPlan,
         goldSubscriptionPlan,
         homeFilled,
@@ -269,7 +282,9 @@ class $AssetsSvgsIconsGen {
         inboxOutlined,
         locationIconGradient,
         messageIcon,
+        multiPost,
         notificationIcon,
+        openedEye,
         profileFilled,
         profileOutlined,
         settingsIcon,

@@ -316,3 +316,36 @@ const List<ActivityInterestGroups> kActivityInterestGroups = [
     ],
   ),
 ];
+
+
+
+/// Maps a list of interests to their respective categories in `kActivityInterestGroups`.
+List<ActivityInterestGroups> mapInterestsToCategories(List<String> receivedInterests) {
+  // Create a map to hold categorized interests
+  final Map<String, List<String>> categorizedInterests = {};
+
+  // Iterate through each received interest
+  for (final interest in receivedInterests) {
+    for (final group in kActivityInterestGroups) {
+      // Check if the interest belongs to this category
+      if (group.interests.contains(interest)) {
+        // If the category is not already in the map, initialize it
+        if (!categorizedInterests.containsKey(group.categoryName)) {
+          categorizedInterests[group.categoryName] = [];
+        }
+        // Add the interest to the category
+        categorizedInterests[group.categoryName]!.add(interest);
+        break;
+      }
+    }
+  }
+
+  // Convert the map into a list of ActivityInterestGroups
+  return categorizedInterests.entries.map((entry) {
+    return ActivityInterestGroups(
+      categoryName: entry.key,
+      interests: entry.value,
+    );
+  }).toList();
+}
+

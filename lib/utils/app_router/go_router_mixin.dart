@@ -279,9 +279,10 @@ mixin GoRouterMixin {
           ),
         );
       case AppRoute.buddyProfileScreenPath:
+final fBuddyId= state.extra as String;
         return _createRoute(
           routeScreen: BlocProvider(
-            child: const BuddyProfilePage(),
+            child:  BuddyProfilePage(buddyId: fBuddyId,),
             create: (context) => BuddyProfileCubit(),
           ),
         );

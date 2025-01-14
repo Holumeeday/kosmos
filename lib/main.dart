@@ -25,7 +25,8 @@ void main() async {
 
   runApp(DevicePreview(
     enabled: !kReleaseMode,
-    builder: (_) => App(
+    builder: (_) => 
+    App(
       fNonSecureStorage: fNonSecureStorage,
       fCookiesStorage: fCookiesStorage,
     ),

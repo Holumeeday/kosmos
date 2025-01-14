@@ -30,7 +30,7 @@ class BuddiesCubit extends Cubit<BuddiesState> {
     emit(state.copyWith(status: BuddiesStatus.loading));
     try {
       final fResponse = await fBuddiesRepository.fetchBuddies();
-      log("##########fresponse ${fResponse.data}");
+     
       if (fResponse.status == true) {
         // Parse the response and ensure type safety
         final List<BuddyModel> buddies =
@@ -65,8 +65,8 @@ class BuddiesCubit extends Cubit<BuddiesState> {
     emit(state.copyWith(status: BuddiesStatus.loading));
     try {
       // Fetch current location
-      final location = await fLocationManager.getCurrentUserLocation();
-      log('@@########## $location');
+      final  location = await fLocationManager.getCurrentUserLocation();
+      log('@@########## ${location!.latitude} ${location.longitude}');
       emit(state.copyWith(
           status: BuddiesStatus.success, userLocation: location));
     } on PlaykosmosException catch (e) {

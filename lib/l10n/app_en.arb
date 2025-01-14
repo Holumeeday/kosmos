@@ -197,6 +197,7 @@
   "@invalidEmail": {
     "description": "Error gotten when email field contains other characters than accepted"
   },
+
   "setEmailOrPhone": "{emailOrPhone, select, email{Use Phone instead} other{Use Email instead}}",
   "@setEmailOrPhone": {
     "description": "Is the post being made in your username, team, store or venue name",
@@ -206,6 +207,17 @@
       }
     }
   },
+
+  "setStayInLoop":"Stay in the loop. Get notified whenever {name} makes a post, uploads a status, or creates an activity.",
+  "@setstayInTheLoop": {
+    "description": "Message shown to users to notify them about updates from a specific person. The {name} placeholder will be replaced with the person's name.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+
   "becomeAFan": "Become a fan",
   "rate": "Rate",
   "typeYourComplaint": "Type your complaint",
@@ -331,6 +343,10 @@
   "activitiesJoined": "Activities Joined",
   "@activitiesJoined": {
     "description": "Events the user joined"
+  },
+    "activitiesHosted": "Activities Hosted",
+  "@activitiesHosted": {
+    "description": "Events the user Hosted"
   },
   "allFans": "All Fans",
   "@allFans": {
@@ -840,6 +856,14 @@
   "@copyLink": {
     "description": "To copy a link"
   },
+    "copyProfileURL": "Copy profile URL",
+  "@copyProfileURL": {
+    "description": "To Copy a profile's URL"
+  },
+    "copiedToClipboard": "Copied to Clipboard",
+  "@copiedToClipboard": {
+    "description": "To Copy to Clipboard"
+  },
   "linkCopied": "Link copied",
   "@linkCopied": {
     "description": "On successful copying of the link"
@@ -1017,7 +1041,11 @@
   "@noCommentDetail": {
     "description": "Other info about no comment"
   },
-  "noReview": "No review has been made yet",
+  "noReviewHasBeenMadeYet": "No review has been made yet",
+  "@noReviewHasBeenMadeYet": {
+    "description": "No review has been made yet"
+  },
+    "noReview": "No review",
   "@noReview": {
     "description": "No review"
   },
@@ -4049,7 +4077,7 @@
   "privacyAndNotifications": "Privacy And Notifications",
   "account": "ACCOUNT",
   "privacy": "Privacy",
-  "notification": "NOTIFICATION",
+  "notification": "Notification",
   "blockedAccount": "Blocked account",
   "manageWhatInfoOtherPeopleSee": "Manage what information you allow other people on playkosmos to see",
   "setPrivacyCanSeePostDetail": "{identity, select, Teams{Who can see this team''s post} Venues{Who can see this venue''s post} Stores{Who can see this store''s post} other{Who can see your post}}",
