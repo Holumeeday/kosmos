@@ -174,6 +174,8 @@ class AppColors extends ThemeExtension<AppColors> {
 
   });
 
+  get fShimmerColor => null;
+
   @override
   ThemeExtension<AppColors> lerp(ThemeExtension<AppColors>? other, double t) {
     if (other is! AppColors) {
@@ -562,5 +564,6 @@ class AppColor {
   static const Color fHyperLinkColor = Color(0xFF5085F7);
   static const Color fReviewColor = Color(0xFFF5F5F5);
   static const Color fOnReviewColor = Color(0xFF141414);
+  static const Color fGreyColor = Color(0xFFF5F5F5);
 
 }

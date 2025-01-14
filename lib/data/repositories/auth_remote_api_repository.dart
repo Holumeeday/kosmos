@@ -6,7 +6,6 @@ import 'package:playkosmos_v3/enums/enums.dart';
 import 'package:playkosmos_v3/models/activity_interest_groups.dart';
 import 'package:playkosmos_v3/models/generic_respose_model.dart';
 import 'package:playkosmos_v3/models/location_model.dart';
-import 'package:playkosmos_v3/utils/logger.dart';
 
 /// The authentication flow repository for nodejs/Java backend
 ///
@@ -19,230 +18,123 @@ class AuthRemoteApiRepository {
     required RemoteApi remoteApi,
   }) : _remoteApi = remoteApi;
 
-  /// Register with email
-  Future<GenericResponse> signUpEmail({
-    required String email,
-  }) async {
+  //Genericmethod to handle API calls
+  Future<GenericResponse> _apiCall(String method, String url,
+      {Map<String, dynamic>? body}) async {
     try {
-      final res = await _remoteApi.post(
-        'auth/register/email',
-        body: {'email': email},
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
+      final response = method == 'POST'
+          ? await _remoteApi.post(url, body: body)
+          : await _remoteApi.put(url, body: body);
+      return GenericResponse.fromJson(response.data as Map<String, dynamic>);
     } catch (_) {
       rethrow;
     }
   }
 
+  /// POST API helper
+  Future<GenericResponse> _post(String url, {Map<String, dynamic>? body}) =>
+      _apiCall('POST', url, body: body);
+
+  /// PUT API helper
+  Future<GenericResponse> _put(String url, {Map<String, dynamic>? body}) =>
+      _apiCall('PUT', url, body: body);
+
+  /// Register with email
+
+  Future<GenericResponse> signUpEmail({
+    required String email}) =>  _post('auth/register/email', body: {'email': email});
+
   /// Register with phone
-  Future<GenericResponse> signUpPhone({
-    required String phone,
-  }) async {
-    try {
-      final res = await _remoteApi.post(
-        'auth/register/phone',
-        body: {'phone': phone},
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+  Future<GenericResponse> signUpPhone({required String phone,}) =>  
+  _post('auth/register/phone', body: {'phone': phone}); 
 
   /// Verify email using OTP
   Future<GenericResponse> verifyEmailOtp({
     required String email,
     required int otp,
-  }) async {
-    try {
-      final res = await _remoteApi.post(
-        'auth/register/email/verify',
-        body: {
-          'email': email,
-          'otp': otp,
-        },
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+  }) =>
+      _post('auth/register/email/verify', body: {
+        'email': email,
+        'otp': otp,
+      });
 
   /// Verify phone using OTP
   Future<GenericResponse> verifyPhoneOtp({
     required String phone,
     required int otp,
-  }) async {
-    try {
-      final res = await _remoteApi.post(
-        'auth/register/phone/verify',
-        body: {
-          'phone': phone,
-          'otp': otp,
-        },
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+  }) =>
+      _post('auth/register/phone/verify', body: {
+        'phone': phone,
+        'otp': otp,
+      });
 
   /// Create password for both email/phone sign up
   Future<GenericResponse> createPassword({
-    String? phone,
-    String? email,
-    required String password,
-  }) async {
-    try {
-      final res = await _remoteApi.post(
-        'auth/register/set-password',
-        body: {
-          if (phone != null && phone.isNotEmpty) 'phone': phone,
-          if (email != null && email.isNotEmpty) 'email': email,
-          'password': password,
-        },
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+  String? phone,
+  String? email,
+  required String password,
+  }) =>
+      _post('auth/register/set-password', body: {
+        if (phone != null && phone.isNotEmpty) 'phone': phone,
+        if (email != null && email.isNotEmpty) 'email': email,
+        'password': password,
+      });
+
 
   /// Request forgot password otp
   Future<GenericResponse> forgotPasswordEmail({
-    required String email,
-  }) async {
-    try {
-      final res = await _remoteApi.post(
-        'auth/forgot-password/email',
-        body: {'email': email},
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+    required String email,}) => _post('auth/forgot-password/email', body: {'email': email});
+
 
   /// Request forgot password otp for phone
   Future<GenericResponse> forgotPasswordPhone({
-    required String phone,
-  }) async {
-    try {
-      final res = await _remoteApi.post(
-        'auth/forgot-password/phone',
-        body: {'phone': phone},
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+    required String phone,}) =>  _post('auth/forgot-password/phone', body: {'phone': phone});
 
   /// Forgot password email verification
   Future<GenericResponse> verifyForgotPasswordEmail({
     required String otp,
     required String email,
-  }) async {
-    try {
-      final res = await _remoteApi.post(
-        'auth/forgot-password/email/verify',
-        body: {
-          'email': email,
-          'otp': otp,
-        },
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+  }) =>
+      _post('auth/forgot-password/email/verify', body: {
+        'email': email,
+        'otp': otp,
+      });
+
 
   /// Forgot password phone verification
   Future<GenericResponse> verifyForgotPasswordPhone({
     required String otp,
     required String phone,
-  }) async {
-    try {
-      final res = await _remoteApi.post(
-        'auth/forgot-password/phone/verify',
-        body: {
-          'phone': phone,
-          'otp': otp,
-        },
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+  }) =>
+      _post('auth/forgot-password/phone/verify', body: {
+        'phone': phone,
+        'otp': otp,
+      });
 
   /// Resend OTP for email
   Future<GenericResponse> resendOtpEmail({
     required String email,
-  }) async {
-    try {
-      final res = await _remoteApi.post(
-        'auth/register/email/resend-otp',
-        body: {
-          'email': email,
-        },
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+  }) =>
+      _post('auth/register/email/resend-otp', body: {'email': email});
 
   /// Resend OTP for phone
   Future<GenericResponse> resendOtpPhone({
     required String phone,
-  }) async {
-    try {
-      final res = await _remoteApi.post(
-        'auth/register/phone/resend-otp',
-        body: {
-          'phone': phone,
-        },
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+  })  =>
+      _post('auth/register/phone/resend-otp', body: {'phone': phone});
 
   /// Resend OTP for forgot password email
   Future<GenericResponse> resendOtpForgotPasswordEmail({
     required String email,
-  }) async {
-    try {
-      final res = await _remoteApi.post(
-        'auth/forgot-password/email/resend-otp',
-        body: {
-          'email': email,
-        },
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+  })  =>
+      _post('auth/forgot-password/email/resend-otp', body: {'email': email});
 
   /// Resend OTP for forgot password phone
   Future<GenericResponse> resendOtpForgotPasswordPhone({
     required String phone,
-  }) async {
-    try {
-      final res = await _remoteApi.post(
-        'auth/forgot-password/phone/resend-otp',
-        body: {
-          'phone': phone,
-        },
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+  }) =>
+      _post('auth/forgot-password/phone/resend-otp', body: {'phone': phone});
+      
 
   /// Verify otp for forgot password email
   Future<GenericResponse> verifyOtpForgotPasswordEmail({
@@ -282,83 +174,58 @@ class AuthRemoteApiRepository {
     }
   }
 
-  /// Reset password email/phone
+/// Reset password email/phone
   Future<GenericResponse> resetPassword({
     String? email,
     String? phone,
     required String password,
-  }) async {
-    try {
-      final res = await _remoteApi.post(
-        'auth/forgot-password/change-password',
-        body: {
-          if (email != null) 'email': email,
-          if (phone != null) 'phone': phone,
-          'password': password,
-        },
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+  }) =>
+      _post('auth/forgot-password/change-password', body: {
+        if (email != null) 'email': email,
+        if (phone != null) 'phone': phone,
+        'password': password,
+      });
 
-  /// Reset password phone
-  Future<GenericResponse> resetPasswordPhone({
-    required String phone,
-    required String password,
-  }) async {
-    try {
-      final res = await _remoteApi.post(
-        'auth/forgot-password/change-password',
-        body: {
-          'phone': phone,
-          'password': password,
-        },
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+
+  // /// Reset password phone
+  // Future<GenericResponse> resetPasswordPhone({
+  //   required String phone,
+  //   required String password,
+  // }) async {
+  //   try {
+  //     final res = await _remoteApi.post(
+  //       'auth/forgot-password/change-password',
+  //       body: {
+  //         'phone': phone,
+  //         'password': password,
+  //       },
+  //     );
+  //     return GenericResponse.fromJson(res.data as Map<String, dynamic>);
+  //   } catch (_) {
+  //     rethrow;
+  //   }
+  // }
 
   /// Login with email
   Future<GenericResponse> loginWithEmail({
     required String email,
     required String password,
-  }) async {
-    try {
-      final res = await _remoteApi.post(
-        'auth/login',
-        body: {
-          'email': email,
-          'password': password,
-        },
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+  }) =>
+      _post('auth/login', body: {
+        'email': email,
+        'password': password,
+      });
 
-  /// Login with phone
+
+   /// Login with phone
   Future<GenericResponse> loginWithPhone({
     required String phone,
     required String password,
-  }) async {
-    try {
-      final res = await _remoteApi.post(
-        'auth/login',
-        body: {
-          'phone': phone,
-          'password': password,
-        },
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+  }) =>
+      _post('auth/login', body: {
+        'phone': phone,
+        'password': password,
+      });
 
   /// -----------  Profile creation flow ------------
 
@@ -366,20 +233,12 @@ class AuthRemoteApiRepository {
   Future<GenericResponse> setUsernameBio({
     required String fullName,
     String? bio,
-  }) async {
-    try {
-      final res = await _remoteApi.post(
-        'user/profile/update/name',
-        body: {
-          'fullName': fullName,
-          if (bio != null) 'bio': bio,
-        },
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+  }) =>
+      _post('user/profile/update/name', body: {
+        'fullName': fullName,
+        if (bio != null) 'bio': bio,
+      });
+
 
   /// Update profile second step
   Future<GenericResponse> setOnboarding({
@@ -390,109 +249,52 @@ class AuthRemoteApiRepository {
     GenderEnum? gender,
     ActivityInterestGroupsList? interests,
     Locations? location,
-  }) async {
-    try {
-      final interestMap = interests?.toJson();
-      printI(pictures);
-      final res = await _remoteApi.post(
-        'user/onboarding',
-        body: {
-          if (fullName != null) 'fullName': fullName,
-          if (searchRadius != null) 'searchRadius': searchRadius.round(),
-          if (birthday != null) 'birthday': birthday,
-          if (pictures != null) 'pictures': pictures,
-          if (gender != null) 'gender': gender.backendName,
-          if (interestMap != null && interestMap.isNotEmpty)
-            'interests': interestMap,
-          if (location != null) 'locations': location.toMap(),
-        },
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+  }) =>
+      _post('user/onboarding', body: {
+        if (fullName != null) 'fullName': fullName,
+        if (searchRadius != null) 'searchRadius': searchRadius.round(),
+        if (birthday != null) 'birthday': birthday,
+        if (pictures != null) 'pictures': pictures,
+        if (gender != null) 'gender': gender.backendName,
+        if (interests != null) 'interests': interests.toJson(),
+        if (location != null) 'locations': location.toMap(),
+      });
+
 
   /// Update search radius
-  Future<GenericResponse> updateSearchRadius(int searchRadius) async {
-    try {
-      final res = await _remoteApi.post(
-        'user/profile/update/search-radius',
-        body: {'searchRadius': searchRadius},
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+  Future<GenericResponse> updateSearchRadius(int searchRadius) =>
+      _post('user/profile/update/search-radius', body: {
+        'searchRadius': searchRadius,
+      });
 
   /// Update birthday
-  Future<GenericResponse> updateBirthday(String birthday) async {
-    try {
-      final res = await _remoteApi.post(
-        'user/profile/update/birthday',
-        body: {'birthday': birthday},
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+  Future<GenericResponse> updateBirthday(String birthday) =>
+      _post('user/profile/update/birthday', body: {'birthday': birthday});
 
   /// Update pictures
-  Future<GenericResponse> updatePictures(List<String> pictures) async {
-    try {
-      final res = await _remoteApi.post(
-        'user/profile/update/pictures',
-        body: {'pictures': pictures},
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+  Future<GenericResponse> updatePictures(List<String> pictures) =>
+      _post('user/profile/update/pictures', body: {'pictures': pictures});
 
   /// Update gender
-  Future<GenericResponse> updateGender(GenderEnum gender) async {
-    try {
-      final res = await _remoteApi.post(
-        'user/profile/update/gender',
-        body: {'gender': gender.name},
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+  Future<GenericResponse> updateGender(GenderEnum gender) =>
+      _post('user/profile/update/gender', body: {
+        'gender': gender.name,
+      });
 
   /// Update interests
   Future<GenericResponse> updateInterests(
-      List<ActivityInterestGroups> interests) async {
-    try {
-      final formattedInterests =
-          interests.map((e) => {e.categoryName: e.interests}).toList();
-      final res = await _remoteApi.post(
-        'user/profile/interests',
-        body: {'interests': formattedInterests},
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+          List<ActivityInterestGroups> interests) =>
+      _post('user/profile/interests', body: {
+        'interests':
+            interests.map((e) => {e.categoryName: e.interests}).toList(),
+      });
+
 
   /// Update location
-  Future<GenericResponse> updateLocation(Locations location) async {
-    try {
-      final res = await _remoteApi.post(
-        'user/profile/update/location',
-        body: {'location': location.toMap()},
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+   Future<GenericResponse> updateLocation(Locations location) =>
+      _post('user/profile/update/location', body: {
+        'location': location.toMap(),
+      });
 
   /// Upload multiple image files
   Future<GenericResponse> uploadImagesWithFiles({
@@ -527,7 +329,7 @@ class AuthRemoteApiRepository {
   }
 
   /// Upload a single image
-  Future<void> uploadImagesWithFile({
+Future<void> uploadImagesWithFile({
     required File image,
     required String uploadPath,
   }) async {
@@ -547,33 +349,17 @@ class AuthRemoteApiRepository {
       rethrow;
     }
   }
-
   /// Get image upload urls
-  Future<GenericResponse> getOnboardingImageUrls(
-      {required int totalImages}) async {
-    try {
-      final res = await _remoteApi.put(
-        'file/onboarding',
-        body: {
-          'numberOfFiles': totalImages,
-        },
-      );
+  
+  Future<GenericResponse> getOnboardingImageUrls({required int totalImages}) =>
+      _post('file/get-upload-urls', body: {
+        "totalImages": totalImages,
+      });
 
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
 
   /// Logout of the app
-  Future<GenericResponse> logout() async {
-    try {
-      final res = await _remoteApi.post(
-        'auth/logout',
-      );
-      return GenericResponse.fromJson(res.data as Map<String, dynamic>);
-    } catch (_) {
-      rethrow;
-    }
-  }
+Future<GenericResponse> logout()
+ => _post('auth/logout');
 }
+
+

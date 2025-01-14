@@ -256,6 +256,75 @@ class $AssetsSvgsIconsGen {
   SvgGenImage get silverSubscriptionPlan =>
       const SvgGenImage('assets/svgs/icons/silver_subscription_plan.svg');
 
+  /// File path: assets/svgs/icons/about.svg
+  SvgGenImage get about =>
+      const SvgGenImage('assets/svgs/icons/about.svg');
+  
+    /// File path: assets/svgs/icons/activity.svg
+  SvgGenImage get activity => const SvgGenImage('assets/svgs/icons/activity.svg');
+
+    /// File path: assets/svgs/icons/blocked.svg
+  SvgGenImage get blocked => const SvgGenImage('assets/svgs/icons/blocked.svg');
+
+    /// File path: assets/svgs/icons/feedback.svg
+  SvgGenImage get feedback => const SvgGenImage('assets/svgs/icons/feedback.svg');
+
+    /// File path: assets/svgs/icons/guidelines.svg
+  SvgGenImage get guidelines => const SvgGenImage('assets/svgs/icons/guidelines.svg');
+
+    /// File path: assets/svgs/icons/helpdesk.svg
+  SvgGenImage get helpdesk => const SvgGenImage('assets/svgs/icons/helpdesk.svg');
+
+    /// File path: assets/svgs/icons/language.svg
+  SvgGenImage get language => const SvgGenImage('assets/svgs/icons/language.svg');
+
+    /// File path: assets/svgs/icons/location&searcch.svg
+  SvgGenImage get locationSearch => const SvgGenImage('assets/svgs/icons/location&search.svg');
+
+    /// File path: assets/svgs/icons/logout.svg
+  SvgGenImage get logout => const SvgGenImage('assets/svgs/icons/logout.svg');
+
+    /// File path: assets/svgs/icons/notification.svg
+  SvgGenImage get notificationn => const SvgGenImage('assets/svgs/icons/notificationn.svg');
+
+    /// File path: assets/svgs/icons/payment_info.svg
+  SvgGenImage get payment_info => const SvgGenImage('assets/svgs/icons/payment_info.svg');
+
+    /// File path: assets/svgs/icons/play point.svg
+  SvgGenImage get play_points => const SvgGenImage('assets/svgs/icons/play_points.svg');
+
+    /// File path: assets/svgs/icons/policy.svg
+  SvgGenImage get policy => const SvgGenImage('assets/svgs/icons/policy.svg');
+
+    /// File path: assets/svgs/icons/privacy.svg
+  SvgGenImage get privacy => const SvgGenImage('assets/svgs/icons/privacy.svg');
+
+    /// File path: assets/svgs/icons/Qr_code.svg
+  SvgGenImage get QR_code => const SvgGenImage('assets/svgs/icons/QR_code.svg');
+
+    /// File path: assets/svgs/icons/about.svg
+  SvgGenImage get referral => const SvgGenImage('assets/svgs/icons/referral.svg');
+
+    /// File path: assets/svgs/icons/about.svg
+  SvgGenImage get report => const SvgGenImage('assets/svgs/icons/report.svg');
+
+    /// File path: assets/svgs/icons/saved.svg
+  SvgGenImage get saved => const SvgGenImage('assets/svgs/icons/saved.svg');
+
+    /// File path: assets/svgs/icons/subscription.svg
+  SvgGenImage get subscription => const SvgGenImage('assets/svgs/icons/subscription.svg');
+
+    /// File path: assets/svgs/icons/terms.svg
+  SvgGenImage get terms => const SvgGenImage('assets/svgs/icons/terms.svg');
+
+    /// File path: assets/svgs/icons/theme.svg
+  SvgGenImage get theme => const SvgGenImage('assets/svgs/icons/theme.svg');
+
+    /// File path: assets/svgs/icons/wallet.svg
+  SvgGenImage get wallet => const SvgGenImage('assets/svgs/icons/wallet.svg');
+
+      /// File path: assets/svgs/icons/add_emal.svg
+  SvgGenImage get addEmail => const SvgGenImage('assets/svgs/icons/add_email.svg');
   /// List of all assets
   List<SvgGenImage> get values => [
         bronzeSubscriptionPlan,
@@ -273,7 +342,32 @@ class $AssetsSvgsIconsGen {
         profileFilled,
         profileOutlined,
         settingsIcon,
-        silverSubscriptionPlan
+        silverSubscriptionPlan,
+        about,
+        activity,
+        blocked,
+        feedback,
+        guidelines,
+        helpdesk,
+        language,
+        locationSearch,
+        logout,
+        notificationn,
+        payment_info,
+        play_points,
+        policy,
+        privacy,
+        QR_code,
+        referral,
+        report,
+        saved,
+        subscription,
+        terms,
+        theme,
+        wallet,
+        addEmail
+
+
       ];
 }
 

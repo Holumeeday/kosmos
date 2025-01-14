@@ -7,6 +7,9 @@ import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/data/repositories/buddies_remote_api_repository.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
+import 'package:playkosmos_v3/ui/account_information/view/account_email/account_info_email.dart';
+import 'package:playkosmos_v3/ui/account_information/view/account_information.dart';
+import 'package:playkosmos_v3/ui/account_information/view/account_phone/account_information_phone.dart';
 import 'package:playkosmos_v3/ui/auth_provider/auth_provider_page.dart';
 import 'package:playkosmos_v3/ui/buddies/cubit/buddies_cubit.dart';
 import 'package:playkosmos_v3/ui/buddies/view/buddies_page.dart';
@@ -37,6 +40,7 @@ import 'package:playkosmos_v3/ui/phone_number_otp_verification%20copy/cubit/phon
 import 'package:playkosmos_v3/ui/phone_number_otp_verification%20copy/view/phone_number_otp_verification_page.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/cubit/profile_creation_flow_cubit.dart';
 import 'package:playkosmos_v3/ui/profile_creation_flow/view/profile_creation_flow_page.dart';
+import 'package:playkosmos_v3/ui/profile_menu/view/profile_menu_page.dart';
 import 'package:playkosmos_v3/ui/reset_password_page/cubit/reset_password_cubit.dart';
 import 'package:playkosmos_v3/ui/reset_password_page/view/reset_password_page.dart';
 import 'package:playkosmos_v3/ui/reviews/cubit/reviews_cubit.dart';
@@ -54,6 +58,10 @@ import 'package:playkosmos_v3/ui/signup_with_email/view/sign_up_with_email_page.
 import 'package:playkosmos_v3/ui/splash/splash_page.dart';
 import 'package:playkosmos_v3/utils/location_manager.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
+
+import '../../ui/account_information/cubit/account_information_cubit.dart';
+import '../../ui/account_information/view/account_email/add_email_page.dart';
+import '../../ui/account_information/view/account_password/account_information_password..dart';
 
 mixin GoRouterMixin {
   /// To create a go router route
@@ -314,6 +322,48 @@ mixin GoRouterMixin {
           routeScreen: BlocProvider(
             child: const EditReviewPage(),
             create: (context) => EditReviewCubit(),
+          ),
+        );
+        case AppRoute.profileMenuPagePath:
+        return _createRoute(
+          routeScreen: BlocProvider(
+            child: const ProfileMenuPage(),
+            create: (context) => MainPageCubit(),
+          ),
+        );
+         case AppRoute.accountInformationPath:
+        return _createRoute(
+          routeScreen: BlocProvider(
+            child: const AccountInformationPage(),
+            create: (context) => AccountInformationCubit(),
+          ),
+        );
+         case AppRoute.accountInformationemailPath:
+        return _createRoute(
+          routeScreen: BlocProvider(
+            child: const AccountInfomationEmailPage(),
+            create: (context) => AccountInformationCubit(),
+          ),
+        );
+         case AppRoute.accountInformationphonePath:
+        return _createRoute(
+          routeScreen: BlocProvider(
+            child: const AccountInformationPhonePage(),
+            create: (context) => AccountInformationCubit(),
+          ),
+        );
+         case AppRoute.accountInformationpasswordPath:
+        return _createRoute(
+          routeScreen: BlocProvider(
+            child: const AccountInformationPasswordPage(),
+            create: (context) => AccountInformationCubit(),
+          ),
+        );
+        case AppRoute.addemailPath:
+        return _createRoute(
+          routeScreen: BlocProvider(
+            child: const AddEmailPage(),
+            create: (context) => AccountInformationCubit(),
           ),
         );
       default:

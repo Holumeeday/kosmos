@@ -51,7 +51,7 @@
       "gender": "String"
     }
   },
-"activityFee":"Activity Fee",
+  "activityFee":"Activity Fee",
   "bioTooShort": "Bio is too short. Add more details",
   "buddies":"Buddies",
   "alrightTimeToCreateEnterASecretCode": "Alright, it’s time to enter your secret code!  Type it in below and let’s unlock your next move!",
@@ -59,6 +59,7 @@
   "checkYourInbox": "Check your inbox",
   "codeAccepted": "Code Accepted",
   "countryCode": "Country code",
+
   "createPassword": "Create password",
   "dingDingCheckInboxMessage": "Ding-ding! Your reset code has just landed in your inbox! Go check it out, and let’s get you back on track in no time",
   "dontHaveAnAccount": "Don''t have an account? ",

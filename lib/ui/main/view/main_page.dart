@@ -126,7 +126,7 @@ class _MainPageState extends State<MainPage> {
                   onPressed: () {
                     // Navigate to the MenuPage for Userprofile
                     // context.go(AppRoute.menuPagePath);
-                    context.push(AppRoute.menuPagePath);
+                    context.push(AppRoute.profileMenuPagePath);
                   },
                   iconSize: 30,
                   icon: const Icon(Icons.menu_rounded),
