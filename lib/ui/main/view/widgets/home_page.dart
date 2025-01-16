@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:playkosmos_v3/common_widgets/activity_post_tab.dart';
+import 'package:playkosmos_v3/common_widgets/profile_image_with_story_indicator.dart';
+import 'package:playkosmos_v3/ui/activitiy/view/activity_card.dart';
 import 'package:playkosmos_v3/ui/main/cubit/main_page_cubit.dart';
 
 /// The home page (tab)
@@ -15,7 +17,18 @@ class HomePage extends StatelessWidget {
       length: 2,
       child: NestedScrollView(
         headerSliverBuilder: (_, __) => [
-          const _ActivityTab(),
+          const SliverToBoxAdapter(
+            child: Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: ProfileImageWithStoryIndicator(),
+                )
+                ],
+            ),
+          ),
+
+         const _ActivityTab(),
         ],
         body: const _ActivityPostTabBarView(),
       ),
@@ -55,8 +68,17 @@ class Activity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const CustomScrollView(
-      slivers: [],
+    return  CustomScrollView(
+      slivers: [
+         SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) {
+              return const ActivityCard();
+            },
+            childCount: 4, 
+          ),
+        ),
+      ],
     );
   }
 }

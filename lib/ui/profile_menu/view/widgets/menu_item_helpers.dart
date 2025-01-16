@@ -13,7 +13,7 @@ List<Widget> menuItems(BuildContext context, List<MenuItem> items) {
             ? Icon(item.icon as IconData, color: Colors.grey)
             : item.icon as Widget, 
         title: Text(
-          item.title,
+          item.title!,
           style: context.textTheme.bodySmall,
         ),
         trailing:

@@ -62,7 +62,7 @@ class _CarouselWidgetState extends State<CarouselWidget> {
                       color: Colors.black,
                       image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: NetworkImage(
+                        image: NetworkImage(widget.images[pagePosition] ??
                           state.fBuddyModel.profileImages[pagePosition],
                         ),
                       ),

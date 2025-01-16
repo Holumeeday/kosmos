@@ -6,12 +6,12 @@ import 'package:playkosmos_v3/utils/app_router/app_router.dart';
 
 class MenuItem {
   final Widget icon;
-  final String title;
+  final String ? title;
   final void Function(BuildContext context) onTap;
 
   MenuItem({
     required this.icon,
-    required this.title,
+     this.title,
     required this.onTap,
   });
 }

@@ -337,6 +337,44 @@ class $AssetsSvgsIconsGen {
 
       /// File path: assets/svgs/icons/add_emal.svg
   SvgGenImage get addEmail => const SvgGenImage('assets/svgs/icons/add_email.svg');
+
+        /// File path: assets/svgs/icons/add_emal.svg
+  SvgGenImage get bookmark => const SvgGenImage('assets/svgs/icons/bookmark.svg');
+
+          /// File path: assets/svgs/icons/add_emal.svg
+  SvgGenImage get more => const SvgGenImage('assets/svgs/icons/more.svg');
+
+            /// File path: assets/svgs/icons/add_emal.svg
+  SvgGenImage get share => const SvgGenImage('assets/svgs/icons/share.svg');
+
+              /// File path: assets/svgs/icons/add_emal.svg
+  SvgGenImage get clap => const SvgGenImage('assets/svgs/icons/clap.svg');
+
+              /// File path: assets/svgs/icons/add_emal.svg
+  SvgGenImage get comment => const SvgGenImage('assets/svgs/icons/comment.svg');
+
+              /// File path: assets/svgs/icons/add_emal.svg
+  SvgGenImage get gradient_like => const SvgGenImage('assets/svgs/icons/gradient_like.svg');
+
+              /// File path: assets/svgs/icons/add_emal.svg
+  SvgGenImage get group_user => const SvgGenImage('assets/svgs/icons/group_user.svg');
+
+              /// File path: assets/svgs/icons/add_emal.svg
+  SvgGenImage get like => const SvgGenImage('assets/svgs/icons/like.svg');
+
+              /// File path: assets/svgs/icons/add_emal.svg
+  SvgGenImage get red_heart => const SvgGenImage('assets/svgs/icons/red_heaart.svg');
+
+                /// File path: assets/svgs/icons/add_emal.svg
+  SvgGenImage get star => const SvgGenImage('assets/svgs/icons/star.svg');
+
+                /// File path: assets/svgs/icons/add_emal.svg
+  SvgGenImage get question_answer => const SvgGenImage('assets/svgs/icons/question&answer.svg');
+
+                  /// File path: assets/svgs/icons/add_emal.svg
+  SvgGenImage get location =>
+      const SvgGenImage('assets/svgs/icons/location.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
         bronzeSubscriptionPlan,
@@ -380,7 +418,20 @@ class $AssetsSvgsIconsGen {
         terms,
         theme,
         wallet,
-        addEmail
+        addEmail,
+        bookmark,
+        more,
+        share,
+        clap,
+        comment,
+        gradient_like,
+        group_user,
+        like,
+        red_heart,
+        question_answer,
+        star,
+        location
+
 
 
       ];

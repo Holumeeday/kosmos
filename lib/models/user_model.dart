@@ -68,7 +68,7 @@ class UserModel {
 
   String toJson() => json.encode(toMap());
 
-  factory UserModel.fromMapLocal(Map<String, dynamic> json) => UserModel(
+factory UserModel.fromMapLocal(Map<String, dynamic> json) => UserModel(
         id: json["id"],
         fullName: json["fullName"],
         email: json["email"],
@@ -90,7 +90,7 @@ class UserModel {
         locations: json["locations"] == null
             ? null
             : Locations.fromMap(json["locations"]),
-        searchRadius: json["searchRadius"],
+        searchRadius: (json["searchRadius"] as num?)?.toDouble(), // Fix here
       );
 
   factory UserModel.fromMapRemote(Map<String, dynamic> json) => UserModel(
@@ -116,8 +116,10 @@ class UserModel {
         locations: json['data']["locations"] == null
             ? null
             : Locations.fromMap(json['data']["locations"]),
-        searchRadius: json['data']["searchRadius"],
+        searchRadius:
+            (json['data']["searchRadius"] as num?)?.toDouble(), // Fix here
       );
+
 
   Map<String, dynamic> toMap() => {
         if (id != null) "id": id,
