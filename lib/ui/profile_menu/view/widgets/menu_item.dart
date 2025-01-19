@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:path/path.dart';
 import 'package:playkosmos_v3/assets_gen/assets.gen.dart';
 import 'package:playkosmos_v3/utils/app_router/app_router.dart';
 
@@ -64,6 +65,7 @@ final List<MenuItem> accountItems = [
   MenuItem(
    icon: SvgPicture.asset(
       Assets.svgs.icons.payment_info.path,
+      // colorFilter: ColorFilter.mode(context.appColors.onSurface, BlendMode.srcIn),
       width: 18,
       height: 18,
     ),

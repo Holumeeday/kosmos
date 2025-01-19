@@ -13,10 +13,10 @@ class ReactionsSelectionTabComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      scrollDirection: Axis.horizontal, // Allow horizontal scrolling
+      scrollDirection: Axis.horizontal, 
       child: SizedBox(
         width:
-            MediaQuery.of(context).size.width, // Set the width to screen width
+            MediaQuery.of(context).size.width, 
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: List.generate(
@@ -24,14 +24,14 @@ class ReactionsSelectionTabComponent extends StatelessWidget {
             (index) {
               return GestureDetector(
                 onTap: () {
-                  onSelect(reactions[index]); // Trigger the onSelect callback
+                  onSelect(reactions[index]); 
                 },
                 child: Padding(
                   padding: const EdgeInsets.only(
-                      right: 6), // Add space between reactions
+                      right: 6), 
                   child: Image.asset(
-                    reactions[index], // Load the reaction image (GIF)
-                    width: 40, // Set the size of the reaction
+                    reactions[index], 
+                    width: 40, 
                     height: 40,
                   ),
                 ),

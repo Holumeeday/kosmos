@@ -125,108 +125,10 @@ class _ActivityCardState extends State<ActivityCard> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Container(
-                    width: 100,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.grey.shade200,
-                    ),
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: (taggedImages.length) * 15.0 + 30,
-                          height: 24,
-                          child: Stack(
-                            clipBehavior: Clip.none,
-                            children: List.generate(
-                              taggedImages.length,
-                              (index) {
-                                return Positioned(
-                                  left: index * 15.0,
-                                  child: CircleAvatar(
-                                    radius: 12,
-                                    backgroundImage:
-                                        AssetImage(taggedImages[index]),
-                                    backgroundColor: Colors.white,
-                                  ),
-                                );
-                              },
-                            )
-                              // Add text on top of the last image
-                              ..add(
-                                Positioned(
-                                  left: (taggedImages.length) * 15.0,
-                                  top: 0,
-                                  bottom: 0,
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    child: Container(
-                                      width: 20,
-                                      height: 20,
-                                      padding: const EdgeInsets.all(0),
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.red.withOpacity(.5)),
-                                        borderRadius: BorderRadius.circular(50),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          "+2",
-                                          style: TextStyle(
-                                            fontSize: 11,
-                                            color: Colors.red.shade300,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                          ),
-                        ),
-                        // const SizedBox(width: 2), // Space between avatars and text
-                       Text(
-                          "Tagged",
-                          style: context.textTheme.bodySmall!
-                              .copyWith(color: Colors.grey.shade700),
-                        ),
-                      ],
-                    ),
-                  ),
+                  fTagged_images(taggedImages: taggedImages),
 
-                  HSpace(15),
-                  Container(
-                    width: 113,
-                    height: 28,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Color(0xFFF27121).withOpacity(.10),
-                    ),
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-                    child: Center(
-                      child: Row(
-                        children: [
-                          SvgPicture.asset(
-                            Assets.svgs.icons.location.path,
-                            width: 12,
-                            height: 12,
-                          ),
-                         const HSpace(2), 
-                          Expanded(
-                            child:  Text(
-                              "20 miles away",
-                              style: context.textTheme.bodySmall!
-                                  .copyWith(color: Color(0xFFF27121)),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  const HSpace(15),
+                  const fLocation_tagged(),
                   const HSpace(10),
                 ],
               ),
@@ -240,6 +142,129 @@ class _ActivityCardState extends State<ActivityCard> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class fLocation_tagged extends StatelessWidget {
+  const fLocation_tagged({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 113,
+      height: 28,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Color(0xFFF27121).withOpacity(.10),
+      ),
+      padding:
+          const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+      child: Center(
+        child: Row(
+          children: [
+            SvgPicture.asset(
+              Assets.svgs.icons.location.path,
+              width: 12,
+              height: 12,
+            ),
+           const HSpace(2), 
+            Expanded(
+              child:  Text(
+                "20 miles away",
+                style: context.textTheme.bodySmall!
+                    .copyWith(color: Color(0xFFF27121)),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class fTagged_images extends StatelessWidget {
+  const fTagged_images({
+    super.key,
+    required this.taggedImages,
+  });
+
+  final List<String> taggedImages;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 100,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.grey.shade200,
+      ),
+      padding:
+          const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+      child: Row(
+        children: [
+          SizedBox(
+            width: (taggedImages.length) * 15.0 + 30,
+            height: 24,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: List.generate(
+                taggedImages.length,
+                (index) {
+                  return Positioned(
+                    left: index * 15.0,
+                    child: CircleAvatar(
+                      radius: 12,
+                      backgroundImage:
+                          AssetImage(taggedImages[index]),
+                      backgroundColor: Colors.white,
+                    ),
+                  );
+                },
+              )
+                // Add text on top of the last image
+                ..add(
+                  Positioned(
+                    left: (taggedImages.length) * 15.0,
+                    top: 0,
+                    bottom: 0,
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Container(
+                        width: 20,
+                        height: 20,
+                        padding: const EdgeInsets.all(0),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              color: Colors.red.withOpacity(.5)),
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "+2",
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: Colors.red.shade300,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+            ),
+          ),
+          // const SizedBox(width: 2), // Space between avatars and text
+         Text(
+            "Tagged",
+            style: context.textTheme.bodySmall!
+                .copyWith(color: Colors.grey.shade700),
+          ),
+        ],
       ),
     );
   }

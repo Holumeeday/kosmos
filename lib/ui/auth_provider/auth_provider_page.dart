@@ -264,46 +264,49 @@ class _TermsAndConditions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RichText(
-      textAlign: TextAlign.center,
-      text: TextSpan(
-        text: context.loc.iUnderstandTandC,
-        style: context.appTextTheme.body?.copyWith(
-          color: Colors.white,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 10),
+      child: RichText(
+        textAlign: TextAlign.center,
+        text: TextSpan(
+          text: context.loc.iUnderstandTandC,
+          style: context.appTextTheme.body?.copyWith(
+            color: Colors.white,
+          ),
+          children: [
+            TextSpan(
+              text: context.loc.termsAndConditions.toLowerCase(),
+              style: context.appTextTheme.body?.copyWith(
+                color: Colors.white,
+                decoration: TextDecoration.underline,
+                decorationColor: Colors.white,
+              ),
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  // Navigate to terms & conditions page
+                  debugPrint('Terms & Conditions clicked');
+                },
+            ),
+            TextSpan(
+              text: context.loc.andText,
+            ),
+            TextSpan(
+              text: context.loc.privacyPolicy.toLowerCase(),
+              style: context.appTextTheme.body?.copyWith(
+                decoration: TextDecoration.underline,
+                decorationColor: Colors.white,
+                color: Colors.white,
+              ),
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  // Navigate to privacy policy page
+                },
+            ),
+            const TextSpan(
+              text: '.',
+            ),
+          ],
         ),
-        children: [
-          TextSpan(
-            text: context.loc.termsAndConditions.toLowerCase(),
-            style: context.appTextTheme.body?.copyWith(
-              color: Colors.white,
-              decoration: TextDecoration.underline,
-              decorationColor: Colors.white,
-            ),
-            recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                // Navigate to terms & conditions page
-                debugPrint('Terms & Conditions clicked');
-              },
-          ),
-          TextSpan(
-            text: context.loc.andText,
-          ),
-          TextSpan(
-            text: context.loc.privacyPolicy.toLowerCase(),
-            style: context.appTextTheme.body?.copyWith(
-              decoration: TextDecoration.underline,
-              decorationColor: Colors.white,
-              color: Colors.white,
-            ),
-            recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                // Navigate to privacy policy page
-              },
-          ),
-          const TextSpan(
-            text: '.',
-          ),
-        ],
       ),
     );
   }

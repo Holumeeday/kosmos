@@ -86,7 +86,7 @@ class UploadPicsPage extends StatelessWidget {
                                 await file.length(); // Get file size in bytes
 
                             const int maxSizeInBytes =
-                                2 * 1024 * 1024; // 2 MB in bytes
+                                4 * 1024 * 1024; // 2 MB in bytes
 
                             if (fileSize > maxSizeInBytes) {
                               SnackBarUtil.showError(

@@ -425,7 +425,7 @@
   "@enterPassword": {
     "description": "Error gotten when password field is blank"
   },
-  "passwordMinError": "Password must be minimum of 6 character",
+  "passwordMinError": "Password must be minimum of 8 character",
   "@passwordMinError": {
     "description": "Error gotten when password length is less than 6"
   },

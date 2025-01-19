@@ -65,7 +65,7 @@ class ValidationUtil {
   static String? passwordValidator(String? value) {
     if (value == null || value.isEmpty) {
       return _loc.enterPassword;
-    } else if (value.length < 6) {
+    } else if (value.length < 8) {
       return _loc.passwordMinError;
     }
     return null;
