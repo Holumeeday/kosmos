@@ -231,10 +231,11 @@ class AppRoute with GoRouterMixin {
             /// If initialized and onboarded only, redirect to create Account if
             /// user is not going to the auth pages else redirect to login
           } else if (isInitialized && isOnboarded && !isLoggedIn) {
+            final retrivedEmail = await CacheUtil.getData('user_email');
 
-            final  retrivedEmail =  await CacheUtil.getData('user_email');
-
-            if(retrivedEmail!= null && !empty)
+            if (retrivedEmail != null && retrivedEmail.isNotEmpty) {
+              return '/email-otp-verification?email=$retrivedEmail';
+            }
 
             if (hasJustCreatedAccount == true) {
               if (isOtpVerified == false) {

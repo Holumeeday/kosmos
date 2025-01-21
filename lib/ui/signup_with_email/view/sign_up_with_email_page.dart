@@ -122,8 +122,9 @@ class _SignUpWithEmailPageViewState extends State<_SignUpWithEmailPageView> {
                   PrimaryGradientButton(
                     fDisabled: !_dCanNext,
                     fOnPressed: () async {
-                      await CacheUtil.saveData('user_email', _fEmailController.text);
-                       context.pushNamed(AppRoute.emailOtpVerificationScreen);
+                      await CacheUtil.saveData(
+                          'user_email', _fEmailController.text);
+                      context.pushNamed(AppRoute.emailOtpVerificationScreen);
                       context
                           .read<SignUpWithEmailCubit>()
                           .signUpEmail(email: _fEmailController.text);
