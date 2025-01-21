@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
+import 'package:playkosmos_v3/data/repositories/auth_flow_storage.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/signup_with_email/cubit/sign_up_with_email_cubit.dart';
+import 'package:playkosmos_v3/utils/cache_util.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// This defines the sign up with email page
@@ -67,6 +69,7 @@ class _SignUpWithEmailPageViewState extends State<_SignUpWithEmailPageView> {
           if (state.status == SignUpWithEmailStatus.success) {
             // If sign up was successful
             if (state.data?.status == true) {
+              context.read<AuthFlowStorage>().hasJustCreatedAccount();
               context.pushNamed(
                 AppRoute.emailOtpVerificationScreen,
                 pathParameters: {
@@ -118,7 +121,9 @@ class _SignUpWithEmailPageViewState extends State<_SignUpWithEmailPageView> {
                   // Next button
                   PrimaryGradientButton(
                     fDisabled: !_dCanNext,
-                    fOnPressed: () {
+                    fOnPressed: () async {
+                      await CacheUtil.saveData('user_email', _fEmailController.text);
+                       context.pushNamed(AppRoute.emailOtpVerificationScreen);
                       context
                           .read<SignUpWithEmailCubit>()
                           .signUpEmail(email: _fEmailController.text);

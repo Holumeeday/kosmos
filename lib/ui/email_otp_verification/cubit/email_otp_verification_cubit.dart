@@ -22,83 +22,71 @@ class EmailOtpVerificationCubit extends Cubit<EmailOtpVerificationState> {
 
   /// Verify the otp
   void verifyOtp() async {
-    if (state.otp == null) return;
+    if (state.otp == null ||
+        state.otp!.isEmpty ||
+        !RegExp(r'^\d+$').hasMatch(state.otp!)) {
+      emit(state.copyWith(
+          status: EmailOtpVerificationStatus.failure,
+          errorMessage: "OTP must be a valid number."));
+      return;
+    }
+
     emit(state.copyWith(status: EmailOtpVerificationStatus.loading));
+
     try {
       final fResponse = await fAuthRepository.verifyEmailOtp(
         email: fEmail,
         otp: int.parse(state.otp!),
       );
-      // Emit the state if response status is failed or success with the error message
-      // if available
       if (fResponse.status == true) {
-        emit(
-          state.copyWith(
-            status: EmailOtpVerificationStatus.success,
-            data: fResponse,
-          ),
-        );
+        emit(state.copyWith(
+          status: EmailOtpVerificationStatus.success,
+          data: fResponse,
+        ));
       } else {
-        addError(fResponse.status);
-        emit(
-          state.copyWith(
-            status: EmailOtpVerificationStatus.failure,
-            data: fResponse,
-            errorMessage: fResponse.message,
-          ),
-        );
+        emit(state.copyWith(
+          status: EmailOtpVerificationStatus.failure,
+          errorMessage: fResponse.message,
+        ));
       }
     } on PlaykosmosException catch (e) {
-      addError(e);
-      emit(
-        state.copyWith(
-          errorMessage: e.message,
-          status: EmailOtpVerificationStatus.failure,
-        ),
-      );
+      emit(state.copyWith(
+        status: EmailOtpVerificationStatus.failure,
+        errorMessage: e.message,
+      ));
     }
   }
 
-  /// Set otp value
+  // void setOtp(String fOtp) {
+  //   emit(state.copyWith(otp: fOtp.trim()));
+  // }
+
   void setOtp({required String fOtp}) {
-    emit(state.copyWith(otp: fOtp));
+    final sanitizedOtp = fOtp.trim();
+    emit(state.copyWith(
+        otp: sanitizedOtp)); // Make sure you are passing the correct value here
   }
 
-  /// To resend the otp
   void resendOtp() async {
     emit(state.copyWith(
         resendOtpStatus: EmailResendOtpVerificationStatus.loading));
     try {
-      final fResponse = await fAuthRepository.resendOtpEmail(
-        email: fEmail,
-      );
-      // Emit the state if response status is failed or success with the error message
-      // if available
+      final fResponse = await fAuthRepository.resendOtpEmail(email: fEmail);
       if (fResponse.status == true) {
-        emit(
-          state.copyWith(
-            resendOtpStatus: EmailResendOtpVerificationStatus.success,
-            data: fResponse,
-          ),
-        );
+        emit(state.copyWith(
+          resendOtpStatus: EmailResendOtpVerificationStatus.success,
+        ));
       } else {
-        addError(fResponse.status);
-        emit(
-          state.copyWith(
-            resendOtpStatus: EmailResendOtpVerificationStatus.failure,
-            data: fResponse,
-            errorMessage: fResponse.message,
-          ),
-        );
+        emit(state.copyWith(
+          resendOtpStatus: EmailResendOtpVerificationStatus.failure,
+          errorMessage: fResponse.message,
+        ));
       }
     } on PlaykosmosException catch (e) {
-      addError(e);
-      emit(
-        state.copyWith(
-          errorMessage: e.message,
-          resendOtpStatus: EmailResendOtpVerificationStatus.failure,
-        ),
-      );
+      emit(state.copyWith(
+        resendOtpStatus: EmailResendOtpVerificationStatus.failure,
+        errorMessage: e.message,
+      ));
     }
   }
 }

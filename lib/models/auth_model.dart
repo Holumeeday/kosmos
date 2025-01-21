@@ -18,12 +18,18 @@ class AuthModel {
   /// if the user has seen the pic and bio screen
   final bool hasCompletedStep2;
 
+  final bool hasCreatePassword;
+
+  final bool hasJustCreatedAccount;
+
   const AuthModel({
     required this.isInitialized,
     required this.isOnboarded,
     required this.isLoggedIn,
     required this.isVerified,
     required this.hasCompletedStep2,
+    required this.hasCreatePassword,
+    required this.hasJustCreatedAccount,
   });
 
   /// Create a new AuthModel instance with updated properties
@@ -33,14 +39,18 @@ class AuthModel {
     bool? isLoggedIn,
     bool? isVerified,
     bool? hasCompletedStep2,
+    bool? hasCreatePassword,
+    bool? hasJustCreatedAccount,
   }) {
     return AuthModel(
-      isInitialized: isInitialized ?? this.isInitialized,
-      isOnboarded: isOnboarded ?? this.isOnboarded,
-      isLoggedIn: isLoggedIn ?? this.isLoggedIn,
-      isVerified: isVerified ?? this.isVerified,
-      hasCompletedStep2: hasCompletedStep2 ?? this.hasCompletedStep2,
-    );
+        isInitialized: isInitialized ?? this.isInitialized,
+        isOnboarded: isOnboarded ?? this.isOnboarded,
+        isLoggedIn: isLoggedIn ?? this.isLoggedIn,
+        isVerified: isVerified ?? this.isVerified,
+        hasCompletedStep2: hasCompletedStep2 ?? this.hasCompletedStep2,
+        hasCreatePassword: hasCreatePassword ?? this.hasCreatePassword,
+        hasJustCreatedAccount:
+            hasJustCreatedAccount ?? this.hasJustCreatedAccount);
   }
 
   /// Create an AuthModel instance from a JSON map
@@ -54,6 +64,8 @@ class AuthModel {
       isLoggedIn: json['isLoggedIn'] ?? false,
       isVerified: json['isVerified'] ?? false,
       hasCompletedStep2: json['hasCompletedStep2'] ?? false,
+      hasCreatePassword: json['hasCreatePassword'] ?? false,
+      hasJustCreatedAccount: json['hasJustCreatedAccount'] ?? false,
     );
   }
 
@@ -65,6 +77,7 @@ class AuthModel {
       'isLoggedIn': isLoggedIn,
       'isVerified': isVerified,
       'hasCompletedStep2': hasCompletedStep2,
+      'hasJustCreatedAccount': hasJustCreatedAccount,
     };
   }
 
@@ -76,6 +89,8 @@ class AuthModel {
       isLoggedIn: false,
       isVerified: false,
       hasCompletedStep2: false,
+      hasCreatePassword: false,
+      hasJustCreatedAccount: false,
     );
   }
 
@@ -85,7 +100,9 @@ class AuthModel {
         isOnboarded &&
         isLoggedIn &&
         isVerified &&
-        hasCompletedStep2;
+        hasCompletedStep2 &&
+        hasCreatePassword &&
+        hasJustCreatedAccount;
   }
 
   // toString method to print the AuthModel instance as a formatted string

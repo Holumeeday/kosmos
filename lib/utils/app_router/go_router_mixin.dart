@@ -100,45 +100,40 @@ mixin GoRouterMixin {
   Widget _route(GoRouterState state, String path) {
     switch (path) {
       case AppRoute.splashScreenPath:
-        return _createRoute(
-          routeScreen: const SplashPage(),
-        );
+        return _createRoute(routeScreen: const SplashPage());
       case AppRoute.onboardingScreenPath:
-        return _createRoute(
-          routeScreen: const OnboardPage(),
-        );
+        return _createRoute(routeScreen: const OnboardPage());
       case AppRoute.authProviderScreenPath:
         final isSignUp =
             bool.tryParse(state.uri.queryParameters['is-sign-up'] ?? '');
         return _createRoute(
-          routeScreen: AuthProviderPage(fIsSignUp: isSignUp ?? false),
-        );
+            routeScreen: AuthProviderPage(fIsSignUp: isSignUp ?? false));
       case AppRoute.signUpEmailScreenPath:
         return _createRoute(
           routeScreen: BlocProvider(
-            child: const SignUpWithEmailPage(),
             create: (context) => SignUpWithEmailCubit(
               fAuthRepository: context.read<AuthRemoteApiRepository>(),
             ),
+            child: const SignUpWithEmailPage(),
           ),
         );
       case AppRoute.signUpPhoneScreenPath:
         return _createRoute(
           routeScreen: BlocProvider(
-            child: const SignUpPhoneNumberPage(),
             create: (context) => SignUpWithPhoneNumberCubit(
               fAuthRepository: context.read<AuthRemoteApiRepository>(),
             ),
+            child: const SignUpPhoneNumberPage(),
           ),
         );
       case AppRoute.signInEmailScreenPath:
         return _createRoute(
           routeScreen: BlocProvider(
-            child: const SignInEmailPage(),
             create: (context) => SignInWithEmailCubit(
               fUserStorage: context.read<UserProfileStorage>(),
               fAuthRepository: context.read<AuthRemoteApiRepository>(),
             ),
+            child: const SignInEmailPage(),
           ),
         );
       case AppRoute.signInPhoneScreenPath:
@@ -154,230 +149,220 @@ mixin GoRouterMixin {
       case AppRoute.forgotPasswordEmailScreenPath:
         return _createRoute(
           routeScreen: BlocProvider(
-            child: const ForgotPasswordEmailPage(),
             create: (context) => ForgotPasswordEmailCubit(
               fAuthRepository: context.read<AuthRemoteApiRepository>(),
             ),
+            child: const ForgotPasswordEmailPage(),
           ),
         );
       case AppRoute.forgotPasswordPhoneScreenPath:
         return _createRoute(
           routeScreen: BlocProvider(
-            child: const ForgotPasswordPhonePage(),
             create: (context) => ForgotPasswordPhoneCubit(
               fAuthRepository: context.read<AuthRemoteApiRepository>(),
             ),
+            child: const ForgotPasswordPhonePage(),
           ),
         );
       case AppRoute.forgotPasswordOtpScreenPath:
         final fQueryParams = state.uri.queryParameters;
         return _createRoute(
           routeScreen: BlocProvider(
-            child: ForgotPasswordOtpVerificationPage(
-              fEmail: fQueryParams['email'],
-              fPhone: fQueryParams['phone'],
-              fIsEmail: bool.parse(fQueryParams['is-email'] as String),
-            ),
             create: (context) => ForgotPasswordOtpVerificationCubit(
               fEmail: fQueryParams['email'],
               fPhone: fQueryParams['phone'],
-              fIsEmail: bool.parse(fQueryParams['is-email'] as String),
+              fIsEmail: bool.parse(fQueryParams['is-email']!),
               fAuthRepository: context.read<AuthRemoteApiRepository>(),
+            ),
+            child: ForgotPasswordOtpVerificationPage(
+              fEmail: fQueryParams['email'],
+              fPhone: fQueryParams['phone'],
+              fIsEmail: bool.parse(fQueryParams['is-email']!),
             ),
           ),
         );
       case AppRoute.emailOtpVerificationScreenPath:
-        final fEmail = state.pathParameters['email'] as String;
+        final fEmail = state.uri.queryParameters['email'] ?? '';
+         print('Navigated to emailOtpVerification with email: $fEmail');
         return _createRoute(
           routeScreen: BlocProvider(
-            child: EmailOtpVerificationPage(fEmail: fEmail),
             create: (context) => EmailOtpVerificationCubit(
               fEmail: fEmail,
               fAuthRepository: context.read<AuthRemoteApiRepository>(),
             ),
+            child: EmailOtpVerificationPage(fEmail: fEmail),
           ),
         );
       case AppRoute.createPasswordScreenPath:
         final fQueryParams = state.uri.queryParameters;
         return _createRoute(
           routeScreen: BlocProvider(
+            create: (context) => CreatePasswordCubit(
+              fAuthRepository: context.read<AuthRemoteApiRepository>(),
+            ),
             child: CreatePasswordPage(
               fEmail: fQueryParams['email'] ?? '',
               fPhone: fQueryParams['phone'] ?? '',
-              fIsEmail: bool.parse(fQueryParams['is-email'] as String),
-            ),
-            create: (context) => CreatePasswordCubit(
-              fAuthRepository: context.read<AuthRemoteApiRepository>(),
+              fIsEmail: bool.parse(fQueryParams['is-email']!),
             ),
           ),
         );
       case AppRoute.galleryOrProfilePicturesScreenPath:
         return _createRoute(
-          routeScreen: const GalleryProfilePicPage(
-            fSelectedAssetEntity: null,
-          ),
-        );
+            routeScreen:
+                const GalleryProfilePicPage(fSelectedAssetEntity: null));
       case AppRoute.homeScreenPath:
         return _createRoute(
           routeScreen: BlocProvider(
-            child: const MainPage(),
             create: (context) => MainPageCubit(),
+            child: const MainPage(),
           ),
         );
       case AppRoute.selectLanguageScreenPath:
         return _createRoute(
           routeScreen: BlocProvider(
-            child: const SelectLanguagePage(),
             create: (context) => SelectLanguageCubit(),
+            child: const SelectLanguagePage(),
           ),
         );
       case AppRoute.resetPasswordScreenPath:
         final fQueryParams = state.uri.queryParameters;
         return _createRoute(
           routeScreen: BlocProvider(
+            create: (context) => ResetPasswordCubit(
+              fAuthRepository: context.read<AuthRemoteApiRepository>(),
+            ),
             child: ResetPasswordPage(
               fEmail: fQueryParams['email'],
               fPhone: fQueryParams['phone'],
               fIsEmail: bool.parse(fQueryParams['is-email']!),
             ),
-            create: (context) => ResetPasswordCubit(
-              fAuthRepository: context.read<AuthRemoteApiRepository>(),
-            ),
           ),
         );
       case AppRoute.phoneNumberOtpVerificationScreenPath:
-        final fPhone = state.pathParameters['phone'] as String;
+        final fPhone = state.uri.queryParameters['phone'] ?? '';
         return _createRoute(
           routeScreen: BlocProvider(
-            child: PhoneNumberOtpVerificationPage(
-              fPhone: fPhone,
-            ),
             create: (context) => PhoneNumberOtpVerificationCubit(
               fAuthRepository: context.read<AuthRemoteApiRepository>(),
               fPhone: fPhone,
             ),
+            child: PhoneNumberOtpVerificationPage(fPhone: fPhone),
           ),
         );
       case AppRoute.profileCreationFlowScreenPath:
         return _createRoute(
           routeScreen: BlocProvider(
-            child: const ProfileCreationFlowPage(),
             create: (context) => ProfileCreationFlowCubit(
               fUserRepository: context.read<UserProfileStorage>(),
               fAuthRepository: context.read<AuthRemoteApiRepository>(),
             ),
+            child: const ProfileCreationFlowPage(),
           ),
         );
       case AppRoute.homeBuddiesScreenPath:
         return _createRoute(
           routeScreen: BlocProvider(
-            child: const BuddiesPage(),
             create: (context) => BuddiesCubit(
               fLocationManager: context.read<LocationManager>(),
               fBuddiesRepository: context.read<BuddiesRemoteApiRepository>(),
             ),
+            child: const BuddiesPage(),
           ),
         );
       case AppRoute.buddyConnectionsScreenPath:
         final fInitIndex = state.extra as int;
         return _createRoute(
           routeScreen: BlocProvider(
-            child: BuddyConnectionsPage(fInitialIndex: fInitIndex),
             create: (context) => BuddyConnectionsCubit(),
+            child: BuddyConnectionsPage(fInitialIndex: fInitIndex),
           ),
         );
       case AppRoute.buddyProfileScreenPath:
-final fBuddyId= state.extra as String;
+        final fBuddyId = state.extra as String;
         return _createRoute(
           routeScreen: BlocProvider(
-            child:  BuddyProfilePage(buddyId: fBuddyId,),
             create: (context) => BuddyProfileCubit(),
+            child: BuddyProfilePage(buddyId: fBuddyId),
           ),
         );
       case AppRoute.reviewsScreenPath:
         return _createRoute(
           routeScreen: BlocProvider(
-            child: const ReviewsPage(),
             create: (context) => ReviewsCubit(),
+            child: const ReviewsPage(),
           ),
         );
       case AppRoute.buddyActivitiesScreenPath:
         final fIsCreator = state.extra as bool;
         return _createRoute(
           routeScreen: BlocProvider(
-            child: BuddyActivitiesPage(
-              fIsCreator: fIsCreator,
-            ),
             create: (context) => BuddyActivitiesCubit(),
+            child: BuddyActivitiesPage(fIsCreator: fIsCreator),
           ),
         );
       case AppRoute.activityDetailsScreenPath:
         return _createRoute(
           routeScreen: BlocProvider(
-            child: const ActivityDetailsPage(),
             create: (context) => BuddyActivitiesCubit(),
+            child: const ActivityDetailsPage(),
           ),
         );
       case AppRoute.editReviewPath:
         return _createRoute(
           routeScreen: BlocProvider(
-            child: const EditReviewPage(),
             create: (context) => EditReviewCubit(),
+            child: const EditReviewPage(),
           ),
         );
-        case AppRoute.profileMenuPagePath:
+      case AppRoute.profileMenuPagePath:
         return _createRoute(
           routeScreen: BlocProvider(
-            child: const ProfileMenuPage(),
             create: (context) => MainPageCubit(),
+            child: const ProfileMenuPage(),
           ),
         );
-         case AppRoute.accountInformationPath:
+      case AppRoute.accountInformationPath:
         return _createRoute(
           routeScreen: BlocProvider(
+            create: (context) => AccountInformationCubit(),
             child: const AccountInformationPage(),
-            create: (context) => AccountInformationCubit(),
           ),
         );
-         case AppRoute.accountInformationemailPath:
+      case AppRoute.accountInformationemailPath:
         return _createRoute(
           routeScreen: BlocProvider(
+            create: (context) => AccountInformationCubit(),
             child: const AccountInfomationEmailPage(),
-            create: (context) => AccountInformationCubit(),
           ),
         );
-         case AppRoute.accountInformationphonePath:
+      case AppRoute.accountInformationphonePath:
         return _createRoute(
           routeScreen: BlocProvider(
+            create: (context) => AccountInformationCubit(),
             child: const AccountInformationPhonePage(),
-            create: (context) => AccountInformationCubit(),
           ),
         );
-         case AppRoute.accountInformationpasswordPath:
+      case AppRoute.accountInformationpasswordPath:
         return _createRoute(
           routeScreen: BlocProvider(
+            create: (context) => AccountInformationCubit(),
             child: const AccountInformationPasswordPage(),
-            create: (context) => AccountInformationCubit(),
           ),
         );
-        case AppRoute.addemailPath:
+      case AppRoute.addemailPath:
         return _createRoute(
           routeScreen: BlocProvider(
-            child: const AddEmailPage(),
             create: (context) => AccountInformationCubit(),
+            child: const AddEmailPage(),
           ),
         );
       default:
-        return _createRoute(
-          routeScreen: const SplashPage(),
-        );
+        return _createRoute(routeScreen: const SplashPage());
     }
   }
 
-  ///To create a route
-  ///
-  ///Accepts the name of the route [routeName] and the screen it points to
-  ///[routeScreen]
+  /// To create a route
   Widget _createRoute({
     required Widget routeScreen,
   }) {

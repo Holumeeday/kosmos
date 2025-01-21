@@ -30,7 +30,8 @@ class SignUpWithEmailCubit extends Cubit<SignUpWithEmailState> {
           ),
         );
       } else {
-        addError(fResponse.status);
+        addError(Exception(fResponse.message));
+        // addError(fResponse.status);
         emit(
           state.copyWith(
             status: SignUpWithEmailStatus.failure,

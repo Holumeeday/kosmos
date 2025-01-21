@@ -86,14 +86,14 @@ class UploadPicsPage extends StatelessWidget {
                                 await file.length(); // Get file size in bytes
 
                             const int maxSizeInBytes =
-                                4 * 1024 * 1024; // 2 MB in bytes
+                                4 * 1024 * 1024; // 4 MB in bytes
 
                             if (fileSize > maxSizeInBytes) {
                               SnackBarUtil.showError(
                                   message: context.loc.selectedImageExceed2Mb);
                               continue;
                             }
-
+                          
                             // Replace existing image at the index or add if index exceeds the list length
                             if (replacementIndex < dSelectedImages.length) {
                               dSelectedImages[replacementIndex] =

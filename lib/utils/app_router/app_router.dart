@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/data/data.dart';
+import 'package:playkosmos_v3/utils/cache_util.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
 
 /// Used to remove every suffix of a path i.e path parameters or query parameters
@@ -130,11 +131,11 @@ class AppRoute with GoRouterMixin {
             path: editReviewPath,
             name: editReviewScreen,
           ),
-           createGoRoute(
+          createGoRoute(
             path: profileMenuPagePath,
             name: profileMenuPage,
           ),
-            createGoRoute(
+          createGoRoute(
             path: accountInformationPath,
             name: accountInformationPage,
           ),
@@ -159,8 +160,7 @@ class AppRoute with GoRouterMixin {
             name: addemailPage,
           ),
         ],
-        
-        redirect: (context, state) {
+        redirect: (context, state) async {
           /// Pages used for authentication
           final List<String> authPages = [
             signInEmailScreenPath.cleanPath,
@@ -212,6 +212,14 @@ class AppRoute with GoRouterMixin {
           final bool isGoingToOnboard =
               state.matchedLocation.cleanPath == onboardingScreenPath;
 
+          final bool hasJustCreatedAccount =
+              _fAuthFlowStorage.fAuthModel.hasJustCreatedAccount;
+
+          final bool hasCreatedPassword =
+              _fAuthFlowStorage.fAuthModel.hasCreatePassword;
+
+          final bool isOtpVerified = _fAuthFlowStorage.fAuthModel.isVerified;
+
           /// If not initialized, redirect to Splash
           if (!isInitialized) {
             return splashScreenPath;
@@ -223,6 +231,19 @@ class AppRoute with GoRouterMixin {
             /// If initialized and onboarded only, redirect to create Account if
             /// user is not going to the auth pages else redirect to login
           } else if (isInitialized && isOnboarded && !isLoggedIn) {
+
+            final  retrivedEmail =  await CacheUtil.getData('user_email');
+
+            if(retrivedEmail!= null && !empty)
+
+            if (hasJustCreatedAccount == true) {
+              if (isOtpVerified == false) {
+                return emailOtpVerificationScreenPath;
+              } else {}
+              if (hasCreatedPassword == false) {
+                return createPasswordScreenPath;
+              }
+            }
             if (hasCompletedStep2) {
               return isGoingToAuthPages ? null : authProviderScreenPath;
             }
@@ -262,14 +283,14 @@ class AppRoute with GoRouterMixin {
   static const String signInPhoneScreenPath = '/sign-in-phone';
   static const String createPasswordScreenPath = '/create-password';
   static const String emailOtpVerificationScreenPath =
-      '/email-otp-verification/:email';
+      '/email-otp-verification';
   static const String forgotPasswordEmailScreenPath = '/forgot-password-email';
   static const String forgotPasswordOtpScreenPath = '/forgot-password-otp';
   static const String forgotPasswordPhoneScreenPath = '/forgot-password-phone';
   static const String galleryOrProfilePicturesScreenPath = '/gallery-pictures';
   static const String onboardingScreenPath = '/onboarding';
   static const String phoneNumberOtpVerificationScreenPath =
-      '/phone-otp-verification/:phone';
+      '/phone-otp-verification';
   static const String profileCreationFlowScreenPath = '/profile-creation-flow';
   static const String resetPasswordScreenPath = '/reset-password';
   static const String selectLanguageScreenPath = '/select-language';
@@ -282,12 +303,15 @@ class AppRoute with GoRouterMixin {
   static const String editReviewPath = '/edit-review';
   static const String profileMenuPagePath = '/menu';
   static const String accountInformationPath = '/account-information';
-  static const String accountInformationemailPath = '/account-information-email';
-  static const String accountInformationphonePath = '/account-information-phone';
-  static const String accountInformationpasswordPath = '/account-information-password';
-  static const String accountInformationdeletaccountPath = '/account-information-delete-account';
+  static const String accountInformationemailPath =
+      '/account-information-email';
+  static const String accountInformationphonePath =
+      '/account-information-phone';
+  static const String accountInformationpasswordPath =
+      '/account-information-password';
+  static const String accountInformationdeletaccountPath =
+      '/account-information-delete-account';
   static const String addemailPath = '/account-information-delete-account';
-
 
   /// Route names
 
@@ -321,12 +345,15 @@ class AppRoute with GoRouterMixin {
   //Profile Menu
   static const String profileMenuPage = 'menu';
   static const String accountInformationPage = '/account-information';
-  static const String accountInformationemailPage = '/account-information-email';
-  static const String accountInformationphonePage = '/account-information-phone';
-  static const String accountInformationpaswordPage = '/account-information-password';
-  static const String accountInformationdeletaccountPage = '/account-information-delet-account';
+  static const String accountInformationemailPage =
+      '/account-information-email';
+  static const String accountInformationphonePage =
+      '/account-information-phone';
+  static const String accountInformationpaswordPage =
+      '/account-information-password';
+  static const String accountInformationdeletaccountPage =
+      '/account-information-delet-account';
   static const String addemailPage = '/addemail';
-
 }
 
 class StreamListenable extends ValueNotifier<dynamic> {

@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:playkosmos_v3/data/data.dart';
 import 'package:playkosmos_v3/data_transfer_objects/playkosmos_exception.dart';
 import 'package:playkosmos_v3/models/generic_respose_model.dart';
+import 'package:playkosmos_v3/utils/cache_util.dart';
 
 part 'create_password_state.dart';
 
@@ -15,7 +16,7 @@ class CreatePasswordCubit extends Cubit<CreatePasswordState> {
   }) : super(const CreatePasswordState());
 
   /// Create new password email or phone
-  void createPassword({
+void createPassword({
     String? email,
     String? phone,
     required String password,
@@ -29,8 +30,14 @@ class CreatePasswordCubit extends Cubit<CreatePasswordState> {
       );
 
       // Emit the state if response status is failed or success with the error message
-      // if available
       if (fResponse.status == true) {
+        // Clear the cached email or phone upon success
+        if (email != null) {
+          await CacheUtil.clearData('user_email');
+        } else if (phone != null) {
+          await CacheUtil.clearData('user_phone');
+        }
+
         emit(
           state.copyWith(
             status: CreatePasswordStatus.success,

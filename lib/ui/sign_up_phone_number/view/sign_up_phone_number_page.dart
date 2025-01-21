@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
+import 'package:playkosmos_v3/data/repositories/auth_flow_storage.dart';
 import 'package:playkosmos_v3/enums/phone_otp_method_enum.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/sign_up_phone_number/cubit/sign_up_phone_number_cubit.dart';
@@ -72,6 +73,7 @@ class _SignUpPhoneNumberPageState extends State<SignUpPhoneNumberPage> {
           if (state.status == SignUpWithPhoneStatus.success) {
             // If sign up was successful
             if (state.data?.status == true) {
+              context.read<AuthFlowStorage>().hasJustCreatedAccount();
               context.pushNamed(
                 AppRoute.phoneNumberOtpVerificationScreen,
                 pathParameters: {

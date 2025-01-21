@@ -52,12 +52,16 @@ class AuthRemoteApiRepository {
   Future<GenericResponse> verifyEmailOtp({
     required String email,
     required int otp,
-  }) =>
-      _post('auth/register/email/verify', body: {
-        'email': email,
-        'otp': otp,
-      });
+  }){
+     print('verifyEmailOtp - Email: $email, OTP: $otp');
 
+    return _post('auth/register/email/verify', body: {
+        'email': email,
+         'otp': otp,
+        
+      });
+  }
+      
   /// Verify phone using OTP
   Future<GenericResponse> verifyPhoneOtp({
     required String phone,

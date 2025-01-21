@@ -85,6 +85,8 @@ class AuthFlowStorage {
         .copyWith(
           isLoggedIn: true,
           isVerified: true,
+          hasCreatePassword: true,
+          hasJustCreatedAccount: true,
           hasCompletedStep2: hasCompletedStep2,
         )
         .toJson();
@@ -122,5 +124,17 @@ class AuthFlowStorage {
         )
         .toJson();
     return _updateAuthStorage(jsonModel);
+  }
+
+
+Future<void> hasCreatePassword([bool value = true]) async {
+    final jsonModel = fAuthModel.copyWith(hasCreatePassword: value).toJson();
+    await _updateAuthStorage(jsonModel);
+  }
+
+  Future<void> hasJustCreatedAccount([bool value = true]) async {
+    final jsonModel =
+        fAuthModel.copyWith(hasJustCreatedAccount: value).toJson();
+    await _updateAuthStorage(jsonModel);
   }
 }

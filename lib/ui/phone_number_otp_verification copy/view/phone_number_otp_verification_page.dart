@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:playkosmos_v3/common_widgets/common_widgets.dart';
+import 'package:playkosmos_v3/data/repositories/auth_flow_storage.dart';
 import 'package:playkosmos_v3/extensions/extensions.dart';
 import 'package:playkosmos_v3/ui/phone_number_otp_verification%20copy/cubit/phone_number_otp_verification_cubit.dart';
 import 'package:playkosmos_v3/utils/utils.dart';
@@ -43,6 +44,7 @@ class PhoneNumberOtpVerificationPage extends StatelessWidget {
                   if (state.status ==
                       PhoneNumberOtpVerificationStatus.success) {
                     if (state.data?.status != true) return;
+                    context.read<AuthFlowStorage>().setVerified();
                     // Show success dialog
                     showCustomDialog(
                       context,
