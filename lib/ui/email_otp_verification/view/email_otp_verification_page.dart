@@ -240,7 +240,17 @@ class _EmailOtpView extends StatelessWidget {
                       fMessage: context.loc.emailVerifiedDialogMessage,
                       fOnLetGo: () {
                         // Navigate to the Create Password page
-                        context.goNamed(AppRoute.createPasswordScreen);
+                        // context.goNamed(AppRoute.createPasswordScreen);
+                       
+                      context.read<AuthFlowStorage>().setVerified().then(
+                              (_) => context.goNamed(
+                                AppRoute.createPasswordScreen,
+                                queryParameters: {
+                                  'email': fEmail, // Pass the email value as a query parameter
+                                  'is-email': true.toString(),
+                                },
+                              ),
+                            );
                       },
                     ),
                   );

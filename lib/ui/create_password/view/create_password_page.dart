@@ -188,6 +188,19 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
       });
   }
 
+  //  @override
+  // void initState() {
+  //   super.initState();
+  //   _fPasswordController = TextEditingController()
+  //     ..addListener(() {
+  //       setState(() {
+  //         _dCanNext =
+  //             ValidationUtil.passwordValidator(_fPasswordController.text) ==
+  //                 null;
+  //       });
+  //     });
+  // }
+
   @override
   void dispose() {
     _fPasswordController.dispose();
@@ -219,6 +232,8 @@ class _CreatePasswordPageState extends State<CreatePasswordPage> {
           fEmail: email,
           fPhone: phone,
           fIsEmail: isEmail,
+          fPasswordController: _fPasswordController,
+          dCanNext: _dCanNext,
         );
       },
     );
@@ -246,7 +261,7 @@ class _CreatePasswordForm extends StatelessWidget {
   const _CreatePasswordForm({
     required this.fEmail,
     required this.fPhone,
-    required this.fIsEmail,
+    required this.fIsEmail, required TextEditingController fPasswordController, required bool dCanNext,
   });
 
   @override

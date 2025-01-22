@@ -234,13 +234,14 @@ class AppRoute with GoRouterMixin {
             final retrivedEmail = await CacheUtil.getData('user_email');
 
             if (retrivedEmail != null && retrivedEmail.isNotEmpty) {
-              return '/email-otp-verification?email=$retrivedEmail';
+              
             }
-
+            
             if (hasJustCreatedAccount == true) {
               if (isOtpVerified == false) {
-                return emailOtpVerificationScreenPath;
-              } else {}
+                return '/email-otp-verification?email=$retrivedEmail';
+                // return emailOtpVerificationScreenPath;
+              } 
               if (hasCreatedPassword == false) {
                 return createPasswordScreenPath;
               }

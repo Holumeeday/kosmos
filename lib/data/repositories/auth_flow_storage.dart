@@ -96,11 +96,15 @@ class AuthFlowStorage {
   /// Sets the verification state for the user.
   ///
   /// Defaults to `true` if no value is provided.
-  void setVerified([bool value = true]) {
-    final jsonModel = fAuthModel.copyWith(isVerified: value).toJson();
-    _updateAuthStorage(jsonModel);
-  }
+  // void setVerified([bool value = true]) {
+  //   final jsonModel = fAuthModel.copyWith(isVerified: value).toJson();
+  //   _updateAuthStorage(jsonModel);
+  // }
 
+  Future<void> setVerified([bool value = true]) async {
+  final jsonModel = fAuthModel.copyWith(isVerified: value).toJson();
+  await _updateAuthStorage(jsonModel);
+}
   /// Updates the state indicating that the user has completed step 2.
   ///
   /// Defaults to `true` if no value is provided.
